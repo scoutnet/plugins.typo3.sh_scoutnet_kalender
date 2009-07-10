@@ -28,7 +28,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  * @author sergio <jsonrpcphp@inservibile.org>
  */
 if (!defined("JSON_RPC_CLIENT")) {
-	define ("JSON_RPC_CLIENT");
+	define ("JSON_RPC_CLIENT",1);
 
 class jsonRPCClient {
 	
