@@ -28,6 +28,8 @@
  */
 
 
+define("DEBUG",true);
+
 require_once(PATH_tslib.'class.tslib_pibase.php');
 require_once('jsonRPCClient.php');
 
@@ -60,6 +62,9 @@ class tx_shscoutnetkalender_pi1 extends tslib_pibase {
 			$res = $SN->get_data_by_global_id('4',array('events'=>array('limit'=>'4','after'=>'now()')));
 		} catch(Exception $e) {
 			$content .= "<span class='termin'>zZ ist der Scoutnet Kalender down. Bitte versuch es zu einem spaeteren zeitpunkt noch mal</span>";
+
+			if (DEBUG) 
+				echo $e;
 
 		}
 
