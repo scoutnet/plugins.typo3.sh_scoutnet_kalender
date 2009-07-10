@@ -70,7 +70,8 @@ class tx_shscoutnetkalender_pi1 extends tslib_pibase {
 			$content .= "<span class='termin'>zZ ist der Scoutnet Kalender down.<br>Bitte versuch es zu einem sp&auml;teren Zeitpunkt noch mal</span>";
 		}
 
-		foreach ($res as $record) {
+		foreach ($res as $resource)
+		foreach ($resource as $record) {
 			if ($record['type'] === 'event') {
 				$line = $record['content'];
 		
