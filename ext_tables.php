@@ -9,7 +9,7 @@ $tempColumns = Array (
 			"type" => "input",	
 			"size" => "30",	
 			"checkbox" => "",	
-			"eval" => "required,trim,alphanum,nospace",
+			"eval" => "required,trim,nospace",
 		)
 	),
 	"tx_shscoutnetkalender_kat_ids" => Array (		
@@ -19,7 +19,7 @@ $tempColumns = Array (
 			"type" => "input",	
 			"size" => "30",	
 			"checkbox" => "",	
-			"eval" => "trim,alphanum,nospace",
+			"eval" => "trim,nospace",
 		)
 	),
 );
