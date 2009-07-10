@@ -62,17 +62,14 @@ class tx_shscoutnetkalender_pi1 extends tslib_pibase {
 		try {
 			$SN = new jsonRPCClient("http://www.scoutnet.de/jsonrpc/server.php");
 
-			foreach ($ids as $id) {
-				$res[$id] = $SN->get_data_by_global_id($id,array('events'=>array('limit'=>'4','after'=>'now()')));
-			}
+			$res = $SN->get_data_by_global_id(split(",",$ids_text),array('events'=>array('limit'=>'4','after'=>'now()')));
 		} catch(Exception $e) {
 			$content .= "<span class='termin'>zZ ist der Scoutnet Kalender down.<br>Bitte versuch es zu einem sp&auml;teren Zeitpunkt noch mal</span>";
 		}
 
-		foreach ($res as $resource){
-			foreach ($resource as $record) {
-				if ($record['type'] === 'event') {
-					$line = $record['content'];
+		foreach ($res as $record) {
+			if ($record['type'] === 'event') {
+				$line = $record['content'];
 
 				print_r($record);
 
@@ -80,11 +77,10 @@ class tx_shscoutnetkalender_pi1 extends tslib_pibase {
 				if (ereg ("[0-9]{2}([0-9]{2})-([0-9]{1,2})-([0-9]{1,2})", $line['Start_Date'], $regs)) {
 					    $start_date = "$regs[3].$regs[2].$regs[1]";
 				}*/
-					$start_date = strftime("%d.%m.%y",$line['start']);
+				$start_date = strftime("%d.%m.%y",$line['start']);
 
-					$content .= "<span class='termin'><span class='termin_date'>".$start_date."</span>".
-						" <span class='termin_text'><a href='/veranstaltungen/kalender/?no_cache=1'>".utf8_Decode($line['title'])."</a></span></span>\n";
-				}
+				$content .= "<span class='termin'><span class='termin_date'>".$start_date."</span>".
+					" <span class='termin_text'><a href='/veranstaltungen/kalender/?no_cache=1'>".utf8_Decode($line['title'])."</a></span></span>\n";
 			}
 		}
 
