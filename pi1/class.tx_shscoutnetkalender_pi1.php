@@ -78,7 +78,7 @@ class tx_shscoutnetkalender_pi1 extends tslib_pibase {
 			}
 		}
 
-		$content.='</div>
+		$content.='</div>';
 	
 		return $this->pi_wrapInBaseClass($content);
 	}
