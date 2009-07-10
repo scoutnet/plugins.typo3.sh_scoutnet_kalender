@@ -63,7 +63,7 @@ class tx_shscoutnetkalender_pi1 extends tslib_pibase {
 		try {
 			$SN = new jsonRPCClient("http://www.scoutnet.de/jsonrpc/server.php");
 
-			for ($ids as $id) {
+			foreach ($ids as $id) {
 				$res[$id] = $SN->get_data_by_global_id('4',array('events'=>array('limit'=>'4','after'=>'now()')));
 			}
 		} catch(Exception $e) {
