@@ -29,7 +29,7 @@ t3lib_div::loadTCA("tt_content");
 t3lib_extMgm::addTCAcolumns("tt_content",$tempColumns,1);
 
 t3lib_div::loadTCA('tt_content');
-$TCA['tt_content']['types']['list']['subtypes_excludelist'][$_EXTKEY.'_pi1']='layout,select_key';
+$TCA['tt_content']['types']['list']['subtypes_excludelist'][$_EXTKEY.'_pi1']='layout,select_key,startingpoint';
 $TCA['tt_content']['types']['list']['subtypes_addlist'][$_EXTKEY.'_pi1']='tx_shscoutnetkalender_tx_sh_scoutnet_kalender_ids,tx_shscoutnetkalender_tx_sh_scoutnet_kalender_kat_ids';
 
 
