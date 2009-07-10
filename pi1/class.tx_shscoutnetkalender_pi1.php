@@ -29,6 +29,7 @@
 
 
 require_once(PATH_tslib.'class.tslib_pibase.php');
+require_once('jsonRPCClient.php');
 
 class tx_shscoutnetkalender_pi1 extends tslib_pibase {
 	var $prefixId = 'tx_shscoutnetkalender_pi1';		// Same as class name
@@ -49,20 +50,35 @@ class tx_shscoutnetkalender_pi1 extends tslib_pibase {
 		$this->pi_loadLL();
 		
 	
-		$content='
-			<strong>This is a few paragraphs:</strong><br />
-			<p>This is line 1</p>
-			<p>This is line 2</p>
-	
-			<h3>This is a form:</h3>
-			<form action="'.$this->pi_getPageLink($GLOBALS['TSFE']->id).'" method="POST">
-				<input type="hidden" name="no_cache" value="1">
-				<input type="text" name="'.$this->prefixId.'[input_field]" value="'.htmlspecialchars($this->piVars['input_field']).'">
-				<input type="submit" name="'.$this->prefixId.'[submit_button]" value="'.htmlspecialchars($this->pi_getLL('submit_button_label')).'">
-			</form>
-			<br />
-			<p>You can click here to '.$this->pi_linkToPage('get to this page again',$GLOBALS['TSFE']->id).'</p>
-		';
+		$content='<div class="rahmen_right">
+			<h1><a href="/veranstaltungen/kalender/?no_cache=1">Termine</a></h1>';
+
+		$res = array();
+		try {
+			$SN = new jsonRPCClient("http://www.scoutnet.de/jsonrpc/server.php");
+
+			$res = $SN->get_data_by_global_id('4',array('events'=>array('limit'=>'4','after'=>'now()')));
+		} catch(Exception $e) {
+			$content .= "<span class='termin'>zZ ist der Scoutnet Kalender down. Bitte versuch es zu einem spaeteren zeitpunkt noch mal</span>";
+
+		}
+
+		foreach ($res as $record) {
+			if ($record['type'] === 'event') {
+				$line = $record['content'];
+		
+				/*$start_date = "";
+				if (ereg ("[0-9]{2}([0-9]{2})-([0-9]{1,2})-([0-9]{1,2})", $line['Start_Date'], $regs)) {
+					    $start_date = "$regs[3].$regs[2].$regs[1]";
+				}*/
+				$start_date = strftime("%d.%m.%y",$line['start']);
+
+				$content .= "<span class='termin'><span class='termin_date'>".$start_date."</span>".
+					" <span class='termin_text'><a href='/veranstaltungen/kalender/?no_cache=1'>".utf8_Decode($line['title'])."</a></span></span>\n";
+			}
+		}
+
+		$content.='</div>
 	
 		return $this->pi_wrapInBaseClass($content);
 	}
