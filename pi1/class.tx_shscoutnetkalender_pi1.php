@@ -50,11 +50,11 @@ class tx_shscoutnetkalender_pi1 extends tslib_pibase {
 		$this->pi_loadLL();
 		
 
-		$cids = $this->cObj->data["tx_shscoutnetkalender_tx_sh_scoutnet_kalender_ids"];
+		$ids = $this->cObj->data["tx_shscoutnetkalender_ids"];
 
 	
 		$content='<div class="rahmen_right">
-			<h1><a href="/veranstaltungen/kalender/?no_cache=1">Termine</a></h1>';
+			<h1><a href="/veranstaltungen/kalender/?no_cache=1">Termine</a></h1>'.$ids;
 
 		$res = array();
 		try {
