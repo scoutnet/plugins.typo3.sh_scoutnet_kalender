@@ -9,10 +9,6 @@
 			<label index="pi1_title">Scoutnet calendar</label>
 			<label index="pi1_plus_wiz_description">Adds a scoutnet kalender to the page</label>
 		</languageKey>
-		<languageKey index="en" type="array">
-			<label index="pi1_title">Scoutnet calendar</label>
-			<label index="pi1_plus_wiz_description">Adds a scoutnet kalender to the page</label>
-		</languageKey>
 		<languageKey index="de" type="array">
 			<label index="pi1_title">Scoutnet Kalender</label>
 			<label index="pi1_plus_wiz_description">Fügt einen Scoutnet Kalender in die Seite ein</label>

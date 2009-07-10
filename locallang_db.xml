@@ -7,9 +7,13 @@
 	<data type="array">
 		<languageKey index="default" type="array">
 			<label index="tt_content.list_type_pi1">Scoutnet calendar</label>
+			<label index="tt_content.tx_shscoutnetkalender_tx_sh_scoutnet_kalender_ids">Calendars</label>
+			<label index="tt_content.tx_shscoutnetkalender_tx_sh_scoutnet_kalender_kat_ids">Kategories</label>
 		</languageKey>
 		<languageKey index="de" type="array">
 			<label index="tt_content.list_type_pi1">Scoutnet Kalender</label>
+			<label index="tt_content.tx_shscoutnetkalender_tx_sh_scoutnet_kalender_ids">Kalender</label>
+			<label index="tt_content.tx_shscoutnetkalender_tx_sh_scoutnet_kalender_kat_ids">Kategorien</label>
 		</languageKey>
 	</data>
 </T3locallang>
