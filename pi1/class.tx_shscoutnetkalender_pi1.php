@@ -75,7 +75,7 @@ class tx_shscoutnetkalender_pi1 extends tslib_pibase {
 
 		$subcontent = "";
 
-		$termin_template = $this->cObj->getSubpart($templatecode,"###TERMIN###");
+		$termin_template = $this->cObj->getSubpart($templatecode,"###TEMPLATE_TERMIN###");
 		foreach ($res as $record) {
 			if ($record['type'] === 'event') {
 				$line = $record['content'];
@@ -120,7 +120,7 @@ class tx_shscoutnetkalender_pi1 extends tslib_pibase {
 
 		$templatecode = $this->cObj->substituteMarkerArray($templatecode,$subarray);
 
-		$content .= $this->cObj->substituteSubpart($templatecode,"###MONAT###",$subcontent);
+		$content .= $this->cObj->substituteSubpart($templatecode,"###TEMPLATE_MONAT###",$subcontent);
 	
 		return $this->pi_wrapInBaseClass($content);
 	}
