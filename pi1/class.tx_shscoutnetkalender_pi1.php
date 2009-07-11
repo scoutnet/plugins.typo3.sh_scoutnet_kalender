@@ -73,6 +73,8 @@ class tx_shscoutnetkalender_pi1 extends tslib_pibase {
 
 		$templatecode = $this->cObj->getSubpart($templatecode,"###TEMPLATE_SCOUTNET###");
 
+		$subcontent = "";
+
 		foreach ($res as $record) {
 			if ($record['type'] === 'event') {
 				$line = $record['content'];
@@ -103,6 +105,8 @@ class tx_shscoutnetkalender_pi1 extends tslib_pibase {
 			//	."<span class='termin'><span class='termin_date'>".$start_date."</span>".
 			//		" <span class='termin_text'><a href='/veranstaltungen/kalender/?no_cache=1'>".utf8_Decode($line['title'])."</a></span></span>\n";
 			}
+			
+
 		}
 
 		$content.='</div>';
