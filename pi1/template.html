@@ -13,7 +13,6 @@
 <!-- ###TEMPLATE_SCOUTNET### begin
 	This is the template for the latest news, typically displayed on a frontpage 
 -->
-{* Inhalt *}
 <div id="snk-{$kalender.id}" class="snk">
 <div class="snk-body">
 <div class="snk-datum">
@@ -55,20 +54,21 @@
 
 <div class="snk-termine">
 <table>
-	<caption>ScoutNet-Kalender {$kalender.verband|htmlentities|nl2br} {$kalender.ebene|htmlentities|nl2br} {$kalender.name|htmlentities|nl2br}{if $kalender.District OR $kalender.City}, {$kalender.City|htmlentities|nl2br}{if $kalender.District AND $kalender.City}-{/if}{$kalender.District|htmlentities|nl2br}{/if}</caption>
+	<caption>ScoutNet-Kalender ###KALENDERNAME###</caption>
 	<tr class="snk-headings-row"> 
-		{if count($used.kalender) > 1}<th class="snk-eintrag-ebene-ueberschrift">Ebene</th>{/if}
+		<th class="snk-eintrag-ebene-ueberschrift">Ebene</th>
 		<th class="snk-eintrag-datum-ueberschrift">Datum</th>
 		<th class="snk-eintrag-zeit-ueberschrift">Zeit</th>
 		<th class="snk-eintrag-titel-ueberschrift">Titel</th>
 		<th class="snk-eintrag-stufen-ueberschrift">Stufen</th>
 		<th class="snk-eintrag-kategorien-ueberschrift">Kategorien</th>
 	</tr>
-	{foreach from=$groups item=monat} 
+
+	<!-- ###MONAT### begin  -->
 	<tr> 
 		<th colspan="6" class="snk-monat-heading">{$monat.startdatum|date_format:"%B '%y"}</th>
 	</tr>
-	{foreach from=$monat.eintraege item=eintrag} 
+	<!-- ###TERMIN### begin  -->
 	<tr> 
 		{if count($used.kalender) > 1}<td class="snk-eintrag-ebene">{$eintrag.kalender.ebene|htmlentities|nl2br|replace:" ":"&nbsp;"}{if $eintrag.kalender.ebene_id >= 7}&nbsp;{$eintrag.kalender.name|htmlentities|nl2br|replace:" ":"&nbsp;"}{/if}</td>{/if}
 		<td class="snk-eintrag-datum">{$eintrag.startdatum|date_format:"%A"|truncate:2:""}{$eintrag.startdatum|date_format:",&nbsp;%d.%m."}&nbsp;{if $eintrag.enddatum!= ""}&nbsp;-&nbsp;{$eintrag.enddatum|date_format:"%A"|truncate:2:""}{$eintrag.enddatum|date_format:",&nbsp;%d.%m."}{/if}</td>
@@ -103,8 +103,8 @@
 		</td>
 	</tr>
 	{/if}
-	{/foreach} 
-	{/foreach} 
+	<!-- ###TERMIN### end  -->
+	<!-- ###MONAT### end -->
 </table>
 </div>
 </div>
@@ -122,34 +122,5 @@
 {* Inhalt Ende *}
 
 <!-- ###TEMPLATE_SCOUTNET### end -->
-
-
-<!-- ###TEMPLATE_TERMIN### begin
-	This is the template for the latest news, typically displayed on a frontpage 
--->
-<div class="news-latest-container">
-	<h2>###TERMIN_HEADER###</h2>
-	<div class="news-latest-item">
-
-		<span class="news-latest-date"><!--###LINK_ITEM###-->###NEWS_DATE### ###NEWS_TIME###<!--###LINK_ITEM###--></span>
-		<h3><!--###LINK_ITEM###-->###NEWS_TITLE###<!--###LINK_ITEM###--></h3>
-		<!--###LINK_ITEM###-->###NEWS_IMAGE###<!--###LINK_ITEM###-->
-		###NEWS_SUBHEADER###<hr class="clearer" />
-		###CATWRAP_B### ###TEXT_CAT_LATEST### ###NEWS_CATEGORY### ###NEWS_CATEGORY_IMAGE### ###CATWRAP_E### 
-		<div class="news-latest-morelink"><!--###LINK_ITEM###-->###MORE###<!--###LINK_ITEM###--></div>
-	</div>
-<div class="news-latest-gotoarchive"><!--###LINK_ARCHIVE###-->###GOTOARCHIVE###<!--###LINK_ARCHIVE###--></div>
-</div>
-<!-- ###TEMPLATE_TERMIN### end -->
-
-
-
-
-
-
-
-
-
-
 </body>
 </html>

@@ -71,7 +71,7 @@ class tx_shscoutnetkalender_pi1 extends tslib_pibase {
 		//$templatecode = $this->cObj->fileResource($templateflex_file?'uploads/tx_shscoutnetkalender/' . $templateflex_file:$this->conf['templateFile']);
 		$templatecode = $this->cObj->fileResource('uploads/tx_shscoutnetkalender/template.html');
 
-		$content .= $this->cObj->getSubpart($templatecode,"###TEMPLATE_SCOUTNET###");
+		$templatecode = $this->cObj->getSubpart($templatecode,"###TEMPLATE_SCOUTNET###");
 
 		foreach ($res as $record) {
 			if ($record['type'] === 'event') {
@@ -85,12 +85,13 @@ class tx_shscoutnetkalender_pi1 extends tslib_pibase {
 				}*/
 				$start_date = strftime("%d.%m.%y",$line['start']);
 
-				$content .= "<span class='termin'><span class='termin_date'>".$start_date."</span>".
+				$subcontent .= "<span class='termin'><span class='termin_date'>".$start_date."</span>".
 					" <span class='termin_text'><a href='/veranstaltungen/kalender/?no_cache=1'>".utf8_Decode($line['title'])."</a></span></span>\n";
 			}
 		}
 
 		$content.='</div>';
+		$content .= $this->cObj->substituteSubpart($templatecode,"###MONAT###",$subcontent);
 	
 		return $this->pi_wrapInBaseClass($content);
 	}
