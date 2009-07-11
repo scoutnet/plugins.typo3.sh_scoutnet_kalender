@@ -64,55 +64,31 @@
 		<th class="snk-eintrag-kategorien-ueberschrift">Kategorien</th>
 	</tr>
 
-	<!-- ###MONAT### begin  -->
+	<!-- ###TEMPLATE_MONAT### begin  -->
 	<tr> 
-		<th colspan="6" class="snk-monat-heading">{$monat.startdatum|date_format:"%B '%y"}</th>
+		<th colspan="6" class="snk-monat-heading">###MONATS_NAME###</th>
 	</tr>
-	<!-- ###TERMIN### begin  -->
+	<!-- ###TEMPLATE_TERMIN### begin  -->
 	<tr> 
-		{if count($used.kalender) > 1}<td class="snk-eintrag-ebene">{$eintrag.kalender.ebene|htmlentities|nl2br|replace:" ":"&nbsp;"}{if $eintrag.kalender.ebene_id >= 7}&nbsp;{$eintrag.kalender.name|htmlentities|nl2br|replace:" ":"&nbsp;"}{/if}</td>{/if}
-		<td class="snk-eintrag-datum">{$eintrag.startdatum|date_format:"%A"|truncate:2:""}{$eintrag.startdatum|date_format:",&nbsp;%d.%m."}&nbsp;{if $eintrag.enddatum!= ""}&nbsp;-&nbsp;{$eintrag.enddatum|date_format:"%A"|truncate:2:""}{$eintrag.enddatum|date_format:",&nbsp;%d.%m."}{/if}</td>
-		<td class="snk-eintrag-zeit">{$eintrag.startzeit|date_format:"%H:%M"}{if $eintrag.endzeit!= ""}&nbsp;-&nbsp;{$eintrag.endzeit|date_format:"%H:%M"}{/if}</td>
-		<td class="snk-eintrag-titel">
-			{if $eintrag.Description || $eintrag.plz || $eintrag.ort || $eintrag.Organizer || $eintrag.Target_Group || $eintrag.URL}
-			<a
-				href="#snk-termin-{$eintrag.id}" class="snk-termin-link"
-				onclick="if(snk_show_termin) return snk_show_termin({$eintrag.id},this); "
-			>
-				{$eintrag.titel|htmlentities|nl2br}
-			</a>{else}{$eintrag.titel|htmlentities|nl2br}{/if}
-		</td>
-		<td class="snk-eintrag-stufe">
-			{foreach from=$eintrag.stufe.records item=stufe}
-				<img src="{$SNK_URL}2.0/images/{$stufe.id}.gif" alt="{$stufe.bezeichnung|htmlentities|nl2br}"{$xhtmlend}>
-			{/foreach}			
-		</td>
-		<td class="snk-eintrag-kategorien">{$eintrag.kategorie|htmlentities|nl2br}</td>
+		<td class="snk-eintrag-ebene">###EBENE###</td>
+		<td class="snk-eintrag-datum">###DATUM###</td>
+		<td class="snk-eintrag-zeit">###ZEIT###</td>
+		<td class="snk-eintrag-titel">###TITEL###</td>
+		<td class="snk-eintrag-stufe">###STUFE###</td>
+		<td class="snk-eintrag-kategorien">###KATEGORIE###</td>
 	</tr>
-	{if $eintrag.Description || $eintrag.plz || $eintrag.ort || $eintrag.Organizer || $eintrag.Target_Group || $eintrag.URL}
-	<tr id="snk-termin-{$eintrag.id}" class="snk-termin-infos">
-		<td colspan="6">
-			<dl>
-					{if $eintrag.Description}<dt class="snk-eintrag-beschreibung">Beschreibung</dt><dd>{$eintrag.Description|nl2br}</dd>{/if}
-					{if $eintrag.plz || $eintrag.ort}<dt class="snk-eintrag-ort">Ort</dt><dd>{$eintrag.plz|htmlentities|nl2br} {$eintrag.ort|htmlentities|nl2br}</dd>{/if}
-					{if $eintrag.Organizer}<dt class="snk-eintrag-veranstalter">Veranstalter</dt><dd>{$eintrag.Organizer|htmlentities|nl2br}</dd>{/if}
-					{if $eintrag.Target_Group}<dt class="snk-eintrag-zielgruppe">Zielgruppe</dt><dd>{$eintrag.Target_Group|htmlentities|nl2br}</dd>{/if}
-					{if $eintrag.URL}<dt class="snk-eintrag-url">Link</dt><dd><a {if $smarty.get.link_target}target="{$smarty.get.link_target}" {/if}href="{$eintrag.URL}">{if $eintrag.URL_Text|htmlentities|nl2br}{$eintrag.URL_Text}{else}{$eintrag.URL|htmlentities|nl2br}{/if}</a></dd>{/if}
-					<dt class="snk-eintrag-autor">Eingetragen von</dt><dd>{if $eintrag.autor.vorname || $eintrag.autor.nachname}{$eintrag.autor.vorname|htmlentities|nl2br}&nbsp;{$eintrag.autor.nachname|htmlentities|nl2br}{else}{$eintrag.autor.nickname|htmlentities|nl2br}{/if}</dd>
-			</dl>
-		</td>
-	</tr>
-	{/if}
-	<!-- ###TERMIN### end  -->
-	<!-- ###MONAT### end -->
+	<!-- ###TEMPLATE_TERMIN### end  -->
+	<!-- ###TEMPLATE_MONAT### end -->
 </table>
 </div>
 </div>
 <div class="snk-footer">
 	<div class="snk-hinzufuegen">
-		<a href="https://www.scoutnet.de/community/kalender/events.html?task=create&amp;SSID={$kalender.id}" target="_top">Termin&nbsp;hinzufügen</a>
+		###TERMIN_HINZUFUEGEN_LINK###
+		<a href="https://www.scoutnet.de/community/kalender/events.html?task=create&amp;SSID={$kalender.id}" target="_top">Termin&nbsp;hinzuf&uuml;gen</a>
 	</div>
 	<div class="snk-powered-by">
+		###POWERED_BY_LINK###
 		Powered by <span><a href="http://kalender.scoutnet.de/" target="_top">ScoutNet.DE</a></span>
 	</div>
 </div>
