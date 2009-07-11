@@ -97,7 +97,7 @@ class tx_shscoutnetkalender_pi1 extends tslib_pibase {
 
 		$subarray = array (
 			'###TERMIN_HINZUFUEGEN_LINK###'=>'<a href="https://www.scoutnet.de/community/kalender/events.html?task=create&amp;SSID={$kalender.id}" target="_top">Termin&nbsp;hinzuf&uuml;gen</a>',
-			'POWERED_BY_LINK' => 'Powered by <span><a href="http://kalender.scoutnet.de/" target="_top">ScoutNet.DE</a></span>'
+			'###POWERED_BY_LINK###' => 'Powered by <span><a href="http://kalender.scoutnet.de/" target="_top">ScoutNet.DE</a></span>'
 		);
 
 
