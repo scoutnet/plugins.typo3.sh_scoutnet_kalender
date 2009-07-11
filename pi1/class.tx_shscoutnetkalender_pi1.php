@@ -92,7 +92,7 @@ class tx_shscoutnetkalender_pi1 extends tslib_pibase {
 
 				$subarray = array(
 						'###EBENE###'=>'',
-						'###DATUM###'=>'',
+						'###DATUM###'=>$start_date,
 						'###ZEIT###'=>'',
 						'###TITEL###'=>utf8_Decode($line['title']),
 						'###STUFE###'=>'',
