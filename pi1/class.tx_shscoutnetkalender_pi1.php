@@ -51,6 +51,7 @@ class tx_shscoutnetkalender_pi1 extends tslib_pibase {
 		
 
 		$ids_text = $this->cObj->data["tx_shscoutnetkalender_ids"];
+		$kat_ids_text = $this->cObj->data["tx_shscoutnetkalender_kat_ids"];
 
 	
 		$content='<div class="rahmen_right">';
@@ -62,10 +63,15 @@ class tx_shscoutnetkalender_pi1 extends tslib_pibase {
 		try {
 			$SN = new jsonRPCClient("http://www.scoutnet.de/jsonrpc/server.php");
 
-			$res = $SN->get_data_by_global_id(split(",",$ids_text),array('events'=>array('limit'=>'4','after'=>'now()')));
+			$res = $SN->get_data_by_global_id(split(",",$ids_text),array('events'=>array('limit'=>'20','after'=>'now()')));
 		} catch(Exception $e) {
 			$content .= "<span class='termin'>zZ ist der Scoutnet Kalender down.<br>Bitte versuch es zu einem sp&auml;teren Zeitpunkt noch mal</span>";
 		}
+
+		//$templatecode = $this->cObj->fileResource($templateflex_file?'uploads/tx_shscoutnetkalender/' . $templateflex_file:$this->conf['templateFile']);
+		$templatecode = $this->cObj->fileResource('template.html');
+
+		$content .= $this->cObj->getSubpart($templatecode,"###TEMPLATE_TERMIN###");
 
 		foreach ($res as $record) {
 			if ($record['type'] === 'event') {
