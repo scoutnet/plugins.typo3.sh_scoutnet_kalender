@@ -85,7 +85,10 @@ class tx_shscoutnetkalender_pi1 extends tslib_pibase {
 				}*/
 				$start_date = strftime("%d.%m.%y",$line['start']);
 
-				$subcontent .= "<span class='termin'><span class='termin_date'>".$start_date."</span>".
+
+				$termin_template = $this->cObj->getSubpart($templatecode,"###TERMIN###");
+
+				$subcontent .= $termin_template."<span class='termin'><span class='termin_date'>".$start_date."</span>".
 					" <span class='termin_text'><a href='/veranstaltungen/kalender/?no_cache=1'>".utf8_Decode($line['title'])."</a></span></span>\n";
 			}
 		}
