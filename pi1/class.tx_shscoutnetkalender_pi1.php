@@ -75,6 +75,7 @@ class tx_shscoutnetkalender_pi1 extends tslib_pibase {
 
 		$subcontent = "";
 
+		$termin_template = $this->cObj->getSubpart($templatecode,"###TERMIN###");
 		foreach ($res as $record) {
 			if ($record['type'] === 'event') {
 				$line = $record['content'];
@@ -88,7 +89,6 @@ class tx_shscoutnetkalender_pi1 extends tslib_pibase {
 				$start_date = strftime("%d.%m.%y",$line['start']);
 
 
-				$termin_template = $this->cObj->getSubpart($templatecode,"###TERMIN###");
 
 				$subarray = array(
 						'###EBENE###'=>'',
@@ -109,7 +109,7 @@ class tx_shscoutnetkalender_pi1 extends tslib_pibase {
 
 		}
 
-		$content.='</div>';
+		//$content.='</div>';
 
 		$subarray = array (
 			'###TERMIN_HINZUFUEGEN_LINK###'=>'<a href="https://www.scoutnet.de/community/kalender/events.html?task=create&amp;SSID={$kalender.id}" target="_top">Termin&nbsp;hinzuf&uuml;gen</a>',
