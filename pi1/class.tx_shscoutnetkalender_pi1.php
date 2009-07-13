@@ -148,7 +148,7 @@ class tx_shscoutnetkalender_pi1 extends tslib_pibase {
 
 		//$content.='</div>';
 		//
-		print_r $ids;
+		print_r($ids);
 
 		$subarray = array (
 			'###TERMIN_HINZUFUEGEN_LINK###'=>'<a href="https://www.scoutnet.de/community/kalender/events.html?task=create&amp;SSID="'.$ids[0].'" target="_top">Termin&nbsp;hinzuf&uuml;gen</a>',
