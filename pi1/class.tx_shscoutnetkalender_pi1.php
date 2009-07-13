@@ -54,14 +54,14 @@ class tx_shscoutnetkalender_pi1 extends tslib_pibase {
 		$kat_ids_text = $this->cObj->data["tx_shscoutnetkalender_kat_ids"];
 
 	
-		$content = '<script type="text/javascript" src="http://kalender.scoutnet.de/js/base2-p.js"></script>'.
-			'<script type="text/javascript" src="http://kalender.scoutnet.de/js/base2-dom-p.js"></script>'.
-			'<style type="text/css" media="none">.snk-termin-infos{display:none;}</style>'.
-			'<script type="text/javascript">'.
-			'base2.DOM.bind(document);'.
-			'snk_init();'.
-			'document.addEventListener(\'DOMContentLoaded\', function(){ return snk_finish(\'\'); }, false);'.
-			'</script>';
+		$content = '<script type="text/javascript" src="http://kalender.scoutnet.de/js/base2-p.js"></script>'."\n".
+			'<script type="text/javascript" src="http://kalender.scoutnet.de/js/base2-dom-p.js"></script>'."\n".
+			'<style type="text/css" media="none">.snk-termin-infos{display:none;}</style>'."\n".
+			'<script type="text/javascript">'."\n".
+			'base2.DOM.bind(document);'."\n".
+			'snk_init();'."\n".
+			'document.addEventListener(\'DOMContentLoaded\', function(){ return snk_finish(\'\'); }, false);'."\n".
+			'</script>'."\n";
 		
 		$ids = split(",",$ids_text);
 
