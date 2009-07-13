@@ -73,8 +73,17 @@ class tx_shscoutnetkalender_pi1 extends tslib_pibase {
 
 		$templatecode = $this->cObj->getSubpart($templatecode,"###TEMPLATE_SCOUTNET###");
 
-		$subcontent = "";
 
+		$headerEbene = "";
+
+		if (count($ids) > 1) {
+			$headerEbene = $this->cObj->getSubpart($templatecode,"###HEADER_EBENE###");
+		}
+
+		$templatecode = $this->cObj->substituteSubpart($templatecode,"###HEADER_EBENE###",$headerEbene);
+
+
+		$subcontent = "";
 		$termin_template = $this->cObj->getSubpart($templatecode,"###TEMPLATE_TERMIN###");
 		foreach ($res as $record) {
 			if ($record['type'] === 'event') {
@@ -134,7 +143,6 @@ class tx_shscoutnetkalender_pi1 extends tslib_pibase {
 						'###TITEL###'=>utf8_Decode($line['title']),
 						'###STUFE###'=>$stufen,
 						'###KATEGORIE###'=>$kategorien,
-						
 					);
 
 				$subcontent .= $this->cObj->substituteMarkerArray($termin_template,$subarray);
