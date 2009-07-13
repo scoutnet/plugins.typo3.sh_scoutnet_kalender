@@ -90,10 +90,10 @@ class tx_shscoutnetkalender_pi1 extends tslib_pibase {
 
 
 
-				$stufe ="";
+				$stufen ="";
 				
-				foreach ($line['stufen'] as $st) {
-					$stufe .= "<img src='SNK_URL2.0/images/stufe.id.gif' alt='stufe.bezeichnung|htmlentities|nl2br}' />";
+				foreach ($line['stufen'] as $stufe) {
+					$stufen .= "<img src='http://kalender.scoutnet.de/2.0/images/".$stufe['id'].".gif' alt='".htmlentities($stufe['bezeichnung'])."' />";
 				}
 
 				$subarray = array(
@@ -102,7 +102,7 @@ class tx_shscoutnetkalender_pi1 extends tslib_pibase {
 							(isset($line['end'])?"&nbsp;-&nbsp;".substr(strftime("%A",$line['end']),0,2).",&nbsp;".strftime("%d.%m.",$line['end']):""),
 						'###ZEIT###'=>'',
 						'###TITEL###'=>utf8_Decode($line['title']),
-						'###STUFE###'=>$stufe,
+						'###STUFE###'=>$stufen,
 						'###KATEGORIE###'=>'',
 						
 					);
