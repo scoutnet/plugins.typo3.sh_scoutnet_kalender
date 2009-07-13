@@ -123,6 +123,8 @@ class tx_shscoutnetkalender_pi1 extends tslib_pibase {
 					}
 				}
 
+				$ebene = $line['kalender']['name'];
+
 				$subarray = array(
 						'###EBENE###'=>$ebene,
 						'###DATUM###'=>$datum,
