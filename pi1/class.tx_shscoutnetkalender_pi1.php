@@ -89,6 +89,11 @@ class tx_shscoutnetkalender_pi1 extends tslib_pibase {
 				$start_date = strftime("%d.%m.%y",$line['start']);
 
 
+				$stufe ="";
+				
+				foreach ($line['stufe'] as $st) {
+					$stufe = "<img src='{$SNK_URL}2.0/images/{$stufe.id}.gif' alt='{$stufe.bezeichnung|htmlentities|nl2br}' />";
+				}
 
 				$subarray = array(
 						'###EBENE###'=>'',
@@ -96,7 +101,7 @@ class tx_shscoutnetkalender_pi1 extends tslib_pibase {
 							(isset($line['end'])?"&nbsp;-&nbsp;".substr(strftime("%A",$line['end']),0,2).",&nbsp;".strftime("%d.%m.",$line['end']):""),
 						'###ZEIT###'=>'',
 						'###TITEL###'=>utf8_Decode($line['title']),
-						'###STUFE###'=>'',
+						'###STUFE###'=>$stufe,
 						'###KATEGORIE###'=>'',
 						
 					);
