@@ -154,7 +154,7 @@ class tx_shscoutnetkalender_pi1 extends tslib_pibase {
 
 				$subarray = array(
 						'###EINTRAG_ID###'=>$line['id'],
-						'###DESCRIPTION###'=>$line['Description'],
+						'###DESCRIPTION###'=>htmlentities(utf8_decode($line['Description'])),
 						'###ORT###'=>'',
 						'###ORGANIZER###'=>'',
 						'###TARGET_GROUP###'=>'',
