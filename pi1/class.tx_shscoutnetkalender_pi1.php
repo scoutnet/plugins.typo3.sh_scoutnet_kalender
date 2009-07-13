@@ -58,9 +58,9 @@ class tx_shscoutnetkalender_pi1 extends tslib_pibase {
 			'<script type="text/javascript" src="http://kalender.scoutnet.de/js/base2-dom-p.js"></script>'."\n".
 			'<style type="text/css" media="none">.snk-termin-infos{display:none;}</style>'."\n".
 			'<script type="text/javascript">'."\n".
-			'base2.DOM.bind(document);'."\n".
-			'snk_init();'."\n".
-			'document.addEventListener(\'DOMContentLoaded\', function(){ return snk_finish(\'\'); }, false);'."\n".
+				'base2.DOM.bind(document);'."\n".
+				'snk_init();'."\n".
+				'document.addEventListener(\'DOMContentLoaded\', function(){ return snk_finish(\'\'); }, false);'."\n".
 			'</script>'."\n";
 		
 		$ids = split(",",$ids_text);
@@ -148,7 +148,7 @@ class tx_shscoutnetkalender_pi1 extends tslib_pibase {
 
 				$showDetails = trim($line['Description']).trim($line['ZIP']).trim($line['Location']).trim($line['organizer']).trim($line['targetGroup']).trim($line['URL']);
 
-				$titel = ($showDetails?'<a href="#snk-termin-'.$line['id'].'" class="snk-termin-link" onclick="if(snk_show_termin) return snk_show_termin('.$line['id'].',this);">':'').nl2br(htmlentities(utf8_Decode($line['title']))).($showDetails?'</a>':'');
+				$titel = ($showDetails?'<a href="#snk-termin-'.$line['ID'].'" class="snk-termin-link" onclick="if(snk_show_termin) return snk_show_termin('.$line['ID'].',this);">':'').nl2br(htmlentities(utf8_Decode($line['title']))).($showDetails?'</a>':'');
 
 				$subarray = array(
 						'###EBENE###'=>$ebene,
@@ -171,7 +171,7 @@ class tx_shscoutnetkalender_pi1 extends tslib_pibase {
 					$detail_template = $this->cObj->substituteSubpart($detail_template,"###CONTENT_URL###",trim($line['URL'])?$this->cObj->getSubpart($detail_template,"###CONTENT_URL###"):"");
 
 					$subarray = array(
-						'###EINTRAG_ID###'=>$line['id'],
+						'###EINTRAG_ID###'=>$line['ID'],
 						'###DESCRIPTION###'=>utf8_decode($line['Description']),
 						'###ORT###'=>htmlentities(utf8_decode($line['ZIP']." ".$line['Location'])),
 						'###ORGANIZER###'=>htmlentities(utf8_decode($line['organizer'])),
