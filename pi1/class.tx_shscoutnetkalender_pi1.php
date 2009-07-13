@@ -88,6 +88,7 @@ class tx_shscoutnetkalender_pi1 extends tslib_pibase {
 
 		$subcontent = "";
 		$termin_template = $this->cObj->getSubpart($templatecode,"###TEMPLATE_TERMIN###");
+		$termin_detail_template = $this->cObj->getSubpart($templatecode,"###TEMPLATE_DETAILS###");
 		foreach ($res as $record) {
 			if ($record['type'] === 'event') {
 				$line = $record['content'];
@@ -150,10 +151,27 @@ class tx_shscoutnetkalender_pi1 extends tslib_pibase {
 
 				$subcontent .= $this->cObj->substituteMarkerArray($termin_template,$subarray);
 				
+
+				$subarray = array(
+						'###EINTRAG_ID###'=>'',
+						'###DESCRIPTION###'=>'',
+						'###ORT###'=>'',
+						'###ORGANIZER###'=>'',
+						'###TARGET_GROUP###'=>'',
+						'###URL###'=>'',
+						'###AUTHOR###'=>'',
+					
+					);
+
+				$subcontent .= $this->cObj->substituteMarkerArray($termin_detail_template,$subarray);
+
 			//	."<span class='termin'><span class='termin_date'>".$start_date."</span>".
 			//		" <span class='termin_text'><a href='/veranstaltungen/kalender/?no_cache=1'>".utf8_Decode($line['title'])."</a></span></span>\n";
+				//
+				//
+				//
+
 			}
-			
 
 		}
 
