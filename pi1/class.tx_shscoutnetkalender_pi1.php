@@ -118,17 +118,27 @@ class tx_shscoutnetkalender_pi1 extends tslib_pibase {
 		$subcontent = "";
 		$termin_template = $this->cObj->getSubpart($templatecode,"###TEMPLATE_TERMIN###");
 		$termin_detail_template = $this->cObj->getSubpart($templatecode,"###TEMPLATE_DETAILS###");
+		$monats_header_template = $this->cObj->getSubpart($templatecode,"###TEMPLATE_MONAT###");
+
+		$monat = "0";
+
 		foreach ($res as $record) {
 			if ($record['type'] === 'event') {
 				$line = $record['content'];
 
-				#print_r($record);
 
-				/*$start_date = "";
-				if (ereg ("[0-9]{2}([0-9]{2})-([0-9]{1,2})-([0-9]{1,2})", $line['Start_Date'], $regs)) {
-					    $start_date = "$regs[3].$regs[2].$regs[1]";
-				}*/
-				$start_date = strftime("%d.%m.%y",$line['start']);
+				$new_monat = strftime("%Y%M",$line['start']);
+
+				if ($new_monat != $monat) {
+					$subarray = array(
+						'###MONATS_NAME###'=>strftime("%M",$line['start']),
+					);
+
+					$subcontent .= $this->cObj->substituteMarkerArray($monats_header_template,$subarray);
+					$monat = $new_monat;
+				}
+
+
 
 
 
@@ -206,12 +216,6 @@ class tx_shscoutnetkalender_pi1 extends tslib_pibase {
 					$subcontent .= $this->cObj->substituteMarkerArray($detail_template,$subarray);
 				}
 
-			//	."<span class='termin'><span class='termin_date'>".$start_date."</span>".
-			//		" <span class='termin_text'><a href='/veranstaltungen/kalender/?no_cache=1'>".utf8_Decode($line['title'])."</a></span></span>\n";
-				//
-				//
-				//
-
 			}
 
 		}
@@ -226,7 +230,7 @@ class tx_shscoutnetkalender_pi1 extends tslib_pibase {
 
 		$templatecode = $this->cObj->substituteMarkerArray($templatecode,$subarray);
 
-		$content .= $this->cObj->substituteSubpart($templatecode,"###TEMPLATE_MONAT###",$subcontent);
+		$content .= $this->cObj->substituteSubpart($templatecode,"###TEMPLATE_CONTENT###",$subcontent);
 	
 		return $this->pi_wrapInBaseClass($content);
 	}
