@@ -1,0 +1,77 @@
+.snk A, .snk A:visited {
+	text-decoration:none;
+	border-bottom-style:dashed;
+	border-bottom-color:#6E1C32;
+	border-bottom-width:1px;
+	line-height:160%;
+        color: #6E1C32;
+}
+.snk A:hover {
+	text-decoration:none;
+	border-bottom-style:solid;
+	border-bottom-color:#6E1C32;
+	border-bottom-width:1px;
+	line-height:160%;
+        color: #6E1C32;
+}
+
+.snk{
+	color: #6E1C32;
+	font-family: Verdana, Sans-Serif;
+}
+
+.snk-datum, .snk-uhrzeit{
+	color: white;
+	display: inline;
+}
+.snk-uhrzeit{
+	color: white;
+	display: block;
+}
+.snk-termine{
+	width: 100%;
+}
+.snk-termine{
+	align: center;
+}
+.snk-termine table{
+	width:100%;
+}
+tr.snk-headings-row th{
+	color: #6E1C32;
+	background-color: transparent;
+	line-height: 120%;
+	padding: 0px;
+	text-align:center;
+}
+.snk-termine th{
+	color: white;
+	text-align: left;
+	background-color: #003399;
+	line-height: 90%;
+	padding: 5px;
+}
+.snk-powered-by{
+	width: 50%;
+	font-weight: bold;
+	text-align: right;
+	float: left;
+}
+.snk-hinzufuegen{
+	width: 49%;
+	float: left;
+	font-weight: bold;
+}
+.snk-termin-infos dl{
+	border: 1px solid black;
+	border-top:0;
+	border-right:0;
+	margin: 0px 0px 5px 10px;
+	padding: 10px 20px 20px 20px;
+}
+.snk-termin-infos dt{
+	font-weight: bold;
+}
+.snk-eintrag-ebene {
+	text-align:right;
+}
