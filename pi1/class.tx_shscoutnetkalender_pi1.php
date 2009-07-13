@@ -50,11 +50,6 @@ class tx_shscoutnetkalender_pi1 extends tslib_pibase {
 		$this->pi_loadLL();
 		
 
-		$ids_text = $this->cObj->data["tx_shscoutnetkalender_ids"];
-		$kat_ids_text = $this->cObj->data["tx_shscoutnetkalender_kat_ids"];
-		$stufen_ids_text = $this->cObj->data["tx_shscoutnetkalender_stufen_ids"];
-
-	
 		$content = '<link rel="stylesheet" type="text/css" href="uploads/tx_shscoutnetkalender/kalender.css" media="screen" />'."\n".
 			'<script type="text/javascript" src="http://kalender.scoutnet.de/2.0/templates/scoutnet/behavior.js"></script>'."\n".
 			'<script type="text/javascript" src="http://kalender.scoutnet.de/js/base2-p.js"></script>'."\n".
@@ -66,9 +61,7 @@ class tx_shscoutnetkalender_pi1 extends tslib_pibase {
 				'document.addEventListener(\'DOMContentLoaded\', function(){ return snk_finish(\'\'); }, false);'."\n".
 			'</script>'."\n";
 		
-		$ids = split(",",$ids_text);
-		$kategories = split(",",$kat_ids_text);
-		$stufen = split(",",$stufen_ids_text);
+		$ids = split(",",$this->cObj->data["tx_shscoutnetkalender_ids"]);
 
 		$res = array();
 		try {
@@ -79,12 +72,12 @@ class tx_shscoutnetkalender_pi1 extends tslib_pibase {
 				'after'=>'now()',
 			);
 
-			if (count($kategories) > 0 ) {
-				$filter['kategories'] = $kategories;
+			if (isset($this->cObj->data["tx_shscoutnetkalender_kat_ids"]) && trim($this->cObj->data["tx_shscoutnetkalender_kat_ids"])) {
+				$filter['kategories'] = split(",",$this->cObj->data["tx_shscoutnetkalender_kat_ids"]);
 			}
 
-			if (count($stufen) > 0 ) {
-				$filter['stufen'] = $stufen;
+			if (isset($this->cObj->data["tx_shscoutnetkalender_stufen_ids"]) && trim($this->cObj->data["tx_shscoutnetkalender_stufen_ids"])) {
+				$filter['stufen'] = split(",",$this->cObj->data["tx_shscoutnetkalender_stufen_ids"]);
 			}
 
 			print_r($filter);
