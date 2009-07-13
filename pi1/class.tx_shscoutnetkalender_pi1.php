@@ -125,7 +125,7 @@ class tx_shscoutnetkalender_pi1 extends tslib_pibase {
 
 				$ebene = $line['kalender']['ebene']." ".$line['kalender']['name'];
 
-				$ebene = utf8_decode(str_replace(" ","&nbsp;",htmlentities($ebene)));
+				$ebene = str_replace(" ","&nbsp;",htmlentities(utf8_decode($ebene)));
 
 				$subarray = array(
 						'###EBENE###'=>$ebene,
