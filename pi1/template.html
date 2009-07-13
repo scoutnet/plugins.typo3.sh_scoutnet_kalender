@@ -10,51 +10,12 @@
 
 
 
-<!-- ###TEMPLATE_SCOUTNET### begin
-	This is the template for the latest news, typically displayed on a frontpage 
--->
-<div id="snk-{$kalender.id}" class="snk">
+<!-- ###TEMPLATE_SCOUTNET### begin -->
+<div id="snk-###KALENDER_ID###" class="snk">
 <div class="snk-body">
-<div class="snk-datum">
-	{$smarty.now|date_format:"Heute ist %A, der %d.%m.%Y."}
-</div>
-<div class="snk-uhrzeit">
-	{$smarty.now|date_format:"Es ist %H:%M Uhr."}
-</div>
-
-<div class="snk-ebenene-menu">
-	{if $temp_kalender.ebene_id != 5}
-		{assign var="temp_kalender" value=$kalender}
-		<form method="get" action="{$smarty.server.PHP_SELF}">
-			{foreach from=$smarty.request key=var item=value}
-				{if $var != "ebenenup"}
-					<input type="hidden" name="{$var}" value="{$value}"{$xhtmlend}>
-				{/if}
-			{/foreach}
-			<label for="snk-auswahlbox">Termine bis</label>
-			<select id="snk-auswahlbox" name="ebenenup">
-			{section loop=10 name="menu"}
-				{if $temp_kalender}
-				<option
-					value="{$smarty.section.menu.index}"
-					{if isset($smarty.request.ebenenup) && $smarty.request.ebenenup == $smarty.section.menu.index}
-						selected
-					{/if}
-				>
-					{$temp_kalender.ebene|htmlentities|nl2br} {if $temp_kalender.ebene_id >= 6} {$temp_kalender.name|htmlentities|nl2br}{/if}
-				</option>
-				{/if}
-			{assign var="temp_kalender" value=$temp_kalender.gehoertzu}
-		{/section}
-	    </select>
-	    	<span id="snk-anzeigen"></span><noscript><input type="submit" value="anzeigen"{$xhtmlend}></noscript>
-	    </form>
-	{/if}
-</div>
 
 <div class="snk-termine">
 <table>
-	<caption>ScoutNet-Kalender ###KALENDERNAME###</caption>
 	<tr class="snk-headings-row"> 
 		<!-- ###HEADER_EBENE### --><th class="snk-eintrag-ebene-ueberschrift">Ebene</th><!-- ###HEADER_EBENE### -->
 		<th class="snk-eintrag-datum-ueberschrift">Datum</th>
