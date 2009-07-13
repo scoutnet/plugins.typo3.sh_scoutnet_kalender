@@ -111,7 +111,7 @@ class tx_shscoutnetkalender_pi1 extends tslib_pibase {
 						'###ZEIT###'=>'',
 						'###TITEL###'=>utf8_Decode($line['title']),
 						'###STUFE###'=>$stufen,
-						'###KATEGORIE###'=>'',
+						'###KATEGORIE###'=>join(", ",$line['kategories']),
 						
 					);
 
