@@ -101,7 +101,7 @@ class tx_shscoutnetkalender_pi1 extends tslib_pibase {
 				foreach ($line['kategories'] as $kategorie) {
 					if ($kategorien != "")
 						$kategorien .= ", ";
-					$kategorien .= $kategorie;
+					$kategorien .= utf8_decode($kategorie);
 				}
 
 				$subarray = array(
@@ -111,7 +111,7 @@ class tx_shscoutnetkalender_pi1 extends tslib_pibase {
 						'###ZEIT###'=>'',
 						'###TITEL###'=>utf8_Decode($line['title']),
 						'###STUFE###'=>$stufen,
-						'###KATEGORIE###'=>join(", ",$line['kategories']),
+						'###KATEGORIE###'=>$kategorien,
 						
 					);
 
