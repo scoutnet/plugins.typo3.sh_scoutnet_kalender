@@ -140,18 +140,22 @@ class tx_shscoutnetkalender_pi1 extends tslib_pibase {
 
 				$ebene = str_replace(" ","&nbsp;",htmlentities(utf8_decode($ebene)));
 
+				$showDetails = trim($line['Description']).trim($line['ZIP']).trim($line['Location']).trim($line['organizer']).trim($line['targetGroup']).trim($line['URL']);
+
+				$titel = ($showDetails?'<a href="#snk-termin-'.$line['id'].'" class="snk-termin-link" onclick="if(snk_show_termin) return snk_show_termin('.$line['id'].',this);">':'').nl2br(htmlentities(utf8_Decode($line['title']))).($showDetails?'</a>':'');
+
 				$subarray = array(
 						'###EBENE###'=>$ebene,
 						'###DATUM###'=>$datum,
 						'###ZEIT###'=>$zeit,
-						'###TITEL###'=>utf8_Decode($line['title']),
+						'###TITEL###'=>$titel,
 						'###STUFE###'=>$stufen,
 						'###KATEGORIE###'=>$kategorien,
 					);
 
 				$subcontent .= $this->cObj->substituteMarkerArray($termin_template,$subarray);
 
-				if (trim($line['Description']).trim($line['ZIP']).trim($line['Location']).trim($line['organizer']).trim($line['targetGroup']).trim($line['URL'])) {
+				if ($showDetails) {
 				
 					$detail_template = $termin_detail_template;
 					$detail_template = $this->cObj->substituteSubpart($detail_template,"###CONTENT_DESCRIPTION###",trim($line['Description'])?$this->cObj->getSubpart($detail_template,"###CONTENT_DESCRIPTION###"):"");
