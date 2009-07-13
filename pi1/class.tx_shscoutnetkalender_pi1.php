@@ -75,12 +75,15 @@ class tx_shscoutnetkalender_pi1 extends tslib_pibase {
 
 
 		$headerEbene = "";
+		$contentEbene = "";
 
 		if (count($ids) > 1) {
 			$headerEbene = $this->cObj->getSubpart($templatecode,"###HEADER_EBENE###");
+			$contentEbene = $this->cObj->getSubpart($templatecode,"###CONTENT_EBENE###");
 		}
 
 		$templatecode = $this->cObj->substituteSubpart($templatecode,"###HEADER_EBENE###",$headerEbene);
+		$templatecode = $this->cObj->substituteSubpart($templatecode,"###CONTENT_EBENE###",$contentEbene);
 
 
 		$subcontent = "";
