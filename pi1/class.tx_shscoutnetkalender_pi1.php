@@ -92,7 +92,7 @@ class tx_shscoutnetkalender_pi1 extends tslib_pibase {
 				$stufe ="";
 				
 				foreach ($line['stufe'] as $st) {
-					$stufe = "<img src='{$SNK_URL}2.0/images/{$stufe.id}.gif' alt='{$stufe.bezeichnung|htmlentities|nl2br}' />";
+					$stufe .= "<img src='SNK_URL2.0/images/stufe.id.gif' alt='stufe.bezeichnung|htmlentities|nl2br}' />";
 				}
 
 				$subarray = array(
