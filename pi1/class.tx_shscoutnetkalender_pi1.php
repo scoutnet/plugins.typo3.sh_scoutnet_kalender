@@ -164,7 +164,7 @@ class tx_shscoutnetkalender_pi1 extends tslib_pibase {
 						'###ORT###'=>htmlentities(utf8_decode($line['ZIP']." ".$line['Location'])),
 						'###ORGANIZER###'=>htmlentities(utf8_decode($line['organizer'])),
 						'###TARGET_GROUP###'=>htmlentities(utf8_decode($line['targetGroup'])),
-						'###URL###'=>htmlentities(utf8_decode($line['organizer'])),
+						'###URL###'=>'<a target="_blank" href="'.htmlentities(utf8_decode($line['URL'])).'>'.(trim($line['URL_Text'])?htmlentities(utf8_decode($line['URL_Text'])):htmlentities(utf8_decode($line['URL']))).'</a>',
 						'###AUTHOR###'=>htmlentities(utf8_decode($line['lastModifier'] != ""?$line['lastModifier']:$line['creator'])),
 					);
 
