@@ -74,7 +74,20 @@ class tx_shscoutnetkalender_pi1 extends tslib_pibase {
 		try {
 			$SN = new jsonRPCClient("http://www.scoutnet.de/jsonrpc/server.php");
 
-			$res = $SN->get_data_by_global_id($ids,array('events'=>array('limit'=>'20','after'=>'now()','kategories'=>$kategories,'stufen'=>$stufen)));
+			$filter = array(
+				'limit'=>'20',
+				'after'=>'now()',
+			);
+
+			if (count($kategories) > 0 ) {
+				$filter['kategories'] = $kategories;
+			}
+
+			if (count($stufen) > 0 ) {
+				$filter['stufen'] = $stufen;
+			}
+
+			$res = $SN->get_data_by_global_id($ids,array('events'=>$filter));
 		} catch(Exception $e) {
 			$content .= "<span class='termin'>zZ ist der Scoutnet Kalender down.<br>Bitte versuch es zu einem sp&auml;teren Zeitpunkt noch mal</span>";
 		}
