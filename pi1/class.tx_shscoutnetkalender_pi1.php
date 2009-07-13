@@ -104,11 +104,18 @@ class tx_shscoutnetkalender_pi1 extends tslib_pibase {
 					$kategorien .= utf8_decode($kategorie);
 				}
 
+				$datum = substr(strftime("%A",$line['start']),0,2).",&nbsp;".strftime("%d.%m.",$line['start']);
+				
+				$datum .= "&nbsp;";
+
+				if (isset($line['end']) && strftime("%d%m%Y",$line['start']) != strftime("%d%m%Y",$line['end']) ) {
+					$datum .= "&nbsp;-&nbsp;".substr(strftime("%A",$line['end']),0,2).",&nbsp;".strftime("%d.%m.",$line['end']);
+				}
+
 				$subarray = array(
-						'###EBENE###'=>'',
-						'###DATUM###'=>substr(strftime("%A",$line['start']),0,2).",&nbsp;".strftime("%d.%m.",$line['start'])."&nbsp;".
-							(isset($line['end'])?"&nbsp;-&nbsp;".substr(strftime("%A",$line['end']),0,2).",&nbsp;".strftime("%d.%m.",$line['end']):""),
-						'###ZEIT###'=>'',
+						'###EBENE###'=>$ebene,
+						'###DATUM###'=>$datum,
+						'###ZEIT###'=>$zeit,
 						'###TITEL###'=>utf8_Decode($line['title']),
 						'###STUFE###'=>$stufen,
 						'###KATEGORIE###'=>$kategorien,
