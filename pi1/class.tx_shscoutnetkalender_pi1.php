@@ -106,10 +106,16 @@ class tx_shscoutnetkalender_pi1 extends tslib_pibase {
 
 				$datum = substr(strftime("%A",$line['start']),0,2).",&nbsp;".strftime("%d.%m.",$line['start']);
 				
-				$datum .= "&nbsp;";
 
 				if (isset($line['end']) && strftime("%d%m%Y",$line['start']) != strftime("%d%m%Y",$line['end']) ) {
 					$datum .= "&nbsp;-&nbsp;".substr(strftime("%A",$line['end']),0,2).",&nbsp;".strftime("%d.%m.",$line['end']);
+				}
+
+				$zeit = strftime("%H:%M",$line['start']);
+				
+
+				if (isset($line['end']) && strftime("%H%M",$line['start']) != strftime("%H%M",$line['end']) ) {
+					$zeit .= strftime("%H:%M",$line['end']);
 				}
 
 				$subarray = array(
