@@ -80,13 +80,14 @@ class tx_shscoutnetkalender_pi1 extends tslib_pibase {
 			if ($record['type'] === 'event') {
 				$line = $record['content'];
 
-				#print_r($record);
+				print_r($record);
 
 				/*$start_date = "";
 				if (ereg ("[0-9]{2}([0-9]{2})-([0-9]{1,2})-([0-9]{1,2})", $line['Start_Date'], $regs)) {
 					    $start_date = "$regs[3].$regs[2].$regs[1]";
 				}*/
 				$start_date = strftime("%d.%m.%y",$line['start']);
+
 
 
 				$stufe ="";
