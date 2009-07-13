@@ -54,29 +54,12 @@ class tx_shscoutnetkalender_pi1 extends tslib_pibase {
 		$kat_ids_text = $this->cObj->data["tx_shscoutnetkalender_kat_ids"];
 
 	
-		$content = //'<link rel="stylesheet" type="text/css" href="http://kalender.scoutnet.de/2.0/templates/scoutnet/style.css" media="screen" />'."\n".
+		$content = '<link rel="stylesheet" type="text/css" href="uploads/tx_shscoutnetkalender/kalender.css" media="screen" />'."\n".
 			'<script type="text/javascript" src="http://kalender.scoutnet.de/2.0/templates/scoutnet/behavior.js"></script>'."\n".
 			'<script type="text/javascript" src="http://kalender.scoutnet.de/js/base2-p.js"></script>'."\n".
 			'<script type="text/javascript" src="http://kalender.scoutnet.de/js/base2-dom-p.js"></script>'."\n".
-			'<style type="text/css" media="all">'."\n".
-			'.snk-powered-by{
-				text-align: right;
-				float: right;
-			}
-			.snk-hinzufuegen{
-				float: left;
-				font-weight: bold;
-			}
-			.snk-termin-infos dl{
-				border: 1px solid black;
-				border-top:0;
-				border-right:0;
-				margin: 0px 0px 5px 10px;
-				padding: 10px 20px 20px 20px;
-			}
-			.snk-termin-infos dt{
-				font-weight: bold;
-			}
+			'<style type="text/css" media="none">'."\n".
+			'
 			.snk-termin-infos{
 				display:none;
 			}</style>'."\n".
