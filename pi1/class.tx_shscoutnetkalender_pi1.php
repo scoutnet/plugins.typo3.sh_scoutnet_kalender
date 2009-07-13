@@ -52,6 +52,7 @@ class tx_shscoutnetkalender_pi1 extends tslib_pibase {
 
 		$ids_text = $this->cObj->data["tx_shscoutnetkalender_ids"];
 		$kat_ids_text = $this->cObj->data["tx_shscoutnetkalender_kat_ids"];
+		$stufen_ids_text = $this->cObj->data["tx_shscoutnetkalender_stufen_ids"];
 
 	
 		$content = '<link rel="stylesheet" type="text/css" href="uploads/tx_shscoutnetkalender/kalender.css" media="screen" />'."\n".
@@ -67,12 +68,13 @@ class tx_shscoutnetkalender_pi1 extends tslib_pibase {
 		
 		$ids = split(",",$ids_text);
 		$kategories = split(",",$kat_ids_text);
+		$stufen = split(",",$stufen_ids_text);
 
 		$res = array();
 		try {
 			$SN = new jsonRPCClient("http://www.scoutnet.de/jsonrpc/server.php");
 
-			$res = $SN->get_data_by_global_id($ids,array('events'=>array('limit'=>'20','after'=>'now()','kategories'=>$kategories)));
+			$res = $SN->get_data_by_global_id($ids,array('events'=>array('limit'=>'20','after'=>'now()','kategories'=>$kategories,'stufen'=>$stufen)));
 		} catch(Exception $e) {
 			$content .= "<span class='termin'>zZ ist der Scoutnet Kalender down.<br>Bitte versuch es zu einem sp&auml;teren Zeitpunkt noch mal</span>";
 		}
