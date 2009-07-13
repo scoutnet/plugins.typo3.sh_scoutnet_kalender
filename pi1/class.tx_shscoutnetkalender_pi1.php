@@ -63,7 +63,7 @@ class tx_shscoutnetkalender_pi1 extends tslib_pibase {
 		try {
 			$SN = new jsonRPCClient("http://www.scoutnet.de/jsonrpc/server.php");
 
-			$res = $SN->get_data_by_global_id(split(",",$ids_text),array('events'=>array('limit'=>'20','after'=>'now()')));
+			$res = $SN->get_data_by_global_id($ids,array('events'=>array('limit'=>'20','after'=>'now()')));
 		} catch(Exception $e) {
 			$content .= "<span class='termin'>zZ ist der Scoutnet Kalender down.<br>Bitte versuch es zu einem sp&auml;teren Zeitpunkt noch mal</span>";
 		}
@@ -149,7 +149,7 @@ class tx_shscoutnetkalender_pi1 extends tslib_pibase {
 		//$content.='</div>';
 
 		$subarray = array (
-			'###TERMIN_HINZUFUEGEN_LINK###'=>'<a href="https://www.scoutnet.de/community/kalender/events.html?task=create&amp;SSID={$kalender.id}" target="_top">Termin&nbsp;hinzuf&uuml;gen</a>',
+			'###TERMIN_HINZUFUEGEN_LINK###'=>'<a href="https://www.scoutnet.de/community/kalender/events.html?task=create&amp;SSID="'.$ids[0].'" target="_top">Termin&nbsp;hinzuf&uuml;gen</a>',
 			'###POWERED_BY_LINK###' => 'Powered by <span><a href="http://kalender.scoutnet.de/" target="_top">ScoutNet.DE</a></span>'
 		);
 
