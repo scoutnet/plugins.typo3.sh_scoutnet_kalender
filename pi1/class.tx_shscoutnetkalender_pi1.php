@@ -150,15 +150,17 @@ class tx_shscoutnetkalender_pi1 extends tslib_pibase {
 					);
 
 				$subcontent .= $this->cObj->substituteMarkerArray($termin_template,$subarray);
-				
-				$detail_template = $termin_detail_template;
-				$detail_template = $this->cObj->substituteSubpart($detail_template,"###CONTENT_DESCRIPTION###",trim($line['Description'])?$this->cObj->getSubpart($detail_template,"###CONTENT_DESCRIPTION###"):"");
-				$detail_template = $this->cObj->substituteSubpart($detail_template,"###CONTENT_ORT###",trim($line['ZIP']).trim($line['Location'])?$this->cObj->getSubpart($detail_template,"###CONTENT_ORT###"):"");
-				$detail_template = $this->cObj->substituteSubpart($detail_template,"###CONTENT_ORGANIZER###",trim($line['organizer'])?$this->cObj->getSubpart($detail_template,"###CONTENT_ORGANIZER###"):"");
-				$detail_template = $this->cObj->substituteSubpart($detail_template,"###CONTENT_TARGET_GROUP###",trim($line['targetGroup'])?$this->cObj->getSubpart($detail_template,"###CONTENT_TARGET_GROUP###"):"");
-				$detail_template = $this->cObj->substituteSubpart($detail_template,"###CONTENT_URL###",trim($line['URL'])?$this->cObj->getSubpart($detail_template,"###CONTENT_URL###"):"");
 
-				$subarray = array(
+				if (trim($line['Description']).trim($line['ZIP']).trim($line['Location']).trim($line['organizer']).trim($line['targetGroup']).trim($line['URL'])) {
+				
+					$detail_template = $termin_detail_template;
+					$detail_template = $this->cObj->substituteSubpart($detail_template,"###CONTENT_DESCRIPTION###",trim($line['Description'])?$this->cObj->getSubpart($detail_template,"###CONTENT_DESCRIPTION###"):"");
+					$detail_template = $this->cObj->substituteSubpart($detail_template,"###CONTENT_ORT###",trim($line['ZIP']).trim($line['Location'])?$this->cObj->getSubpart($detail_template,"###CONTENT_ORT###"):"");
+					$detail_template = $this->cObj->substituteSubpart($detail_template,"###CONTENT_ORGANIZER###",trim($line['organizer'])?$this->cObj->getSubpart($detail_template,"###CONTENT_ORGANIZER###"):"");
+					$detail_template = $this->cObj->substituteSubpart($detail_template,"###CONTENT_TARGET_GROUP###",trim($line['targetGroup'])?$this->cObj->getSubpart($detail_template,"###CONTENT_TARGET_GROUP###"):"");
+					$detail_template = $this->cObj->substituteSubpart($detail_template,"###CONTENT_URL###",trim($line['URL'])?$this->cObj->getSubpart($detail_template,"###CONTENT_URL###"):"");
+
+					$subarray = array(
 						'###EINTRAG_ID###'=>$line['id'],
 						'###DESCRIPTION###'=>utf8_decode($line['Description']),
 						'###ORT###'=>htmlentities(utf8_decode($line['ZIP']." ".$line['Location'])),
@@ -168,7 +170,8 @@ class tx_shscoutnetkalender_pi1 extends tslib_pibase {
 						'###AUTHOR###'=>htmlentities(utf8_decode($line['lastModifier'] != ""?$line['lastModifier']:$line['creator'])),
 					);
 
-				$subcontent .= $this->cObj->substituteMarkerArray($detail_template,$subarray);
+					$subcontent .= $this->cObj->substituteMarkerArray($detail_template,$subarray);
+				}
 
 			//	."<span class='termin'><span class='termin_date'>".$start_date."</span>".
 			//		" <span class='termin_text'><a href='/veranstaltungen/kalender/?no_cache=1'>".utf8_Decode($line['title'])."</a></span></span>\n";
