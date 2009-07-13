@@ -58,7 +58,28 @@ class tx_shscoutnetkalender_pi1 extends tslib_pibase {
 			'<script type="text/javascript" src="http://kalender.scoutnet.de/2.0/templates/scoutnet/behavior.js"></script>'."\n".
 			'<script type="text/javascript" src="http://kalender.scoutnet.de/js/base2-p.js"></script>'."\n".
 			'<script type="text/javascript" src="http://kalender.scoutnet.de/js/base2-dom-p.js"></script>'."\n".
-			'<style type="text/css" media="all">.snk-termin-infos{display:none;}</style>'."\n".
+			'<style type="text/css" media="all">'."\n".
+			'.snk-powered-by{
+				text-align: right;
+				float: right;
+			}
+			.snk-hinzufuegen{
+				float: left;
+				font-weight: bold;
+			}
+			.snk-termin-infos dl{
+				border: 1px solid black;
+				border-top:0;
+				border-right:0;
+				margin: 0px 0px 5px 10px;
+				padding: 10px 20px 20px 20px;
+			}
+			.snk-termin-infos dt{
+				font-weight: bold;
+			}
+			.snk-termin-infos{
+				display:none;
+			}</style>'."\n".
 			'<script type="text/javascript">'."\n".
 				'base2.DOM.bind(document);'."\n".
 				'snk_init();'."\n".
