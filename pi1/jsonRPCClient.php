@@ -132,8 +132,7 @@ class jsonRPCClient {
 							'content' => $request
 							));
 		$context  = stream_context_create($opts);
-		echo "foo";
-		if ($fp = @fopen($this->url, 'r', false, $context)) {
+		if ($fp = fopen($this->url, 'r', false, $context)) {
 			$response = '';
 			while($row = fgets($fp)) {
 				$response.= trim($row)."\n";
