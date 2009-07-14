@@ -163,7 +163,7 @@ class tx_shscoutnetkalender_pi1 extends tslib_pibase {
 					}
 				}
 
-				$ebene = $line['kalender']['ebene'].(($line['kalender']['ebene_id'] >= 7)?" ".$line['kalender']['name']:"");
+				$ebene = $line['kalender']['ebene'].(($line['kalender']['ebene_id'] >= 7)?"<br>".$line['kalender']['name']:"");
 
 				$ebene = str_replace(" ","&nbsp;",htmlentities(utf8_decode($ebene)));
 
