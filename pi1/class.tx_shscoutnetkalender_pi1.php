@@ -65,6 +65,7 @@ class tx_shscoutnetkalender_pi1 extends tslib_pibase {
 
 		$res = array();
 		try {
+			ini_set('default_socket_timeout',1);
 			$SN = new jsonRPCClient("http://www.scoutnet.de/jsonrpc/server.php");
 
 			$filter = array(

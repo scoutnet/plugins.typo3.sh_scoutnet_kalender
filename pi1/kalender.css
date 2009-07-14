@@ -16,7 +16,6 @@
 }
 
 .snk{
-	width:100%;
 	color: #6E1C32;
 	font-family: Verdana, Sans-Serif;
 }
@@ -30,13 +29,14 @@
 	display: block;
 }
 .snk-termine{
-	width: 100%;
+	width: 660px;
+	overflow:hidden;
 }
 .snk-termine{
 	align: center;
 }
 .snk-termine table{
-	width:564px;
+	width:100%;
 }
 tr.snk-headings-row th{
 	color: #6E1C32;
