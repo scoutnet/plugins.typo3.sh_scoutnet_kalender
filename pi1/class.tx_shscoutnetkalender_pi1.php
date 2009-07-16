@@ -29,7 +29,7 @@
 
 
 require_once(PATH_tslib.'class.tslib_pibase.php');
-require_once('jsonRPCClient.php');
+require_once('class.tx_shscoutnetkalender_jsonRPCClient.php');
 
 class tx_shscoutnetkalender_pi1 extends tslib_pibase {
 	var $prefixId = 'tx_shscoutnetkalender_pi1';		// Same as class name
@@ -66,7 +66,7 @@ class tx_shscoutnetkalender_pi1 extends tslib_pibase {
 		$res = array();
 		try {
 			ini_set('default_socket_timeout',1);
-			$SN = new jsonRPCClient("http://www.scoutnet.de/jsonrpc/server.php");
+			$SN = new tx_shscoutnetkalender_jsonRPCClient("http://www.scoutnet.de/jsonrpc/server.php");
 
 			$filter = array(
 				'limit'=>'20',

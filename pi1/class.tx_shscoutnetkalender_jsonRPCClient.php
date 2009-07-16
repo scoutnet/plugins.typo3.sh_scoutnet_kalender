@@ -27,10 +27,8 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  *
  * @author sergio <jsonrpcphp@inservibile.org>
  */
-if (!defined("JSON_RPC_CLIENT")) {
-	define ("JSON_RPC_CLIENT",1);
 
-class jsonRPCClient {
+class tx_shscoutnetkalender_jsonRPCClient {
 	
 	/**
 	 * Debug state
@@ -165,10 +163,9 @@ class jsonRPCClient {
 		}
 	}
 }
-}
 
-if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/sh_scoutnet_kalender/pi1/jsonRPCClient.php']) {
-	  include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/sh_scoutnet_kalender/pi1/jsonRPCClient.php']);
+if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/sh_scoutnet_kalender/pi1/class.tx_shscoutnetkalender_jsonRPCClient.php']) {
+	  include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/sh_scoutnet_kalender/pi1/class.tx_shscoutnetkalender_jsonRPCClient.php']);
 }
 
 ?>
