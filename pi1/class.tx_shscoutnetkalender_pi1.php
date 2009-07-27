@@ -88,7 +88,8 @@ class tx_shscoutnetkalender_pi1 extends tslib_pibase {
 		}
 
 		//$templatecode = $this->cObj->fileResource($templateflex_file?'uploads/tx_shscoutnetkalender/' . $templateflex_file:$this->conf['templateFile']);
-		$templatecode = $this->cObj->fileResource('uploads/tx_shscoutnetkalender/template.html');
+
+		$templatecode = $this->cObj->fileResource($this->conf["templateFile"]);
 
 		$templatecode = $this->cObj->getSubpart($templatecode,"###TEMPLATE_SCOUTNET###");
 
