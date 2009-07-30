@@ -66,8 +66,7 @@ class tx_shscoutnetkalender_pi1 extends tslib_pibase {
 
 		$res = array();
 		try {
-			ini_set('default_socket_timeout',1);
-			$SN = new tx_shscoutnetwebservice_jsonRPCClient("http://www.scoutnet.de/jsonrpc/server.php");
+			$SN = new tx_shscoutnetwebservice_sn();
 
 			$filter = array(
 				'limit'=>'20',
@@ -128,10 +127,6 @@ class tx_shscoutnetkalender_pi1 extends tslib_pibase {
 					$subcontent .= $this->cObj->substituteMarkerArray($monats_header_template,$subarray);
 					$monat = $new_monat;
 				}
-
-
-
-
 
 				$stufen ="";
 				
