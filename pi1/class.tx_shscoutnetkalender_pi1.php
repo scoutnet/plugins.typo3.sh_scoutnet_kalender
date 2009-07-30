@@ -112,96 +112,90 @@ class tx_shscoutnetkalender_pi1 extends tslib_pibase {
 
 		$monat = "0";
 
-		foreach ($res as $record) {
-			if ($record['type'] === 'event') {
-				$line = $record['content'];
+		foreach ($res as $line) {
+			$new_monat = strftime("%Y%m",$line['Start']);
 
+			if ($new_monat != $monat) {
+				$subarray = array(
+					'###MONATS_NAME###'=>strftime("%B '%y",$line['Start']),
+				);
 
-				$new_monat = strftime("%Y%m",$line['Start']);
+				$subcontent .= $this->cObj->substituteMarkerArray($monats_header_template,$subarray);
+				$monat = $new_monat;
+			}
 
-				if ($new_monat != $monat) {
-					$subarray = array(
-						'###MONATS_NAME###'=>strftime("%B '%y",$line['Start']),
-					);
+			$stufen ="";
 
-					$subcontent .= $this->cObj->substituteMarkerArray($monats_header_template,$subarray);
-					$monat = $new_monat;
-				}
+			foreach ($line['Stufen'] as $stufe) {
+				$stufen .= "<img src='http://kalender.scoutnet.de/2.0/images/".$res["STUFE_".$stufe]['content']['id'].".gif' alt='".htmlentities($res["STUFE_".$stufe]['content']['bezeichnung'])."' />";
+			}
 
-				$stufen ="";
-				
-				foreach ($line['Stufen'] as $stufe) {
-					$stufen .= "<img src='http://kalender.scoutnet.de/2.0/images/".$res["STUFE_".$stufe]['content']['id'].".gif' alt='".htmlentities($res["STUFE_".$stufe]['content']['bezeichnung'])."' />";
-				}
+			$kategorien = "";
 
-				$kategorien = "";
-
-				foreach ($line['Keywords'] as $kategorie) {
+			foreach ($line['Keywords'] as $kategorie) {
 					if ($kategorien != "")
 						$kategorien .= ", ";
 					$kategorien .= utf8_decode($kategorie);
+			}
+
+			$datum = substr(strftime("%A",$line['Start']),0,2).",&nbsp;".strftime("%d.%m.",$line['Start']);
+
+			if (isset($line['End']) && strftime("%d%m%Y",$line['Start']) != strftime("%d%m%Y",$line['End']) ) {
+				$datum .= "&nbsp;-&nbsp;";
+				$datum .= substr(strftime("%A",$line['End']),0,2).",&nbsp;".strftime("%d.%m.",$line['End']);
+			}
+
+
+			$zeit = "";
+			if ($line['All_Day'] != 1) {
+				$zeit = strftime("%H:%M",$line['Start']);
+
+
+				if (isset($line['End']) && strftime("%H%M",$line['Start']) != strftime("%H%M",$line['End']) ) {
+					$zeit .= "&nbsp;-&nbsp;";
+					$zeit .= strftime("%H:%M",$line['End']);
 				}
+			}
 
-				$datum = substr(strftime("%A",$line['Start']),0,2).",&nbsp;".strftime("%d.%m.",$line['Start']);
+			$ebene = htmlentities(utf8_decode($res['KALENDER_'.$line['Kalender']]['content']['Ebene'])).(($res['KALENDER_'.$line['Kalender']]['content']['Ebene_Id'] >= 7)?"<br>".htmlentities(utf8_decode($res['KALENDER_'.$line['Kalender']]['content']['Name'])):"");
 
-				if (isset($line['End']) && strftime("%d%m%Y",$line['Start']) != strftime("%d%m%Y",$line['End']) ) {
-					$datum .= "&nbsp;-&nbsp;";
-					$datum .= substr(strftime("%A",$line['End']),0,2).",&nbsp;".strftime("%d.%m.",$line['End']);
-				}
+			$ebene = str_replace(" ","&nbsp;",$ebene);
 
+			$showDetails = trim($line['Description']).trim($line['ZIP']).trim($line['Location']).trim($line['Organizer']).trim($line['Target_Group']).trim($line['URL']);
 
-				$zeit = "";
-				if ($line['All_Day'] != 1) {
-					$zeit = strftime("%H:%M",$line['Start']);
-				
+			$titel = ($showDetails?'<a href="#snk-termin-'.$line['ID'].'" class="snk-termin-link" onclick="if(snk_show_termin) return snk_show_termin('.$line['ID'].',this);">':'').nl2br(htmlentities(utf8_Decode($line['Title']))).($showDetails?'</a>':'');
 
-					if (isset($line['End']) && strftime("%H%M",$line['Start']) != strftime("%H%M",$line['End']) ) {
-						$zeit .= "&nbsp;-&nbsp;";
-						$zeit .= strftime("%H:%M",$line['End']);
-					}
-				}
+			$subarray = array(
+				'###EBENE###'=>$ebene,
+				'###DATUM###'=>$datum,
+				'###ZEIT###'=>$zeit,
+				'###TITEL###'=>$titel,
+				'###STUFE###'=>$stufen,
+				'###KATEGORIE###'=>$kategorien,
+			);
 
-				$ebene = htmlentities(utf8_decode($res['KALENDER_'.$line['Kalender']]['content']['Ebene'])).(($res['KALENDER_'.$line['Kalender']]['content']['Ebene_Id'] >= 7)?"<br>".htmlentities(utf8_decode($res['KALENDER_'.$line['Kalender']]['content']['Name'])):"");
+			$subcontent .= $this->cObj->substituteMarkerArray($termin_template,$subarray);
 
-				$ebene = str_replace(" ","&nbsp;",$ebene);
+			if ($showDetails) {
 
-				$showDetails = trim($line['Description']).trim($line['ZIP']).trim($line['Location']).trim($line['Organizer']).trim($line['Target_Group']).trim($line['URL']);
-
-				$titel = ($showDetails?'<a href="#snk-termin-'.$line['ID'].'" class="snk-termin-link" onclick="if(snk_show_termin) return snk_show_termin('.$line['ID'].',this);">':'').nl2br(htmlentities(utf8_Decode($line['Title']))).($showDetails?'</a>':'');
+				$detail_template = $termin_detail_template;
+				$detail_template = $this->cObj->substituteSubpart($detail_template,"###CONTENT_DESCRIPTION###",trim($line['Description'])?$this->cObj->getSubpart($detail_template,"###CONTENT_DESCRIPTION###"):"");
+				$detail_template = $this->cObj->substituteSubpart($detail_template,"###CONTENT_ORT###",trim($line['ZIP']).trim($line['Location'])?$this->cObj->getSubpart($detail_template,"###CONTENT_ORT###"):"");
+				$detail_template = $this->cObj->substituteSubpart($detail_template,"###CONTENT_ORGANIZER###",trim($line['Organizer'])?$this->cObj->getSubpart($detail_template,"###CONTENT_ORGANIZER###"):"");
+				$detail_template = $this->cObj->substituteSubpart($detail_template,"###CONTENT_TARGET_GROUP###",trim($line['Target_Group'])?$this->cObj->getSubpart($detail_template,"###CONTENT_TARGET_GROUP###"):"");
+				$detail_template = $this->cObj->substituteSubpart($detail_template,"###CONTENT_URL###",trim($line['URL'])?$this->cObj->getSubpart($detail_template,"###CONTENT_URL###"):"");
 
 				$subarray = array(
-						'###EBENE###'=>$ebene,
-						'###DATUM###'=>$datum,
-						'###ZEIT###'=>$zeit,
-						'###TITEL###'=>$titel,
-						'###STUFE###'=>$stufen,
-						'###KATEGORIE###'=>$kategorien,
-					);
+					'###EINTRAG_ID###'=>$line['ID'],
+					'###DESCRIPTION###'=>utf8_decode($line['Description']),
+					'###ORT###'=>htmlentities(utf8_decode($line['ZIP']." ".$line['Location'])),
+					'###ORGANIZER###'=>htmlentities(utf8_decode($line['Organizer'])),
+					'###TARGET_GROUP###'=>htmlentities(utf8_decode($line['Target_Group'])),
+					'###URL###'=>'<a target="_blank" href="'.htmlentities(utf8_decode($line['URL'])).'>'.(trim($line['URL_Text'])?htmlentities(utf8_decode($line['URL_Text'])):htmlentities(utf8_decode($line['URL']))).'</a>',
+					'###AUTHOR###'=>htmlentities(utf8_decode($line['Last_Modified_By'] != ""?$line['Last_Modified_By']:$line['Created_By'])),
+				);
 
-				$subcontent .= $this->cObj->substituteMarkerArray($termin_template,$subarray);
-
-				if ($showDetails) {
-				
-					$detail_template = $termin_detail_template;
-					$detail_template = $this->cObj->substituteSubpart($detail_template,"###CONTENT_DESCRIPTION###",trim($line['Description'])?$this->cObj->getSubpart($detail_template,"###CONTENT_DESCRIPTION###"):"");
-					$detail_template = $this->cObj->substituteSubpart($detail_template,"###CONTENT_ORT###",trim($line['ZIP']).trim($line['Location'])?$this->cObj->getSubpart($detail_template,"###CONTENT_ORT###"):"");
-					$detail_template = $this->cObj->substituteSubpart($detail_template,"###CONTENT_ORGANIZER###",trim($line['Organizer'])?$this->cObj->getSubpart($detail_template,"###CONTENT_ORGANIZER###"):"");
-					$detail_template = $this->cObj->substituteSubpart($detail_template,"###CONTENT_TARGET_GROUP###",trim($line['Target_Group'])?$this->cObj->getSubpart($detail_template,"###CONTENT_TARGET_GROUP###"):"");
-					$detail_template = $this->cObj->substituteSubpart($detail_template,"###CONTENT_URL###",trim($line['URL'])?$this->cObj->getSubpart($detail_template,"###CONTENT_URL###"):"");
-
-					$subarray = array(
-						'###EINTRAG_ID###'=>$line['ID'],
-						'###DESCRIPTION###'=>utf8_decode($line['Description']),
-						'###ORT###'=>htmlentities(utf8_decode($line['ZIP']." ".$line['Location'])),
-						'###ORGANIZER###'=>htmlentities(utf8_decode($line['Organizer'])),
-						'###TARGET_GROUP###'=>htmlentities(utf8_decode($line['Target_Group'])),
-						'###URL###'=>'<a target="_blank" href="'.htmlentities(utf8_decode($line['URL'])).'>'.(trim($line['URL_Text'])?htmlentities(utf8_decode($line['URL_Text'])):htmlentities(utf8_decode($line['URL']))).'</a>',
-						'###AUTHOR###'=>htmlentities(utf8_decode($line['Last_Modified_By'] != ""?$line['Last_Modified_By']:$line['Created_By'])),
-					);
-
-					$subcontent .= $this->cObj->substituteMarkerArray($detail_template,$subarray);
-				}
-
+				$subcontent .= $this->cObj->substituteMarkerArray($detail_template,$subarray);
 			}
 
 		}
