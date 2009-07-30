@@ -166,8 +166,7 @@ class tx_shscoutnetkalender_pi1 extends tslib_pibase {
 					}
 				}
 
-				var_dump($res['KALENDER_'.$line['Kalender']]['content']);
-				$ebene = htmlentities(utf8_decode($res['KALENDER_'.$line['Kalender']]['content']['ebene'])).(($res['KALENDER_'.$line['Kalender']]['content']['ebene_id'] >= 7)?"<br>".htmlentities(utf8_decode($res['KALENDER_'.$line['Kalender']]['content']['name'])):"");
+				$ebene = htmlentities(utf8_decode($res['KALENDER_'.$line['Kalender']]['content']['Ebene'])).(($res['KALENDER_'.$line['Kalender']]['content']['Ebene_Id'] >= 7)?"<br>".htmlentities(utf8_decode($res['KALENDER_'.$line['Kalender']]['content']['Name'])):"");
 
 				$ebene = str_replace(" ","&nbsp;",$ebene);
 
