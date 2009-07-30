@@ -128,7 +128,6 @@ class tx_shscoutnetkalender_pi1 extends tslib_pibase {
 
 			foreach ($line['Stufen'] as $stufe) {
 				$stufen .= $SN->get_stufe_by_id($stufe)->get_Image_URL();
-				//$stufen .= "<img src='http://kalender.scoutnet.de/2.0/images/".$SN->res["STUFE_".$stufe]['content']['id'].".gif' alt='".htmlentities($res["STUFE_".$stufe]['content']['bezeichnung'])."' />";
 			}
 
 			$kategorien = "";
@@ -158,7 +157,7 @@ class tx_shscoutnetkalender_pi1 extends tslib_pibase {
 				}
 			}
 
-			$ebene = htmlentities(utf8_decode($res['KALENDER_'.$line['Kalender']]['content']['Ebene'])).(($res['KALENDER_'.$line['Kalender']]['content']['Ebene_Id'] >= 7)?"<br>".htmlentities(utf8_decode($res['KALENDER_'.$line['Kalender']]['content']['Name'])):"");
+			$ebene = $SN->get_kalender_by_id($line['Kalender'])->get_long_Name();
 
 			$ebene = str_replace(" ","&nbsp;",$ebene);
 
