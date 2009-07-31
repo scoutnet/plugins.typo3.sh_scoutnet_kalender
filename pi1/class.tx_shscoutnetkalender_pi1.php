@@ -124,11 +124,7 @@ class tx_shscoutnetkalender_pi1 extends tslib_pibase {
 				$monat = $new_monat;
 			}
 
-			$stufen ="";
-
-			foreach ($event['Stufen'] as $stufe) {
-				//$stufen .= $SN->get_stufe_by_id($stufe)->get_Image_URL();
-			}
+			$stufen = $event->get_Stufen_Images();
 
 			$kategorien = "";
 
