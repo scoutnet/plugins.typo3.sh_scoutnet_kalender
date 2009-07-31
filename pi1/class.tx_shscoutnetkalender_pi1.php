@@ -153,7 +153,7 @@ class tx_shscoutnetkalender_pi1 extends tslib_pibase {
 				}
 			}
 
-			//$ebene = $SN->get_kalender_by_id($event['Kalender'])->get_long_Name();
+			$ebene = $event['Kalender']->get_long_Name();
 
 			$ebene = str_replace(" ","&nbsp;",$ebene);
 
