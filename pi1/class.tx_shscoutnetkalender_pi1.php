@@ -186,9 +186,9 @@ class tx_shscoutnetkalender_pi1 extends tslib_pibase {
 				$detail_template = $this->cObj->substituteSubpart($detail_template,"###CONTENT_URL###",trim($line['URL'])?$this->cObj->getSubpart($detail_template,"###CONTENT_URL###"):"");
 
 				$author = null;
-				$author = $SN->get_user_by_id($line['Last_Modified_By']);
+				//$author = $SN->get_user_by_id($line['Last_Modified_By']);
 				if ($author == null) {
-					$author = $SN->get_user_by_id($line['Created_By']);
+				//	$author = $SN->get_user_by_id($line['Created_By']);
 				}
 
 				$subarray = array(
