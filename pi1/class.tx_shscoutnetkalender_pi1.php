@@ -185,12 +185,6 @@ class tx_shscoutnetkalender_pi1 extends tslib_pibase {
 				$detail_template = $this->cObj->substituteSubpart($detail_template,"###CONTENT_TARGET_GROUP###",trim($line['Target_Group'])?$this->cObj->getSubpart($detail_template,"###CONTENT_TARGET_GROUP###"):"");
 				$detail_template = $this->cObj->substituteSubpart($detail_template,"###CONTENT_URL###",trim($line['URL'])?$this->cObj->getSubpart($detail_template,"###CONTENT_URL###"):"");
 
-				$author = null;
-				//$author = $SN->get_user_by_id($line['Last_Modified_By']);
-				if ($author == null) {
-				//	$author = $SN->get_user_by_id($line['Created_By']);
-				}
-
 				$subarray = array(
 					'###EINTRAG_ID###'=>$line['ID'],
 					'###DESCRIPTION###'=>utf8_decode($line['Description']),
@@ -198,7 +192,7 @@ class tx_shscoutnetkalender_pi1 extends tslib_pibase {
 					'###ORGANIZER###'=>htmlentities(utf8_decode($line['Organizer'])),
 					'###TARGET_GROUP###'=>htmlentities(utf8_decode($line['Target_Group'])),
 					'###URL###'=>'<a target="_blank" href="'.htmlentities(utf8_decode($line['URL'])).'>'.(trim($line['URL_Text'])?htmlentities(utf8_decode($line['URL_Text'])):htmlentities(utf8_decode($line['URL']))).'</a>',
-					'###AUTHOR###'=>($author==null?"":$author->get_long_name()),
+					'###AUTHOR###'=>$event->get_Author_name(),
 				);
 
 				$subcontent .= $this->cObj->substituteMarkerArray($detail_template,$subarray);
