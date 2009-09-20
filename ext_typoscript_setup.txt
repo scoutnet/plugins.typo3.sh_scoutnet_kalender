@@ -3,5 +3,5 @@ tt_content.sh_scoutnet_kalender_pi1.10 >
 
 plugin.tx_shscoutnetkalender_pi1 {
   templateFile = {$plugin.tx_shscoutnetkalender_pi1.templateFile}
-
+  cssFile = {$plugin.tx_shscoutnetkalender_pi1.cssFile}
 }

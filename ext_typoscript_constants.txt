@@ -1,5 +1,6 @@
 # Const
 plugin.tx_shscoutnetkalender_pi1 {
   templateFile = EXT:sh_scoutnet_kalender/pi1/scoutnet_kalender.tmpl
+  cssFile = EXT:sh_scoutnet_kalender/pi1/kalender.css
 }
 
