@@ -53,7 +53,7 @@ class tx_shscoutnetkalender_pi1 extends tslib_pibase {
 
 		$cssFile = $this->conf["cssFile"];
 
-		$content = '<link rel="stylesheet" type="text/css" href="'.$this->cObj->getTypoLink_URL($cssFile).'" media="screen" />'."\n".
+		$content = '<link rel="stylesheet" type="text/css" href="'.$this->pi_getLL($cssFile).'" media="screen" />'."\n".
 			'<script type="text/javascript" src="http://kalender.scoutnet.de/2.0/templates/scoutnet/behavior.js"></script>'."\n".
 			'<script type="text/javascript" src="http://kalender.scoutnet.de/js/base2-p.js"></script>'."\n".
 			'<script type="text/javascript" src="http://kalender.scoutnet.de/js/base2-dom-p.js"></script>'."\n".
