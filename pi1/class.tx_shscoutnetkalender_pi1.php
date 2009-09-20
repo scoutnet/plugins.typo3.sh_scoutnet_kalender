@@ -51,7 +51,7 @@ class tx_shscoutnetkalender_pi1 extends tslib_pibase {
 		$this->pi_loadLL();
 		
 
-		$cssFile = $this->pi_getLL($this->conf["cssFile"]);
+		$cssFile = $this->cObj->fileResource($this->conf["cssFile"]);
 
 		echo $cssFile;
 
