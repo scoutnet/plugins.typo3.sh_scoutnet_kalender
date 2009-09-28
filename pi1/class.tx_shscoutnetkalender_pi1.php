@@ -92,7 +92,6 @@ class tx_shscoutnetkalender_pi1 extends tslib_pibase {
 			$content .= "<span class='termin'>zZ ist der Scoutnet Kalender down.<br>Bitte versuch es zu einem sp&auml;teren Zeitpunkt noch mal</span>";
 		}
 
-		print_r ($this->piVars);
 		if ($this->piVars['addids']) {
 			$content .= "addids";
 		}
