@@ -105,14 +105,18 @@ class tx_shscoutnetkalender_pi1 extends tslib_pibase {
 
 			$stammesAuswahl = "";
 
+			$addKalenderForm = "";
+
 			if (count($optionalKalenders) > 0) {
 				$stammesAuswahl = $this->cObj->getSubpart($templatecode,"###STAMMESAUSWAHL###");
-	/*<form action="" method="get">
-		<? foreach ($this->optionalKalenders as $kalender) {?> 
-		<input onchange="form.submit();" ###CHECK### name="addids[]" value="<?echo $kalender['ID'];?>" id="add_id_<?echo $kalender['ID'];?>" title="<?echo $kalender->get    _Name();?>" type="checkbox" /><label for="add_id_<?echo $kalender['ID'];?>"><?echo $kalender->get_Name();?></label>
-			<?}?>
-	</form>
-	 */
+
+				$addKalenderForm = '<form action="" method="get">';
+				foreach ($optionalKalenders as $kalender) { 
+					$addKalenderForm .= '<input onchange="form.submit();" ###CHECK### name="addids[]" value="'.$kalender['ID'].'" id="add_id_'.$kalender['ID'].'" title="'.$kalender->get_Name().'" type="checkbox" /><label for="add_id_'.$kalender['ID'].'">'.$kalender->get_Name().'</label>';
+				}
+				$addKalenderForm .= '</form>';
+
+				$stammesAuswahl = $this->cObj->substituteMarkerArray($stammesAuswahl,array("ADD_KALENDER_FORM"=>$addKalenderForm));
 			}
 
 			$templatecode = $this->cObj->substituteSubpart($templatecode,"###STAMMESAUSWAHL###",$stammesAuswahl);
