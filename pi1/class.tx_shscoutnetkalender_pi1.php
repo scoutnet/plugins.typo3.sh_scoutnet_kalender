@@ -112,7 +112,7 @@ class tx_shscoutnetkalender_pi1 extends tslib_pibase {
 
 				$addKalenderForm = '<form action="" method="get">';
 				foreach ($optionalKalenders as $kalender) { 
-					$addKalenderForm .= '<input onchange="form.submit();" ###CHECK### name="addids[]" value="'.$kalender['ID'].'" id="add_id_'.$kalender['ID'].'" title="'.$kalender->get_Name().'" type="checkbox" /><label for="add_id_'.$kalender['ID'].'">&nbsp;'.$kalender->get_Name().'</label>';
+					$addKalenderForm .= '<input onchange="form.submit();" ###CHECK### name="'.$this->prefixId.'[addids][]" value="'.$kalender['ID'].'" id="add_id_'.$kalender['ID'].'" title="'.$kalender->get_Name().'" type="checkbox" /><label for="add_id_'.$kalender['ID'].'">&nbsp;'.$kalender->get_Name().'</label>';
 				}
 				$addKalenderForm .= '</form><br>';
 
