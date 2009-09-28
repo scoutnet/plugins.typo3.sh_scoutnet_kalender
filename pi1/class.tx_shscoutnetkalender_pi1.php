@@ -65,6 +65,10 @@ class tx_shscoutnetkalender_pi1 extends tslib_pibase {
 			'</script>'."\n";
 		
 		$ids = split(",",$this->cObj->data["tx_shscoutnetkalender_ids"]);
+		$optids = Array();
+		if (isset($this->cObj->data["tx_shscoutnetkalender_optids"]) && trim($this->cObj->data["tx_shscoutnetkalender_optids"])) {
+			$optids = split(",",$this->cObj->data["tx_shscoutnetkalender_optids"]);
+		}
 
 		$events = array();
 		try {
@@ -86,6 +90,10 @@ class tx_shscoutnetkalender_pi1 extends tslib_pibase {
 			$events = $SN->get_events_for_global_id_with_filter($ids,$filter);
 		} catch(Exception $e) {
 			$content .= "<span class='termin'>zZ ist der Scoutnet Kalender down.<br>Bitte versuch es zu einem sp&auml;teren Zeitpunkt noch mal</span>";
+		}
+
+		if ($this->piVars['addids']) {
+			$content .= "addids";
 		}
 
 		//$templatecode = $this->cObj->fileResource($templateflex_file?'uploads/tx_shscoutnetkalender/' . $templateflex_file:$this->conf['templateFile']);
