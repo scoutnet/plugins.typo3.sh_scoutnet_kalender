@@ -46,6 +46,8 @@ class tx_shscoutnetkalender_pi1 extends tslib_pibase {
 	 * @return	The content that is displayed on the website
 	 */
 	function main($content,$conf)	{
+		$GLOBALS["TSFE"]->set_no_cache();
+
 		$this->conf=$conf;
 		$this->pi_setPiVarDefaults();
 		$this->pi_loadLL();
