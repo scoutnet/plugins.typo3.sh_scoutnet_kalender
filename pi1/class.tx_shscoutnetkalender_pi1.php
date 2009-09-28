@@ -94,6 +94,7 @@ class tx_shscoutnetkalender_pi1 extends tslib_pibase {
 			$events = $SN->get_events_for_global_id_with_filter($ids,$filter);
 
 			$kalenders = $SN->get_kalender_by_global_id(array('17','151'));
+			print_r ($kalenders);
 		} catch(Exception $e) {
 			$content .= "<span class='termin'>zZ ist der Scoutnet Kalender down.<br>Bitte versuch es zu einem sp&auml;teren Zeitpunkt noch mal</span>";
 		}
