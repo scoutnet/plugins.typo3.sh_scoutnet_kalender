@@ -65,10 +65,6 @@ class tx_shscoutnetkalender_pi1 extends tslib_pibase {
 			'</script>'."\n";
 		
 		$ids = split(",",$this->cObj->data["tx_shscoutnetkalender_ids"]);
-		$optids = Array();
-		if (isset($this->cObj->data["tx_shscoutnetkalender_optids"]) && trim($this->cObj->data["tx_shscoutnetkalender_optids"])) {
-			$optids = split(",",$this->cObj->data["tx_shscoutnetkalender_optids"]);
-		}
 
 		$events = array();
 		try {
@@ -93,7 +89,11 @@ class tx_shscoutnetkalender_pi1 extends tslib_pibase {
 
 			$events = $SN->get_events_for_global_id_with_filter($ids,$filter);
 
-			$optionalKalenders = $SN->get_kalender_by_global_id($optids);
+			$optionalKalenders = Array();
+			if (isset($this->cObj->data["tx_shscoutnetkalender_optids"]) && trim($this->cObj->data["tx_shscoutnetkalender_optids"])) {
+				$optids = split(",",$this->cObj->data["tx_shscoutnetkalender_optids"]);
+				$optionalKalenders = $SN->get_kalender_by_global_id($optids);
+			}
 
 
 			//$templatecode = $this->cObj->fileResource($templateflex_file?'uploads/tx_shscoutnetkalender/' . $templateflex_file:$this->conf['templateFile']);
