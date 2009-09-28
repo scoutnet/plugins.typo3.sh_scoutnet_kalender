@@ -87,14 +87,15 @@ class tx_shscoutnetkalender_pi1 extends tslib_pibase {
 				$filter['stufen'] = split(",",$this->cObj->data["tx_shscoutnetkalender_stufen_ids"]);
 			}
 
+			if (isset($this->piVars['addids']) && count($this->piVars['addids']) > 0 && is_array($this->piVars['addids'])) {
+				$ids = array_merge($ids,$this->piVars["addids"]);
+			}
+
 			$events = $SN->get_events_for_global_id_with_filter($ids,$filter);
 		} catch(Exception $e) {
 			$content .= "<span class='termin'>zZ ist der Scoutnet Kalender down.<br>Bitte versuch es zu einem sp&auml;teren Zeitpunkt noch mal</span>";
 		}
 
-		if ($this->piVars['addids']) {
-			$content .= join(", ",$this->piVars["addids"]);
-		}
 
 		//$templatecode = $this->cObj->fileResource($templateflex_file?'uploads/tx_shscoutnetkalender/' . $templateflex_file:$this->conf['templateFile']);
 
