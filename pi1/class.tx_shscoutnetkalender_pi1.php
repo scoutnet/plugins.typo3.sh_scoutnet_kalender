@@ -94,132 +94,132 @@ class tx_shscoutnetkalender_pi1 extends tslib_pibase {
 			$events = $SN->get_events_for_global_id_with_filter($ids,$filter);
 
 			$optionalKalenders = $SN->get_kalender_by_global_id($optids);
+
+
+			//$templatecode = $this->cObj->fileResource($templateflex_file?'uploads/tx_shscoutnetkalender/' . $templateflex_file:$this->conf['templateFile']);
+
+			$templatecode = $this->cObj->fileResource($this->conf["templateFile"]);
+
+			$templatecode = $this->cObj->getSubpart($templatecode,"###TEMPLATE_SCOUTNET###");
+
+
+			$headerEbene = "";
+			$contentEbene = "";
+
+			if (count($ids) > 1) {
+				$headerEbene = $this->cObj->getSubpart($templatecode,"###HEADER_EBENE###");
+				$contentEbene = $this->cObj->getSubpart($templatecode,"###CONTENT_EBENE###");
+			}
+
+			$templatecode = $this->cObj->substituteSubpart($templatecode,"###HEADER_EBENE###",$headerEbene);
+			$templatecode = $this->cObj->substituteSubpart($templatecode,"###CONTENT_EBENE###",$contentEbene);
+
+
+			$subcontent = "";
+			$termin_template = $this->cObj->getSubpart($templatecode,"###TEMPLATE_TERMIN###");
+			$termin_detail_template = $this->cObj->getSubpart($templatecode,"###TEMPLATE_DETAILS###");
+			$monats_header_template = $this->cObj->getSubpart($templatecode,"###TEMPLATE_MONAT###");
+
+			$monat = "0";
+
+			foreach ($events as $event) {
+				$new_monat = strftime("%Y%m",$event['Start']);
+
+				if ($new_monat != $monat) {
+					$subarray = array(
+						'###MONATS_NAME###'=>strftime("%B '%y",$event['Start']),
+					);
+
+					$subcontent .= $this->cObj->substituteMarkerArray($monats_header_template,$subarray);
+					$monat = $new_monat;
+				}
+
+				$stufen = $event->get_Stufen_Images();
+
+				$kategorien = "";
+
+				foreach ($event['Keywords'] as $kategorie) {
+						if ($kategorien != "")
+							$kategorien .= ", ";
+						$kategorien .= utf8_decode($kategorie);
+				}
+
+				$datum = substr(strftime("%A",$event['Start']),0,2).",&nbsp;".strftime("%d.%m.",$event['Start']);
+
+				if (isset($event['End']) && strftime("%d%m%Y",$event['Start']) != strftime("%d%m%Y",$event['End']) ) {
+					$datum .= "&nbsp;-&nbsp;";
+					$datum .= substr(strftime("%A",$event['End']),0,2).",&nbsp;".strftime("%d.%m.",$event['End']);
+				}
+
+
+				$zeit = "";
+				if ($event['All_Day'] != 1) {
+					$zeit = strftime("%H:%M",$event['Start']);
+
+
+					if (isset($event['End']) && strftime("%H%M",$event['Start']) != strftime("%H%M",$event['End']) ) {
+						$zeit .= "&nbsp;-&nbsp;";
+						$zeit .= strftime("%H:%M",$event['End']);
+					}
+				}
+
+				$ebene = $event['Kalender']->get_long_Name();
+
+				$ebene = str_replace(" ","&nbsp;",$ebene);
+
+				$showDetails = trim($event['Description']).trim($event['ZIP']).trim($event['Location']).trim($event['Organizer']).trim($event['Target_Group']).trim($event['URL']);
+
+				$titel = ($showDetails?'<a href="#snk-termin-'.$event['ID'].'" class="snk-termin-link" onclick="if(snk_show_termin) return snk_show_termin('.$event['ID'].',this);">':'').nl2br(htmlentities(utf8_Decode($event['Title']))).($showDetails?'</a>':'');
+
+				$subarray = array(
+					'###EBENE###'=>$ebene,
+					'###DATUM###'=>$datum,
+					'###ZEIT###'=>$zeit,
+					'###TITEL###'=>$titel,
+					'###STUFE###'=>$stufen,
+					'###KATEGORIE###'=>$kategorien,
+				);
+
+				$subcontent .= $this->cObj->substituteMarkerArray($termin_template,$subarray);
+
+				if ($showDetails) {
+
+					$detail_template = $termin_detail_template;
+					$detail_template = $this->cObj->substituteSubpart($detail_template,"###CONTENT_DESCRIPTION###",trim($event['Description'])?$this->cObj->getSubpart($detail_template,"###CONTENT_DESCRIPTION###"):"");
+					$detail_template = $this->cObj->substituteSubpart($detail_template,"###CONTENT_ORT###",trim($event['ZIP']).trim($event['Location'])?$this->cObj->getSubpart($detail_template,"###CONTENT_ORT###"):"");
+					$detail_template = $this->cObj->substituteSubpart($detail_template,"###CONTENT_ORGANIZER###",trim($event['Organizer'])?$this->cObj->getSubpart($detail_template,"###CONTENT_ORGANIZER###"):"");
+					$detail_template = $this->cObj->substituteSubpart($detail_template,"###CONTENT_TARGET_GROUP###",trim($event['Target_Group'])?$this->cObj->getSubpart($detail_template,"###CONTENT_TARGET_GROUP###"):"");
+					$detail_template = $this->cObj->substituteSubpart($detail_template,"###CONTENT_URL###",trim($event['URL'])?$this->cObj->getSubpart($detail_template,"###CONTENT_URL###"):"");
+
+					$subarray = array(
+						'###EINTRAG_ID###'=>$event['ID'],
+						'###DESCRIPTION###'=>utf8_decode($event['Description']),
+						'###ORT###'=>htmlentities(utf8_decode($event['ZIP']." ".$event['Location'])),
+						'###ORGANIZER###'=>htmlentities(utf8_decode($event['Organizer'])),
+						'###TARGET_GROUP###'=>htmlentities(utf8_decode($event['Target_Group'])),
+						'###URL###'=>'<a target="_blank" href="'.htmlentities(utf8_decode($event['URL'])).'>'.(trim($event['URL_Text'])?htmlentities(utf8_decode($event['URL_Text'])):htmlentities(utf8_decode($event['URL']))).'</a>',
+						'###AUTHOR###'=>$event->get_Author_name(),
+					);
+
+					$subcontent .= $this->cObj->substituteMarkerArray($detail_template,$subarray);
+				}
+
+			}
+
+			$subarray = array (
+				'###TERMIN_HINZUFUEGEN_LINK###'=>'<a href="https://www.scoutnet.de/community/kalender/events.html?task=create&amp;SSID='.$ids[0].'" target="_top">Termin&nbsp;hinzuf&uuml;gen</a>',
+				'###POWERED_BY_LINK###' => 'Powered by <span><a href="http://kalender.scoutnet.de/" target="_top">ScoutNet.DE</a></span>',
+				'###KALENDER_ID###' => $ids[0],
+			);
+
+
+
+			$templatecode = $this->cObj->substituteMarkerArray($templatecode,$subarray);
+
+			$content .= $this->cObj->substituteSubpart($templatecode,"###TEMPLATE_CONTENT###",$subcontent);
 		} catch(Exception $e) {
 			$content .= "<span class='termin'>zZ ist der Scoutnet Kalender down.<br>Bitte versuch es zu einem sp&auml;teren Zeitpunkt noch mal</span>";
 		}
-
-
-		//$templatecode = $this->cObj->fileResource($templateflex_file?'uploads/tx_shscoutnetkalender/' . $templateflex_file:$this->conf['templateFile']);
-
-		$templatecode = $this->cObj->fileResource($this->conf["templateFile"]);
-
-		$templatecode = $this->cObj->getSubpart($templatecode,"###TEMPLATE_SCOUTNET###");
-
-
-		$headerEbene = "";
-		$contentEbene = "";
-
-		if (count($ids) > 1) {
-			$headerEbene = $this->cObj->getSubpart($templatecode,"###HEADER_EBENE###");
-			$contentEbene = $this->cObj->getSubpart($templatecode,"###CONTENT_EBENE###");
-		}
-
-		$templatecode = $this->cObj->substituteSubpart($templatecode,"###HEADER_EBENE###",$headerEbene);
-		$templatecode = $this->cObj->substituteSubpart($templatecode,"###CONTENT_EBENE###",$contentEbene);
-
-
-		$subcontent = "";
-		$termin_template = $this->cObj->getSubpart($templatecode,"###TEMPLATE_TERMIN###");
-		$termin_detail_template = $this->cObj->getSubpart($templatecode,"###TEMPLATE_DETAILS###");
-		$monats_header_template = $this->cObj->getSubpart($templatecode,"###TEMPLATE_MONAT###");
-
-		$monat = "0";
-
-		foreach ($events as $event) {
-			$new_monat = strftime("%Y%m",$event['Start']);
-
-			if ($new_monat != $monat) {
-				$subarray = array(
-					'###MONATS_NAME###'=>strftime("%B '%y",$event['Start']),
-				);
-
-				$subcontent .= $this->cObj->substituteMarkerArray($monats_header_template,$subarray);
-				$monat = $new_monat;
-			}
-
-			$stufen = $event->get_Stufen_Images();
-
-			$kategorien = "";
-
-			foreach ($event['Keywords'] as $kategorie) {
-					if ($kategorien != "")
-						$kategorien .= ", ";
-					$kategorien .= utf8_decode($kategorie);
-			}
-
-			$datum = substr(strftime("%A",$event['Start']),0,2).",&nbsp;".strftime("%d.%m.",$event['Start']);
-
-			if (isset($event['End']) && strftime("%d%m%Y",$event['Start']) != strftime("%d%m%Y",$event['End']) ) {
-				$datum .= "&nbsp;-&nbsp;";
-				$datum .= substr(strftime("%A",$event['End']),0,2).",&nbsp;".strftime("%d.%m.",$event['End']);
-			}
-
-
-			$zeit = "";
-			if ($event['All_Day'] != 1) {
-				$zeit = strftime("%H:%M",$event['Start']);
-
-
-				if (isset($event['End']) && strftime("%H%M",$event['Start']) != strftime("%H%M",$event['End']) ) {
-					$zeit .= "&nbsp;-&nbsp;";
-					$zeit .= strftime("%H:%M",$event['End']);
-				}
-			}
-
-			$ebene = $event['Kalender']->get_long_Name();
-
-			$ebene = str_replace(" ","&nbsp;",$ebene);
-
-			$showDetails = trim($event['Description']).trim($event['ZIP']).trim($event['Location']).trim($event['Organizer']).trim($event['Target_Group']).trim($event['URL']);
-
-			$titel = ($showDetails?'<a href="#snk-termin-'.$event['ID'].'" class="snk-termin-link" onclick="if(snk_show_termin) return snk_show_termin('.$event['ID'].',this);">':'').nl2br(htmlentities(utf8_Decode($event['Title']))).($showDetails?'</a>':'');
-
-			$subarray = array(
-				'###EBENE###'=>$ebene,
-				'###DATUM###'=>$datum,
-				'###ZEIT###'=>$zeit,
-				'###TITEL###'=>$titel,
-				'###STUFE###'=>$stufen,
-				'###KATEGORIE###'=>$kategorien,
-			);
-
-			$subcontent .= $this->cObj->substituteMarkerArray($termin_template,$subarray);
-
-			if ($showDetails) {
-
-				$detail_template = $termin_detail_template;
-				$detail_template = $this->cObj->substituteSubpart($detail_template,"###CONTENT_DESCRIPTION###",trim($event['Description'])?$this->cObj->getSubpart($detail_template,"###CONTENT_DESCRIPTION###"):"");
-				$detail_template = $this->cObj->substituteSubpart($detail_template,"###CONTENT_ORT###",trim($event['ZIP']).trim($event['Location'])?$this->cObj->getSubpart($detail_template,"###CONTENT_ORT###"):"");
-				$detail_template = $this->cObj->substituteSubpart($detail_template,"###CONTENT_ORGANIZER###",trim($event['Organizer'])?$this->cObj->getSubpart($detail_template,"###CONTENT_ORGANIZER###"):"");
-				$detail_template = $this->cObj->substituteSubpart($detail_template,"###CONTENT_TARGET_GROUP###",trim($event['Target_Group'])?$this->cObj->getSubpart($detail_template,"###CONTENT_TARGET_GROUP###"):"");
-				$detail_template = $this->cObj->substituteSubpart($detail_template,"###CONTENT_URL###",trim($event['URL'])?$this->cObj->getSubpart($detail_template,"###CONTENT_URL###"):"");
-
-				$subarray = array(
-					'###EINTRAG_ID###'=>$event['ID'],
-					'###DESCRIPTION###'=>utf8_decode($event['Description']),
-					'###ORT###'=>htmlentities(utf8_decode($event['ZIP']." ".$event['Location'])),
-					'###ORGANIZER###'=>htmlentities(utf8_decode($event['Organizer'])),
-					'###TARGET_GROUP###'=>htmlentities(utf8_decode($event['Target_Group'])),
-					'###URL###'=>'<a target="_blank" href="'.htmlentities(utf8_decode($event['URL'])).'>'.(trim($event['URL_Text'])?htmlentities(utf8_decode($event['URL_Text'])):htmlentities(utf8_decode($event['URL']))).'</a>',
-					'###AUTHOR###'=>$event->get_Author_name(),
-				);
-
-				$subcontent .= $this->cObj->substituteMarkerArray($detail_template,$subarray);
-			}
-
-		}
-
-		$subarray = array (
-			'###TERMIN_HINZUFUEGEN_LINK###'=>'<a href="https://www.scoutnet.de/community/kalender/events.html?task=create&amp;SSID='.$ids[0].'" target="_top">Termin&nbsp;hinzuf&uuml;gen</a>',
-			'###POWERED_BY_LINK###' => 'Powered by <span><a href="http://kalender.scoutnet.de/" target="_top">ScoutNet.DE</a></span>',
-			'###KALENDER_ID###' => $ids[0],
-		);
-
-
-
-		$templatecode = $this->cObj->substituteMarkerArray($templatecode,$subarray);
-
-		$content .= $this->cObj->substituteSubpart($templatecode,"###TEMPLATE_CONTENT###",$subcontent);
 	
 		return $this->pi_wrapInBaseClass($content);
 	}
