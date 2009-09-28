@@ -104,12 +104,16 @@ class tx_shscoutnetkalender_pi1 extends tslib_pibase {
 
 
 			$stammesAuswahl = "";
+
+			if (count($optionalKalenders) > 0) {
+				$stammesAuswahl = $this->cObj->getSubpart($templatecode,"###STAMMESAUSWAHL###");
 	/*<form action="" method="get">
 		<? foreach ($this->optionalKalenders as $kalender) {?> 
 		<input onchange="form.submit();" ###CHECK### name="addids[]" value="<?echo $kalender['ID'];?>" id="add_id_<?echo $kalender['ID'];?>" title="<?echo $kalender->get    _Name();?>" type="checkbox" /><label for="add_id_<?echo $kalender['ID'];?>"><?echo $kalender->get_Name();?></label>
 			<?}?>
 	</form>
 	 */
+			}
 
 			$templatecode = $this->cObj->substituteSubpart($templatecode,"###STAMMESAUSWAHL###",$stammesAuswahl);
 
