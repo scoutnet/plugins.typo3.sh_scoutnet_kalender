@@ -73,7 +73,7 @@ class tx_shscoutnetkalender_pi1 extends tslib_pibase {
 			$SN = new tx_shscoutnetwebservice_sn();
 
 			$filter = array(
-				'limit'=>'20',
+				'limit'=>'40',
 				'after'=>'now()',
 			);
 
