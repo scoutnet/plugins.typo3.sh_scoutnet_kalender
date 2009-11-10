@@ -17,7 +17,7 @@ $EM_CONF[$_EXTKEY] = array(
 	'author' => 'Stefan "Muetze" Horst',
 	'author_email' => 'muetze@scoutnet.de',
 	'shy' => '',
-	'dependencies' => array('cms','sh_scoutnet_webservice'),
+	'dependencies' => 'cms,sh_scoutnet_webservice',
 	'conflicts' => '',
 	'priority' => '',
 	'module' => '',
@@ -33,6 +33,7 @@ $EM_CONF[$_EXTKEY] = array(
 	'constraints' => array(
 		'depends' => array(
 			'cms' => '',
+			'sh_scoutnet_webservice' => '',
 		),
 		'conflicts' => array(
 		),
