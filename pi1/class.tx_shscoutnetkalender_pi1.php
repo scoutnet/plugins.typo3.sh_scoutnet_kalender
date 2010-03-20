@@ -238,6 +238,8 @@ class tx_shscoutnetkalender_pi1 extends tslib_pibase {
 				'###TERMIN_HINZUFUEGEN_LINK###'=>'<a href="https://www.scoutnet.de/community/kalender/events.html?task=create&amp;SSID='.$ids[0].'" target="_top">'.$this->pi_getLL('addEvent').'</a>',
 				'###POWERED_BY_LINK###' => $this->pi_getLL('powered_by').' <span><a href="http://www.scoutnet.de/technik/kalender/" target="_top">ScoutNet.DE</a></span>',
 				'###KALENDER_ID###' => $ids[0],
+
+				'###EBENE_LABEL###' => 'Ebene',
 			);
 
 
