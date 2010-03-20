@@ -127,7 +127,7 @@ class tx_shscoutnetkalender_pi1 extends tslib_pibase {
 
 				$stammesAuswahl = $this->cObj->substituteMarkerArray($stammesAuswahl,array(
 					"###ADD_KALENDER_FORM###"=>$addKalenderForm,
-					'###STAMMESAUSWAHL_LABEL' => $this->pi_getLL('stammesAuswahl'),
+					'###STAMMESAUSWAHL_LABEL###' => $this->pi_getLL('stammesAuswahl'),
 				));
 			}
 
