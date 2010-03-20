@@ -246,7 +246,7 @@ class tx_shscoutnetkalender_pi1 extends tslib_pibase {
 
 			$content .= $this->cObj->substituteSubpart($templatecode,"###TEMPLATE_CONTENT###",$subcontent);
 		} catch(Exception $e) {
-			$content .= "<span class='termin'>zZ ist der Scoutnet Kalender down.<br>Bitte versuch es zu einem sp&auml;teren Zeitpunkt noch mal</span>";
+			$content .= '<span class="termin">'.$this->pi_getLL('snkDown').'</span>';
 		}
 	
 		return $this->pi_wrapInBaseClass($content);

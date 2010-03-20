@@ -6,12 +6,14 @@
 	</meta>
 	<data type="array">
 		<languageKey index="default" type="array">
-			<label index="powered_by">Powered By</label>
+			<label index="powered_by">Powered by</label>
 			<label index="addEvent">Add new Event</label>
+			<label index="snkDown">the Scoutnet Calendar Server is down.&lt;br&gt;Please try again later.</label>
 		</languageKey>
 		<languageKey index="de" type="array">
 			<label index="powered_by">Powered By</label>
 			<label index="addEvent">Termin hinzufügen</label>
+			<label index="snkDown">zZ ist der Scoutnet Kalender down.&lt;br&gt;Bitte versuch es zu einem späteren Zeitpunkt noch mal</label>
 		</languageKey>
 	</data>
 </T3locallang>
