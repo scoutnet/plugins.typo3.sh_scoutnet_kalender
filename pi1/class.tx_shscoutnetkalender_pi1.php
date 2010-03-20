@@ -239,7 +239,12 @@ class tx_shscoutnetkalender_pi1 extends tslib_pibase {
 				'###POWERED_BY_LINK###' => $this->pi_getLL('powered_by').' <span><a href="http://www.scoutnet.de/technik/kalender/" target="_top">ScoutNet.DE</a></span>',
 				'###KALENDER_ID###' => $ids[0],
 
-				'###EBENE_LABEL###' => 'Ebene',
+				'###EBENE_LABEL###' => $this->pi_getLL('ebene'),
+				'###DATE_LABEL###' => $this->pi_getLL('date'),
+				'###TIME_LABEL###' => $this->pi_getLL('time'),
+				'###TITLE_LABEL###' => $this->pi_getLL('title'),
+				'###STUFE_LABEL###' => $this->pi_getLL('stufe'),
+				'###CLASSES_LABEL###' => $this->pi_getLL('classes'),
 			);
 
 
