@@ -248,7 +248,6 @@ class tx_shscoutnetkalender_pi1 extends tslib_pibase {
 		} catch(Exception $e) {
 			$content .= '<span class="termin">'.$this->pi_getLL('snkDown').'</span>';
 		}
-			$content .= '<span class="termin">'.$this->pi_getLL('snkDown').'</span>';
 	
 		return $this->pi_wrapInBaseClass($content);
 	}
