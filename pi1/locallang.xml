@@ -21,6 +21,7 @@
 			<label index="targetGroup">Target Audience</label>
 			<label index="url">Link</label>
 			<label index="author">Created by</label>
+			<label index="stammesAuswahl">Show this calendars additional:</label> 
 		</languageKey>
 		<languageKey index="de" type="array">
 			<label index="poweredBy">Powered By</label>
@@ -38,6 +39,7 @@
 			<label index="targetGroup">Zielgruppe</label>
 			<label index="url">Link</label>
 			<label index="author">Eingetragen von</label>
+			<label index="stammesAuswahl">Zusätzlich diese Kalender Anzeigen:</label> 
 		</languageKey>
 	</data>
 </T3locallang>
