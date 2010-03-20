@@ -58,9 +58,9 @@ class tx_shscoutnetkalender_pi1_wizicon {
 	 * @return	The array with language labels
 	 */
 	function includeLocalLang()	{
-		global $LANG;
+		$llFile = t3lib_extMgm::extPath('sh_scoutnet_kalender').'locallang.xml';
+		$LOCAL_LANG = t3lib_div::readLLXMLfile($llFile, $GLOBALS['LANG']->lang);
 
-		$LOCAL_LANG = $LANG->includeLLFile('EXT:".$extKey."/locallang.xml',FALSE);
 		return $LOCAL_LANG;
 	}
 }
