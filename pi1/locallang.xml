@@ -6,7 +6,7 @@
 	</meta>
 	<data type="array">
 		<languageKey index="default" type="array">
-			<label index="powered_by">Powered by</label>
+			<label index="poweredBy">Powered by</label>
 			<label index="addEvent">Add new Event</label>
 			<label index="snkDown">the Scoutnet Calendar Server is down.&lt;br&gt;Please try again later.</label>
 			<label index="ebene">Ebene</label>
@@ -14,10 +14,16 @@
 			<label index="time">Time</label>
 			<label index="title">Title</label>
 			<label index="stufe">Stufen</label>
-			<label index="classes">classes</label>
+			<label index="classes">Classes</label>
+			<label index="description">Description</label>
+			<label index="ort">City</label>
+			<label index="organizer">Host</label>
+			<label index="targetGroup">Target Audience</label>
+			<label index="url">Link</label>
+			<label index="author">Created by</label>
 		</languageKey>
 		<languageKey index="de" type="array">
-			<label index="powered_by">Powered By</label>
+			<label index="poweredBy">Powered By</label>
 			<label index="addEvent">Termin hinzufügen</label>
 			<label index="snkDown">zZ ist der Scoutnet Kalender down.&lt;br&gt;Bitte versuch es zu einem späteren Zeitpunkt noch mal</label>
 			<label index="ebene">Ebene</label>
@@ -26,6 +32,12 @@
 			<label index="title">Titel</label>
 			<label index="stufe">Stufen</label>
 			<label index="classes">Kategorien</label>
+			<label index="description">Beschreibung</label>
+			<label index="ort">Ort</label>
+			<label index="organizer">Veranstalter</label>
+			<label index="targetGroup">Zielgruppe</label>
+			<label index="url">Link</label>
+			<label index="author">Eingetragen von</label>
 		</languageKey>
 	</data>
 </T3locallang>

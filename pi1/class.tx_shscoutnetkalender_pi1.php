@@ -227,6 +227,13 @@ class tx_shscoutnetkalender_pi1 extends tslib_pibase {
 						'###TARGET_GROUP###'=>htmlentities(utf8_decode($event['Target_Group'])),
 						'###URL###'=>'<a target="_blank" href="'.htmlentities(utf8_decode($event['URL'])).'>'.(trim($event['URL_Text'])?htmlentities(utf8_decode($event['URL_Text'])):htmlentities(utf8_decode($event['URL']))).'</a>',
 						'###AUTHOR###'=>$event->get_Author_name(),
+
+						'###DESCRIPTION_LABEL###' => $this->pi_getLL('description'),
+						'###ORT_LABEL###' => $this->pi_getLL('ort'),
+						'###ORGANIZER_LABEL###' => $this->pi_getLL('organizer'),
+						'###TARGET_GROUP_LABEL###' => $this->pi_getLL('targetGroup'),
+						'###URL_LABEL###' => $this->pi_getLL('url'),
+						'###AUTHOR_LABEL###' => $this->pi_getLL('author'),
 					);
 
 					$subcontent .= $this->cObj->substituteMarkerArray($detail_template,$subarray);
