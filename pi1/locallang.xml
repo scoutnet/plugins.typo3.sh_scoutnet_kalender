@@ -9,11 +9,23 @@
 			<label index="powered_by">Powered by</label>
 			<label index="addEvent">Add new Event</label>
 			<label index="snkDown">the Scoutnet Calendar Server is down.&lt;br&gt;Please try again later.</label>
+			<label index="ebene">Ebene</label>
+			<label index="date">Date</label>
+			<label index="time">Time</label>
+			<label index="title">Title</label>
+			<label index="stufe">Stufen</label>
+			<label index="classes">classes</label>
 		</languageKey>
 		<languageKey index="de" type="array">
 			<label index="powered_by">Powered By</label>
 			<label index="addEvent">Termin hinzufügen</label>
 			<label index="snkDown">zZ ist der Scoutnet Kalender down.&lt;br&gt;Bitte versuch es zu einem späteren Zeitpunkt noch mal</label>
+			<label index="ebene">Ebene</label>
+			<label index="date">Datum</label>
+			<label index="time">Zeit</label>
+			<label index="title">Titel</label>
+			<label index="stufe">Stufen</label>
+			<label index="classes">Kategorien</label>
 		</languageKey>
 	</data>
 </T3locallang>
