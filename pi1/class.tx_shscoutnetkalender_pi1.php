@@ -112,7 +112,7 @@ class tx_shscoutnetkalender_pi1 extends tslib_pibase {
 			if (count($optionalKalenders) > 0) {
 				$stammesAuswahl = $this->cObj->getSubpart($templatecode,"###STAMMESAUSWAHL###");
 
-				$addKalenderForm = '<form action="#" method="get">';
+				$addKalenderForm = '<form action="'.$this->pi_getPageLink($GLOBALS['TSFE']->id).'" method="get">';
 				$i = 0;
 				foreach ($optionalKalenders as $kalender) { 
 					$addKalenderForm .= '<input onchange="form.submit();" '.(in_array($kalender['ID'],$ids)?'checked':'').' name="'.$this->prefixId.'[addids][]" value="'.$kalender['ID'].'" id="add_id_'.$kalender['ID'].'" title="'.$kalender->get_Name().'" type="checkbox" /><label for="add_id_'.$kalender['ID'].'">&nbsp;'.$kalender->get_Name().'</label>'."\n";
