@@ -224,7 +224,7 @@ class tx_shscoutnetkalender_pi1 extends tslib_pibase {
 
 					$subarray = array(
 						'###EINTRAG_ID###'=>$event['ID'],
-						'###DESCRIPTION###'=>htmlentities($event['Description']),
+						'###DESCRIPTION###'=>htmlentities($event['Description'],ENT_COMPAT,'UTF-8'),
 						'###ORT###'=>htmlentities(utf8_decode($event['ZIP']." ".$event['Location'])),
 						'###ORGANIZER###'=>htmlentities(utf8_decode($event['Organizer'])),
 						'###TARGET_GROUP###'=>htmlentities(utf8_decode($event['Target_Group'])),
