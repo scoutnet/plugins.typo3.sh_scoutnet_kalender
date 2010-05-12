@@ -172,7 +172,7 @@ class tx_shscoutnetkalender_pi1 extends tslib_pibase {
 				foreach ($event['Keywords'] as $kategorie) {
 						if ($kategorien != "")
 							$kategorien .= ", ";
-						$kategorien .= utf8_decode($kategorie);
+						$kategorien .= $kategorie;
 				}
 
 				$datum = substr(strftime("%A",$event['Start']),0,2).",&nbsp;".strftime("%d.%m.",$event['Start']);
@@ -200,7 +200,7 @@ class tx_shscoutnetkalender_pi1 extends tslib_pibase {
 
 				$showDetails = trim($event['Description']).trim($event['ZIP']).trim($event['Location']).trim($event['Organizer']).trim($event['Target_Group']).trim($event['URL']);
 
-				$titel = ($showDetails?'<a href="#snk-termin-'.$event['ID'].'" class="snk-termin-link" onclick="if(snk_show_termin) return snk_show_termin('.$event['ID'].',this);">':'').nl2br(htmlentities(utf8_Decode($event['Title']))).($showDetails?'</a>':'');
+				$titel = ($showDetails?'<a href="#snk-termin-'.$event['ID'].'" class="snk-termin-link" onclick="if(snk_show_termin) return snk_show_termin('.$event['ID'].',this);">':'').nl2br(htmlentities($event['Title'])).($showDetails?'</a>':'');
 
 				$subarray = array(
 					'###EBENE###'=>$ebene,
@@ -224,11 +224,11 @@ class tx_shscoutnetkalender_pi1 extends tslib_pibase {
 
 					$subarray = array(
 						'###EINTRAG_ID###'=>$event['ID'],
-						'###DESCRIPTION###'=>utf8_decode($event['Description']),
-						'###ORT###'=>htmlentities(utf8_decode($event['ZIP']." ".$event['Location'])),
-						'###ORGANIZER###'=>htmlentities(utf8_decode($event['Organizer'])),
-						'###TARGET_GROUP###'=>htmlentities(utf8_decode($event['Target_Group'])),
-						'###URL###'=>'<a target="_blank" href="'.htmlentities(utf8_decode($event['URL'])).'>'.(trim($event['URL_Text'])?htmlentities(utf8_decode($event['URL_Text'])):htmlentities(utf8_decode($event['URL']))).'</a>',
+						'###DESCRIPTION###'=>$event['Description'],
+						'###ORT###'=>htmlentities(($event['ZIP']." ".$event['Location'])),
+						'###ORGANIZER###'=>htmlentities(($event['Organizer'])),
+						'###TARGET_GROUP###'=>htmlentities(($event['Target_Group'])),
+						'###URL###'=>'<a target="_blank" href="'.htmlentities(($event['URL'])).'>'.(trim($event['URL_Text'])?htmlentities(($event['URL_Text'])):htmlentities(($event['URL']))).'</a>',
 						'###AUTHOR###'=>$event->get_Author_name(),
 
 						'###DESCRIPTION_LABEL###' => $this->pi_getLL('description'),
