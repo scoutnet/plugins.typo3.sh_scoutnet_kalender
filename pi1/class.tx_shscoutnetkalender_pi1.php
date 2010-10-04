@@ -228,7 +228,7 @@ class tx_shscoutnetkalender_pi1 extends tslib_pibase {
 						'###ORT###'=>htmlentities($event['ZIP']." ".$event['Location'],ENT_COMPAT,'UTF-8'),
 						'###ORGANIZER###'=>htmlentities($event['Organizer'],ENT_COMPAT,'UTF-8'),
 						'###TARGET_GROUP###'=>htmlentities($event['Target_Group'],ENT_COMPAT,'UTF-8'),
-						'###URL###'=>'<a target="_blank" href="'.$event['URL'].'>'.(trim($event['URL_Text'])?htmlentities($event['URL_Text'],ENT_COMPAT,'UTF-8'):htmlentities($event['URL'],ENT_COMPAT,'UTF-8')).'</a>',
+						'###URL###'=>'<a target="_blank" href="'.$event['URL'].'">'.(trim($event['URL_Text'])?htmlentities($event['URL_Text'],ENT_COMPAT,'UTF-8'):htmlentities($event['URL'],ENT_COMPAT,'UTF-8')).'</a>',
 						'###AUTHOR###'=>$event->get_Author_name(),
 
 						'###DESCRIPTION_LABEL###' => $this->pi_getLL('description'),
