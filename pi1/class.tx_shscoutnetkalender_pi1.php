@@ -154,6 +154,9 @@ class tx_shscoutnetkalender_pi1 extends tslib_pibase {
 			$monat = "0";
 
 			foreach ($events as $event) {
+
+				print_r($event);
+
 				$new_monat = strftime("%Y%m",$event['Start']);
 
 				if ($new_monat != $monat) {
