@@ -3,7 +3,7 @@
 ########################################################################
 # Extension Manager/Repository config file for ext "sh_scoutnet_kalender".
 #
-# Auto generated 04-10-2010 10:11
+# Auto generated 04-10-2010 10:14
 #
 # Manual updates:
 # Only the data in the array - everything else is removed by next
@@ -29,7 +29,7 @@ $EM_CONF[$_EXTKEY] = array(
 	'clearCacheOnLoad' => 1,
 	'lockType' => '',
 	'author_company' => '',
-	'version' => '0.10.2',
+	'version' => '0.10.3',
 	'constraints' => array(
 		'depends' => array(
 			'cms' => '',
