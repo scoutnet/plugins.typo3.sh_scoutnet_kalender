@@ -1,9 +1,12 @@
 
+#typo3-docbody-content
+{
+	padding: 2em 1em 0 0;
+}
 /* Mittlere Spalte */
 #typo3-inner-docbody
 {
 	padding: 0 10px;
-	width: 80%;
 	border: 2px solid #D3D3D3;
 	background: #fff url(../../img/bg_h1.png) repeat-x top;
 }
