@@ -10,6 +10,12 @@ h1 {
 	font-weight: bold;
 	margin: 0.4em 0px 1.5em;
 	padding: 0px;
+	text-align:left;
+}
+
+h1, h2, h3, h4 {
+	display: block;
+	font-family: 'Lucida Grande', Verdana, Arial, sans-serif;
 }
 
 #typo3-docbody-content
