@@ -2,3 +2,27 @@
 body {
 	padding-left: 12px;
 }
+
+
+/* Mittlere Spalte */
+#col3
+{
+	margin: 0 0 0 25.5%;
+	padding: 0;
+	border: 2px solid #D3D3D3;
+	background: #fff url(../../img/bg_h1.png) repeat-x top;
+	zoom: 1; 
+}
+
+#col3_content { 
+	padding: 0;
+	margin: 0 1em 0 1em;
+}
+
+#corner{
+	border:0; 
+	position:absolute; 
+	top:-2px; 
+	right:-3px;
+}
+
