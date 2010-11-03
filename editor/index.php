@@ -29,23 +29,9 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 		$this->doc->backPath = $GLOBALS['BACK_PATH'];
 		$this->doc->getPageRenderer()->loadScriptaculous('effects,dragdrop');
 		$this->doc->addStyleSheet(
-			'tx_taskcenter',
-			'../' . t3lib_extMgm::siteRelPath('taskcenter') . 'res/mod_styles.css'
+			'tx_shscoutnetkalender',
+			'../' . t3lib_extMgm::siteRelPath('sh_scoutnet_kalender') . 'res/mod_styles.css'
 		);
-	}
-
-	/**
-	 * Adds items to the ->MOD_MENU array. Used for the function menu selector.
-	 *
-	 * @return	void
-	 */
-	public function menuConfig() {
-		$this->MOD_MENU  = array('mode' => array());
-
-		$this->MOD_MENU['mode']['information'] = $GLOBALS['LANG']->sL('LLL:EXT:taskcenter/locallang.xml:task_overview');
-		$this->MOD_MENU['mode']['tasks'] = 'Tasks';
-
-		parent::menuConfig();
 	}
 
 	/**
@@ -57,8 +43,8 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 	public function main() {
 		$this->content = "foo";
 
-		return;
 		$docHeaderButtons = $this->getButtons();
+		return;
 		$markers = array();
 
 		$this->doc->JScodeArray[] = '
