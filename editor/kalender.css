@@ -1,1 +1,88 @@
-@import url(../community/kalender/style/kalender.css);
+#snk a,#snk a:link,#snk a:visited,#snk a:hover{
+	color:#E0A000;
+	padding:2px;
+	margin-right: 8px;
+}
+/*#kalendermenu ul {
+	padding:0;
+	margin:0;
+}
+#kalendermenu li {
+	padding: 5px 0;
+	margin:0;
+}*/
+#snk #kalendermenu h4 {
+	padding: 10px 0 5px 0;
+	margin:0;
+}
+
+/* Tobias 2008-03-01 */
+
+/**/
+#snk SMALL {
+	font-size: 75%;
+}
+#snk FIELDSET {
+	padding: 10px 10px 0px 10px;
+	margin: 5px 0px 15px 0px;
+}
+#snk LEGEND {
+	font-weight: strong;
+}
+
+#snk TABLE {
+	width: 100%;
+	border-bottom: 1px solid silver;
+}
+#snk TABLE TD,
+#snk TABLE TH {
+	padding: 2px 5px;
+}
+#snk TABLE TH {
+	border-bottom: 1px solid silver;
+}
+
+/* Um Button und so größer zu machen... */
+#snk .zoom,
+#snk .zoom INPUT, #snk INPUT.zoom,
+#snk .zoom LABEL, #snk LABEL.zoom,
+#snk .zoom TEXTAREA, #snk TEXTAREA.zoom {
+	font-size: 120%;
+}
+/* Für Einleitungstexte am Beginn der Seite. */
+#snk .einleitung {
+}
+/* Für Hilfe-Texte in Interfaces. */
+#snk .hinweis {
+	color: darkgray;
+	line-height: 109%;
+}
+
+
+/* Terminliste in der Übersicht eines Kalenders (Administrationsumgebung) */
+#snk .terminlinks {
+	padding-bottom: 15px; 
+}
+#snk .terminlinks SMALL,
+
+/* Rechteverwaltung */
+#snk #rechteverwaltung SMALL {
+	color: darkgray;
+}
+
+#snk #rechteverwaltung FIELDSET OL, #snk FIELDSET UL {
+	margin: 15px 0px;
+}
+#snk #rechteverwaltung FIELDSET LI {
+	margin-bottom: 8px;
+}
+
+/* Neuer Termin */
+#snk #kalender-input-field-table,
+#snk #kalender-input-field-table TABLE {
+	border: 0;
+}
+#snk .trenner TD {
+	border-bottom: 1px solid silver;
+	font-size: 2px;
+}
