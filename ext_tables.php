@@ -63,7 +63,7 @@ t3lib_extMgm::addStaticFile($_EXTKEY,"pi1/static/","Scoutnet calendar");
 if (TYPO3_MODE == 'BE') {
 	$TBE_MODULES_EXT["xMOD_db_new_content_el"]["addElClasses"]["tx_shscoutnetkalender_pi1_wizicon"] = t3lib_extMgm::extPath($_EXTKEY).'pi1/class.tx_shscoutnetkalender_pi1_wizicon.php';
 
-	//t3lib_extMgm::addModulePath('tools_txscoutnetkalenderM1', t3lib_extMgm::extPath($_EXTKEY) . 'editor/');
+	t3lib_extMgm::addModulePath('scoutnet_kalender', t3lib_extMgm::extPath($_EXTKEY) . 'editor/');
 	t3lib_extMgm::addModule('user','scoutnet', '', t3lib_extMgm::extPath($_EXTKEY) . 'editor/');
 
 //	$GLOBALS['TYPO3_CONF_VARS']['BE']['AJAX']['Taskcenter::saveCollapseState']      = 'EXT:taskcenter/classes/class.tx_taskcenter_status.php:tx_taskcenter_status->saveCollapseState';

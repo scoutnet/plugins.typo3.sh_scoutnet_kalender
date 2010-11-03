@@ -6,9 +6,7 @@
 	</meta>
 	<data type="array">
 		<languageKey index="default" type="array">
-			<label index="mlang_labels_tablabel">Task Center with overviews, messages, ToDo lists</label>
-			<label index="mlang_labels_tabdescr">The task center provides access to your internal To-Do list, messages, Quick-note, actions etc. It also provides shortcuts to your available frontend modules and most recently edited pages. The Task Center is where you keep track of your daily tasks and workflows.</label>
-			<label index="mlang_tabs_tab">Task center</label>
+			<label index="mlang_tabs_tab">Scoutnet Kalender Editor</label>
 		</languageKey>
 	</data>
 </T3locallang>
