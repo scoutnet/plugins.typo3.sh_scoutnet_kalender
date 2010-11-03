@@ -42,7 +42,7 @@ $BE_USER->modAccess($MCONF, 1);
 // ***************************
 // Script Classes
 // ***************************
-class SC_mod_user_task_index extends t3lib_SCbase {
+class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 
 	protected $pageinfo;
 
@@ -88,6 +88,9 @@ class SC_mod_user_task_index extends t3lib_SCbase {
 	 * @return	void
 	 */
 	public function main() {
+		$this->content = "foo";
+
+		return;
 		$docHeaderButtons = $this->getButtons();
 		$markers = array();
 
@@ -523,9 +526,10 @@ if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/taskcen
 
 
 
-	// Make instance:
-$SOBE = t3lib_div::makeInstance('SC_mod_user_task_index');
-	// Include files?
+// Make instance:
+$SOBE = t3lib_div::makeInstance('SC_mod_user_scoutnet_kalender_editor_index');
+
+// Include files?
 foreach($SOBE->include_once as $INC_FILE) {
 	include_once($INC_FILE);
 }
