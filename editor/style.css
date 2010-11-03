@@ -36,6 +36,10 @@ td, th {
 	text-align:left;
 }
 
+p {
+	line-height: 1.5em;
+	margin: 0px 0px 1em;
+}
 
 #typo3-docbody-content
 {
