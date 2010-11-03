@@ -23,15 +23,10 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 
 			// initialize document
 		$this->doc = t3lib_div::makeInstance('template');
-		$this->doc->setModuleTemplate(
-			t3lib_extMgm::extPath('sh_scoutnet_kalender') . 'res/mod_template.html'
-		);
+		$this->doc->setModuleTemplate(t3lib_extMgm::extPath('sh_scoutnet_kalender') . 'editor/template.html');
 		$this->doc->backPath = $GLOBALS['BACK_PATH'];
 		$this->doc->getPageRenderer()->loadScriptaculous('effects,dragdrop');
-		$this->doc->addStyleSheet(
-			'tx_shscoutnetkalender',
-			'../' . t3lib_extMgm::siteRelPath('sh_scoutnet_kalender') . 'editor/styles.css'
-		);
+		$this->doc->addStyleSheet( 'tx_shscoutnetkalender', '../' . t3lib_extMgm::siteRelPath('sh_scoutnet_kalender') . 'editor/styles.css');
 	}
 
 	/**
@@ -60,14 +55,6 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 			</script>
 		';
 
-			// Render content depending on the mode
-		$mode = (string)$this->MOD_SETTINGS['mode'];
-		if ($mode == 'information') {
-			$this->renderInformationContent();
-		} else {
-			$this->renderModuleContent();
-		}
-
 			// compile document
 		$markers['FUNC_MENU'] = t3lib_BEfunc::getFuncMenu(
 				0,
@@ -81,7 +68,7 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 		// Build the <body> for the module
 		$this->content = $this->doc->startPage($GLOBALS['LANG']->getLL('title'));
 		$this->content .= "foo";
-		//$this->content .= $this->doc->moduleBody($this->pageinfo, $docHeaderButtons, $markers);
+		$this->content .= $this->doc->moduleBody($this->pageinfo, $docHeaderButtons, $markers);
 		$this->content .= $this->doc->endPage();
 		$this->content = $this->doc->insertStylesAndJS($this->content);
 
