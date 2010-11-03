@@ -7,8 +7,6 @@ body {
 /* Mittlere Spalte */
 #col3
 {
-	margin: 0 0 0 25.5%;
-	padding: 0;
 	border: 2px solid #D3D3D3;
 	background: #fff url(../../img/bg_h1.png) repeat-x top;
 	zoom: 1; 
