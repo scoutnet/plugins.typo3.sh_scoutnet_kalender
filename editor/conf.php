@@ -4,5 +4,5 @@
 	
 	$MCONF['script']='_DISPATCH';
 	$MCONF['access']='group,user';
-	$MCONF['name']='user_scoutnet_kalender';
+	$MCONF['name']='user_scoutnet';
 ?>
