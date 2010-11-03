@@ -12,7 +12,7 @@ h1, h2, h3, h4 {
 h1 {
 	background: inherit;
 	color: #0E4DAD;
-	font-size: 13px;
+	font-size: 1em;
 	font-weight: bold;
 	margin: 0.4em 0px 1.5em;
 	padding: 0px;
@@ -38,6 +38,13 @@ h2 {
 }
 #snk table td, #snk table th {
 	padding: 2px 5px;
+}
+
+#snk .terminlinks small, #snk #rechteverwaltung small {
+	color: darkGray;
+}
+#snk small {
+	font-size: 75%;
 }
 
 th {
