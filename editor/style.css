@@ -1,6 +1,6 @@
 
 /* Mittlere Spalte */
-#col3
+#typo3-docbody
 {
 	margin: 0;
 	padding: 0 10px;
@@ -10,7 +10,7 @@
 	overflow:hidden;
 }
 
-#col3_content { 
+#typo3-inner-docbody { 
 	padding: 0;
 	margin: 0 1em 0 1em;
 }
