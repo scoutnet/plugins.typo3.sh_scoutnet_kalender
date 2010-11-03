@@ -1,39 +1,6 @@
 <?php
-/***************************************************************
-*  Copyright notice
-*
-*  (c) 2010 Georg Ringer <typo3@ringerge.org>
-*  All rights reserved
-*
-*  This script is part of the TYPO3 project. The TYPO3 project is
-*  free software; you can redistribute it and/or modify
-*  it under the terms of the GNU General Public License as published by
-*  the Free Software Foundation; either version 2 of the License, or
-*  (at your option) any later version.
-*
-*  The GNU General Public License can be found at
-*  http://www.gnu.org/copyleft/gpl.html.
-*
-*  This script is distributed in the hope that it will be useful,
-*  but WITHOUT ANY WARRANTY; without even the implied warranty of
-*  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-*  GNU General Public License for more details.
-*
-*  This copyright notice MUST APPEAR in all copies of the script!
-***************************************************************/
 
-
-/**
- * This class provides a scoutnet kalender for BE users
- *
- * @author		Georg Ringer <typo3@ringerge.org>
- * @package		TYPO3
- * @subpackage	scoutnet Kalender
- *
- */
-
-
-$LANG->includeLLFile('EXT:shscoutnetkalender/editor/locallang.xml');
+$LANG->includeLLFile('EXT:sh_scoutnet_kalender/editor/locallang.xml');
 
 
 $BE_USER->modAccess($MCONF, 1);
@@ -57,7 +24,7 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 			// initialize document
 		$this->doc = t3lib_div::makeInstance('template');
 		$this->doc->setModuleTemplate(
-			t3lib_extMgm::extPath('shscoutnetkalender') . 'res/mod_template.html'
+			t3lib_extMgm::extPath('sh_scoutnet_kalender') . 'res/mod_template.html'
 		);
 		$this->doc->backPath = $GLOBALS['BACK_PATH'];
 		$this->doc->getPageRenderer()->loadScriptaculous('effects,dragdrop');
