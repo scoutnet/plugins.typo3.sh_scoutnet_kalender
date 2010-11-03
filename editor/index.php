@@ -43,17 +43,6 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 	public function main() {
 		$docHeaderButtons = $this->getButtons();
 
-
-		// Build the <body> for the module
-		$this->content = $this->doc->startPage($GLOBALS['LANG']->getLL('title'));
-		$this->content .= "foo";
-		$this->content .= $this->doc->moduleBody($this->pageinfo, $docHeaderButtons, $markers);
-		$this->content .= $this->doc->endPage();
-		$this->content = $this->doc->insertStylesAndJS($this->content);
-
-
-		return;
-
 		$markers = array();
 
 		$this->doc->JScodeArray[] = '
@@ -88,11 +77,16 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 			);
 		$markers['CONTENT'] = $this->content;
 
-			// Build the <body> for the module
+
+		// Build the <body> for the module
 		$this->content = $this->doc->startPage($GLOBALS['LANG']->getLL('title'));
+		$this->content .= "foo";
 		$this->content .= $this->doc->moduleBody($this->pageinfo, $docHeaderButtons, $markers);
 		$this->content .= $this->doc->endPage();
 		$this->content = $this->doc->insertStylesAndJS($this->content);
+
+
+		return;
 	}
 
 	/**
