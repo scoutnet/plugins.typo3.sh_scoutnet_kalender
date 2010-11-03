@@ -26,7 +26,7 @@ h1, h2, h3, h4 {
 /* Mittlere Spalte */
 #typo3-inner-docbody
 {
-	padding: 10px 10px 0 10px;
+	padding: 0 !important;
 	border: 2px solid #D3D3D3;
 	background: #fff url(bg_h1.png) repeat-x top;
 	position:relative;
