@@ -9,6 +9,7 @@
 	padding: 0 10px;
 	border: 2px solid #D3D3D3;
 	background: #fff url(../../img/bg_h1.png) repeat-x top;
+	position:relative;
 }
 
 #typo3-inner-docbody-content { 
