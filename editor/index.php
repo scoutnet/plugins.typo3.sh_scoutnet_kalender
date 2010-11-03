@@ -26,13 +26,14 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 		$this->doc->setModuleTemplate(t3lib_extMgm::extPath('sh_scoutnet_kalender') . 'editor/template.html');
 		$this->doc->backPath = $GLOBALS['BACK_PATH'];
 		$this->doc->getPageRenderer()->loadScriptaculous('effects,dragdrop');
-		//$this->doc->addStyleSheet( 'tx_shscoutnetkalender', t3lib_extMgm::siteRelPath('sh_scoutnet_kalender') . 'editor/styles.css');
+		$this->doc->addStyleSheet( 'tx_shscoutnetkalender', t3lib_extMgm::siteRelPath('sh_scoutnet_kalender') . 'editor/style.css');
 	       
+		/*
 		if (version_compare(TYPO3_version, '4.3', '<')) {
 			$this->doc->addStyleSheet('tx_shscoutnetkalender', t3lib_extMgm::siteRelPath('sh_scoutnet_kalender') . 'editor/styles.css');
 		} else {
 			$this->doc->JScode .= '<link rel="stylesheet" type="text/css" href="' . t3lib_div::createVersionNumberedFilename(t3lib_div::resolveBackPath($this->doc->backPath . t3lib_extMgm::extRelPath('sh_scoutnet_kalender') . 'editor/styles.css')) . '" />';
-		}
+		}*/
 
 	}
 
@@ -47,12 +48,12 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 
 		$markers = array();
 
-		/*$this->doc->JScodeArray[] = '
+		$this->doc->JScodeArray[] = '
 			script_ended = 0;
 			function jumpToUrl(URL) {
 				document.location = URL;
 			}
-			';*/
+		';
 		$this->doc->postCode='
 			<script language="javascript" type="text/javascript">
 				script_ended = 1;
