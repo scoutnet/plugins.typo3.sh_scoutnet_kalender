@@ -317,7 +317,7 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 				}
 
 
-			$fkt .= '}';
+			}';
 			$this->doc->JScodeArray[] = $fkt;
 		}
 
