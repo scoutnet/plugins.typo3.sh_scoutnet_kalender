@@ -91,7 +91,14 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 
 		$termine = '';
 		for ($i = 0; $i < 15; $i++) {
-			$termine .= $termin_template;
+
+			$termine_markers = array();
+
+			$termin_markers['DESCRIPTION'] = 'Termin #'.$i;
+			$termin_markers['DATUM'] = 'Heute';
+
+
+			$termine .= t3lib_parsehtml::substituteMarkerArray($termin_template,$termin_markers,'###|###');
 		}
 
 
