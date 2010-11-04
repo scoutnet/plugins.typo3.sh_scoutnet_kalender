@@ -108,23 +108,37 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 				(($event['End_Date'] != $event['Start_Date'] && !is_null($event['End_Time']))?",&nbsp;":'').
 				(is_null($event['End_Time'])?'':strftime("%H:%M", $event['End_Timestamp']));
 
-			$zeit = "";
+			$start_date = substr(strftime("%A",$event['Start']),0,2).",&nbsp;".strftime("%d.%m.",$event['Start']);
+			$date = $start_date;
+
+			if (isset($event['End']) && strftime("%d%m%Y",$event['Start']) != strftime("%d%m%Y",$event['End']) ) {
+				$date .= "&nbsp;-&nbsp;";
+				$end_date = substr(strftime("%A",$event['End']),0,2).",&nbsp;".strftime("%d.%m.",$event['End']);
+				$date .= $end_date;
+			}
+
+			$time = '';
+			$start_time = '';
 			if ($event['All_Day'] != 1) {
-				$zeit = strftime("%H:%M",$event['Start']);
+				$start_time = strftime("%H:%M",$event['Start']);
+				$time = $start_time;
 
 
 				if (isset($event['End']) && strftime("%H%M",$event['Start']) != strftime("%H%M",$event['End']) ) {
-					$zeit .= "&nbsp;-&nbsp;";
-					$zeit .= strftime("%H:%M",$event['End']);
+					$time .= "&nbsp;-&nbsp;";
+					$end_time .= strftime("%H:%M",$event['End']);
+					$time .= $end_time;
 				}
 			}
+
+			$date_with_time = $start_date.(($start_time != '')?'&nbsp;'.$start_time:'').(($end_date.$end_time != '')?' - ':'').($end_date != ''?$end_date:'').(($end_date.$end_time != '')?'&nbsp;':'').($end_time != ''?$end_time:'');
 
 
 
 			$termine_markers = array();
 
 			$termin_markers['TITEL'] = nl2br(htmlentities($event['Title'],ENT_COMPAT,'UTF-8'));
-			$termin_markers['DATUM'] = $zeit;
+			$termin_markers['DATE_WITH_TIME'] = $date_with_time;
 
 
 			$termine .= t3lib_parsehtml::substituteMarkerArray($termin_template,$termin_markers,'###|###');
