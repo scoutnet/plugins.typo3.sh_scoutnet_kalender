@@ -147,6 +147,17 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 			$termin_markers['CREATED_LABEL'] = $GLOBALS['LANG']->getLL('createdLabel');
 			$termin_markers['LAST_CHANGED_LABEL'] = $GLOBALS['LANG']->getLL('lastChangedLabel');
 
+			/*
+			<?=$event['Created_By']?>, <?=strftime("%x %H:%M",$event['Created_At_Timestamp'])
+     99 »·······»·······»·······»·······»·······<?=($event['Last_Modified_By']?" | ".$lang_cal['Last_Modified'].": ".$event['Last_Modified_By'].", ".strftime("%x %H:%M",$event['Last_Modified_At_Timestamp'])."":"")
+			 */
+
+			$termin_markers['CREATED_BY'] = $event['Created_By'];
+			$termin_markers['CREATED_AT'] = $GLOBALS['LANG']->getLL('createdLabel');
+
+			$termin_markers['LAST_CHANGED_BY'] = $GLOBALS['LANG']->getLL('lastChangedLabel');
+			$termin_markers['LAST_CHANGED_AT'] = $GLOBALS['LANG']->getLL('lastChangedLabel');
+
 			$termine .= t3lib_parsehtml::substituteMarkerArray($termin_template,$termin_markers,'###|###');
 		}
 
