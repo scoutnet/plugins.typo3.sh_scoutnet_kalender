@@ -349,19 +349,25 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 			'<select id="'.$name.'_year" onchange="setDaysForYearMon(this.value,document.getElementById(\''.$name.'_month\').value,document.getElementById(\''.$name.'_day\'))">'.$year_options.'</select>';
 
 		return $out;
-
-		return '<input maxlength="255" name="'.$name.'" style="color:'.$color.'" type="text" value="'.$value.'" onfocus="if (this.value == \''.$defaultValue.'\') { this.value=\'\'; this.style.color=\'black\';}" onblur="if (this.value ==\'\') {this.style.color=\'lightgray\';this.value=\''.$defaultValue.'\'}">'; 
 	}
 
 	private function createTimeInput($name, $defaultValue, $value = ""){
-		$color = "black";
 		if ($value == "") {
-			$color = "lightgray";
 			$value = $defaultValue;
 		}
-		return '';
 
-		return '<input maxlength="255" name="'.$name.'" style="color:'.$color.'" type="text" value="'.$value.'" onfocus="if (this.value == \''.$defaultValue.'\') { this.value=\'\'; this.style.color=\'black\';}" onblur="if (this.value ==\'\') {this.style.color=\'lightgray\';this.value=\''.$defaultValue.'\'}">'; 
+		for ($hour = 1; $hour <= 24; $hour++) {
+			$hour_options .= '<option value="'.$hour.'" '.(!$noContent && strftime("%h",$hour) == $hour?'selected':'').'>'.$hour'</option>';
+		}
+
+		for ($min = 1; $min <= 24; $min++) {
+			$min_options .= '<option value="'.$min.'" '.(!$noContent && strftime("%i",$min) == $min?'selected':'').'>'.$min'</option>';
+		}
+
+		$out .= '<select id="'.$name.'_hour">'.$hour_options.'</select>'.
+			'<select id="'.$name.'_min">'.$min_options.'</select>';
+
+		return $out;
 	}
 
 	/**
