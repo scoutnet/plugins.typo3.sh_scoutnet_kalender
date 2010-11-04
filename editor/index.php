@@ -100,10 +100,20 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 		$termine = '';
 		foreach ($events as $event) {
 
+
+			$zeit = strftime("%a,&nbsp;%x", $event['Start_Timestamp']).
+				(is_null($event['Start_Time'])?'':",&nbsp;".strftime("%H:%M", $event['Start_Timestamp'])).
+				(($event['End_Date'] != $event['Start_Date'] || !is_null($event['End_Time']))?" bis ":'').
+				(($event['End_Date'] != $event['Start_Date'])?"<br />".strftime( "%a,&nbsp;%x", $event['End_Timestamp']):"").
+				(($event['End_Date'] != $event['Start_Date'] && !is_null($event['End_Time']))?",&nbsp;":'').
+				(is_null($event['End_Time'])?'':strftime("%H:%M", $event['End_Timestamp']));
+
+
+
 			$termine_markers = array();
 
 			$termin_markers['TITEL'] = nl2br(htmlentities($event['Title'],ENT_COMPAT,'UTF-8'));
-			$termin_markers['DATUM'] = 'Heute';
+			$termin_markers['DATUM'] = $zeit;
 
 
 			$termine .= t3lib_parsehtml::substituteMarkerArray($termin_template,$termin_markers,'###|###');
