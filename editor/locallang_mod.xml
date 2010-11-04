@@ -7,7 +7,6 @@
 	<data type="array">
 		<languageKey index="default" type="array">
 			<label index="mlang_tabs_tab">Scoutnet Kalender</label>
-			<label index="to">to</label>
 		</languageKey>
 	</data>
 </T3locallang>
