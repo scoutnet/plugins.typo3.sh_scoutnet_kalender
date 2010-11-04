@@ -229,7 +229,7 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 		if ($value == "")
 			$value = $title;
 
-		return '<input maxlength="255" name="'.$title.'" type="text" value="'.$value.'" onfucus="if (this.value == \'$title\') this.value=\'\';">'; 
+		return '<input maxlength="255" name="'.$title.'" type="text" value="'.$value.'" onfucus="if (this.value == \''.$title.'\') this.value=\'\';">'; 
 
 	}
 
