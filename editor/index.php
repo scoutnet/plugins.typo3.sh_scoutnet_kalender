@@ -280,7 +280,7 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 		}
 
 		for ($year=strftime("%Y") - 5;$year <= strftime("%Y") + 10; $year++){
-			$year_options .= '<option value="'.$year.'" '.(strftime("%m",$value) == $month?'selected':'').'>'.$year.'</option>'; 
+			$year_options .= '<option value="'.$year.'" '.(strftime("%Y",$value) == $month?'selected':'').'>'.$year.'</option>'; 
 
 			$days_in_feb[$year] = 28;
 			if (checkdate(2,29,$year)) 
@@ -289,7 +289,7 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 		}
 
 		for ($day=1; $day <= 31; $day++){
-			$day_options .= '<option value="'.$day.'" '.(strftime("%m",$value) == $day?'selected':'').'>'.$day.'</option>'; 
+			$day_options .= '<option value="'.$day.'" '.(strftime("%d",$value) == $day?'selected':'').'>'.$day.'</option>'; 
 		}
 
 		if (!$this->jsDateFktSet) {
@@ -329,8 +329,6 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 			}';
 			$this->doc->JScodeArray[] = $fkt;
 		}
-
-		$out .= $value;
 
 		$out .= '<select id="'.$name.'_day">'.$day_options.'</select>'.
 			'<select id="'.$name.'_month" onchange="setDaysForYearMon(document.getElementById(\''.$name.'_year\').value,this.value,document.getElementById(\''.$name.'_day\'))">'.$month_options.'</select>'.
