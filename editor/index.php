@@ -356,11 +356,11 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 			$value = $defaultValue;
 		}
 
-		for ($hour = 1; $hour <= 24; $hour++) {
+		for ($hour = 0; $hour < 24; $hour++) {
 			$hour_options .= '<option value="'.$hour.'" '.(!$noContent && strftime("%h",$hour) == $hour?'selected':'').'>'.$hour.'</option>';
 		}
 
-		for ($min = 1; $min <= 24; $min++) {
+		for ($min = 0; $min < 60; $min+=5) {
 			$min_options .= '<option value="'.$min.'" '.(!$noContent && strftime("%i",$min) == $min?'selected':'').'>'.$min.'</option>';
 		}
 
