@@ -116,6 +116,10 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 				$subpartMarkers['LAST_MODIFIED_FIELD'] = '';
 			}
 
+			if ($event['Last_Modified_by'] == ''){
+				$subpartMarkers['LAST_MODIFIED_FIELD'] = '';
+			}
+
 			$markers['HIDDEN_FIELDS'] = '<input type="hidden" value="'.$event['ID'].'" />';
 
 			$markers['BACK_TO_OVERVIEW_LINK'] = '<a href="'.$this->MCONF['_'].'">» '.$GLOBALS['LANG']->getLL('backToOverview').'</a>';
