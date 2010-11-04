@@ -91,6 +91,9 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 			$markers['LAST_MODIFIED_BY_LABEL'] = $GLOBALS['LANG']->getLL('lastModifiedByLabel');
 			$markers['LAST_MODIFIED_AT_LABEL'] = $GLOBALS['LANG']->getLL('lastModifiedAtLabel');
 
+			$markers['TITLE_LABEL'] = $GLOBALS['LANG']->getLL('title');
+			$markers['TITLE_MANDATORY'] = '<span style="color: #ff0000">*</span>';
+
 		} else {
 			$markers['CONTENT'] = $this->content;
 

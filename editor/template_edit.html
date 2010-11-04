@@ -46,56 +46,57 @@
 							//]]>
 							</script>
 
-<form action="events.php?SSID=4&amp;task=modify" method="post" name="eventForm" id="eventForm" onsubmit="try { var myValidator = validate_eventForm; } catch(e) { return true; } return myValidator(this);" autocomplete="on">
-<div>
-<input name="ID" type="hidden" value="137698">
-<table border="0">
-<tbody><tr><td valign="top"><table border="0" id="kalender-input-field-table">
-	<tbody><tr>
-			<td align="right" valign="top"><b>###CREATED_BY_LABEL###</b></td>
-		<td valign="top" align="left">annegret</td>
-	</tr>
-	<tr>
-			<td align="right" valign="top"><b>###CREATED_AT_LABEL###</b></td>
-		<td valign="top" align="left">2009-11-03 08:35:30</td>
-	</tr>
-	<tr>
-		<td align="right" valign="top"><b>###LAST_MODIFIED_BY_LABEL###</b></td>
-		<td valign="top" align="left">peter</td>
-	</tr>
-	<tr>
-		<td align="right" valign="top"><b>###LAST_MODIFIED_AT_LABEL###</b></td>
-		<td valign="top" align="left">2010-04-27 13:57:48</td>
-	</tr>
-	<tr>
-		<td align="right" valign="top"><span style="color: #ff0000">*</span><b>Titel</b></td>
-		<td valign="top" align="left"><input maxlength="255" name="Title" type="text" value="F+F Mitgliederversammlung"></td>
-	</tr>
-	<tr>
-		<td align="right" valign="top"><span style="color: #ff0000">*</span><b>Startdatum</b></td>
-		<td valign="top" align="left"><select name="Start_Date[d]">
-	<option value="1">01</option>
-	<option value="2">02</option>
-	<option value="3">03</option>
-	<option value="4">04</option>
-	<option value="5">05</option>
-	<option value="6">06</option>
-	<option value="7">07</option>
-	<option value="8">08</option>
-	<option value="9">09</option>
-	<option value="10">10</option>
-	<option value="11">11</option>
-	<option value="12">12</option>
-	<option value="13">13</option>
-	<option value="14">14</option>
-	<option value="15">15</option>
-	<option value="16">16</option>
-	<option value="17">17</option>
-	<option value="18">18</option>
-	<option value="19">19</option>
-	<option value="20">20</option>
-	<option value="21">21</option>
-	<option value="22">22</option>
+							<form action="mod.php?SSID=4&amp;task=modify" method="post" name="eventForm" id="eventForm" onsubmit="try { var myValidator = validate_eventForm; } catch(e) { return true; } return myValidator(this);" autocomplete="on">
+								<div>
+									###HIDDEN_FIELDS###
+									<input name="ID" type="hidden" value="###EVENT_ID###">
+									<table border="0">
+										<tbody><tr><td valign="top"><table border="0" id="kalender-input-field-table">
+														<tbody><tr>
+																<td align="right" valign="top"><b>###CREATED_BY_LABEL###</b></td>
+																<td valign="top" align="left">###CREATED_BY###</td>
+															</tr>
+															<tr>
+																<td align="right" valign="top"><b>###CREATED_AT_LABEL###</b></td>
+																<td valign="top" align="left">###CREATED_AT###</td>
+															</tr>
+															<tr>
+																<td align="right" valign="top"><b>###LAST_MODIFIED_BY_LABEL###</b></td>
+																<td valign="top" align="left">###LAST_MODIFIED_BY###</td>
+															</tr>
+															<tr>
+																<td align="right" valign="top"><b>###LAST_MODIFIED_AT_LABEL###</b></td>
+																<td valign="top" align="left">###LAST_MODIFIED_AT###</td>
+															</tr>
+															<tr>
+																<td align="right" valign="top"><b>###TITLE_LABEL###</b>###TITLE_MANDATORY###</td>
+																<td valign="top" align="left"><input maxlength="255" name="Title" type="text" value="F+F Mitgliederversammlung"></td>
+															</tr>
+															<tr>
+																<td align="right" valign="top"><span style="color: #ff0000">*</span><b>Startdatum</b></td>
+																<td valign="top" align="left"><select name="Start_Date[d]">
+																		<option value="1">01</option>
+																		<option value="2">02</option>
+																		<option value="3">03</option>
+																		<option value="4">04</option>
+																		<option value="5">05</option>
+																		<option value="6">06</option>
+																		<option value="7">07</option>
+																		<option value="8">08</option>
+																		<option value="9">09</option>
+																		<option value="10">10</option>
+																		<option value="11">11</option>
+																		<option value="12">12</option>
+																		<option value="13">13</option>
+																		<option value="14">14</option>
+																		<option value="15">15</option>
+																		<option value="16">16</option>
+																		<option value="17">17</option>
+																		<option value="18">18</option>
+																		<option value="19">19</option>
+																		<option value="20">20</option>
+																		<option value="21">21</option>
+																		<option value="22">22</option>
 	<option value="23">23</option>
 	<option value="24">24</option>
 	<option value="25">25</option>
