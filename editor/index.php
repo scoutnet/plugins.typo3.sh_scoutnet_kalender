@@ -313,7 +313,7 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 				field.options = Array();
 
 				for (i = 1; i <= days_in_mon; i++){
-					field.options[i] = i;
+					field.options[i] = new Option(i);
 				}
 
 
