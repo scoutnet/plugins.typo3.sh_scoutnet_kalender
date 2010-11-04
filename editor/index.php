@@ -301,6 +301,7 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 			}
 
 			$fkt .= 'function setDaysForYearMon(year,mon,field) {
+				oldValue = field.value;
 				days_in_mon = 31;
 				if (mon == 2) {
 					days_in_mon = days_in_feb[year];
@@ -317,6 +318,8 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 				for (i = 1; i <= days_in_mon; i++){
 					field.options[i] = new Option(i);
 				}
+
+				field.value = oldValue;
 
 
 			}';
