@@ -86,8 +86,6 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 		$markers['TITLE_LABEL'] = $GLOBALS['LANG']->getLL('titleLabel');
 		$markers['ACTION_LABEL'] = $GLOBALS['LANG']->getLL('actionLabel');
 
-		$markers['CREATED_LABEL'] = $GLOBALS['LANG']->getLL('createdLabel');
-		$markers['LAST_CHANGED_LABEL'] = $GLOBALS['LANG']->getLL('lastChangedLabel');
 
 
 		$termin_template = t3lib_parsehtml::getSubpart($this->doc->moduleTemplate,'###TERMIN_TEMPLATE###');
@@ -146,6 +144,8 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 			$termin_markers['TITEL'] = nl2br(htmlentities($event['Title'],ENT_COMPAT,'UTF-8'));
 			$termin_markers['DATE_WITH_TIME'] = $date_with_time;
 
+			$termin_markers['CREATED_LABEL'] = $GLOBALS['LANG']->getLL('createdLabel');
+			$termin_markers['LAST_CHANGED_LABEL'] = $GLOBALS['LANG']->getLL('lastChangedLabel');
 
 			$termine .= t3lib_parsehtml::substituteMarkerArray($termin_template,$termin_markers,'###|###');
 		}
