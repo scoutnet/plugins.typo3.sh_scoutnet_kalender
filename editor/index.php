@@ -57,6 +57,7 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 		$docHeaderButtons = $this->getButtons();
 
 		$markers = array();
+		$subpartMarkers = array();
 
 		$this->doc->JScodeArray[] = '
 			script_ended = 0;
@@ -99,7 +100,6 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 			}
 
 			if ($event_id > -1) {
-
 				$ids = array(4);
 				$events = $SN->get_events_with_ids($ids,array($event_id));
 				if (isset($events[0]))
@@ -109,6 +109,12 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 					$event['id'] = -1;
 				}
 
+			}
+
+
+			if ($event['id'] == -1) {
+				$subpartMarkers['CREATER_FIELD'] = '';
+				$subpartMarkers['LAST_MODIFIED_FIELD'] = '';
 			}
 
 			$markers['HIDDEN_FIELDS'] = '<input type="hidden" value="'.$event['ID'].'" />';
@@ -266,7 +272,7 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 
 		// Build the <body> for the module
 		$this->content = $this->doc->startPage($GLOBALS['LANG']->getLL('title'));
-		$this->content .= $this->doc->moduleBody($this->pageinfo, $docHeaderButtons, $markers);
+		$this->content .= $this->doc->moduleBody($this->pageinfo, $docHeaderButtons, $markers, $subpartMarkers);
 		$this->content .= $this->doc->endPage();
 		$this->content = $this->doc->insertStylesAndJS($this->content);
 
