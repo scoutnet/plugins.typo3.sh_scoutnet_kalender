@@ -108,7 +108,7 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 				(($event['End_Date'] != $event['Start_Date'] && !is_null($event['End_Time']))?",&nbsp;":'').
 				(is_null($event['End_Time'])?'':strftime("%H:%M", $event['End_Timestamp']));
 
-			$start_date = substr(strftime("%A",$event['Start']),0,2).",&nbsp;".strftime("%d.%m.",$event['Start']);
+			$start_date = substr(strftime("%A",$event['Start']),0,2).",&nbsp;".strftime("%d.%m.%Y",$event['Start']);
 			$date = $start_date;
 			$end_date = '';
 
