@@ -114,7 +114,7 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 
 			if (isset($event['End']) && strftime("%d%m%Y",$event['Start']) != strftime("%d%m%Y",$event['End']) ) {
 				$date .= "&nbsp;-&nbsp;";
-				$end_date = substr(strftime("%A",$event['End']),0,2).",&nbsp;".strftime("%d.%m.",$event['End']);
+				$end_date = substr(strftime("%A",$event['End']),0,2).",&nbsp;".strftime("%d.%m.%Y",$event['End']);
 				$date .= $end_date;
 			}
 
