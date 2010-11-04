@@ -141,7 +141,7 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 
 
 
-			$termine_markers = array(
+			$termin_markers = array(
 
 				'TITEL' => nl2br(htmlentities($event['Title'],ENT_COMPAT,'UTF-8')),
 				'DATE_WITH_TIME' => $date_with_time,
