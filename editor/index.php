@@ -96,6 +96,7 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 			$markers['TITLE_FIELD'] = '<input maxlength="255" name="Title" type="text" value="F+F Mitgliederversammlung">'; 
 
 			$markers['START_DATE_LABEL'] = $GLOBALS['LANG']->getLL('startDateLabel');
+			$markers['START_DATE_MANDATORY'] = '<span style="color: #ff0000">*</span>';
 			$markers['START_TIME_LABEL'] = $GLOBALS['LANG']->getLL('startTimeLabel');
 			$markers['END_DATE_LABEL'] = $GLOBALS['LANG']->getLL('endDateLabel');
 			$markers['END_TIME_LABEL'] = $GLOBALS['LANG']->getLL('endTimeLabel');
