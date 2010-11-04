@@ -80,7 +80,7 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 		$markers['HEADER1_LABEL'] = "Terminverwaltung";
 		$markers['EBENE_LONG_NAME'] = "Diozese Köln";
 
-		$markers['TERMINE'] = t3lib_parsehtml::getSubpart($this->doc->moduleTemplate,'###TERMIN###');
+		$markers['TERMINE'] = "basbo".t3lib_parsehtml::getSubpart($this->doc->moduleTemplate,'###TERMIN###'). "foobaa";
 
 
 
