@@ -237,11 +237,11 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 	}
 
 
-	private function createTextInput($title, $value = ""){
+	private function createTextInput($name, $defaultValue, $value = ""){
 		if ($value == "")
-			$value = $title;
+			$value = $defaultValue;
 
-		return '<input maxlength="255" name="'.$title.'" type="text" value="'.$value.'" onfocus="if (this.value == \''.$title.'\') this.value=\'\';" onblur="if (this.value ==\'\') this.value=\''.$title.'\'">'; 
+		return '<input maxlength="255" name="'.$name.'" type="text" value="'.$value.'" onfocus="if (this.value == \''.$defaultValue.'\') this.value=\'\';" onblur="if (this.value ==\'\') this.value=\''.$defaultValue.'\'">'; 
 
 	}
 
