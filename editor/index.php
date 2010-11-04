@@ -184,6 +184,7 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 				'4'=>'Aktion',
 				);
 
+			print_r ($event);
 			foreach ($keywords as $id=>$name) {
 				$markers['KEYWORDS_FIELD'] .= '<input name="keywords['.$id.']" type="checkbox" value="1" id="kw_'.$id.'"><label for="kw_'.$id.'">'.$name.'</label><br>';
 			}
