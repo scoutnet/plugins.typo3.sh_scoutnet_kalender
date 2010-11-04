@@ -91,9 +91,23 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 			$markers['LAST_MODIFIED_BY_LABEL'] = $GLOBALS['LANG']->getLL('lastModifiedByLabel');
 			$markers['LAST_MODIFIED_AT_LABEL'] = $GLOBALS['LANG']->getLL('lastModifiedAtLabel');
 
-			$markers['TITLE_LABEL'] = $GLOBALS['LANG']->getLL('title');
+			$markers['TITLE_LABEL'] = $GLOBALS['LANG']->getLL('titleLabel');
 			$markers['TITLE_MANDATORY'] = '<span style="color: #ff0000">*</span>';
 			$markers['TITLE_FIELD'] = '<input maxlength="255" name="Title" type="text" value="F+F Mitgliederversammlung">'; 
+
+			$markers['START_DATE_LABEL'] = $GLOBALS['LANG']->getLL('startDateLabel');
+			$markers['START_TIME_LABEL'] = $GLOBALS['LANG']->getLL('startTimeLabel');
+			$markers['END_DATE_LABEL'] = $GLOBALS['LANG']->getLL('endDateLabel');
+			$markers['END_TIME_LABEL'] = $GLOBALS['LANG']->getLL('endTimeLabel');
+			$markers['LOCATION_LABEL'] = $GLOBALS['LANG']->getLL('LocationLabel');
+			$markers['ORGANIZER_LABEL'] = $GLOBALS['LANG']->getLL('organizerLabel');
+			$markers['TARGET_GROUP_LABEL'] = $GLOBALS['LANG']->getLL('targetGroupLabel');
+			$markers['ZIP_LABEL'] = $GLOBALS['LANG']->getLL('zipLabel');
+			$markers['LINK_TEXT_LABEL'] = $GLOBALS['LANG']->getLL('linkTextLabel');
+			$markers['LINK_URL_LABEL'] = $GLOBALS['LANG']->getLL('linkUrlLabel');
+			$markers['INFO_LABEL'] = $GLOBALS['LANG']->getLL('infoLabel');
+			$markers['SAVE_LABEL'] = $GLOBALS['LANG']->getLL('save');
+
 
 		} else {
 			$markers['CONTENT'] = $this->content;

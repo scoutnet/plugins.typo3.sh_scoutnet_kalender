@@ -20,12 +20,26 @@
 			<label index="endLabel">End</label>
 			<label index="titleLabel">Title</label>
 			<label index="actionLabel">Action</label>
+			<label index="startDateLabel">Start Date</label>
+			<label index="startTimeLabel">Start Time</label>
+			<label index="endDateLabel">End Date</label>
+			<label index="endTimeLabel">End Time</label>
+			<label index="locationLabel">Location</label>
+			<label index="organizerLabel">Organizer</label>
+			<label index="targetGroupLabel">target Group</label>
+			<label index="zipLabel">ZIP</label>
+			<label index="linkTextLabel">Link Text</label>
+			<label index="linkUrlLabel">Link</label>
+			<label index="infoLabel">Info</label>
 
+			<label index="save">Save</label>
 			<label index="edit">Edit</label>
 			<label index="create">Create new Event</label>
 			<label index="backToOverview">Back to Overview</label>
 			<label index="useAsTemplate">Use as Template</label>
 			<label index="delete">Delete</label>
+
+
 		</languageKey>
 	</data>
 </T3locallang>
