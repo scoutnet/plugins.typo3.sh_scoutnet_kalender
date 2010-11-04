@@ -330,8 +330,7 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 
 		$out .= $value;
 
-		$out .= '</select>'.
-			'<select id="'.$name.'_day">'.$day_options.'</select>'.
+		$out .= '<select id="'.$name.'_day">'.$day_options.'</select>'.
 			'<select id="'.$name.'_month" onchange="setDaysForYearMon(document.getElementById(\''.$name.'_year\').value,this.value,document.getElementById(\''.$name.'_day\'))">'.$month_options.'</select>'.
 			'<select id="'.$name.'_year" onchange="setDaysForYearMon(this.value,document.getElementById(\''.$name.'_month\').value,document.getElementById(\''.$name.'_day\'))">'.$year_options.'</select>';
 
