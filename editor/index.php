@@ -275,20 +275,22 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 		$day_options = $month_options = $year_options = '';
 
 
+		$noContent = false;
 		if ($defaultValue == -1) { 
-			$day_options .= '<option value="" '.($value == $defaultValue?'selected':'').'></option>';
-			$month_options .= '<option value="" '.($value == $defaultValue?'selected':'').'></option>';
-			$year_options .= '<option value="" '.($value == $defaultValue?'selected':'').'></option>';
+			$noContent = $value == $defaultValue;
+			$day_options .= '<option value="" '.($noContent?'selected':'').'></option>';
+			$month_options .= '<option value="" '.($noContent?'selected':'').'></option>';
+			$year_options .= '<option value="" '.($noContent?'selected':'').'></option>';
 		}
 
 		for ($month = 1; $month <= 12; $month++) {
-			$month_options .= '<option value="'.$month.'" '.(strftime("%m",$value) == $month?'selected':'').'>'.$GLOBALS['LANG']->getLL('mon'.$month).'</option>';
+			$month_options .= '<option value="'.$month.'" '.(!$noContent && strftime("%m",$value) == $month?'selected':'').'>'.$GLOBALS['LANG']->getLL('mon'.$month).'</option>';
 		}
 
 
 		$days_in_feb = array();
 		for ($year=strftime("%Y") - 5;$year <= strftime("%Y") + 10; $year++){
-			$year_options .= '<option value="'.$year.'" '.(strftime("%Y",$value) == $month?'selected':'').'>'.$year.'</option>'; 
+			$year_options .= '<option value="'.$year.'" '.(!$noContent && strftime("%Y",$value) == $month?'selected':'').'>'.$year.'</option>'; 
 
 			$days_in_feb[$year] = 28;
 			if (checkdate(2,29,$year)) 
@@ -297,7 +299,7 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 		}
 
 		for ($day=1; $day <= 31; $day++){
-			$day_options .= '<option value="'.$day.'" '.(strftime("%d",$value) == $day?'selected':'').'>'.$day.'</option>'; 
+			$day_options .= '<option value="'.$day.'" '.(!$noContent && strftime("%d",$value) == $day?'selected':'').'>'.$day.'</option>'; 
 		}
 
 		if (!$this->jsDateFktSet) {
