@@ -278,11 +278,14 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 		for ($year=strftime("%Y") - 5;$year <= strftime("%Y") + 10; $year++){
 			$year_options .= '<option value="'.$year.'">'.$year.'</option>'; 
 
+			$days_in_feb[$year] = 28;
+			if (checkdate(2,29,$year)) 
+				$days_in_feb[$year] = 29;
 
 		}
 
 		for ($i=1; $i <= 31; $i++){
-			$day_out .= '<option value="'.$i.'">'.$i.'</option>'; 
+			$day_options .= '<option value="'.$i.'">'.$i.'</option>'; 
 		}
 
 
