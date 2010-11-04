@@ -358,7 +358,6 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 
 		$out = '<input type="hidden" name="'.$name.'" id="'.$name.'_value" value="'.$value.'">';
 	
-		$out .= $value;
 
 		$hour_options = $min_options = '';
 
@@ -370,12 +369,11 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 		}
 
 		for ($hour = 0; $hour < 24; $hour++) {
-			$hour_options .= '<option value="'.$hour.'" '.(!$noContent && strftime("%h",$value) == $hour?'selected':'').'>'.$hour.'</option>';
-			$out .= strftime("%R",$value);
+			$hour_options .= '<option value="'.$hour.'" '.(!$noContent && strftime("%H",$value) == $hour?'selected':'').'>'.$hour.'</option>';
 		}
 
 		for ($min = 0; $min < 60; $min+=5) {
-			$min_options .= '<option value="'.$min.'" '.(!$noContent && strftime("%i",$value) == $min?'selected':'').'>'.$min.'</option>';
+			$min_options .= '<option value="'.$min.'" '.(!$noContent && strftime("%i",$value)%5 == $min?'selected':'').'>'.$min.'</option>';
 		}
 
 		$out .= '<select id="'.$name.'_hour">'.$hour_options.'</select>'.
