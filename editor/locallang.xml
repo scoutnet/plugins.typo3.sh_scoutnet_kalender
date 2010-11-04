@@ -32,6 +32,11 @@
 			<label index="linkUrlLabel">Link</label>
 			<label index="infoLabel">Info</label>
 
+			<label index="keywordsLabel">Keywords</label>
+			<label index="ownKeywordsLabel">Own</label>
+			<label index="groupOrLeaderLabel">Group/Leader</label>
+			<label index="dpsgEduLabel">DPSG Education</label>
+
 			<label index="save">Save</label>
 			<label index="edit">Edit</label>
 			<label index="create">Create new Event</label>
