@@ -99,16 +99,28 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 
 			$markers['START_DATE_LABEL'] = $GLOBALS['LANG']->getLL('startDateLabel');
 			$markers['START_DATE_MANDATORY'] = $mandatoryAsterisk;
-
 			$markers['START_TIME_LABEL'] = $GLOBALS['LANG']->getLL('startTimeLabel');
 			$markers['END_DATE_LABEL'] = $GLOBALS['LANG']->getLL('endDateLabel');
 			$markers['END_TIME_LABEL'] = $GLOBALS['LANG']->getLL('endTimeLabel');
+
 			$markers['LOCATION_LABEL'] = $GLOBALS['LANG']->getLL('locationLabel');
+			$markers['LOCATION_FIELD'] = $this->createTextInput("Location",""); 
+			
 			$markers['ORGANIZER_LABEL'] = $GLOBALS['LANG']->getLL('organizerLabel');
+			$markers['ORGANIZER_FIELD'] = $this->createTextInput("Organizer",""); 
+			
 			$markers['TARGET_GROUP_LABEL'] = $GLOBALS['LANG']->getLL('targetGroupLabel');
+			$markers['TARGET_GROUP_FIELD'] = $this->createTextInput("TargetGroup",""); 
+
 			$markers['ZIP_LABEL'] = $GLOBALS['LANG']->getLL('zipLabel');
+			$markers['ZIP_FIELD'] = $this->createTextInput("Zip",""); 
+
 			$markers['LINK_TEXT_LABEL'] = $GLOBALS['LANG']->getLL('linkTextLabel');
+			$markers['LINK_TEXT_FIELD'] = $this->createTextInput("LinkText",""); 
+
 			$markers['LINK_URL_LABEL'] = $GLOBALS['LANG']->getLL('linkUrlLabel');
+			$markers['LINK_URL_FIELD'] = $this->createTextInput("LinkUrl",""); 
+
 			$markers['INFO_LABEL'] = $GLOBALS['LANG']->getLL('infoLabel');
 			$markers['SAVE_LABEL'] = $GLOBALS['LANG']->getLL('save');
 
@@ -229,7 +241,7 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 		if ($value == "")
 			$value = $title;
 
-		return '<input maxlength="255" name="'.$title.'" type="text" value="'.$value.'" onsubmit="alert(this.value)" onfocus="if (this.value == \''.$title.'\') this.value=\'\';" onblur="if (this.value ==\'\') this.value=\''.$title.'\'">'; 
+		return '<input maxlength="255" name="'.$title.'" type="text" value="'.$value.'" onfocus="if (this.value == \''.$title.'\') this.value=\'\';" onblur="if (this.value ==\'\') this.value=\''.$title.'\'">'; 
 
 	}
 
