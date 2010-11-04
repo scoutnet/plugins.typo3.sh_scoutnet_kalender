@@ -48,6 +48,28 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 	public function main() {
 
 		
+		$events = array();
+		try {
+			$SN = new tx_shscoutnetwebservice_sn();
+
+			$filter = array(
+				'limit'=>'40',
+				'after'=>'now()',
+			);
+
+			if (isset($this->cObj->data["tx_shscoutnetkalender_kat_ids"]) && trim($this->cObj->data["tx_shscoutnetkalender_kat_ids"])) {
+				$filter['kategories'] = split(",",$this->cObj->data["tx_shscoutnetkalender_kat_ids"]);
+			}
+
+			if (isset($this->cObj->data["tx_shscoutnetkalender_stufen_ids"]) && trim($this->cObj->data["tx_shscoutnetkalender_stufen_ids"])) {
+				$filter['stufen'] = split(",",$this->cObj->data["tx_shscoutnetkalender_stufen_ids"]);
+			}
+
+			if (isset($this->piVars['addids']) && count($this->piVars['addids']) > 0 && is_array($this->piVars['addids'])) {
+				$ids = array_merge($ids,$this->piVars["addids"]);
+			}
+
+			$events = $SN->get_events_for_global_id_with_filter($ids,$filter);
 
 		$docHeaderButtons = $this->getButtons();
 
@@ -105,6 +127,9 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 		$markers['TERMINE'] = $termine;
 
 
+		} catch(Exception $e) {
+			$this->content = '<span class="termin">'.$this->pi_getLL('snkDown').'</span>';
+		}
 
 		// Build the <body> for the module
 		$this->content = $this->doc->startPage($GLOBALS['LANG']->getLL('title'));
