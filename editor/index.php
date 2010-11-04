@@ -222,8 +222,8 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 		} else {
 			$flashMessage = t3lib_div::makeInstance(
 				't3lib_FlashMessage',
-				$GLOBALS['LANG']->sL('LLL:EXT:taskcenter/task/locallang_mod.xml:mlang_labels_tabdescr'),
-				$GLOBALS['LANG']->sL('LLL:EXT:taskcenter/task/locallang_mod.xml:mlang_tabs_tab'),
+				$GLOBALS['LANG']->sL('LLL:EXT:taskcenter/task/locallang.xml:mlang_labels_tabdescr'),
+				$GLOBALS['LANG']->sL('LLL:EXT:taskcenter/task/locallang.xml:mlang_tabs_tab'),
 				t3lib_FlashMessage::INFO
 			);
 			$actionContent .= $flashMessage->render();
@@ -247,7 +247,7 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 	protected function renderInformationContent() {
 		$content = $this->description (
 			$GLOBALS['LANG']->getLL('mlang_tabs_tab'),
-			$GLOBALS['LANG']->sL('LLL:EXT:taskcenter/task/locallang_mod.xml:mlang_labels_tabdescr')
+			$GLOBALS['LANG']->sL('LLL:EXT:taskcenter/task/locallang.xml:mlang_labels_tabdescr')
 		);
 
 		$content .= $GLOBALS['LANG']->getLL('taskcenter-about');
