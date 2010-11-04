@@ -86,7 +86,7 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 		$markers['TITLE_LABEL'] = $GLOBALS['LANG']->getLL('titleLabel');
 		$markers['ACTION_LABEL'] = $GLOBALS['LANG']->getLL('actionLabel');
 
-		$markers['CREATE_NEW_TERMIN_LINK'] = '<a href="'.$this->MCONF['_'].'&action=create">» '.$GLOBALS['LANG']->getLL('create').'</a>',
+		$markers['CREATE_NEW_TERMIN_LINK'] = '<a href="'.$this->MCONF['_'].'&action=create">» '.$GLOBALS['LANG']->getLL('create').'</a>';
 
 
 
