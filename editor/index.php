@@ -14,6 +14,8 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 
 	protected $pageinfo;
 
+	protected $jsDateFktSet;
+
 	/**
 	 * Initializes the Module
 	 *
@@ -21,6 +23,8 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 	 */
 	public function __construct() {
 		parent::init();
+
+		$this->jsDateFktSet = false;
 
 			// initialize document
 		$this->doc = t3lib_div::makeInstance('template');
@@ -259,6 +263,19 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 		return '<textarea cols="30" rows="8" name="'.$name.'" style="color:'.$color.'" onfocus="if (this.value == \''.$defaultValue.'\') { this.value=\'\'; this.style.color=\'black\';}" onblur="if (this.value ==\'\') {this.style.color=\'lightgray\';this.value=\''.$defaultValue.'\'}">'.$value.'</textarea>'; 
 	}
 
+	private function createJSFunctions(){
+		if ($this->jsDateFktSet)
+			return;
+
+		$this->jsDateFktSet = true;
+
+
+		$this->doc->JScodeArray[] = 'function setDaysForYearMon(year,mon,field) {
+			field.value = 18;
+			
+			}';
+	}
+
 	private function createDateInput($name, $defaultValue, $value = ""){
 		$color = "black";
 		if ($value == "") {
@@ -291,8 +308,8 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 
 		$out .= '</select>'.
 			'<select id="'.$name.'_day">'.$day_options.'</select>'.
-			'<select id="'.$name.'_month">'.$month_options.'</select>'.
-			'<select id="'.$name.'_year">'.$year_options.'</select>';
+			'<select id="'.$name.'_month" onchange="setDaysForYearMon(document.getElementById('.$name.'_year).value,this.value,document.getElementById('.$name.'_day))">'.$month_options.'</select>'.
+			'<select id="'.$name.'_year" onchange="setDaysForYearMon(this.value,document.getElementById('.$name.'_month).value,document.getElementById('.$name.'_day))">'.$year_options.'</select>';
 
 		return $out;
 
