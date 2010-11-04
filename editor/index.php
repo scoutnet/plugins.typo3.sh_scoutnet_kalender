@@ -271,7 +271,8 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 
 
 		$this->doc->JScodeArray[] = 'function setDaysForYearMon(year,mon,field) {
-			field.value = 18;
+			field.options[12].selected = true;
+			alert("foo");
 			
 			}';
 	}
