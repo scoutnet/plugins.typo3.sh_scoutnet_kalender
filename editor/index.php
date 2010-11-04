@@ -93,7 +93,9 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 		$events = array();
 		try {
 			$SN = new tx_shscoutnetwebservice_sn();
-			$filter = array();
+			$filter = array(
+				'order' => 'start_time desc',
+				);
 			$ids = array(4);
 			$events = $SN->get_events_for_global_id_with_filter($ids,$filter);
 
