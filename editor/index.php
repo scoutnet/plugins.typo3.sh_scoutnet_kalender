@@ -106,7 +106,7 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 			$markers['START_DATE_FIELD'] = $this->createDateInput('StartDate',time(),0);
 			$markers['START_TIME_LABEL'] = $GLOBALS['LANG']->getLL('startTimeLabel');
 			$markers['END_DATE_LABEL'] = $GLOBALS['LANG']->getLL('endDateLabel');
-			$markers['END_DATE_FIELD'] = $this->createDateInput('EndDate',time(),0);
+			$markers['END_DATE_FIELD'] = $this->createDateInput('EndDate',-1,0);
 
 			$markers['END_TIME_LABEL'] = $GLOBALS['LANG']->getLL('endTimeLabel');
 
@@ -274,11 +274,19 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 
 		$day_options = $month_options = $year_options = '';
 
-		$days_in_feb = array();
+
+		if ($defaultValue == -1) { 
+			$day_options .= '<option value="" '.($value == $defaultValue?'selected':'').'></option>';
+			$month_options .= '<option value="" '.($value == $defaultValue?'selected':'').'></option>';
+			$year_options .= '<option value="" '.($value == $defaultValue?'selected':'').'></option>';
+		}
+
 		for ($month = 1; $month <= 12; $month++) {
 			$month_options .= '<option value="'.$month.'" '.(strftime("%m",$value) == $month?'selected':'').'>'.$GLOBALS['LANG']->getLL('mon'.$month).'</option>';
 		}
 
+
+		$days_in_feb = array();
 		for ($year=strftime("%Y") - 5;$year <= strftime("%Y") + 10; $year++){
 			$year_options .= '<option value="'.$year.'" '.(strftime("%Y",$value) == $month?'selected':'').'>'.$year.'</option>'; 
 
