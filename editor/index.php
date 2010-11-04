@@ -76,104 +76,112 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 				$this->MOD_SETTINGS['mode'],
 				$this->MOD_MENU['mode']
 			);
-		$markers['CONTENT'] = $this->content;
-
-		$markers['EBENE_LONG_NAME'] = "Diozese Köln";
-
-		$markers['HEADER1_LABEL'] = $GLOBALS['LANG']->getLL('header1Label');
-		$markers['BEGIN_LABEL'] = $GLOBALS['LANG']->getLL('beginLabel');
-		$markers['END_LABEL'] = $GLOBALS['LANG']->getLL('endLabel');
-		$markers['TITLE_LABEL'] = $GLOBALS['LANG']->getLL('titleLabel');
-		$markers['ACTION_LABEL'] = $GLOBALS['LANG']->getLL('actionLabel');
-
-		$markers['CREATE_NEW_EVENT_LINK'] = '<a href="'.$this->MCONF['_'].'&action=create">» '.$GLOBALS['LANG']->getLL('create').'</a>';
 
 
-
-		$event_template = t3lib_parsehtml::getSubpart($this->doc->moduleTemplate,'###EVENT_TEMPLATE###');
-		$year_change_template = t3lib_parsehtml::getSubpart($this->doc->moduleTemplate,'###YEAR_CHANGE_TEMPLATE###');
-		$last_modified_template = t3lib_parsehtml::getSubpart($event_template,'###LAST_MODIFIED###');
+		if ($_GET['action'] == "edit") {
+			$this->doc->setModuleTemplate(t3lib_extMgm::extPath('sh_scoutnet_kalender') . 'editor/template_edit.html');
 
 
-		$events = array();
-		try {
-			$SN = new tx_shscoutnetwebservice_sn();
-			$filter = array(
-				'order' => 'start_time desc',
-				);
-			$ids = array(4);
-			$events = $SN->get_events_for_global_id_with_filter($ids,$filter);
+		} else {
+			$markers['CONTENT'] = $this->content;
 
-		$events_out = '';
-		foreach ($events as $event) {
+			$markers['EBENE_LONG_NAME'] = "Diozese Köln";
 
-			if($previous_year != strftime('%Y',$event['Start'])) {
-				$previous_year = strftime('%Y',$event['Start']);
-				$events_out .= t3lib_parsehtml::substituteMarkerArray($year_change_template,array('YEAR'=>strftime('%Y',$event['Start'])),'###|###');
+			$markers['HEADER1_LABEL'] = $GLOBALS['LANG']->getLL('header1Label');
+			$markers['BEGIN_LABEL'] = $GLOBALS['LANG']->getLL('beginLabel');
+			$markers['END_LABEL'] = $GLOBALS['LANG']->getLL('endLabel');
+			$markers['TITLE_LABEL'] = $GLOBALS['LANG']->getLL('titleLabel');
+			$markers['ACTION_LABEL'] = $GLOBALS['LANG']->getLL('actionLabel');
 
-			}
+			$markers['CREATE_NEW_EVENT_LINK'] = '<a href="'.$this->MCONF['_'].'&action=create">» '.$GLOBALS['LANG']->getLL('create').'</a>';
 
 
-			$start_date = substr(strftime("%A",$event['Start']),0,2).",&nbsp;".strftime("%d.%m.%Y",$event['Start']);
-			$date = $start_date;
-			$end_date = '';
 
-			if (isset($event['End']) && strftime("%d%m%Y",$event['Start']) != strftime("%d%m%Y",$event['End']) ) {
-				$date .= "&nbsp;-&nbsp;";
-				$end_date = substr(strftime("%A",$event['End']),0,2).",&nbsp;".strftime("%d.%m.%Y",$event['End']);
-				$date .= $end_date;
-			}
-
-			$time = '';
-			$start_time = '';
-			$end_time = '';
-			if ($event['All_Day'] != 1) {
-				$start_time = strftime("%H:%M",$event['Start']);
-				$time = $start_time;
+			$event_template = t3lib_parsehtml::getSubpart($this->doc->moduleTemplate,'###EVENT_TEMPLATE###');
+			$year_change_template = t3lib_parsehtml::getSubpart($this->doc->moduleTemplate,'###YEAR_CHANGE_TEMPLATE###');
+			$last_modified_template = t3lib_parsehtml::getSubpart($event_template,'###LAST_MODIFIED###');
 
 
-				if (isset($event['End']) && strftime("%H%M",$event['Start']) != strftime("%H%M",$event['End']) ) {
-					$time .= "&nbsp;-&nbsp;";
-					$end_time = strftime("%H:%M",$event['End']);
-					$time .= $end_time;
+			$events = array();
+			try {
+				$SN = new tx_shscoutnetwebservice_sn();
+				$filter = array(
+					'order' => 'start_time desc',
+					);
+				$ids = array(4);
+				$events = $SN->get_events_for_global_id_with_filter($ids,$filter);
+
+			$events_out = '';
+			foreach ($events as $event) {
+
+				if($previous_year != strftime('%Y',$event['Start'])) {
+					$previous_year = strftime('%Y',$event['Start']);
+					$events_out .= t3lib_parsehtml::substituteMarkerArray($year_change_template,array('YEAR'=>strftime('%Y',$event['Start'])),'###|###');
+
 				}
+
+
+				$start_date = substr(strftime("%A",$event['Start']),0,2).",&nbsp;".strftime("%d.%m.%Y",$event['Start']);
+				$date = $start_date;
+				$end_date = '';
+
+				if (isset($event['End']) && strftime("%d%m%Y",$event['Start']) != strftime("%d%m%Y",$event['End']) ) {
+					$date .= "&nbsp;-&nbsp;";
+					$end_date = substr(strftime("%A",$event['End']),0,2).",&nbsp;".strftime("%d.%m.%Y",$event['End']);
+					$date .= $end_date;
+				}
+
+				$time = '';
+				$start_time = '';
+				$end_time = '';
+				if ($event['All_Day'] != 1) {
+					$start_time = strftime("%H:%M",$event['Start']);
+					$time = $start_time;
+
+
+					if (isset($event['End']) && strftime("%H%M",$event['Start']) != strftime("%H%M",$event['End']) ) {
+						$time .= "&nbsp;-&nbsp;";
+						$end_time = strftime("%H:%M",$event['End']);
+						$time .= $end_time;
+					}
+				}
+
+				$date_with_time = $start_date.(($start_time != '')?',&nbsp;'.$start_time:'').(($end_date.$end_time != '')?' '.$GLOBALS['LANG']->getLL('to').' ':'').($end_date != ''?$end_date:'').(($end_date.$end_time != '')?',&nbsp;':'').($end_time != ''?$end_time:'');
+
+
+
+				$event_markers = array(
+
+					'TITEL' => nl2br(htmlentities($event['Title'],ENT_COMPAT,'UTF-8')),
+					'DATE_WITH_TIME' => $date_with_time,
+
+					'CREATED_LABEL' => $GLOBALS['LANG']->getLL('createdLabel'),
+					'LAST_MODIFIED_LABEL' => $GLOBALS['LANG']->getLL('lastModifiedLabel'),
+
+					'CREATED_BY' => $event['Created_By'],
+					'CREATED_AT' => strftime("%d.%m.%Y %H:%M",$event['Created_At']),
+
+					'LAST_MODIFIED_BY' => $event['Last_Modified_By'],
+					'LAST_MODIFIED_AT' => strftime("%d.%m.%Y %H:%M",$event['Last_Modified_At']),
+
+					'EDIT_LINK' => '<a href="'.$this->MCONF['_'].'&event_id='.$event['ID'].'&action=edit">» '.$GLOBALS['LANG']->getLL('edit').'</a>',
+					'USE_AS_TEMPLATE_LINK' => '<a href="'.$this->MCONF['_'].'&event_id='.$event['ID'].'&action=create">» '.$GLOBALS['LANG']->getLL('useAsTemplate').'</a>',
+					'DELETE_LINK' => '<a href="'.$this->MCONF['_'].'&event_id='.$event['ID'].'&action=delete">» '.$GLOBALS['LANG']->getLL('delete').'</a>',
+				);
+
+
+				$last_modified = isset($event['Last_Modified_By']) && $event['Last_Modified_By'] != ''?$last_modified_template:'';
+				
+				$events_out .= t3lib_parsehtml::substituteMarkerArray(t3lib_parsehtml::substituteSubpart($event_template,'###LAST_MODIFIED###',$last_modified),$event_markers,'###|###');
 			}
 
-			$date_with_time = $start_date.(($start_time != '')?',&nbsp;'.$start_time:'').(($end_date.$end_time != '')?' '.$GLOBALS['LANG']->getLL('to').' ':'').($end_date != ''?$end_date:'').(($end_date.$end_time != '')?',&nbsp;':'').($end_time != ''?$end_time:'');
+
+			$markers['EVENTS'] = $events_out;
 
 
-
-			$event_markers = array(
-
-				'TITEL' => nl2br(htmlentities($event['Title'],ENT_COMPAT,'UTF-8')),
-				'DATE_WITH_TIME' => $date_with_time,
-
-				'CREATED_LABEL' => $GLOBALS['LANG']->getLL('createdLabel'),
-				'LAST_MODIFIED_LABEL' => $GLOBALS['LANG']->getLL('lastModifiedLabel'),
-
-				'CREATED_BY' => $event['Created_By'],
-				'CREATED_AT' => strftime("%d.%m.%Y %H:%M",$event['Created_At']),
-
-				'LAST_MODIFIED_BY' => $event['Last_Modified_By'],
-				'LAST_MODIFIED_AT' => strftime("%d.%m.%Y %H:%M",$event['Last_Modified_At']),
-
-				'EDIT_LINK' => '<a href="'.$this->MCONF['_'].'&event_id='.$event['ID'].'&action=edit">» '.$GLOBALS['LANG']->getLL('edit').'</a>',
-				'USE_AS_TEMPLATE_LINK' => '<a href="'.$this->MCONF['_'].'&event_id='.$event['ID'].'&action=create">» '.$GLOBALS['LANG']->getLL('useAsTemplate').'</a>',
-				'DELETE_LINK' => '<a href="'.$this->MCONF['_'].'&event_id='.$event['ID'].'&action=delete">» '.$GLOBALS['LANG']->getLL('delete').'</a>',
-			);
-
-
-			$last_modified = isset($event['Last_Modified_By']) && $event['Last_Modified_By'] != ''?$last_modified_template:'';
-			
-			$events_out .= t3lib_parsehtml::substituteMarkerArray(t3lib_parsehtml::substituteSubpart($event_template,'###LAST_MODIFIED###',$last_modified),$event_markers,'###|###');
-		}
-
-
-		$markers['EVENTS'] = $events_out;
-
-
-		} catch(Exception $e) {
-			$this->content = '<span class="termin">'.$GLOBALS['LANG']->getLL('snkDown').'</span>';
+			} catch(Exception $e) {
+				$this->content = '<span class="termin">'.$GLOBALS['LANG']->getLL('snkDown').'</span>';
+			}
 		}
 
 		// Build the <body> for the module
