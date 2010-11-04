@@ -89,6 +89,7 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 
 
 		$termin_template = t3lib_parsehtml::getSubpart($this->doc->moduleTemplate,'###TERMIN_TEMPLATE###');
+		$year_change_template = t3lib_parsehtml::getSubpart($this->doc->moduleTemplate,'###YEAR_CHANGE_TEMPLATE###');
 
 		$events = array();
 		try {
@@ -102,13 +103,12 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 		$termine = '';
 		foreach ($events as $event) {
 
+			if($previous_year != strftime('%Y',$event['Start'])) {
+				$previous_year = strftime('%Y',$event['Start']);
+				$termine .= t3lib_parsehtml::substituteMarkerArray($year_change_template,array('YEAR'=>strftime('%Y',$event['Start'])),'###|###');
 
-			$zeit = strftime("%a,&nbsp;%x", $event['Start_Timestamp']).
-				(is_null($event['Start_Time'])?'':",&nbsp;".strftime("%H:%M", $event['Start_Timestamp'])).
-				(($event['End_Date'] != $event['Start_Date'] || !is_null($event['End_Time']))?" bis ":'').
-				(($event['End_Date'] != $event['Start_Date'])?"<br />".strftime( "%a,&nbsp;%x", $event['End_Timestamp']):"").
-				(($event['End_Date'] != $event['Start_Date'] && !is_null($event['End_Time']))?",&nbsp;":'').
-				(is_null($event['End_Time'])?'':strftime("%H:%M", $event['End_Timestamp']));
+			}
+
 
 			$start_date = substr(strftime("%A",$event['Start']),0,2).",&nbsp;".strftime("%d.%m.%Y",$event['Start']);
 			$date = $start_date;
