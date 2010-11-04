@@ -107,7 +107,7 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 
 			}
 
-			$markers['HI'] = '';
+			$markers['HIDDEN_FIELDS'] = '<input type="hidden" value="'.$event['ID'].'" />';
 
 			$markers['BACK_TO_OVERVIEW_LINK'] = '<a href="'.$this->MCONF['_'].'">» '.$GLOBALS['LANG']->getLL('backToOverview').'</a>';
 
