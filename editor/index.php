@@ -277,9 +277,9 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 			}';
 	}
 
-	private function createDateInput($name, $defaultValue, $value = ""){
+	private function createDateInput($name, $defaultValue, $value = 0){
 		$color = "black";
-		if ($value == "") {
+		if ($value == 0) {
 			$color = "lightgray";
 			$value = $defaultValue;
 		}
