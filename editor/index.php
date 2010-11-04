@@ -100,7 +100,7 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 			$markers['START_TIME_LABEL'] = $GLOBALS['LANG']->getLL('startTimeLabel');
 			$markers['END_DATE_LABEL'] = $GLOBALS['LANG']->getLL('endDateLabel');
 			$markers['END_TIME_LABEL'] = $GLOBALS['LANG']->getLL('endTimeLabel');
-			$markers['LOCATION_LABEL'] = $GLOBALS['LANG']->getLL('LocationLabel');
+			$markers['LOCATION_LABEL'] = $GLOBALS['LANG']->getLL('locationLabel');
 			$markers['ORGANIZER_LABEL'] = $GLOBALS['LANG']->getLL('organizerLabel');
 			$markers['TARGET_GROUP_LABEL'] = $GLOBALS['LANG']->getLL('targetGroupLabel');
 			$markers['ZIP_LABEL'] = $GLOBALS['LANG']->getLL('zipLabel');
