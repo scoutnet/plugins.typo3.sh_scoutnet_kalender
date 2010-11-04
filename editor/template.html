@@ -28,6 +28,14 @@
 
 
 <p>
+	<form action="https://www.scoutnet.de/community/scoutnetConnect.html" id="scoutnetLogin" method="post" target="_top">
+		<input type="hidden" name="redirect_url" value="###REDIRECT_URL###" />
+		<input type="hidden" name="provider" value="www.dpsg-koeln.de" />
+		<a href="#" onclick="document.getElementById('scoutnetLogin').submit(); return false;">
+			<img src="https://www.dpsg-koeln.de/typo3conf/ext/sh_scoutnet_fe_auth/res/scoutnetConnect.png" title="scoutnet" alt="scoutnet"/>
+		</a>
+	</form>
+
 	<strong>
 		<a href="http://www.scoutnet.de/events.php?task=create&amp;SSID=17" title="neuen Termin eintragen">
 			» neuen Termin eintragen		</a>
