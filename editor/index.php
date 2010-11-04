@@ -104,11 +104,10 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 				$events = $SN->get_events_with_ids($ids,array($event_id));
 				if (isset($events[0]))
 					$event = $events[0];
+			}
 
-				if ($_GET['action'] == "create") {
-					$event['id'] = -1;
-				}
-
+			if ($_GET['action'] == "create") {
+				$event['id'] = -1;
 			}
 
 
