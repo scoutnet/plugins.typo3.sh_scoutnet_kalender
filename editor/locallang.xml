@@ -18,6 +18,7 @@
 			<label index="actionLabel">Action</label>
 
 			<label index="edit">Edit</label>
+			<label index="create">Create new Termin</label>
 			<label index="useAsTemplate">Use as Template</label>
 			<label index="delete">Delete</label>
 		</languageKey>
