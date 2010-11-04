@@ -267,7 +267,13 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 		}
 
 		$out = '<input type="hidden" name="'.$name.'" id="'.$name.'_value" value="'.$value.'">'.
-			'<select id="'.$name.'_day">'.'</select>'.
+			'<select id="'.$name.'_day">';
+
+		for ($i=1; $i <= 31; $i++){
+			$out .= '<option value="'.$i.'">'.$i.'</option>'; 
+		}
+
+		$out .= '</select>'.
 			'<select id="'.$name.'_month">'.'</select>'.
 			'<select id="'.$name.'_year">'.'</select>';
 
