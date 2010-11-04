@@ -263,24 +263,8 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 		return '<textarea cols="30" rows="8" name="'.$name.'" style="color:'.$color.'" onfocus="if (this.value == \''.$defaultValue.'\') { this.value=\'\'; this.style.color=\'black\';}" onblur="if (this.value ==\'\') {this.style.color=\'lightgray\';this.value=\''.$defaultValue.'\'}">'.$value.'</textarea>'; 
 	}
 
-	private function createJSFunctions(){
-		if ($this->jsDateFktSet)
-			return;
-
-		$this->jsDateFktSet = true;
-
-
-		$this->doc->JScodeArray[] = 'function setDaysForYearMon(year,mon,field) {
-			field.value=12;
-			alert("foo");
-			
-			}';
-	}
-
 	private function createDateInput($name, $defaultValue, $value = 0){
-		$color = "black";
 		if ($value == 0) {
-			$color = "lightgray";
 			$value = $defaultValue;
 		}
 
@@ -306,7 +290,25 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 			$day_options .= '<option value="'.$day.'" '.(strftime("%m",$value) == $day?'selected':'').'>'.$day.'</option>'; 
 		}
 
-		$this->createJSFunctions();
+		if (!$this->jsDateFktSet) {
+
+			$this->jsDateFktSet = true;
+
+			$fkt = 'days_in_feb = Array();';
+
+			foreach ($days_in_feb as $year=>$days) {
+				$fkt .= 'days_in_feb['.$year.'] = '.$days.';'."\n";
+			}
+
+			$fkt .= 'function setDaysForYearMon(year,mon,field) {
+				alert(days_in_feb[year]);
+				field.value=12;';
+
+
+			$fkt .= '}';
+			$this->doc->JScodeArray[] = $fkt;
+		}
+
 
 		$out .= '</select>'.
 			'<select id="'.$name.'_day">'.$day_options.'</select>'.
