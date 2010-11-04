@@ -305,6 +305,7 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 			$day_options .= '<option value="'.$i.'">'.$i.'</option>'; 
 		}
 
+		$this->createJSFunctions();
 
 		$out .= '</select>'.
 			'<select id="'.$name.'_day">'.$day_options.'</select>'.
