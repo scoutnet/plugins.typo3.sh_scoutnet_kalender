@@ -18,7 +18,6 @@
 				<img src="/typo3conf/ext/sh_scoutnet_kalender/editor/bg_ecke.gif" id="corner" alt="Ecke">
 				<div id="typo3-inner-docbody-content">
 					<h1>###HEADER1_LABEL###</h1>
-					<!-- Content - Start -->
 					<div class="community">
 						<div id="snk"> 
 
@@ -26,26 +25,22 @@
 
 
 							<p>
-							<form action="https://www.scoutnet.de/community/scoutnetConnect.html" id="scoutnetLogin" method="post" target="_self">
-								<input type="hidden" name="redirect_url" value="https://www.dpsg-koeln.de/typo3/mod.php?M=user_scoutnet" />
-								<input type="hidden" name="provider" value="www.dpsg-koeln.de" />
-								<a href="#" onclick="document.getElementById('scoutnetLogin').submit(); return false;">
-									<img src="https://www.dpsg-koeln.de/typo3conf/ext/sh_scoutnet_fe_auth/res/scoutnetConnect.png" title="scoutnet" alt="scoutnet"/>
-								</a>
-							</form>
+								<form action="https://www.scoutnet.de/community/scoutnetConnect.html" id="scoutnetLogin" method="post" target="_self">
+									<input type="hidden" name="redirect_url" value="https://www.dpsg-koeln.de/typo3/mod.php?M=user_scoutnet" />
+									<input type="hidden" name="provider" value="www.dpsg-koeln.de" />
+									<a href="#" onclick="document.getElementById('scoutnetLogin').submit(); return false;">
+										<img src="https://www.dpsg-koeln.de/typo3conf/ext/sh_scoutnet_fe_auth/res/scoutnetConnect.png" title="scoutnet" alt="scoutnet"/>
+									</a>
+								</form>
 
-							<strong>
-								<a href="http://www.scoutnet.de/events.php?task=create&amp;SSID=17" title="neuen Termin eintragen">
-									» neuen Termin eintragen		</a>
-							</strong>
+								<strong>###CREATE_NEW_TERMIN_LINK###</strong>
 							</p>
 
 							<table id="termin-liste" summary="">
-								<!--caption>eingetragene Termine</caption-->
 								<thead>
 									<tr>
-										<th>Beginn/Ende</th>
-										<th>Titel/Aktion</th>
+										<th>###BEGIN_LABEL###/###END_LABEL###</th>
+										<th>###TITLE_LABEL###/###ACTION_LABEL###</th>
 									</tr>
 								</thead>
 
@@ -69,21 +64,18 @@
 
 <!-- ###TERMIN_TEMPLATE### begin -->
 <tr class="termindatum">
+	<td>###DATUM###</td>
 	<td>
-		Mo,&nbsp;29.11.2010,&nbsp;20:00				
-		bis 22:00			</td>
-	<td>
-		<strong>WeihnachtStuKo</strong>
+		<strong>###DESCRIPTION###</strong>
 		<br>
-		<strong><a href="events.php?task=modify&amp;SSID=17&amp;Events_ID=138383" title="Termin 'WeihnachtStuKo' ändern" id="event-modify-138383">» ändern</a></strong>
-		<a href="events.php?task=create&amp;SSID=17&amp;Events_ID=138383" title="Termin 'WeihnachtStuKo' als Vorlage für einen neuen Termin verwenden" id="event-copy-138383">» als&nbsp;Vorlage</a>
-		<a href="events.php?task=delete&amp;SSID=17&amp;Events_ID=138383" title="Termin 'WeihnachtStuKo' löschen" id="event-delete-138383">» löschen</a>			
+		<strong>###EDIT_LINK###</strong>
+		###USE_AS_TEMPLATE_LINK###
+		###DELETE_LINK###
 	</td>
 </tr>
 <tr>
 	<td class="terminlinks" colspan="2">
-		<small>
-			erstellt: mütze, 30.11.2009 21:27					 | zuletzt geändert: mütze, 02.12.2009 12:57				</small>
+		<small>###CREADET_LABEL###: ###CREATED_BY###, ###CREATED_AT### | ###LAST_CHANGED_LABEL###: ###LAST_CHANGED_BY###, ###LAST_CHANGED_AT###</small>
 	</td>
 </tr>
 <!-- ###TERMIN_TEMPLATE### end -->
