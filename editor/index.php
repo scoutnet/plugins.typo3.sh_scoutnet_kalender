@@ -94,7 +94,7 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 			$this->doc->setModuleTemplate(t3lib_extMgm::extPath('sh_scoutnet_kalender') . 'editor/template_edit.html');
 
 			$event_id = $_GET['event_id'];
-			if (!isset($event_id) || !is_numeric($event_id)) {
+			if ($_GET['action'] == "create" || !isset($event_id) || !is_numeric($event_id)) {
 				$event_id = -1;
 			}
 
