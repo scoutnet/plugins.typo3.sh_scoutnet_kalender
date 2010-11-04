@@ -77,17 +77,18 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 				$this->MOD_MENU['mode']
 			);
 
+		$markers['HEADER1_LABEL'] = $GLOBALS['LANG']->getLL('header1Label');
 
 		if ($_GET['action'] == "edit") {
 			$this->doc->setModuleTemplate(t3lib_extMgm::extPath('sh_scoutnet_kalender') . 'editor/template_edit.html');
 
+			$markers['BACK_TO_OVERVIEW_LINK'] = '<a href="'.$this->MCONF['_'].'">» '.$GLOBALS['LANG']->getLL('backToOverview').'</a>';
 
 		} else {
 			$markers['CONTENT'] = $this->content;
 
 			$markers['EBENE_LONG_NAME'] = "Diozese Köln";
 
-			$markers['HEADER1_LABEL'] = $GLOBALS['LANG']->getLL('header1Label');
 			$markers['BEGIN_LABEL'] = $GLOBALS['LANG']->getLL('beginLabel');
 			$markers['END_LABEL'] = $GLOBALS['LANG']->getLL('endLabel');
 			$markers['TITLE_LABEL'] = $GLOBALS['LANG']->getLL('titleLabel');

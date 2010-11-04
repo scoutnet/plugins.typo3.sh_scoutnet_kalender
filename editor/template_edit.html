@@ -20,31 +20,31 @@
 					<h1>###HEADER1_LABEL###</h1>
 					<div class="community">
 						<div id="snk"> 
-<a href="?SSID=4&amp;task=overview">zurück zur Übersicht</a>
-<script type="text/javascript">
-//<![CDATA[
-function validate_eventForm(frm) {
-  var value = '';
-  var errFlag = new Array();
-  var _qfGroups = {};
-  _qfMsg = '';
+							###BACK_TO_OVERVIEW_LINK###
+							<script type="text/javascript">
+								//<![CDATA[
+								function validate_eventForm(frm) {
+									var value = '';
+									var errFlag = new Array();
+									var _qfGroups = {};
+									_qfMsg = '';
 
-  value = frm.elements['Title'].value;
-  if (value == '' && !errFlag['Title']) {
-    errFlag['Title'] = true;
-    _qfMsg = _qfMsg + '\n - Bitte Titel eingeben';
-  }
+									value = frm.elements['Title'].value;
+									if (value == '' && !errFlag['Title']) {
+										errFlag['Title'] = true;
+										_qfMsg = _qfMsg + '\n - Bitte Titel eingeben';
+									}
 
-  if (_qfMsg != '') {
-    _qfMsg = 'Invalid information entered.' + _qfMsg;
-    _qfMsg = _qfMsg + '\nPlease correct these fields.';
-    alert(_qfMsg);
-    return false;
-  }
-  return true;
-}
-//]]>
-</script>
+									if (_qfMsg != '') {
+										_qfMsg = 'Invalid information entered.' + _qfMsg;
+										_qfMsg = _qfMsg + '\nPlease correct these fields.';
+										alert(_qfMsg);
+										return false;
+									}
+									return true;
+								}
+							//]]>
+							</script>
 
 <form action="events.php?SSID=4&amp;task=modify" method="post" name="eventForm" id="eventForm" onsubmit="try { var myValidator = validate_eventForm; } catch(e) { return true; } return myValidator(this);" autocomplete="on">
 <div>

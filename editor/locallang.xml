@@ -19,6 +19,7 @@
 
 			<label index="edit">Edit</label>
 			<label index="create">Create new Event</label>
+			<label index="backToOverview">Back to Overview</label>
 			<label index="useAsTemplate">Use as Template</label>
 			<label index="delete">Delete</label>
 		</languageKey>
