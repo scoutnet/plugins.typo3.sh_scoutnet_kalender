@@ -102,6 +102,9 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 
 				$ids = array(4);
 				$events = $SN->get_events_with_ids($ids,array($event_id));
+				if (isset($events[0]))
+					$event = $events[0];
+
 			}
 
 			$markers['BACK_TO_OVERVIEW_LINK'] = '<a href="'.$this->MCONF['_'].'">» '.$GLOBALS['LANG']->getLL('backToOverview').'</a>';
@@ -109,7 +112,7 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 			$markers['CREATED_LABEL'] = $GLOBALS['LANG']->getLL('createdLabel');
 			$markers['CREATED_BY_LABEL'] = $GLOBALS['LANG']->getLL('createdByLabel');
 			$markers['CREATED_AT_LABEL'] = $GLOBALS['LANG']->getLL('createdAtLabel');
-			$markers['CREATED_BY'] = $events['Created_By'];
+			$markers['CREATED_BY'] = $event['Created_By'];
 
 			$markers['LAST_MODIFIED_LABEL'] = $GLOBALS['LANG']->getLL('lastModifiedLabel');
 			$markers['LAST_MODIFIED_BY_LABEL'] = $GLOBALS['LANG']->getLL('lastModifiedByLabel');
