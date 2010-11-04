@@ -108,6 +108,17 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 				(($event['End_Date'] != $event['Start_Date'] && !is_null($event['End_Time']))?",&nbsp;":'').
 				(is_null($event['End_Time'])?'':strftime("%H:%M", $event['End_Timestamp']));
 
+			$zeit = "";
+			if ($event['All_Day'] != 1) {
+				$zeit = strftime("%H:%M",$event['Start']);
+
+
+				if (isset($event['End']) && strftime("%H%M",$event['Start']) != strftime("%H%M",$event['End']) ) {
+					$zeit .= "&nbsp;-&nbsp;";
+					$zeit .= strftime("%H:%M",$event['End']);
+				}
+			}
+
 
 
 			$termine_markers = array();
