@@ -84,15 +84,33 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 		$markers['HEADER1_LABEL'] = $GLOBALS['LANG']->getLL('header1Label');
 
 		$mandatoryAsterisk = '<sup style="color: #ff0000">*</sup>';
+		try {
+			$SN = new tx_shscoutnetwebservice_sn();
+			$filter = array(
+				'order' => 'start_time desc',
+			);
 
 		if ($_GET['action'] == "edit" || $_GET['action'] == "create") {
 			$this->doc->setModuleTemplate(t3lib_extMgm::extPath('sh_scoutnet_kalender') . 'editor/template_edit.html');
+
+			$event_id = $_GET['event_id'];
+			if (!isset($event_id) || !is_numeric($event_id)) {
+				$event_id = -1;
+			}
+
+			if ($event_id > -1) {
+
+				$ids = array(4);
+				$events = $SN->get_events_with_ids($ids,array($event_id));
+			}
 
 			$markers['BACK_TO_OVERVIEW_LINK'] = '<a href="'.$this->MCONF['_'].'">» '.$GLOBALS['LANG']->getLL('backToOverview').'</a>';
 
 			$markers['CREATED_LABEL'] = $GLOBALS['LANG']->getLL('createdLabel');
 			$markers['CREATED_BY_LABEL'] = $GLOBALS['LANG']->getLL('createdByLabel');
 			$markers['CREATED_AT_LABEL'] = $GLOBALS['LANG']->getLL('createdAtLabel');
+			$markers['CREATED_BY'] = $events['Created_By'];
+
 			$markers['LAST_MODIFIED_LABEL'] = $GLOBALS['LANG']->getLL('lastModifiedLabel');
 			$markers['LAST_MODIFIED_BY_LABEL'] = $GLOBALS['LANG']->getLL('lastModifiedByLabel');
 			$markers['LAST_MODIFIED_AT_LABEL'] = $GLOBALS['LANG']->getLL('lastModifiedAtLabel');
@@ -158,11 +176,6 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 
 
 			$events = array();
-			try {
-				$SN = new tx_shscoutnetwebservice_sn();
-				$filter = array(
-					'order' => 'start_time desc',
-					);
 				$ids = array(4);
 				$events = $SN->get_events_for_global_id_with_filter($ids,$filter);
 
@@ -234,9 +247,9 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 			$markers['EVENTS'] = $events_out;
 
 
-			} catch(Exception $e) {
-				$this->content = '<span class="termin">'.$GLOBALS['LANG']->getLL('snkDown').'</span>';
-			}
+		}
+		} catch(Exception $e) {
+			$this->content = '<span class="termin">'.$GLOBALS['LANG']->getLL('snkDown').'</span>';
 		}
 
 		// Build the <body> for the module
