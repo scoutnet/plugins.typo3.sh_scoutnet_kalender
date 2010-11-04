@@ -319,7 +319,9 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 					field.options[i] = new Option(i);
 				}
 
-				field.value = oldValue;
+				if (oldValue <= days_in_mon) {
+					field.value = oldValue;
+				}
 
 
 			}';
