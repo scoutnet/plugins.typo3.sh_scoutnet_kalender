@@ -10,7 +10,7 @@
 			<label index="to">to</label>
 
 			<label index="createdLabel">Created</label>
-			<label index="lastChangedLabel">Last Changed</label>
+			<label index="lastModifiedLabel">Last Modified</label>
 			<label index="header1Label">Terminverwaltung</label>
 			<label index="beginLabel">Begin</label>
 			<label index="endLabel">End</label>
