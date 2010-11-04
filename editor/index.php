@@ -113,10 +113,13 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 			$markers['CREATED_BY_LABEL'] = $GLOBALS['LANG']->getLL('createdByLabel');
 			$markers['CREATED_AT_LABEL'] = $GLOBALS['LANG']->getLL('createdAtLabel');
 			$markers['CREATED_BY'] = $event['Created_By'];
+			$markers['CREATED_AT'] = strftime("%d.%m.%Y %H:%M";$event['Created_At']);
 
 			$markers['LAST_MODIFIED_LABEL'] = $GLOBALS['LANG']->getLL('lastModifiedLabel');
 			$markers['LAST_MODIFIED_BY_LABEL'] = $GLOBALS['LANG']->getLL('lastModifiedByLabel');
 			$markers['LAST_MODIFIED_AT_LABEL'] = $GLOBALS['LANG']->getLL('lastModifiedAtLabel');
+			$markers['LAST_MODIFIED_BY'] = $event['Last_Modified_By'];
+			$markers['LAST_MODIFIED_AT'] = strftime("%d.%m.%Y %H:%M";$event['Last_Modified_At']);
 
 			$markers['TITLE_LABEL'] = $GLOBALS['LANG']->getLL('titleLabel');
 			$markers['TITLE_MANDATORY'] = $mandatoryAsterisk; 
