@@ -16,6 +16,8 @@
 			<label index="endLabel">End</label>
 			<label index="titleLabel">Title</label>
 			<label index="actionLabel">Action</label>
+
+			<label index="edit">Edit</label>
 		</languageKey>
 	</data>
 </T3locallang>
