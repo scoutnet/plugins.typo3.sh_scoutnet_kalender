@@ -156,8 +156,8 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 				'LAST_MODIFIED_AT' => strftime("%d.%m.%Y %H:%M",$event['Last_Modified_At']),
 
 				'EDIT_LINK' => '<a href="'.$this->MCONF['_'].'&event_id='.$event['ID'].'&action=edit">» '.$GLOBALS['LANG']->getLL('edit').'</a>',
-				'USE_AS_TEMPLATE_LINK' => '<a href="">» '.$GLOBALS['LANG']->getLL('useAsTemplate').'</a>',
-				'DELETE_LINK' => '<a href="">» '.$GLOBALS['LANG']->getLL('delete').'</a>',
+				'USE_AS_TEMPLATE_LINK' => '<a href="'.$this->MCONF['_'].'&event_id='.$event['ID'].'&action=useAsTemplate">» '.$GLOBALS['LANG']->getLL('useAsTemplate').'</a>',
+				'DELETE_LINK' => '<a href="'.$this->MCONF['_'].'&event_id='.$event['ID'].'&action=delete">» '.$GLOBALS['LANG']->getLL('delete').'</a>',
 			);
 
 
