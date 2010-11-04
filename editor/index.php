@@ -85,7 +85,7 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 
 		$mandatoryAsterisk = '<sup style="color: #ff0000">*</sup>';
 
-		if ($_GET['action'] == "edit") {
+		if ($_GET['action'] == "edit" || $_GET['action'] == "create") {
 			$this->doc->setModuleTemplate(t3lib_extMgm::extPath('sh_scoutnet_kalender') . 'editor/template_edit.html');
 
 			$markers['BACK_TO_OVERVIEW_LINK'] = '<a href="'.$this->MCONF['_'].'">» '.$GLOBALS['LANG']->getLL('backToOverview').'</a>';
