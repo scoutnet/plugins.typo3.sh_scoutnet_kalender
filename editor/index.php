@@ -155,7 +155,7 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 			 */
 
 			$termin_markers['CREATED_BY'] = $event['Created_By'];
-			$termin_markers['CREATED_AT'] = $GLOBALS['LANG']->getLL('createdLabel');
+			$termin_markers['CREATED_AT'] = strftime("%x %H:%M",$event['Created_At']);
 
 			$termin_markers['LAST_MODIFIED_BY'] = $event['Last_Modified_By'];
 			$termin_markers['LAST_MODIFIED_AT'] = $GLOBALS['LANG']->getLL('lastChangedLabel');
