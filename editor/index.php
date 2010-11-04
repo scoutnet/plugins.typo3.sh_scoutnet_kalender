@@ -5,6 +5,7 @@ $LANG->includeLLFile('EXT:sh_scoutnet_kalender/editor/locallang.xml');
 
 $BE_USER->modAccess($MCONF, 1);
 
+require_once (t3lib_extMgm::extPath('sh_scoutnet_webservice') . 'sn/class.tx_shscoutnetwebservice_sn.php');
 
 // ***************************
 // Script Classes
