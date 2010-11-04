@@ -24,7 +24,7 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 
 			// initialize document
 		$this->doc = t3lib_div::makeInstance('template');
-		$this->doc->setModuleTemplate(t3lib_extMgm::extPath('sh_scoutnet_kalender') . 'editor/template.html');
+		$this->doc->setModuleTemplate(t3lib_extMgm::extPath('sh_scoutnet_kalender') . 'editor/template_overview.html');
 		$this->doc->backPath = $GLOBALS['BACK_PATH'];
 		$this->doc->getPageRenderer()->loadScriptaculous('effects,dragdrop');
 		//$this->doc->addStyleSheet( 'tx_shscoutnetkalender', t3lib_extMgm::siteRelPath('sh_scoutnet_kalender') . 'editor/style.css');

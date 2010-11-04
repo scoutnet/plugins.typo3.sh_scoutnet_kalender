@@ -1,0 +1,342 @@
+
+<div id="snk">﻿<a href="?SSID=4&amp;task=overview">zurück zur Übersicht</a>
+<script type="text/javascript">
+//<![CDATA[
+function validate_eventForm(frm) {
+  var value = '';
+  var errFlag = new Array();
+  var _qfGroups = {};
+  _qfMsg = '';
+
+  value = frm.elements['Title'].value;
+  if (value == '' && !errFlag['Title']) {
+    errFlag['Title'] = true;
+    _qfMsg = _qfMsg + '\n - Bitte Titel eingeben';
+  }
+
+  if (_qfMsg != '') {
+    _qfMsg = 'Invalid information entered.' + _qfMsg;
+    _qfMsg = _qfMsg + '\nPlease correct these fields.';
+    alert(_qfMsg);
+    return false;
+  }
+  return true;
+}
+//]]>
+</script>
+
+<form action="events.php?SSID=4&amp;task=modify" method="post" name="eventForm" id="eventForm" onsubmit="try { var myValidator = validate_eventForm; } catch(e) { return true; } return myValidator(this);" autocomplete="on">
+<div>
+<input name="ID" type="hidden" value="137698">
+<table border="0">
+<tbody><tr><td valign="top"><table border="0" id="kalender-input-field-table">
+	<tbody><tr>
+		<td align="right" valign="top"><b>Erstellt von</b></td>
+		<td valign="top" align="left">annegret</td>
+	</tr>
+	<tr>
+		<td align="right" valign="top"><b>Erstellt am</b></td>
+		<td valign="top" align="left">2009-11-03 08:35:30</td>
+	</tr>
+	<tr>
+		<td align="right" valign="top"><b>Zuletzt geändert von</b></td>
+		<td valign="top" align="left">peter</td>
+	</tr>
+	<tr>
+		<td align="right" valign="top"><b>Zuletzt geändert am</b></td>
+		<td valign="top" align="left">2010-04-27 13:57:48</td>
+	</tr>
+	<tr>
+		<td align="right" valign="top"><span style="color: #ff0000">*</span><b>Titel</b></td>
+		<td valign="top" align="left"><input maxlength="255" name="Title" type="text" value="F+F Mitgliederversammlung"></td>
+	</tr>
+	<tr>
+		<td align="right" valign="top"><span style="color: #ff0000">*</span><b>Startdatum</b></td>
+		<td valign="top" align="left"><select name="Start_Date[d]">
+	<option value="1">01</option>
+	<option value="2">02</option>
+	<option value="3">03</option>
+	<option value="4">04</option>
+	<option value="5">05</option>
+	<option value="6">06</option>
+	<option value="7">07</option>
+	<option value="8">08</option>
+	<option value="9">09</option>
+	<option value="10">10</option>
+	<option value="11">11</option>
+	<option value="12">12</option>
+	<option value="13">13</option>
+	<option value="14">14</option>
+	<option value="15">15</option>
+	<option value="16">16</option>
+	<option value="17">17</option>
+	<option value="18">18</option>
+	<option value="19">19</option>
+	<option value="20">20</option>
+	<option value="21">21</option>
+	<option value="22">22</option>
+	<option value="23">23</option>
+	<option value="24">24</option>
+	<option value="25">25</option>
+	<option value="26">26</option>
+	<option value="27">27</option>
+	<option value="28">28</option>
+	<option value="29">29</option>
+	<option value="30" selected="selected">30</option>
+	<option value="31">31</option>
+</select><select name="Start_Date[M]">
+	<option value="1">Jan</option>
+	<option value="2">Feb</option>
+	<option value="3">März</option>
+	<option value="4">April</option>
+	<option value="5">Mai</option>
+	<option value="6">Juni</option>
+	<option value="7">Juli</option>
+	<option value="8">Aug</option>
+	<option value="9">Sept</option>
+	<option value="10">Okt</option>
+	<option value="11" selected="selected">Nov</option>
+	<option value="12">Dez</option>
+</select><select name="Start_Date[Y]">
+	<option value="2009">2009</option>
+	<option value="2010">2010</option>
+	<option value="2011">2011</option>
+	<option value="2012" selected="selected">2012</option>
+	<option value="2013">2013</option>
+	<option value="2014">2014</option>
+	<option value="2015">2015</option>
+	<option value="2016">2016</option>
+	<option value="2017">2017</option>
+	<option value="2018">2018</option>
+	<option value="2019">2019</option>
+	<option value="2020">2020</option>
+	<option value="2021">2021</option>
+	<option value="2022">2022</option>
+	<option value="2023">2023</option>
+	<option value="2024">2024</option>
+	<option value="2025">2025</option>
+	<option value="2026">2026</option>
+	<option value="2027">2027</option>
+	<option value="2028">2028</option>
+	<option value="2029">2029</option>
+	<option value="2030">2030</option>
+</select></td>
+	</tr>
+	<tr>
+		<td align="right" valign="top"><b>Startzeit</b></td>
+		<td valign="top" align="left"><select name="Start_Time[H]">
+	<option value="">&nbsp;</option>
+	<option value="0">00</option>
+	<option value="1">01</option>
+	<option value="2">02</option>
+	<option value="3">03</option>
+	<option value="4">04</option>
+	<option value="5">05</option>
+	<option value="6">06</option>
+	<option value="7">07</option>
+	<option value="8">08</option>
+	<option value="9">09</option>
+	<option value="10">10</option>
+	<option value="11">11</option>
+	<option value="12">12</option>
+	<option value="13">13</option>
+	<option value="14">14</option>
+	<option value="15">15</option>
+	<option value="16">16</option>
+	<option value="17">17</option>
+	<option value="18" selected="selected">18</option>
+	<option value="19">19</option>
+	<option value="20">20</option>
+	<option value="21">21</option>
+	<option value="22">22</option>
+	<option value="23">23</option>
+</select><select name="Start_Time[i]">
+	<option value="">&nbsp;</option>
+	<option value="0" selected="selected">00</option>
+	<option value="5">05</option>
+	<option value="10">10</option>
+	<option value="15">15</option>
+	<option value="20">20</option>
+	<option value="25">25</option>
+	<option value="30">30</option>
+	<option value="35">35</option>
+	<option value="40">40</option>
+	<option value="45">45</option>
+	<option value="50">50</option>
+	<option value="55">55</option>
+</select></td>
+	</tr>
+	<tr>
+		<td align="right" valign="top"><b>Enddatum</b></td>
+		<td valign="top" align="left"><select name="End_Date[d]">
+	<option value="">&nbsp;</option>
+	<option value="1">01</option>
+	<option value="2">02</option>
+	<option value="3">03</option>
+	<option value="4">04</option>
+	<option value="5">05</option>
+	<option value="6">06</option>
+	<option value="7">07</option>
+	<option value="8">08</option>
+	<option value="9">09</option>
+	<option value="10">10</option>
+	<option value="11">11</option>
+	<option value="12">12</option>
+	<option value="13">13</option>
+	<option value="14">14</option>
+	<option value="15">15</option>
+	<option value="16">16</option>
+	<option value="17">17</option>
+	<option value="18">18</option>
+	<option value="19">19</option>
+	<option value="20">20</option>
+	<option value="21">21</option>
+	<option value="22">22</option>
+	<option value="23">23</option>
+	<option value="24">24</option>
+	<option value="25">25</option>
+	<option value="26">26</option>
+	<option value="27">27</option>
+	<option value="28">28</option>
+	<option value="29">29</option>
+	<option value="30">30</option>
+	<option value="31">31</option>
+</select><select name="End_Date[M]">
+	<option value="">&nbsp;</option>
+	<option value="1">Jan</option>
+	<option value="2">Feb</option>
+	<option value="3">März</option>
+	<option value="4">April</option>
+	<option value="5">Mai</option>
+	<option value="6">Juni</option>
+	<option value="7">Juli</option>
+	<option value="8">Aug</option>
+	<option value="9">Sept</option>
+	<option value="10">Okt</option>
+	<option value="11">Nov</option>
+	<option value="12">Dez</option>
+</select><select name="End_Date[Y]">
+	<option value="">&nbsp;</option>
+	<option value="2009">2009</option>
+	<option value="2010">2010</option>
+	<option value="2011">2011</option>
+	<option value="2012">2012</option>
+	<option value="2013">2013</option>
+	<option value="2014">2014</option>
+	<option value="2015">2015</option>
+	<option value="2016">2016</option>
+	<option value="2017">2017</option>
+	<option value="2018">2018</option>
+	<option value="2019">2019</option>
+	<option value="2020">2020</option>
+	<option value="2021">2021</option>
+	<option value="2022">2022</option>
+	<option value="2023">2023</option>
+	<option value="2024">2024</option>
+	<option value="2025">2025</option>
+	<option value="2026">2026</option>
+	<option value="2027">2027</option>
+	<option value="2028">2028</option>
+	<option value="2029">2029</option>
+	<option value="2030">2030</option>
+</select></td>
+	</tr>
+	<tr>
+		<td align="right" valign="top"><b>Endzeit</b></td>
+		<td valign="top" align="left"><select name="End_Time[H]">
+	<option value="">&nbsp;</option>
+	<option value="0">00</option>
+	<option value="1">01</option>
+	<option value="2">02</option>
+	<option value="3">03</option>
+	<option value="4">04</option>
+	<option value="5">05</option>
+	<option value="6">06</option>
+	<option value="7">07</option>
+	<option value="8">08</option>
+	<option value="9">09</option>
+	<option value="10">10</option>
+	<option value="11">11</option>
+	<option value="12">12</option>
+	<option value="13">13</option>
+	<option value="14">14</option>
+	<option value="15">15</option>
+	<option value="16">16</option>
+	<option value="17">17</option>
+	<option value="18">18</option>
+	<option value="19">19</option>
+	<option value="20">20</option>
+	<option value="21">21</option>
+	<option value="22">22</option>
+	<option value="23">23</option>
+</select><select name="End_Time[i]">
+	<option value="">&nbsp;</option>
+	<option value="0">00</option>
+	<option value="5">05</option>
+	<option value="10">10</option>
+	<option value="15">15</option>
+	<option value="20">20</option>
+	<option value="25">25</option>
+	<option value="30">30</option>
+	<option value="35">35</option>
+	<option value="40">40</option>
+	<option value="45">45</option>
+	<option value="50">50</option>
+	<option value="55">55</option>
+</select></td>
+	</tr>
+	<tr>
+		<td align="right" valign="top"><b>Ortsangabe</b></td>
+		<td valign="top" align="left"><input maxlength="255" name="Location" type="text" value="Tagungs- und Gästehaus Rolandstr."></td>
+	</tr>
+	<tr>
+		<td align="right" valign="top"><b>Veranstalter</b></td>
+		<td valign="top" align="left"><input maxlength="255" name="Organizer" type="text" value="Freundes- und Förderkreis"></td>
+	</tr>
+	<tr>
+		<td align="right" valign="top"><b>Zielgruppe</b></td>
+		<td valign="top" align="left"><input maxlength="255" name="Target_Group" type="text" value=""></td>
+	</tr>
+	<tr>
+		<td align="right" valign="top"><b><acronym title="Postleitzahl">PLZ</acronym></b></td>
+		<td valign="top" align="left"><input maxlength="255" name="ZIP" type="text" value=""></td>
+	</tr>
+	<tr>
+		<td align="right" valign="top"><b>Link-Text</b></td>
+		<td valign="top" align="left"><input maxlength="255" name="URL_Text" type="text" value=""></td>
+	</tr>
+	<tr>
+		<td align="right" valign="top"><b>Link</b></td>
+		<td valign="top" align="left"><input maxlength="255" name="URL" type="text" value=""></td>
+	</tr>
+	<tr>
+		<td align="right" valign="top"><b>Info</b></td>
+		<td valign="top" align="left"><textarea cols="30" rows="8" name="Description"></textarea></td>
+	</tr>
+	<tr>
+		<td align="right" valign="top"><b></b></td>
+		<td valign="top" align="left"><input value="ändern" type="submit"></td>
+	</tr></tbody></table></td><td><table border="0">
+	<tbody><tr>
+		<td align="right" valign="top"><b>Schlüsselbegriffe</b></td>
+		<td valign="top" align="left"><input name="keywords[604]" type="checkbox" value="1" id="qf_65f3d4"><label for="qf_65f3d4">AG-Medien</label><br><input name="keywords[4]" type="checkbox" value="1" id="qf_243d85"><label for="qf_243d85">Aktion</label><br><input name="keywords[7]" type="checkbox" value="1" id="qf_27bd5c"><label for="qf_27bd5c">Bezirksleitung</label><br><input name="keywords[12]" type="checkbox" value="1" id="qf_faf959"><label for="qf_faf959">Diözesanleitung</label><br><input name="keywords[3]" type="checkbox" value="1" id="qf_7ebfae"><label for="qf_7ebfae">Fahrt/Lager</label><br><input name="keywords[193]" type="checkbox" value="1" id="qf_4eb02b" checked="checked"><label for="qf_4eb02b">F+F</label><br><input name="keywords[5]" type="checkbox" value="1" id="qf_d677f7"><label for="qf_d677f7">Gemeinde</label><br><input name="keywords[11]" type="checkbox" value="1" id="qf_41e21a"><label for="qf_41e21a">Gremium/AK</label><br><input name="keywords[44]" type="checkbox" value="1" id="qf_d49244"><label for="qf_d49244">Leiterrunde</label><br><input name="keywords[608]" type="checkbox" value="1" id="qf_ef8b98"><label for="qf_ef8b98">mi mundo</label><br><input name="keywords[543]" type="checkbox" value="1" id="qf_750dde" checked="checked"><label for="qf_750dde">Mitgliederversammlung</label><br><input name="keywords[10]" type="checkbox" value="1" id="qf_fa2b02"><label for="qf_fa2b02">Schulung/Kurs</label><br><input name="keywords[2]" type="checkbox" value="1" id="qf_320813"><label for="qf_320813">Stamm</label><br><input name="keywords[9]" type="checkbox" value="1" id="qf_37a674"><label for="qf_37a674">Stufenkonferenz</label><br><input name="keywords[39]" type="checkbox" value="1" id="qf_43b3c8"><label for="qf_43b3c8">Truppstunde</label><br><input name="keywords[6]" type="checkbox" value="1" id="qf_f84cc2"><label for="qf_f84cc2">Vorstände</label></td>
+	</tr>
+	<tr>
+		<td align="right" valign="top"><b>Eigene</b></td>
+		<td valign="top" align="left"><input maxlength="255" name="custum_keywords[]" type="text"><br><input maxlength="255" name="custum_keywords[]" type="text"></td>
+	</tr>
+	<tr>
+		<td align="right" valign="top"><b>Stufen/Leiter</b></td>
+		<td valign="top" align="left"><input name="keywords[16]" type="checkbox" value="1" id="qf_94a57b"><label for="qf_94a57b">Wölflinge</label><br><input name="keywords[17]" type="checkbox" value="1" id="qf_3525f0"><label for="qf_3525f0">Jungpfadfinder</label><br><input name="keywords[18]" type="checkbox" value="1" id="qf_a608e2"><label for="qf_a608e2">Pfadfinder</label><br><input name="keywords[19]" type="checkbox" value="1" id="qf_08ba19"><label for="qf_08ba19">Rover</label><br><input name="keywords[20]" type="checkbox" value="1" id="qf_0cb919"><label for="qf_0cb919">Leiter</label></td>
+	</tr></tbody></table></td><td><table border="0">
+	<tbody><tr>
+		<td align="right" valign="top"><b>DPSG-Ausbildung</b></td>
+		<td valign="top" align="left"><input name="keywords[477]" type="checkbox" value="1" id="qf_008e66"><label for="qf_008e66">Einstieg Schritt 1</label><br><input name="keywords[180]" type="checkbox" value="1" id="qf_384c0e"><label for="qf_384c0e">Einstieg Schritt 2</label><br><input name="keywords[332]" type="checkbox" value="1" id="qf_7139b7"><label for="qf_7139b7">Baustein 1 a</label><br><input name="keywords[331]" type="checkbox" value="1" id="qf_684937"><label for="qf_684937">Baustein 1 b</label><br><input name="keywords[478]" type="checkbox" value="1" id="qf_a6cb73"><label for="qf_a6cb73">Baustein 1 c</label><br><input name="keywords[479]" type="checkbox" value="1" id="qf_ba6378"><label for="qf_ba6378">Baustein 2 a</label><br><input name="keywords[480]" type="checkbox" value="1" id="qf_5f37d7"><label for="qf_5f37d7">Baustein 2 b</label><br><input name="keywords[334]" type="checkbox" value="1" id="qf_8e4c0b"><label for="qf_8e4c0b">Baustein 2 c</label><br><input name="keywords[481]" type="checkbox" value="1" id="qf_25f5de"><label for="qf_25f5de">Baustein 2 d</label><br><input name="keywords[333]" type="checkbox" value="1" id="qf_783002"><label for="qf_783002">Baustein 3 a</label><br><input name="keywords[329]" type="checkbox" value="1" id="qf_e45fb3"><label for="qf_e45fb3">Baustein 3 b</label><br><input name="keywords[482]" type="checkbox" value="1" id="qf_77dc64"><label for="qf_77dc64">Baustein 3 c</label><br><input name="keywords[483]" type="checkbox" value="1" id="qf_f47620"><label for="qf_f47620">Baustein 3 d</label><br><input name="keywords[484]" type="checkbox" value="1" id="qf_6fc774"><label for="qf_6fc774">Baustein 3 e</label><br><input name="keywords[485]" type="checkbox" value="1" id="qf_8f7cb4"><label for="qf_8f7cb4">Baustein 3 f</label><br><input name="keywords[486]" type="checkbox" value="1" id="qf_f6d56e"><label for="qf_f6d56e">Woodbadgekurs</label><br><input name="keywords[37]" type="checkbox" value="1" id="qf_c60c5c"><label for="qf_c60c5c">Ausbildungstagung</label><br><input name="keywords[487]" type="checkbox" value="1" id="qf_77eaf8"><label for="qf_77eaf8">Modulleitungstraining (MLT)</label><br><input name="keywords[488]" type="checkbox" value="1" id="qf_d512f6"><label for="qf_d512f6">Teamertraining (TT)</label><br><input name="keywords[489]" type="checkbox" value="1" id="qf_21596c"><label for="qf_21596c">Kursleitungstraining (KLT)</label><br><input name="keywords[490]" type="checkbox" value="1" id="qf_1ba0f8"><label for="qf_1ba0f8">Assistent Leader Training (ALT)</label></td>
+	</tr></tbody></table></td></tr><tr><td></td><td></td></tr></tbody></table><table border="0">
+	<tbody><tr>
+		<td></td>
+	<td align="left" valign="top"><span style="font-size:80%; color:#ff0000;">*</span><span style="font-size:80%;"> Pflichtfelder</span></td>
+	</tr>
+</tbody></table>
+</div>
+</form></div>
