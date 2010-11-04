@@ -310,8 +310,11 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 					days_in_mon = 30;
 				}
 
-				alert(days_in_mon);
-				field.value=12;';
+				field.options = Array();
+
+				for (i = 1; i <= days_in_mon; i++){
+					field.options[i] = i;
+				}
 
 
 			$fkt .= '}';
