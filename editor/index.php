@@ -122,6 +122,8 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 			$markers['LINK_URL_FIELD'] = $this->createTextInput("LinkUrl",$GLOBALS['LANG']->getLL('linkUrlLabel'),""); 
 
 			$markers['INFO_LABEL'] = $GLOBALS['LANG']->getLL('infoLabel');
+			$markers['INFO_FIELD'] = $this->createTextArea("Info",$GLOBALS['LANG']->getLL('infoLabel'),""); 
+
 			$markers['SAVE_LABEL'] = $GLOBALS['LANG']->getLL('save');
 
 
