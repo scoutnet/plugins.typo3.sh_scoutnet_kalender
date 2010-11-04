@@ -374,6 +374,7 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 
 		for ($min = 0; $min < 60; $min+=5) {
 			$min_options .= '<option value="'.$min.'" '.(!$noContent && strftime("%i",$value)%5 == $min?'selected':'').'>'.$min.'</option>';
+			$out .= strftime("%i",$value)%5;
 		}
 
 		$out .= '<select id="'.$name.'_hour">'.$hour_options.'</select>'.
