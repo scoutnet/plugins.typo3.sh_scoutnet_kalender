@@ -178,7 +178,15 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 
 
 			$markers['KEYWORDS_LABEL'] = $GLOBALS['LANG']->getLL('keywordsLabel');
-			$markers['KEYWORDS_FIELD'] = '<input name="keywords[604]" type="checkbox" value="1" id="qf_65f3d4"><label for="qf_65f3d4">AG-Medien</label><br><input name="keywords[4]" type="checkbox" value="1" id="qf_243d85"><label for="qf_243d85">Aktion</label><br><input name="keywords[7]" type="checkbox" value="1" id="qf_27bd5c"><label for="qf_27bd5c">Bezirksleitung</label><br><input name="keywords[12]" type="checkbox" value="1" id="qf_faf959"><label for="qf_faf959">Diözesanleitung</label><br><input name="keywords[3]" type="checkbox" value="1" id="qf_7ebfae"><label for="qf_7ebfae">Fahrt/Lager</label><br><input name="keywords[193]" type="checkbox" value="1" id="qf_4eb02b" checked="checked"><label for="qf_4eb02b">F+F</label><br><input name="keywords[5]" type="checkbox" value="1" id="qf_d677f7"><label for="qf_d677f7">Gemeinde</label><br><input name="keywords[11]" type="checkbox" value="1" id="qf_41e21a"><label for="qf_41e21a">Gremium/AK</label><br><input name="keywords[44]" type="checkbox" value="1" id="qf_d49244"><label for="qf_d49244">Leiterrunde</label><br><input name="keywords[608]" type="checkbox" value="1" id="qf_ef8b98"><label for="qf_ef8b98">mi mundo</label><br><input name="keywords[543]" type="checkbox" value="1" id="qf_750dde" checked="checked"><label for="qf_750dde">Mitgliederversammlung</label><br><input name="keywords[10]" type="checkbox" value="1" id="qf_fa2b02"><label for="qf_fa2b02">Schulung/Kurs</label><br><input name="keywords[2]" type="checkbox" value="1" id="qf_320813"><label for="qf_320813">Stamm</label><br><input name="keywords[9]" type="checkbox" value="1" id="qf_37a674"><label for="qf_37a674">Stufenkonferenz</label><br><input name="keywords[39]" type="checkbox" value="1" id="qf_43b3c8"><label for="qf_43b3c8">Truppstunde</label><br><input name="keywords[6]" type="checkbox" value="1" id="qf_f84cc2"><label for="qf_f84cc2">Vorstände</label>';
+
+			$keywords = array(
+				'604'=>'AG-Medien',
+				'4'=>'Aktion',
+				);
+
+			foreach ($keywords as $id=>$name) {
+				$markers['KEYWORDS_FIELD'] .= '<input name="keywords['.$id.']" type="checkbox" value="1" id="kw_'.$id.'"><label for="kw_'.$id.'">'.$name.'</label><br>';
+			}
 
 			$markers['OWN_KEYWORDS_LABEL'] = $GLOBALS['LANG']->getLL('ownKeywordsLabel');
 			$markers['OWN_KEYWORDS_FIELD'] = $this->createTextInput("customKeywords[]",$GLOBALS['LANG']->getLL('ownKeywordsLabel'),'').'<br>'.
