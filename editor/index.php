@@ -141,24 +141,23 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 
 
 
-			$termine_markers = array();
+			$termine_markers = array(
 
-			$termin_markers['TITEL'] = nl2br(htmlentities($event['Title'],ENT_COMPAT,'UTF-8'));
-			$termin_markers['DATE_WITH_TIME'] = $date_with_time;
+				'TITEL' => nl2br(htmlentities($event['Title'],ENT_COMPAT,'UTF-8')),
+				'DATE_WITH_TIME' => $date_with_time,
 
-			$termin_markers['CREATED_LABEL'] = $GLOBALS['LANG']->getLL('createdLabel');
-			$termin_markers['LAST_MODIFIED_LABEL'] = $GLOBALS['LANG']->getLL('lastModifiedLabel');
+				'CREATED_LABEL' => $GLOBALS['LANG']->getLL('createdLabel'),
+				'LAST_MODIFIED_LABEL' => $GLOBALS['LANG']->getLL('lastModifiedLabel'),
 
-			/*
-			<?=$event['Created_By']?>, <?=strftime("%x %H:%M",$event['Created_At_Timestamp'])
-     99 »·······»·······»·······»·······»·······<?=($event['Last_Modified_By']?" | ".$lang_cal['Last_Modified'].": ".$event['Last_Modified_By'].", ".strftime("%x %H:%M",$event['Last_Modified_At_Timestamp'])."":"")
-			 */
+				'CREATED_BY' => $event['Created_By'],
+				'CREATED_AT' => strftime("%d.%m.%Y %H:%M",$event['Created_At']),
 
-			$termin_markers['CREATED_BY'] = $event['Created_By'];
-			$termin_markers['CREATED_AT'] = strftime("%d.%m.%Y %H:%M",$event['Created_At']);
+				'LAST_MODIFIED_BY' => $event['Last_Modified_By'],
+				'LAST_MODIFIED_AT' => strftime("%d.%m.%Y %H:%M",$event['Last_Modified_At']),
 
-			$termin_markers['LAST_MODIFIED_BY'] = $event['Last_Modified_By'];
-			$termin_markers['LAST_MODIFIED_AT'] = strftime("%d.%m.%Y %H:%M",$event['Last_Modified_At']);
+				'EDIT_LINK' => '<a href=""> edit</a>',
+			);
+
 
 			$last_modified = isset($event['Last_Modified_By']) && $event['Last_Modified_By'] != ''?$last_modified_template:'';
 			
