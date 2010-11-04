@@ -79,6 +79,8 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 
 		$markers['HEADER1_LABEL'] = $GLOBALS['LANG']->getLL('header1Label');
 
+		$mandatoryAsterisk = '<sup style="color: #ff0000">*</sup>';
+
 		if ($_GET['action'] == "edit") {
 			$this->doc->setModuleTemplate(t3lib_extMgm::extPath('sh_scoutnet_kalender') . 'editor/template_edit.html');
 
@@ -92,11 +94,12 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 			$markers['LAST_MODIFIED_AT_LABEL'] = $GLOBALS['LANG']->getLL('lastModifiedAtLabel');
 
 			$markers['TITLE_LABEL'] = $GLOBALS['LANG']->getLL('titleLabel');
-			$markers['TITLE_MANDATORY'] = '<span style="color: #ff0000">*</span>';
+			$markers['TITLE_MANDATORY'] = $mandatoryAsterisk; 
 			$markers['TITLE_FIELD'] = '<input maxlength="255" name="Title" type="text" value="F+F Mitgliederversammlung">'; 
 
 			$markers['START_DATE_LABEL'] = $GLOBALS['LANG']->getLL('startDateLabel');
-			$markers['START_DATE_MANDATORY'] = '<span style="color: #ff0000">*</span>';
+			$markers['START_DATE_MANDATORY'] = $mandatoryAsterisk;
+
 			$markers['START_TIME_LABEL'] = $GLOBALS['LANG']->getLL('startTimeLabel');
 			$markers['END_DATE_LABEL'] = $GLOBALS['LANG']->getLL('endDateLabel');
 			$markers['END_TIME_LABEL'] = $GLOBALS['LANG']->getLL('endTimeLabel');
