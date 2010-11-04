@@ -160,6 +160,8 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 				'DELETE_LINK' => '<a href="">» '.$GLOBALS['LANG']->getLL('delete').'</a>',
 			);
 
+			print_r ($this);
+			die();
 
 
 			$last_modified = isset($event['Last_Modified_By']) && $event['Last_Modified_By'] != ''?$last_modified_template:'';
