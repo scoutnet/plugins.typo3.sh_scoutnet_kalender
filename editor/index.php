@@ -95,7 +95,7 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 
 			$markers['TITLE_LABEL'] = $GLOBALS['LANG']->getLL('titleLabel');
 			$markers['TITLE_MANDATORY'] = $mandatoryAsterisk; 
-			$markers['TITLE_FIELD'] = '<input maxlength="255" name="Title" type="text" value="F+F Mitgliederversammlung">'; 
+			$markers['TITLE_FIELD'] = $this->createTextInput("Title",""); 
 
 			$markers['START_DATE_LABEL'] = $GLOBALS['LANG']->getLL('startDateLabel');
 			$markers['START_DATE_MANDATORY'] = $mandatoryAsterisk;
@@ -222,6 +222,15 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 
 
 		return;
+	}
+
+
+	private function createTextInput($title, $value = ""){
+		if ($value == "")
+			$value = $title;
+
+		return '<input maxlength="255" name="'.$title.'" type="text" value="'.$value.'" onfucus="if (this.value == \'$title\') this.value=\'\';">'; 
+
 	}
 
 	/**
