@@ -125,41 +125,41 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 
 			$markers['TITLE_LABEL'] = $GLOBALS['LANG']->getLL('titleLabel');
 			$markers['TITLE_MANDATORY'] = $mandatoryAsterisk; 
-			$markers['TITLE_FIELD'] = $this->createTextInput("Title",$GLOBALS['LANG']->getLL('titleLabel'),""); 
+			$markers['TITLE_FIELD'] = $this->createTextInput("Title",$GLOBALS['LANG']->getLL('titleLabel'),$event['Title']); 
 
 			$markers['START_DATE_LABEL'] = $GLOBALS['LANG']->getLL('startDateLabel');
 			$markers['START_DATE_MANDATORY'] = $mandatoryAsterisk;
-			$markers['START_DATE_FIELD'] = $this->createDateInput('StartDate',time(),0);
+			$markers['START_DATE_FIELD'] = $this->createDateInput('StartDate',time(),$event['Start']);
 
 			$markers['START_TIME_LABEL'] = $GLOBALS['LANG']->getLL('startTimeLabel');
-			$markers['START_TIME_FIELD'] = $this->createTimeInput('StartTime',-1,time());
+			$markers['START_TIME_FIELD'] = $this->createTimeInput('StartTime',-1,time(),$event['Start']);
 
 			$markers['END_DATE_LABEL'] = $GLOBALS['LANG']->getLL('endDateLabel');
-			$markers['END_DATE_FIELD'] = $this->createDateInput('EndDate',-1,time());
+			$markers['END_DATE_FIELD'] = $this->createDateInput('EndDate',-1,time(),$event['End']);
 
 			$markers['END_TIME_LABEL'] = $GLOBALS['LANG']->getLL('endTimeLabel');
-			$markers['END_TIME_FIELD'] = $this->createTimeInput('StartDate',-1,0);
+			$markers['END_TIME_FIELD'] = $this->createTimeInput('StartDate',-1,$event['End']);
 
 			$markers['LOCATION_LABEL'] = $GLOBALS['LANG']->getLL('locationLabel');
-			$markers['LOCATION_FIELD'] = $this->createTextInput("Location",$GLOBALS['LANG']->getLL('locationLabel'),""); 
+			$markers['LOCATION_FIELD'] = $this->createTextInput("Location",$GLOBALS['LANG']->getLL('locationLabel'),$event['Location']); 
 			
 			$markers['ORGANIZER_LABEL'] = $GLOBALS['LANG']->getLL('organizerLabel');
-			$markers['ORGANIZER_FIELD'] = $this->createTextInput("Organizer",$GLOBALS['LANG']->getLL('organizerLabel'),""); 
+			$markers['ORGANIZER_FIELD'] = $this->createTextInput("Organizer",$GLOBALS['LANG']->getLL('organizerLabel'),$event['Organizer']); 
 			
 			$markers['TARGET_GROUP_LABEL'] = $GLOBALS['LANG']->getLL('targetGroupLabel');
-			$markers['TARGET_GROUP_FIELD'] = $this->createTextInput("TargetGroup",$GLOBALS['LANG']->getLL('targetGroupLabel'),""); 
+			$markers['TARGET_GROUP_FIELD'] = $this->createTextInput("TargetGroup",$GLOBALS['LANG']->getLL('targetGroupLabel'),$event['TargetGroup']); 
 
 			$markers['ZIP_LABEL'] = $GLOBALS['LANG']->getLL('zipLabel');
-			$markers['ZIP_FIELD'] = $this->createTextInput("Zip",$GLOBALS['LANG']->getLL('zipLabel'),""); 
+			$markers['ZIP_FIELD'] = $this->createTextInput("Zip",$GLOBALS['LANG']->getLL('zipLabel'),$event['ZIP']); 
 
 			$markers['LINK_TEXT_LABEL'] = $GLOBALS['LANG']->getLL('linkTextLabel');
-			$markers['LINK_TEXT_FIELD'] = $this->createTextInput("LinkText",$GLOBALS['LANG']->getLL('linkTextLabel'),""); 
+			$markers['LINK_TEXT_FIELD'] = $this->createTextInput("LinkText",$GLOBALS['LANG']->getLL('linkTextLabel'),$event['URL_Text']); 
 
 			$markers['LINK_URL_LABEL'] = $GLOBALS['LANG']->getLL('linkUrlLabel');
-			$markers['LINK_URL_FIELD'] = $this->createTextInput("LinkUrl",$GLOBALS['LANG']->getLL('linkUrlLabel'),""); 
+			$markers['LINK_URL_FIELD'] = $this->createTextInput("LinkUrl",$GLOBALS['LANG']->getLL('linkUrlLabel'),$event['URL']); 
 
 			$markers['INFO_LABEL'] = $GLOBALS['LANG']->getLL('infoLabel');
-			$markers['INFO_FIELD'] = $this->createTextArea("Info",$GLOBALS['LANG']->getLL('infoLabel'),""); 
+			$markers['INFO_FIELD'] = $this->createTextArea("Info",$GLOBALS['LANG']->getLL('infoLabel'),$event['Description']); 
 
 			$markers['SAVE_LABEL'] = $GLOBALS['LANG']->getLL('save');
 
