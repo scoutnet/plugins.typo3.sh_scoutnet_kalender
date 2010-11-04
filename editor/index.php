@@ -357,6 +357,8 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 		}
 
 		$out = '<input type="hidden" name="'.$name.'" id="'.$name.'_value" value="'.$value.'">';
+	
+		$out .= $value;
 
 		$hour_options = $min_options = '';
 
