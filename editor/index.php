@@ -290,7 +290,7 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 
 		$days_in_feb = array();
 		for ($year=strftime("%Y") - 5;$year <= strftime("%Y") + 10; $year++){
-			$year_options .= '<option value="'.$year.'" '.(!$noContent && strftime("%Y",$value) == $month?'selected':'').'>'.$year.'</option>'; 
+			$year_options .= '<option value="'.$year.'" '.(!$noContent && strftime("%Y",$value) == $year?'selected':'').'>'.$year.'</option>'; 
 
 			$days_in_feb[$year] = 28;
 			if (checkdate(2,29,$year)) 
