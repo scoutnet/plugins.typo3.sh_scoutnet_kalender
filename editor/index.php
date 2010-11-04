@@ -46,6 +46,9 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 	 * @return	void
 	 */
 	public function main() {
+
+		
+
 		$docHeaderButtons = $this->getButtons();
 
 		$markers = array();
@@ -73,6 +76,8 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 				$this->MOD_MENU['mode']
 			);
 		$markers['CONTENT'] = $this->content;
+
+		$markers['HEADER1_LABEL'] = "Terminverwaltung";
 
 
 		// Build the <body> for the module
