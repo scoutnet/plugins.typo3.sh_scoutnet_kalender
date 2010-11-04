@@ -311,7 +311,7 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 				}
 
 				while (days_in_mon < field.options.length) {
-					topan.options[(field.options.length - 1)] = null;
+					field.options[(field.options.length - 1)] = null;
 				}
 
 				for (i = 1; i <= days_in_mon; i++){
