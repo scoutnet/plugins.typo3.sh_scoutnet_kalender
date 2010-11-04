@@ -49,15 +49,6 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 	public function main() {
 
 		
-		$events = array();
-		try {
-			$SN = new tx_shscoutnetwebservice_sn();
-
-			$filter = array();
-
-			$ids = array(4);
-
-			$events = $SN->get_events_for_global_id_with_filter($ids,$filter);
 
 		$docHeaderButtons = $this->getButtons();
 
@@ -99,12 +90,19 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 
 		$termin_template = t3lib_parsehtml::getSubpart($this->doc->moduleTemplate,'###TERMIN_TEMPLATE###');
 
+		$events = array();
+		try {
+			$SN = new tx_shscoutnetwebservice_sn();
+			$filter = array();
+			$ids = array(4);
+			$events = $SN->get_events_for_global_id_with_filter($ids,$filter);
+
 		$termine = '';
-		for ($i = 0; $i < 15; $i++) {
+		foreach ($events as $event) {
 
 			$termine_markers = array();
 
-			$termin_markers['DESCRIPTION'] = 'Termin #'.$i;
+			$termin_markers['TITEL'] = $event['titel'];
 			$termin_markers['DATUM'] = 'Heute';
 
 
