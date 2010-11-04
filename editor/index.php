@@ -270,8 +270,15 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 
 		$day_options = $month_options = $year_options = '';
 
+		$days_in_feb = array();
+		for ($month = 1; $month <= 12; $month++) {
+			$month_options .= '<option value="'.$month.'">'.$GLOBALS['LANG']->getLL('mon'.$month).'</option>';
+		}
+
 		for ($year=strftime("%Y") - 5;$year <= strftime("%Y") + 10; $year++){
 			$year_options .= '<option value="'.$year.'">'.$year.'</option>'; 
+
+
 		}
 
 		for ($i=1; $i <= 31; $i++){

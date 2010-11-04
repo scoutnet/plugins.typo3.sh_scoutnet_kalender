@@ -39,6 +39,19 @@
 			<label index="useAsTemplate">Use as Template</label>
 			<label index="delete">Delete</label>
 
+			<label index="mon1">January</label>
+			<label index="mon2">February</label>
+			<label index="mon3">March</label>
+			<label index="mon4">April</label>
+			<label index="mon5">May</label>
+			<label index="mon6">June</label>
+			<label index="mon7">July</label>
+			<label index="mon8">August</label>
+			<label index="mon9">September</label>
+			<label index="mon10">October</label>
+			<label index="mon11">November</label>
+			<label index="mon12">December</label>
+
 
 		</languageKey>
 	</data>
