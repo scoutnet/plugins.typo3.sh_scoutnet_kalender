@@ -11,14 +11,14 @@
 
 			<label index="createdLabel">Created</label>
 			<label index="lastModifiedLabel">Last Modified</label>
-			<label index="header1Label">Terminverwaltung</label>
+			<label index="header1Label">Event Manager</label>
 			<label index="beginLabel">Begin</label>
 			<label index="endLabel">End</label>
 			<label index="titleLabel">Title</label>
 			<label index="actionLabel">Action</label>
 
 			<label index="edit">Edit</label>
-			<label index="create">Create new Termin</label>
+			<label index="create">Create new Event</label>
 			<label index="useAsTemplate">Use as Template</label>
 			<label index="delete">Delete</label>
 		</languageKey>

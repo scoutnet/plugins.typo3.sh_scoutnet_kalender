@@ -86,13 +86,13 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 		$markers['TITLE_LABEL'] = $GLOBALS['LANG']->getLL('titleLabel');
 		$markers['ACTION_LABEL'] = $GLOBALS['LANG']->getLL('actionLabel');
 
-		$markers['CREATE_NEW_TERMIN_LINK'] = '<a href="'.$this->MCONF['_'].'&action=create">» '.$GLOBALS['LANG']->getLL('create').'</a>';
+		$markers['CREATE_NEW_EVENT_LINK'] = '<a href="'.$this->MCONF['_'].'&action=create">» '.$GLOBALS['LANG']->getLL('create').'</a>';
 
 
 
-		$termin_template = t3lib_parsehtml::getSubpart($this->doc->moduleTemplate,'###TERMIN_TEMPLATE###');
+		$event_template = t3lib_parsehtml::getSubpart($this->doc->moduleTemplate,'###EVENT_TEMPLATE###');
 		$year_change_template = t3lib_parsehtml::getSubpart($this->doc->moduleTemplate,'###YEAR_CHANGE_TEMPLATE###');
-		$last_modified_template = t3lib_parsehtml::getSubpart($termin_template,'###LAST_MODIFIED###');
+		$last_modified_template = t3lib_parsehtml::getSubpart($event_template,'###LAST_MODIFIED###');
 
 
 		$events = array();
@@ -104,12 +104,12 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 			$ids = array(4);
 			$events = $SN->get_events_for_global_id_with_filter($ids,$filter);
 
-		$termine = '';
+		$events_out = '';
 		foreach ($events as $event) {
 
 			if($previous_year != strftime('%Y',$event['Start'])) {
 				$previous_year = strftime('%Y',$event['Start']);
-				$termine .= t3lib_parsehtml::substituteMarkerArray($year_change_template,array('YEAR'=>strftime('%Y',$event['Start'])),'###|###');
+				$events_out .= t3lib_parsehtml::substituteMarkerArray($year_change_template,array('YEAR'=>strftime('%Y',$event['Start'])),'###|###');
 
 			}
 
@@ -143,7 +143,7 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 
 
 
-			$termin_markers = array(
+			$event_markers = array(
 
 				'TITEL' => nl2br(htmlentities($event['Title'],ENT_COMPAT,'UTF-8')),
 				'DATE_WITH_TIME' => $date_with_time,
@@ -165,11 +165,11 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 
 			$last_modified = isset($event['Last_Modified_By']) && $event['Last_Modified_By'] != ''?$last_modified_template:'';
 			
-			$termine .= t3lib_parsehtml::substituteMarkerArray(t3lib_parsehtml::substituteSubpart($termin_template,'###LAST_MODIFIED###',$last_modified),$termin_markers,'###|###');
+			$events_out .= t3lib_parsehtml::substituteMarkerArray(t3lib_parsehtml::substituteSubpart($event_template,'###LAST_MODIFIED###',$last_modified),$event_markers,'###|###');
 		}
 
 
-		$markers['TERMINE'] = $termine;
+		$markers['EVENTS'] = $events_out;
 
 
 		} catch(Exception $e) {
