@@ -110,6 +110,7 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 
 			$start_date = substr(strftime("%A",$event['Start']),0,2).",&nbsp;".strftime("%d.%m.",$event['Start']);
 			$date = $start_date;
+			$end_date = '';
 
 			if (isset($event['End']) && strftime("%d%m%Y",$event['Start']) != strftime("%d%m%Y",$event['End']) ) {
 				$date .= "&nbsp;-&nbsp;";
@@ -119,6 +120,7 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 
 			$time = '';
 			$start_time = '';
+			$end_time = '';
 			if ($event['All_Day'] != 1) {
 				$start_time = strftime("%H:%M",$event['Start']);
 				$time = $start_time;
@@ -126,7 +128,7 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 
 				if (isset($event['End']) && strftime("%H%M",$event['Start']) != strftime("%H%M",$event['End']) ) {
 					$time .= "&nbsp;-&nbsp;";
-					$end_time .= strftime("%H:%M",$event['End']);
+					$end_time = strftime("%H:%M",$event['End']);
 					$time .= $end_time;
 				}
 			}
