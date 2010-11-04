@@ -10,7 +10,11 @@
 			<label index="to">to</label>
 
 			<label index="createdLabel">Created</label>
+			<label index="createdByLabel">Created by</label>
+			<label index="createdAtLabel">Created at</label>
 			<label index="lastModifiedLabel">Last Modified</label>
+			<label index="lastModifiedByLabel">Last Modified by</label>
+			<label index="lastModifiedAtLabel">Last Modified at</label>
 			<label index="header1Label">Event Manager</label>
 			<label index="beginLabel">Begin</label>
 			<label index="endLabel">End</label>
