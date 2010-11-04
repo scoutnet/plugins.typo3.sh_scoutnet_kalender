@@ -290,11 +290,11 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 
 		$days_in_feb = array();
 		for ($month = 1; $month <= 12; $month++) {
-			$month_options .= '<option value="'.$month.'" '.(strftime("%m") == $month?'selected':'').'>'.$GLOBALS['LANG']->getLL('mon'.$month).'</option>';
+			$month_options .= '<option value="'.$month.'" '.(strftime("%m",$value) == $month?'selected':'').'>'.$GLOBALS['LANG']->getLL('mon'.$month).'</option>';
 		}
 
 		for ($year=strftime("%Y") - 5;$year <= strftime("%Y") + 10; $year++){
-			$year_options .= '<option value="'.$year.'">'.$year.'</option>'; 
+			$year_options .= '<option value="'.$year.'" '.(strftime("%m",$value) == $month?'selected':'').'>'.$year.'</option>'; 
 
 			$days_in_feb[$year] = 28;
 			if (checkdate(2,29,$year)) 
@@ -302,8 +302,8 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 
 		}
 
-		for ($i=1; $i <= 31; $i++){
-			$day_options .= '<option value="'.$i.'">'.$i.'</option>'; 
+		for ($day=1; $day <= 31; $day++){
+			$day_options .= '<option value="'.$day.'" '.(strftime("%m",$value) == $day?'selected':'').'>'.$day.'</option>'; 
 		}
 
 		$this->createJSFunctions();
