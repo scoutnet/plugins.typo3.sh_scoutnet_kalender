@@ -217,9 +217,7 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 			$markers['GROUP_OR_LEADER_LABEL'] = $GLOBALS['LANG']->getLL('groupOrLeaderLabel');
 
 			$markers['GROUP_OR_LEADER_FIELD'] = '';
-			print_r($kalenders[0]['Forced_Kategories']['']);
-			die();
-			foreach ($kalenders[0]['Forced_Kategories'][0] as $id=>$name) {
+			foreach ($kalenders[0]['Forced_Kategories'][''] as $id=>$name) {
 				$markers['GROUP_OR_LEADER_FIELD'] .= '<input name="keywords['.$id.']" type="checkbox" value="1" id="kw_'.$id.'" '.(array_key_exists($id,$event['Keywords'])?'checked':'').'><label for="kw_'.$id.'">'.$name.'</label><br>';
 			}
 			//$markers['GROUP_OR_LEADER_FIELD'] = '<input name="keywords[16]" type="checkbox" value="1" id="qf_94a57b"><label for="qf_94a57b">Wölflinge</label><br><input name="keywords[17]" type="checkbox" value="1" id="qf_3525f0"><label for="qf_3525f0">Jungpfadfinder</label><br><input name="keywords[18]" type="checkbox" value="1" id="qf_a608e2"><label for="qf_a608e2">Pfadfinder</label><br><input name="keywords[19]" type="checkbox" value="1" id="qf_08ba19"><label for="qf_08ba19">Rover</label><br><input name="keywords[20]" type="checkbox" value="1" id="qf_0cb919"><label for="qf_0cb919">Leiter</label>';
