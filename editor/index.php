@@ -118,7 +118,7 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 				$subpartMarkers['LAST_MODIFIED_FIELD'] = '';
 			}
 
-			if ($event['Last_Modified_by'] == ''){
+			if ($event['Last_Modified_By'] == ''){
 				$subpartMarkers['LAST_MODIFIED_FIELD'] = '';
 			}
 
