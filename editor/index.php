@@ -15,6 +15,7 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 	protected $pageinfo;
 
 	protected $jsDateFktSet;
+	private $usedIds;
 
 	/**
 	 * Initializes the Module
@@ -41,6 +42,8 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 			$this->doc->JScode .= '<link rel="stylesheet" type="text/css" href="' . t3lib_div::createVersionNumberedFilename(t3lib_div::resolveBackPath($this->doc->backPath . t3lib_extMgm::extRelPath('sh_scoutnet_kalender') . 'editor/style.css')) . '" />';
 			$this->doc->JScode .= '<link rel="stylesheet" type="text/css" href="' . t3lib_div::createVersionNumberedFilename(t3lib_div::resolveBackPath($this->doc->backPath . t3lib_extMgm::extRelPath('sh_scoutnet_kalender') . 'editor/kalender.css')) . '" />';
 		}
+
+		$this->usedIds = array();
 
 	}
 
@@ -347,6 +350,19 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 		return;
 	}
 
+	private function createIdFromName($name){
+		$orig_id = $id = str_replace('_','',$name);
+
+		$i = 0;
+		while (array_key_exists($id,$this->usedIds)){
+			$i++;
+			$id = $orig_id.$i;
+		}
+
+
+		$this->usedIds[$id] = true;
+		return $id;
+	}
 
 	private function createTextInput($name, $defaultValue, $value = ""){
 		$color = "black";
@@ -354,6 +370,11 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 			$color = "lightgray";
 			$value = $defaultValue;
 		}
+
+		$id = $this->createIdFromName($name);
+
+		
+		$this->doc->JScodeArray[] = "defaultValues['".$id."'] = '".$defaultValue."'";
 
 		return '<input maxlength="255" name="mod_snk['.$name.']" style="color:'.$color.'" type="text" value="'.$value.'" onfocus="if (this.value == \''.$defaultValue.'\') { this.value=\'\'; this.style.color=\'black\';}" onblur="if (this.value ==\'\') {this.style.color=\'lightgray\';this.value=\''.$defaultValue.'\'}">'; 
 	}
