@@ -217,7 +217,7 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 			$markers['GROUP_OR_LEADER_LABEL'] = $GLOBALS['LANG']->getLL('groupOrLeaderLabel');
 
 			$markers['GROUP_OR_LEADER_FIELD'] = '';
-			print_r($kalenders[0]['Forced_Kategories']);
+			print_r($kalenders[0]['Forced_Kategories']['']);
 			die();
 			foreach ($kalenders[0]['Forced_Kategories'][0] as $id=>$name) {
 				$markers['GROUP_OR_LEADER_FIELD'] .= '<input name="keywords['.$id.']" type="checkbox" value="1" id="kw_'.$id.'" '.(array_key_exists($id,$event['Keywords'])?'checked':'').'><label for="kw_'.$id.'">'.$name.'</label><br>';
