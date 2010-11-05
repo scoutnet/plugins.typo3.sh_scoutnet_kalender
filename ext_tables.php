@@ -55,6 +55,14 @@ $TCA['tt_content']['types']['list']['subtypes_addlist'][$_EXTKEY.'_pi1']='tx_shs
 
 // be_user fileds
 $tempColumns = Array (
+	'tx_shscoutnetkalender_scoutnet_username' => Array (		
+		'exclude' => 1,		
+		'label' => 'LLL:EXT:sh_scoutnet_kalender/locallang_db.xml:be_users.tx_shscoutnetkalender_scoutnet_username',
+		'config' => Array (
+			'type' => 'input',
+			'size' => '255',
+		)
+	),
 	'tx_shscoutnetkalender_scoutnet_apikey' => Array (		
 		'exclude' => 1,		
 		'label' => 'LLL:EXT:sh_scoutnet_kalender/locallang_db.xml:be_users.tx_shscoutnetkalender_scoutnet_apikey',
@@ -68,7 +76,7 @@ $tempColumns = Array (
 
 t3lib_div::loadTCA('be_users');
 t3lib_extMgm::addTCAcolumns('be_users',$tempColumns,1);
-t3lib_extMgm::addToAllTCAtypes('be_users','--div--;LLL:EXT:sh_scoutnet_kalender/locallang_db.xml:be_users.tx_shscoutnetkalender_scounet_tab, tx_shscoutnetkalender_scoutnet_apikey');
+t3lib_extMgm::addToAllTCAtypes('be_users','--div--;LLL:EXT:sh_scoutnet_kalender/locallang_db.xml:be_users.tx_shscoutnetkalender_scounet_tab, tx_shscoutnetkalender_scoutnet_username, tx_shscoutnetkalender_scoutnet_apikey');
 
 
 // add plugins

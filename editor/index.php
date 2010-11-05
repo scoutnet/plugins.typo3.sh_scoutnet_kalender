@@ -104,11 +104,12 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 
 		if ($return_data = $this->getData()) {
 			// save api key
-			$sql = "UPDATE be_user SET tx_shscoutnetkalender_scoutnet_apikey='".$return_data['api_key']."' where uid = '".$GLOBALS['BE_USER']->user['uid']."'";
+			$sql = "UPDATE be_user SET tx_shscoutnetkalender_scoutnet_apikey='".$return_data['api_key']."', tx_shscoutnetkalender_scoutnet_username='".$return_data['user']."' where uid = '".$GLOBALS['BE_USER']->user['uid']."'";
 
-			echo $sql;
-			die();
+			$GLOBALS['TYPO3_DB']->sql(TYPO3_db,$sql);
 
+			$GLOBALS['BE_USER']->user['tx_shscoutnetkalender_scoutnet_username'] = $return_data['user'];
+			$GLOBALS['BE_USER']->user['tx_shscoutnetkalender_scoutnet_apikey'] = $return_data['api_key'];
 		}
 
 		if (!isset($GLOBALS['BE_USER']->user['tx_shscoutnetkalender_scoutnet_apikey']) || $GLOBALS['BE_USER']->user['tx_shscoutnetkalender_scoutnet_apikey'] == ''){
