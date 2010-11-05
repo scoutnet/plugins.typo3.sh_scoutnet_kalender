@@ -102,10 +102,10 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 
 		$markers['HEADER1_LABEL'] = $GLOBALS['LANG']->getLL('header1Label');
 
-		echo "<pre>";
-		print_r($GLOBALS['BE_USER']->user['tx_shscoutnetkalender_scoutnet_apikey']);
-		echo "</pre>";
+		if (!isset($GLOBALS['BE_USER']->user['tx_shscoutnetkalender_scoutnet_apikey']) || $GLOBALS['BE_USER']->user['tx_shscoutnetkalender_scoutnet_apikey'] == '' || count($GLOBALS['BE_USER']->user['tx_shscoutnetkalender_scoutnet_apikey']) != 255){
+		echo "Global key wrong!!";
 		die();
+		}
 
 		$mandatoryAsterisk = '<sup style="color: #ff0000">*</sup>';
 		try {
