@@ -359,7 +359,11 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 	}
 
 	private function createIdFromName($name){
-		$orig_id = $id = str_replace('_','',$name);
+		$id = str_replace('[','',$name);
+		$id = str_replace(']','',$id);
+		$id = str_replace('_','',$id);
+
+		$orig_id = $id;
 
 		$i = 0;
 		while (array_key_exists($id,$this->usedIds)){
