@@ -116,10 +116,6 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 
 			
 			$markers['CONTENT'] = $GLOBALS['LANG']->getLL('noApiKeyError');
-			echo "<pre>";
-			print_r($GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['tx_shscoutnetwebservice']);
-			echo "</pre>";
-			die();
 			$markers['SCOUTNET_CONNECT_BUTTON'] = '<form action="'.$GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['tx_shscoutnetwebservice']['ScoutnetLoginPage'].'" id="scoutnetLogin" method="post" target="_self">
 									<input type="hidden" name="redirect_url" value="https://www.dpsg-koeln.de/typo3/mod.php?M=user_scoutnet" />
 									<input type="hidden" name="provider" value="'.$GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['tx_shscoutnetwebservice']['ScoutnetProviderName'].'" />
