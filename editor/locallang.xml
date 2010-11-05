@@ -45,6 +45,8 @@
 			<label index="useAsTemplate">Use as Template</label>
 			<label index="delete">Delete</label>
 
+			<label index="mandatoryLabel">Mandatory</label>
+
 			<label index="mon1">January</label>
 			<label index="mon2">February</label>
 			<label index="mon3">March</label>
