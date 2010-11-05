@@ -11,6 +11,8 @@
 			<label index="tt_content.tx_shscoutnetkalender_optids">Optional Calendars</label>
 			<label index="tt_content.tx_shscoutnetkalender_kat_ids">Kategories</label>
 			<label index="tt_content.tx_shscoutnetkalender_stufen_ids">Stufen</label>
+			<label index="be_users.tx_shscoutnetkalender_scounet_tab">Scoutnet Calendar</label>
+			<label index="be_users.tx_shscoutnetkalender_scoutnet_apikey">Api Key</label>
 		</languageKey>
 		<languageKey index="de" type="array">
 			<label index="tt_content.list_type_pi1">Scoutnet Kalender</label>
@@ -18,6 +20,8 @@
 			<label index="tt_content.tx_shscoutnetkalender_optids">Optionale Kalender</label>
 			<label index="tt_content.tx_shscoutnetkalender_kat_ids">Kategorien</label>
 			<label index="tt_content.tx_shscoutnetkalender_stufen_ids">Stufen</label>
+			<label index="be_users.tx_shscoutnetkalender_scounet_tab">Scoutnet Kalender</label>
+			<label index="be_users.tx_shscoutnetkalender_scoutnet_apikey">Api Key</label>
 		</languageKey>
 	</data>
 </T3locallang>
