@@ -109,6 +109,7 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 			$markers['CONTENT'] = $GLOBALS['LANG']->getLL('noApiKeyError');
 			echo "<pre>";
 			print_r($GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['tx_shscoutnetwebservice']);
+			print_r($this->getData());
 			echo "</pre>";
 			die();
 			$markers['SCOUTNET_CONNECT_BUTTON'] = '<form action="https://www.scoutnet.de/community/scoutnetConnect.html" id="scoutnetLogin" method="post" target="_self">
@@ -554,6 +555,55 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 	public function printContent() {
 		echo $this->content;
 	}
+
+	private function getData(){
+		if (isset($this->snData)) {
+			return $this->snData;
+		}   
+
+		if (!isset($_GET['auth'])) {
+			return false;
+		}   
+
+		$z = $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['tx_shscoutnetwebservice']['AES_key'];
+		$iv = $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['tx_shscoutnetwebservice']['AES_iv'];
+
+		$aes = new tx_shscoutnetwebservice_AES($z,"CBC",$iv);
+
+		$base64 = base64_decode(strtr($_GET['auth'], '-_~','+/='));
+
+		if (trim($base64) == "") 
+			return false;
+
+		$data = unserialize(substr($aes->decrypt($base64),strlen($iv)));
+
+
+		$md5 = $data['md5']; unset($data['md5']);
+		$sha1 = $data['sha1']; unset($data['sha1']);
+
+		if (md5(serialize($data)) != $md5) {
+			return false;
+		}   
+
+		if (sha1(serialize($data)) != $sha1) {
+			return false;
+		}   
+
+
+		if (time() - $data['time'] > 3600) {
+			return false;
+		}
+
+		$your_domain = $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['tx_shscoutnetwebservice']['ScoutnetProviderName'];
+
+		if ($data['your_domain'] != $your_domain)
+			return false;
+
+		$this->snData = $data;
+
+		return $data;
+	}
+
 
 	/**
 	 * Generates the module content by calling the selected task
