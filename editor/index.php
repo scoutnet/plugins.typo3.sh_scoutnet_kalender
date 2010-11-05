@@ -197,6 +197,11 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 					}
 				}
 			}
+			// "sonstiges"-hack
+			if(isset($kategories[1])){
+				unset($kategories[1]);
+			}
+
 
 			uasort($kategories,'strcoll');
 
