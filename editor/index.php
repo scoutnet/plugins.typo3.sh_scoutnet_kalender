@@ -102,6 +102,8 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 
 		$markers['HEADER1_LABEL'] = $GLOBALS['LANG']->getLL('header1Label');
 
+		$return_data = $this->getData());
+
 		if (!isset($GLOBALS['BE_USER']->user['tx_shscoutnetkalender_scoutnet_apikey']) || $GLOBALS['BE_USER']->user['tx_shscoutnetkalender_scoutnet_apikey'] == '' || count($GLOBALS['BE_USER']->user['tx_shscoutnetkalender_scoutnet_apikey']) != 255){
 			$this->doc->setModuleTemplate(t3lib_extMgm::extPath('sh_scoutnet_kalender') . 'editor/template_noApiKey.html');
 
@@ -109,12 +111,11 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 			$markers['CONTENT'] = $GLOBALS['LANG']->getLL('noApiKeyError');
 			echo "<pre>";
 			print_r($GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['tx_shscoutnetwebservice']);
-			print_r($this->getData());
 			echo "</pre>";
 			die();
-			$markers['SCOUTNET_CONNECT_BUTTON'] = '<form action="https://www.scoutnet.de/community/scoutnetConnect.html" id="scoutnetLogin" method="post" target="_self">
+			$markers['SCOUTNET_CONNECT_BUTTON'] = '<form action="'.$GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['tx_shscoutnetwebservice']['ScoutnetLoginPage'].'" id="scoutnetLogin" method="post" target="_self">
 									<input type="hidden" name="redirect_url" value="https://www.dpsg-koeln.de/typo3/mod.php?M=user_scoutnet" />
-									<input type="hidden" name="provider" value="www.dpsg-koeln.de" />
+									<input type="hidden" name="provider" value="'.$GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['tx_shscoutnetwebservice']['ScoutnetProviderName'].'" />
 									<input type="hidden" name="createApiKey" value="1" />
 									<a href="#" onclick="document.getElementById(\'scoutnetLogin\').submit(); return false;">
 										<img src="https://www.dpsg-koeln.de/typo3conf/ext/sh_scoutnet_fe_auth/res/scoutnetConnect.png" title="scoutnet" alt="scoutnet"/>
