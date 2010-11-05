@@ -60,6 +60,7 @@
 			<label index="mon11">November</label>
 			<label index="mon12">December</label>
 
+			<label index="noApiKeyError">Your account is not connected to any Scoutnet User yet. Please use the Login Button to connect your Scoutnet User to this Typo3 user.</label>
 
 		</languageKey>
 	</data>

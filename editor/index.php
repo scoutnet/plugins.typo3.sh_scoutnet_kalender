@@ -106,7 +106,15 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 			$this->doc->setModuleTemplate(t3lib_extMgm::extPath('sh_scoutnet_kalender') . 'editor/template_noApiKey.html');
 
 			
-			$markers['CONTENT'] = 'Your account is not connected to any Scoutnet User yet. Please use the Login Button to connect your Scoutnet User to this Typo3 user.';
+			$markers['CONTENT'] = $GLOBALS['LANG']->getLL('noApiKeyError');
+			$markers['SCOUTNET_CONNECT_BUTTON'] = '<form action="https://www.scoutnet.de/community/scoutnetConnect.html" id="scoutnetLogin" method="post" target="_self">
+									<input type="hidden" name="redirect_url" value="https://www.dpsg-koeln.de/typo3/mod.php?M=user_scoutnet" />
+									<input type="hidden" name="provider" value="www.dpsg-koeln.de" />
+									<input type="hidden" name="createApiKey" value="1" />
+									<a href="#" onclick="document.getElementById(\'scoutnetLogin\').submit(); return false;">
+										<img src="https://www.dpsg-koeln.de/typo3conf/ext/sh_scoutnet_fe_auth/res/scoutnetConnect.png" title="scoutnet" alt="scoutnet"/>
+									</a>
+								</form>';
 
 		} else {
 
