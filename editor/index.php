@@ -218,8 +218,9 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 			}
 
 			$markers['OWN_KEYWORDS_LABEL'] = $GLOBALS['LANG']->getLL('ownKeywordsLabel');
-			$markers['OWN_KEYWORDS_FIELD'] = $this->createTextInput("customKeywords[]",$GLOBALS['LANG']->getLL('ownKeywordsLabel'),'').'<br>'.
-				$this->createTextInput("customKeywords[]",$GLOBALS['LANG']->getLL('ownKeywordsLabel'),'');
+			// this ][ is correct, since the createTextInput creates an array
+			$markers['OWN_KEYWORDS_FIELD'] = $this->createTextInput("customKeywords][",$GLOBALS['LANG']->getLL('ownKeywordsLabel'),'').'<br>'.
+				$this->createTextInput("customKeywords][",$GLOBALS['LANG']->getLL('ownKeywordsLabel'),'');
 
 			$markers['GROUP_OR_LEADER_LABEL'] = $GLOBALS['LANG']->getLL('groupOrLeaderLabel');
 
