@@ -95,7 +95,7 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 			$kalenders = $SN->get_kalender_by_global_id($ids);
 
 		if ($_GET['action'] == 'modify') {
-			print_r ($_REQUEST['mod_snd']);
+			print_r ($_REQUEST['mod_snk']);
 			die('not Saved!!');
 
 		}
@@ -129,7 +129,7 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 			}
 
 			$markers['FORM_HEADER'] = '<form action="'.$this->MCONF['_'].'&action=modify" method="post" name="eventForm" id="eventForm" autocomplete="on">';
-			$markers['HIDDEN_FIELDS'] = '<input type="hidden" name="mod_snd[event_id]" value="'.$event['ID'].'" />';
+			$markers['HIDDEN_FIELDS'] = '<input type="hidden" name="mod_snk[event_id]" value="'.$event['ID'].'" />';
 
 			$markers['BACK_TO_OVERVIEW_LINK'] = '<a href="'.$this->MCONF['_'].'">» '.$GLOBALS['LANG']->getLL('backToOverview').'</a>';
 
