@@ -74,8 +74,10 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 			function removeDefaultValues(){
 				for (i=defaultValues.length -1; i >=0; i--){
 					var field = document.getElementById(defaultValues[i][0]);
-					if (field.value == defaultValues[i][1]) {
-						field.value = '';
+					if (field != null) {
+						if (field.value == defaultValues[i][1]) {
+							field.value = '';
+						}
 					}
 				}
 				return false;
