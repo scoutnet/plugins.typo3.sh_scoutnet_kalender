@@ -69,7 +69,7 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 				document.location = URL;
 			}
 		';
-		$this->doc->JScodeArray[] = "var defaultValues = Array();";
+		$this->doc->JScodeArray[] = "var defaultValues = new Array();";
 		$this->doc->postCode='
 			<script language="javascript" type="text/javascript">
 				script_ended = 1;
