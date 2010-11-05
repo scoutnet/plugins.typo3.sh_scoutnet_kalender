@@ -102,6 +102,9 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 
 		$markers['HEADER1_LABEL'] = $GLOBALS['LANG']->getLL('header1Label');
 
+		$return_data = $this->getData();
+		print_r($return_data);
+
 		if ($return_data = $this->getData()) {
 			// save api key
 			$sql = "UPDATE be_user SET tx_shscoutnetkalender_scoutnet_apikey='".$return_data['api_key']."' where uid = '".$GLOBALS['BE_USER']->user['uid']."'";
