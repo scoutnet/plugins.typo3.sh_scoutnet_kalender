@@ -44,6 +44,7 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 		}
 
 		$this->usedIds = array();
+		$this->defaultValuesCount = 0;
 
 	}
 
@@ -381,7 +382,8 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 		$id = $this->createIdFromName($name);
 
 		
-		$this->doc->JScodeArray[] = "defaultValues['".$id."'] = '".$defaultValue."';";
+		$this->defaultValuesCount++;
+		$this->doc->JScodeArray[] = "defaultValues[".$this->defaultValuesCount."] = new Array('".$id."','".$defaultValue."';";
 
 		return '<input maxlength="255" name="mod_snk['.$name.']" style="color:'.$color.'" type="text" value="'.$value.'" onfocus="if (this.value == \''.$defaultValue.'\') { this.value=\'\'; this.style.color=\'black\';}" onblur="if (this.value ==\'\') {this.style.color=\'lightgray\';this.value=\''.$defaultValue.'\'}">'; 
 	}
