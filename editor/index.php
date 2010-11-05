@@ -103,260 +103,261 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 		$markers['HEADER1_LABEL'] = $GLOBALS['LANG']->getLL('header1Label');
 
 		if (!isset($GLOBALS['BE_USER']->user['tx_shscoutnetkalender_scoutnet_apikey']) || $GLOBALS['BE_USER']->user['tx_shscoutnetkalender_scoutnet_apikey'] == '' || count($GLOBALS['BE_USER']->user['tx_shscoutnetkalender_scoutnet_apikey']) != 255){
-		echo "Global key wrong!!";
-		die();
-		}
-
-		$mandatoryAsterisk = '<sup style="color: #ff0000">*</sup>';
-		try {
-			$SN = new tx_shscoutnetwebservice_sn();
-			$filter = array(
-				'order' => 'start_time desc',
-			);
-
-			$kalenders = $SN->get_kalender_by_global_id($ids);
-
-		if ($_GET['action'] == 'modify') {
-			print_r ($_REQUEST['mod_snk']);
-			die('not Saved!!');
-
-		}
-
-		if ($_GET['action'] == "edit" || $_GET['action'] == "create") {
-			$this->doc->setModuleTemplate(t3lib_extMgm::extPath('sh_scoutnet_kalender') . 'editor/template_edit.html');
-
-			$event_id = $_GET['event_id'];
-			if (!isset($event_id) || !is_numeric($event_id)) {
-				$event_id = -1;
-			}
-
-			if ($event_id > -1) {
-				$events = $SN->get_events_with_ids($ids,array($event_id));
-				if (isset($events[0]))
-					$event = $events[0];
-			}
-
-			if ($_GET['action'] == "create") {
-				$event['id'] = -1;
-			}
-
-
-			if ($event['id'] == -1) {
-				$subpartMarkers['CREATER_FIELD'] = '';
-				$subpartMarkers['LAST_MODIFIED_FIELD'] = '';
-			}
-
-			if ($event['Last_Modified_By'] == ''){
-				$subpartMarkers['LAST_MODIFIED_FIELD'] = '';
-			}
-
-			$markers['FORM_HEADER'] = '<form action="'.$this->MCONF['_'].'&action=modify" method="post" name="eventForm" id="eventForm" autocomplete="on" onsubmit="return removeDefaultValues()">';
-			$markers['HIDDEN_FIELDS'] = '<input type="hidden" name="mod_snk[event_id]" value="'.$event['ID'].'" />';
-
-			$markers['BACK_TO_OVERVIEW_LINK'] = '<a href="'.$this->MCONF['_'].'">» '.$GLOBALS['LANG']->getLL('backToOverview').'</a>';
-
-			$markers['CREATED_LABEL'] = $GLOBALS['LANG']->getLL('createdLabel');
-			$markers['CREATED_BY_LABEL'] = $GLOBALS['LANG']->getLL('createdByLabel');
-			$markers['CREATED_AT_LABEL'] = $GLOBALS['LANG']->getLL('createdAtLabel');
-			$markers['CREATED_BY'] = $event['Created_By'];
-			$markers['CREATED_AT'] = strftime("%d.%m.%Y %H:%M",$event['Created_At']);
-
-			$markers['LAST_MODIFIED_LABEL'] = $GLOBALS['LANG']->getLL('lastModifiedLabel');
-			$markers['LAST_MODIFIED_BY_LABEL'] = $GLOBALS['LANG']->getLL('lastModifiedByLabel');
-			$markers['LAST_MODIFIED_AT_LABEL'] = $GLOBALS['LANG']->getLL('lastModifiedAtLabel');
-			$markers['LAST_MODIFIED_BY'] = $event['Last_Modified_By'];
-			$markers['LAST_MODIFIED_AT'] = strftime("%d.%m.%Y %H:%M",$event['Last_Modified_At']);
-
-			$markers['TITLE_LABEL'] = $GLOBALS['LANG']->getLL('titleLabel');
-			$markers['TITLE_MANDATORY'] = $mandatoryAsterisk; 
-			$markers['TITLE_FIELD'] = $this->createTextInput("Title",$GLOBALS['LANG']->getLL('titleLabel'),$event['Title']); 
-
-			$markers['START_DATE_LABEL'] = $GLOBALS['LANG']->getLL('startDateLabel');
-			$markers['START_DATE_MANDATORY'] = $mandatoryAsterisk;
-			$markers['START_DATE_FIELD'] = $this->createDateInput('StartDate',time(),$event['Start']);
-
-			$markers['START_TIME_LABEL'] = $GLOBALS['LANG']->getLL('startTimeLabel');
-			$markers['START_TIME_FIELD'] = $this->createTimeInput('StartTime',-1,time(),$event['Start']);
-
-			$markers['END_DATE_LABEL'] = $GLOBALS['LANG']->getLL('endDateLabel');
-			$markers['END_DATE_FIELD'] = $this->createDateInput('EndDate',-1,time(),$event['End']);
-
-			$markers['END_TIME_LABEL'] = $GLOBALS['LANG']->getLL('endTimeLabel');
-			$markers['END_TIME_FIELD'] = $this->createTimeInput('StartDate',-1,$event['End']);
-
-			$markers['LOCATION_LABEL'] = $GLOBALS['LANG']->getLL('locationLabel');
-			$markers['LOCATION_FIELD'] = $this->createTextInput("Location",$GLOBALS['LANG']->getLL('locationLabel'),$event['Location']); 
-			
-			$markers['ORGANIZER_LABEL'] = $GLOBALS['LANG']->getLL('organizerLabel');
-			$markers['ORGANIZER_FIELD'] = $this->createTextInput("Organizer",$GLOBALS['LANG']->getLL('organizerLabel'),$event['Organizer']); 
-			
-			$markers['TARGET_GROUP_LABEL'] = $GLOBALS['LANG']->getLL('targetGroupLabel');
-			$markers['TARGET_GROUP_FIELD'] = $this->createTextInput("TargetGroup",$GLOBALS['LANG']->getLL('targetGroupLabel'),$event['TargetGroup']); 
-
-			$markers['ZIP_LABEL'] = $GLOBALS['LANG']->getLL('zipLabel');
-			$markers['ZIP_FIELD'] = $this->createTextInput("Zip",$GLOBALS['LANG']->getLL('zipLabel'),$event['ZIP']); 
-
-			$markers['LINK_TEXT_LABEL'] = $GLOBALS['LANG']->getLL('linkTextLabel');
-			$markers['LINK_TEXT_FIELD'] = $this->createTextInput("LinkText",$GLOBALS['LANG']->getLL('linkTextLabel'),$event['URL_Text']); 
-
-			$markers['LINK_URL_LABEL'] = $GLOBALS['LANG']->getLL('linkUrlLabel');
-			$markers['LINK_URL_FIELD'] = $this->createTextInput("LinkUrl",$GLOBALS['LANG']->getLL('linkUrlLabel'),$event['URL']); 
-
-			$markers['INFO_LABEL'] = $GLOBALS['LANG']->getLL('infoLabel');
-			$markers['INFO_FIELD'] = $this->createTextArea("Info",$GLOBALS['LANG']->getLL('infoLabel'),$event['Description']); 
-
-			$markers['SAVE_LABEL'] = $GLOBALS['LANG']->getLL('save');
-
-
-			$markers['KEYWORDS_LABEL'] = $GLOBALS['LANG']->getLL('keywordsLabel');
-
-
-			$kategories = $kalenders[0]['Used_Kategories'];
-
-			if( !empty($event['Keywords']) ){
-				foreach( $event['Keywords'] as $id => $keyword ) { 
-					$kategories[$id] = $keyword;
-				}   
-				// this should only remove keywords that are set for the event, but belong to forced_keywords
-				foreach($kalender[0]['Forced_Kategories'] as $forced_keywords_group) {
-					foreach( $forced_keywords_group as $id => $keyword ) { 
-						if(isset($kategories[$id])) {
-							unset($kategories[$id]);
-						}
-					}
-				}
-			}
-			// "sonstiges"-hack
-			if(isset($kategories[1])){
-				unset($kategories[1]);
-			}
-
-
-			uasort($kategories,'strcoll');
-
-			$markers['KEYWORDS_FIELD'] = '';
-			foreach ($kategories as $id=>$name) {
-				$markers['KEYWORDS_FIELD'] .= '<input name="mod_snk[keywords]['.$id.']" type="checkbox" value="1" id="kw_'.$id.'" '.(array_key_exists($id,$event['Keywords'])?'checked':'').'><label for="kw_'.$id.'">'.$name.'</label><br>';
-			}
-
-			$markers['OWN_KEYWORDS_LABEL'] = $GLOBALS['LANG']->getLL('ownKeywordsLabel');
-			// this ][ is correct, since the createTextInput creates an array
-			$markers['OWN_KEYWORDS_FIELD'] = $this->createTextInput("customKeywords][",$GLOBALS['LANG']->getLL('ownKeywordsLabel'),'').'<br>'.
-				$this->createTextInput("customKeywords][",$GLOBALS['LANG']->getLL('ownKeywordsLabel'),'');
-
-			$markers['GROUP_OR_LEADER_LABEL'] = $GLOBALS['LANG']->getLL('groupOrLeaderLabel');
-
-			$markers['GROUP_OR_LEADER_FIELD'] = '';
-			foreach ($kalenders[0]['Forced_Kategories']['sections/leaders'] as $id=>$name) {
-				$markers['GROUP_OR_LEADER_FIELD'] .= '<input name="mod_snk[keywords]['.$id.']" type="checkbox" value="1" id="kw_'.$id.'" '.(array_key_exists($id,$event['Keywords'])?'checked':'').'><label for="kw_'.$id.'">'.$name.'</label><br>';
-			}
-
-			if (isset($kalenders[0]['Forced_Kategories']['DPSG-Ausbildung'])) {
-				$markers['DPSG_EDU_LABEL'] = $GLOBALS['LANG']->getLL('dpsgEduLabel');
-				$markers['DPSG_EDU_FIELD'] = '';
-				foreach ($kalenders[0]['Forced_Kategories']['DPSG-Ausbildung'] as $id=>$name) {
-					$markers['DPSG_EDU_FIELD'] .= '<input name="mod_snk[keywords]['.$id.']" type="checkbox" value="1" id="kw_'.$id.'" '.(array_key_exists($id,$event['Keywords'])?'checked':'').'><label for="kw_'.$id.'">'.$name.'</label><br>';
-				}
-			} else {
-				$subpartMarkers['DPSG_EDU_COLUMN'] = '';
-			}
-
-
-			$markers['MANDATORY_LABEL'] = '<span style="font-size:80%;">'.$mandatoryAsterisk.$GLOBALS['LANG']->getLL('mandatoryLabel').'</span>';
-
+			$this->doc->setModuleTemplate(t3lib_extMgm::extPath('sh_scoutnet_kalender') . 'editor/template_noApiKey.html');
 		} else {
-			$markers['CONTENT'] = $this->content;
 
-			$markers['EBENE_LONG_NAME'] = $kalenders[0]->get_Name();
-
-			$markers['BEGIN_LABEL'] = $GLOBALS['LANG']->getLL('beginLabel');
-			$markers['END_LABEL'] = $GLOBALS['LANG']->getLL('endLabel');
-			$markers['TITLE_LABEL'] = $GLOBALS['LANG']->getLL('titleLabel');
-			$markers['ACTION_LABEL'] = $GLOBALS['LANG']->getLL('actionLabel');
-
-			$markers['CREATE_NEW_EVENT_LINK'] = '<a href="'.$this->MCONF['_'].'&action=create">» '.$GLOBALS['LANG']->getLL('create').'</a>';
-
-
-
-			$event_template = t3lib_parsehtml::getSubpart($this->doc->moduleTemplate,'###EVENT_TEMPLATE###');
-			$year_change_template = t3lib_parsehtml::getSubpart($this->doc->moduleTemplate,'###YEAR_CHANGE_TEMPLATE###');
-			$last_modified_template = t3lib_parsehtml::getSubpart($event_template,'###LAST_MODIFIED###');
-
-
-			$events = array();
-			$events = $SN->get_events_for_global_id_with_filter($ids,$filter);
-
-			$events_out = '';
-			foreach ($events as $event) {
-
-				if($previous_year != strftime('%Y',$event['Start'])) {
-					$previous_year = strftime('%Y',$event['Start']);
-					$events_out .= t3lib_parsehtml::substituteMarkerArray($year_change_template,array('YEAR'=>strftime('%Y',$event['Start'])),'###|###');
-
-				}
-
-
-				$start_date = substr(strftime("%A",$event['Start']),0,2).",&nbsp;".strftime("%d.%m.%Y",$event['Start']);
-				$date = $start_date;
-				$end_date = '';
-
-				if (isset($event['End']) && strftime("%d%m%Y",$event['Start']) != strftime("%d%m%Y",$event['End']) ) {
-					$date .= "&nbsp;-&nbsp;";
-					$end_date = substr(strftime("%A",$event['End']),0,2).",&nbsp;".strftime("%d.%m.%Y",$event['End']);
-					$date .= $end_date;
-				}
-
-				$time = '';
-				$start_time = '';
-				$end_time = '';
-				if ($event['All_Day'] != 1) {
-					$start_time = strftime("%H:%M",$event['Start']);
-					$time = $start_time;
-
-
-					if (isset($event['End']) && strftime("%H%M",$event['Start']) != strftime("%H%M",$event['End']) ) {
-						$time .= "&nbsp;-&nbsp;";
-						$end_time = strftime("%H:%M",$event['End']);
-						$time .= $end_time;
-					}
-				}
-
-				$date_with_time = $start_date.(($start_time != '')?',&nbsp;'.$start_time:'').(($end_date.$end_time != '')?' '.$GLOBALS['LANG']->getLL('to').' ':'').($end_date != ''?$end_date:'').(($end_date.$end_time != '')?',&nbsp;':'').($end_time != ''?$end_time:'');
-
-
-
-				$event_markers = array(
-
-					'TITEL' => nl2br(htmlentities($event['Title'],ENT_COMPAT,'UTF-8')),
-					'DATE_WITH_TIME' => $date_with_time,
-
-					'CREATED_LABEL' => $GLOBALS['LANG']->getLL('createdLabel'),
-					'LAST_MODIFIED_LABEL' => $GLOBALS['LANG']->getLL('lastModifiedLabel'),
-
-					'CREATED_BY' => $event['Created_By'],
-					'CREATED_AT' => strftime("%d.%m.%Y %H:%M",$event['Created_At']),
-
-					'LAST_MODIFIED_BY' => $event['Last_Modified_By'],
-					'LAST_MODIFIED_AT' => strftime("%d.%m.%Y %H:%M",$event['Last_Modified_At']),
-
-					'EDIT_LINK' => '<a href="'.$this->MCONF['_'].'&event_id='.$event['ID'].'&action=edit">» '.$GLOBALS['LANG']->getLL('edit').'</a>',
-					'USE_AS_TEMPLATE_LINK' => '<a href="'.$this->MCONF['_'].'&event_id='.$event['ID'].'&action=create">» '.$GLOBALS['LANG']->getLL('useAsTemplate').'</a>',
-					'DELETE_LINK' => '<a href="'.$this->MCONF['_'].'&event_id='.$event['ID'].'&action=delete">» '.$GLOBALS['LANG']->getLL('delete').'</a>',
+			$mandatoryAsterisk = '<sup style="color: #ff0000">*</sup>';
+			try {
+				$SN = new tx_shscoutnetwebservice_sn();
+				$filter = array(
+					'order' => 'start_time desc',
 				);
 
+				$kalenders = $SN->get_kalender_by_global_id($ids);
 
-				$last_modified = isset($event['Last_Modified_By']) && $event['Last_Modified_By'] != ''?$last_modified_template:'';
-				
-				$events_out .= t3lib_parsehtml::substituteMarkerArray(t3lib_parsehtml::substituteSubpart($event_template,'###LAST_MODIFIED###',$last_modified),$event_markers,'###|###');
+				if ($_GET['action'] == 'modify') {
+					print_r ($_REQUEST['mod_snk']);
+					die('not Saved!!');
+
+				}
+
+				if ($_GET['action'] == "edit" || $_GET['action'] == "create") {
+					$this->doc->setModuleTemplate(t3lib_extMgm::extPath('sh_scoutnet_kalender') . 'editor/template_edit.html');
+
+					$event_id = $_GET['event_id'];
+					if (!isset($event_id) || !is_numeric($event_id)) {
+						$event_id = -1;
+					}
+
+					if ($event_id > -1) {
+						$events = $SN->get_events_with_ids($ids,array($event_id));
+						if (isset($events[0]))
+							$event = $events[0];
+					}
+
+					if ($_GET['action'] == "create") {
+						$event['id'] = -1;
+					}
+
+
+					if ($event['id'] == -1) {
+						$subpartMarkers['CREATER_FIELD'] = '';
+						$subpartMarkers['LAST_MODIFIED_FIELD'] = '';
+					}
+
+					if ($event['Last_Modified_By'] == ''){
+						$subpartMarkers['LAST_MODIFIED_FIELD'] = '';
+					}
+
+					$markers['FORM_HEADER'] = '<form action="'.$this->MCONF['_'].'&action=modify" method="post" name="eventForm" id="eventForm" autocomplete="on" onsubmit="return removeDefaultValues()">';
+					$markers['HIDDEN_FIELDS'] = '<input type="hidden" name="mod_snk[event_id]" value="'.$event['ID'].'" />';
+
+					$markers['BACK_TO_OVERVIEW_LINK'] = '<a href="'.$this->MCONF['_'].'">» '.$GLOBALS['LANG']->getLL('backToOverview').'</a>';
+
+					$markers['CREATED_LABEL'] = $GLOBALS['LANG']->getLL('createdLabel');
+					$markers['CREATED_BY_LABEL'] = $GLOBALS['LANG']->getLL('createdByLabel');
+					$markers['CREATED_AT_LABEL'] = $GLOBALS['LANG']->getLL('createdAtLabel');
+					$markers['CREATED_BY'] = $event['Created_By'];
+					$markers['CREATED_AT'] = strftime("%d.%m.%Y %H:%M",$event['Created_At']);
+
+					$markers['LAST_MODIFIED_LABEL'] = $GLOBALS['LANG']->getLL('lastModifiedLabel');
+					$markers['LAST_MODIFIED_BY_LABEL'] = $GLOBALS['LANG']->getLL('lastModifiedByLabel');
+					$markers['LAST_MODIFIED_AT_LABEL'] = $GLOBALS['LANG']->getLL('lastModifiedAtLabel');
+					$markers['LAST_MODIFIED_BY'] = $event['Last_Modified_By'];
+					$markers['LAST_MODIFIED_AT'] = strftime("%d.%m.%Y %H:%M",$event['Last_Modified_At']);
+
+					$markers['TITLE_LABEL'] = $GLOBALS['LANG']->getLL('titleLabel');
+					$markers['TITLE_MANDATORY'] = $mandatoryAsterisk; 
+					$markers['TITLE_FIELD'] = $this->createTextInput("Title",$GLOBALS['LANG']->getLL('titleLabel'),$event['Title']); 
+
+					$markers['START_DATE_LABEL'] = $GLOBALS['LANG']->getLL('startDateLabel');
+					$markers['START_DATE_MANDATORY'] = $mandatoryAsterisk;
+					$markers['START_DATE_FIELD'] = $this->createDateInput('StartDate',time(),$event['Start']);
+
+					$markers['START_TIME_LABEL'] = $GLOBALS['LANG']->getLL('startTimeLabel');
+					$markers['START_TIME_FIELD'] = $this->createTimeInput('StartTime',-1,time(),$event['Start']);
+
+					$markers['END_DATE_LABEL'] = $GLOBALS['LANG']->getLL('endDateLabel');
+					$markers['END_DATE_FIELD'] = $this->createDateInput('EndDate',-1,time(),$event['End']);
+
+					$markers['END_TIME_LABEL'] = $GLOBALS['LANG']->getLL('endTimeLabel');
+					$markers['END_TIME_FIELD'] = $this->createTimeInput('StartDate',-1,$event['End']);
+
+					$markers['LOCATION_LABEL'] = $GLOBALS['LANG']->getLL('locationLabel');
+					$markers['LOCATION_FIELD'] = $this->createTextInput("Location",$GLOBALS['LANG']->getLL('locationLabel'),$event['Location']); 
+
+					$markers['ORGANIZER_LABEL'] = $GLOBALS['LANG']->getLL('organizerLabel');
+					$markers['ORGANIZER_FIELD'] = $this->createTextInput("Organizer",$GLOBALS['LANG']->getLL('organizerLabel'),$event['Organizer']); 
+
+					$markers['TARGET_GROUP_LABEL'] = $GLOBALS['LANG']->getLL('targetGroupLabel');
+					$markers['TARGET_GROUP_FIELD'] = $this->createTextInput("TargetGroup",$GLOBALS['LANG']->getLL('targetGroupLabel'),$event['TargetGroup']); 
+
+					$markers['ZIP_LABEL'] = $GLOBALS['LANG']->getLL('zipLabel');
+					$markers['ZIP_FIELD'] = $this->createTextInput("Zip",$GLOBALS['LANG']->getLL('zipLabel'),$event['ZIP']); 
+
+					$markers['LINK_TEXT_LABEL'] = $GLOBALS['LANG']->getLL('linkTextLabel');
+					$markers['LINK_TEXT_FIELD'] = $this->createTextInput("LinkText",$GLOBALS['LANG']->getLL('linkTextLabel'),$event['URL_Text']); 
+
+					$markers['LINK_URL_LABEL'] = $GLOBALS['LANG']->getLL('linkUrlLabel');
+					$markers['LINK_URL_FIELD'] = $this->createTextInput("LinkUrl",$GLOBALS['LANG']->getLL('linkUrlLabel'),$event['URL']); 
+
+					$markers['INFO_LABEL'] = $GLOBALS['LANG']->getLL('infoLabel');
+					$markers['INFO_FIELD'] = $this->createTextArea("Info",$GLOBALS['LANG']->getLL('infoLabel'),$event['Description']); 
+
+					$markers['SAVE_LABEL'] = $GLOBALS['LANG']->getLL('save');
+
+
+					$markers['KEYWORDS_LABEL'] = $GLOBALS['LANG']->getLL('keywordsLabel');
+
+
+					$kategories = $kalenders[0]['Used_Kategories'];
+
+					if( !empty($event['Keywords']) ){
+						foreach( $event['Keywords'] as $id => $keyword ) { 
+							$kategories[$id] = $keyword;
+						}   
+						// this should only remove keywords that are set for the event, but belong to forced_keywords
+						foreach($kalender[0]['Forced_Kategories'] as $forced_keywords_group) {
+							foreach( $forced_keywords_group as $id => $keyword ) { 
+								if(isset($kategories[$id])) {
+									unset($kategories[$id]);
+								}
+							}
+						}
+					}
+					// "sonstiges"-hack
+					if(isset($kategories[1])){
+						unset($kategories[1]);
+					}
+
+
+					uasort($kategories,'strcoll');
+
+					$markers['KEYWORDS_FIELD'] = '';
+					foreach ($kategories as $id=>$name) {
+						$markers['KEYWORDS_FIELD'] .= '<input name="mod_snk[keywords]['.$id.']" type="checkbox" value="1" id="kw_'.$id.'" '.(array_key_exists($id,$event['Keywords'])?'checked':'').'><label for="kw_'.$id.'">'.$name.'</label><br>';
+					}
+
+					$markers['OWN_KEYWORDS_LABEL'] = $GLOBALS['LANG']->getLL('ownKeywordsLabel');
+					// this ][ is correct, since the createTextInput creates an array
+					$markers['OWN_KEYWORDS_FIELD'] = $this->createTextInput("customKeywords][",$GLOBALS['LANG']->getLL('ownKeywordsLabel'),'').'<br>'.
+						$this->createTextInput("customKeywords][",$GLOBALS['LANG']->getLL('ownKeywordsLabel'),'');
+
+					$markers['GROUP_OR_LEADER_LABEL'] = $GLOBALS['LANG']->getLL('groupOrLeaderLabel');
+
+					$markers['GROUP_OR_LEADER_FIELD'] = '';
+					foreach ($kalenders[0]['Forced_Kategories']['sections/leaders'] as $id=>$name) {
+						$markers['GROUP_OR_LEADER_FIELD'] .= '<input name="mod_snk[keywords]['.$id.']" type="checkbox" value="1" id="kw_'.$id.'" '.(array_key_exists($id,$event['Keywords'])?'checked':'').'><label for="kw_'.$id.'">'.$name.'</label><br>';
+					}
+
+					if (isset($kalenders[0]['Forced_Kategories']['DPSG-Ausbildung'])) {
+						$markers['DPSG_EDU_LABEL'] = $GLOBALS['LANG']->getLL('dpsgEduLabel');
+						$markers['DPSG_EDU_FIELD'] = '';
+						foreach ($kalenders[0]['Forced_Kategories']['DPSG-Ausbildung'] as $id=>$name) {
+							$markers['DPSG_EDU_FIELD'] .= '<input name="mod_snk[keywords]['.$id.']" type="checkbox" value="1" id="kw_'.$id.'" '.(array_key_exists($id,$event['Keywords'])?'checked':'').'><label for="kw_'.$id.'">'.$name.'</label><br>';
+						}
+					} else {
+						$subpartMarkers['DPSG_EDU_COLUMN'] = '';
+					}
+
+
+					$markers['MANDATORY_LABEL'] = '<span style="font-size:80%;">'.$mandatoryAsterisk.$GLOBALS['LANG']->getLL('mandatoryLabel').'</span>';
+
+				} else {
+					$markers['CONTENT'] = $this->content;
+
+					$markers['EBENE_LONG_NAME'] = $kalenders[0]->get_Name();
+
+					$markers['BEGIN_LABEL'] = $GLOBALS['LANG']->getLL('beginLabel');
+					$markers['END_LABEL'] = $GLOBALS['LANG']->getLL('endLabel');
+					$markers['TITLE_LABEL'] = $GLOBALS['LANG']->getLL('titleLabel');
+					$markers['ACTION_LABEL'] = $GLOBALS['LANG']->getLL('actionLabel');
+
+					$markers['CREATE_NEW_EVENT_LINK'] = '<a href="'.$this->MCONF['_'].'&action=create">» '.$GLOBALS['LANG']->getLL('create').'</a>';
+
+
+
+					$event_template = t3lib_parsehtml::getSubpart($this->doc->moduleTemplate,'###EVENT_TEMPLATE###');
+					$year_change_template = t3lib_parsehtml::getSubpart($this->doc->moduleTemplate,'###YEAR_CHANGE_TEMPLATE###');
+					$last_modified_template = t3lib_parsehtml::getSubpart($event_template,'###LAST_MODIFIED###');
+
+
+					$events = array();
+					$events = $SN->get_events_for_global_id_with_filter($ids,$filter);
+
+					$events_out = '';
+					foreach ($events as $event) {
+
+						if($previous_year != strftime('%Y',$event['Start'])) {
+							$previous_year = strftime('%Y',$event['Start']);
+							$events_out .= t3lib_parsehtml::substituteMarkerArray($year_change_template,array('YEAR'=>strftime('%Y',$event['Start'])),'###|###');
+
+						}
+
+
+						$start_date = substr(strftime("%A",$event['Start']),0,2).",&nbsp;".strftime("%d.%m.%Y",$event['Start']);
+						$date = $start_date;
+						$end_date = '';
+
+						if (isset($event['End']) && strftime("%d%m%Y",$event['Start']) != strftime("%d%m%Y",$event['End']) ) {
+							$date .= "&nbsp;-&nbsp;";
+							$end_date = substr(strftime("%A",$event['End']),0,2).",&nbsp;".strftime("%d.%m.%Y",$event['End']);
+							$date .= $end_date;
+						}
+
+						$time = '';
+						$start_time = '';
+						$end_time = '';
+						if ($event['All_Day'] != 1) {
+							$start_time = strftime("%H:%M",$event['Start']);
+							$time = $start_time;
+
+
+							if (isset($event['End']) && strftime("%H%M",$event['Start']) != strftime("%H%M",$event['End']) ) {
+								$time .= "&nbsp;-&nbsp;";
+								$end_time = strftime("%H:%M",$event['End']);
+								$time .= $end_time;
+							}
+						}
+
+						$date_with_time = $start_date.(($start_time != '')?',&nbsp;'.$start_time:'').(($end_date.$end_time != '')?' '.$GLOBALS['LANG']->getLL('to').' ':'').($end_date != ''?$end_date:'').(($end_date.$end_time != '')?',&nbsp;':'').($end_time != ''?$end_time:'');
+
+
+
+						$event_markers = array(
+
+							'TITEL' => nl2br(htmlentities($event['Title'],ENT_COMPAT,'UTF-8')),
+							'DATE_WITH_TIME' => $date_with_time,
+
+							'CREATED_LABEL' => $GLOBALS['LANG']->getLL('createdLabel'),
+							'LAST_MODIFIED_LABEL' => $GLOBALS['LANG']->getLL('lastModifiedLabel'),
+
+							'CREATED_BY' => $event['Created_By'],
+							'CREATED_AT' => strftime("%d.%m.%Y %H:%M",$event['Created_At']),
+
+							'LAST_MODIFIED_BY' => $event['Last_Modified_By'],
+							'LAST_MODIFIED_AT' => strftime("%d.%m.%Y %H:%M",$event['Last_Modified_At']),
+
+							'EDIT_LINK' => '<a href="'.$this->MCONF['_'].'&event_id='.$event['ID'].'&action=edit">» '.$GLOBALS['LANG']->getLL('edit').'</a>',
+							'USE_AS_TEMPLATE_LINK' => '<a href="'.$this->MCONF['_'].'&event_id='.$event['ID'].'&action=create">» '.$GLOBALS['LANG']->getLL('useAsTemplate').'</a>',
+							'DELETE_LINK' => '<a href="'.$this->MCONF['_'].'&event_id='.$event['ID'].'&action=delete">» '.$GLOBALS['LANG']->getLL('delete').'</a>',
+						);
+
+
+						$last_modified = isset($event['Last_Modified_By']) && $event['Last_Modified_By'] != ''?$last_modified_template:'';
+
+						$events_out .= t3lib_parsehtml::substituteMarkerArray(t3lib_parsehtml::substituteSubpart($event_template,'###LAST_MODIFIED###',$last_modified),$event_markers,'###|###');
+					}
+
+
+					$markers['EVENTS'] = $events_out;
+
+
+				}
+			} catch(Exception $e) {
+				die($GLOBALS['LANG']->getLL('snkDown').'<br><pre>'.$e.'</pre>');
 			}
 
-
-			$markers['EVENTS'] = $events_out;
-
-
-		}
-		} catch(Exception $e) {
-			die($GLOBALS['LANG']->getLL('snkDown').'<br><pre>'.$e.'</pre>');
 		}
 
 		// Build the <body> for the module
