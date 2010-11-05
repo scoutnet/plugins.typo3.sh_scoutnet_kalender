@@ -404,7 +404,11 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 			$value = $defaultValue;
 		}
 
-		return '<textarea cols="30" rows="8" name="mod_snk['.$name.']" style="color:'.$color.'" onfocus="if (this.value == \''.$defaultValue.'\') { this.value=\'\'; this.style.color=\'black\';}" onblur="if (this.value ==\'\') {this.style.color=\'lightgray\';this.value=\''.$defaultValue.'\'}">'.$value.'</textarea>'; 
+		$id = $this->createIdFromName($name);
+		$this->doc->JScodeArray[] = "defaultValues[".$this->defaultValuesCount."] = new Array('".$id."','".$defaultValue."');";
+		$this->defaultValuesCount++;
+
+		return '<textarea cols="30" rows="8" id="'.$id.'" name="mod_snk['.$name.']" style="color:'.$color.'" onfocus="if (this.value == \''.$defaultValue.'\') { this.value=\'\'; this.style.color=\'black\';}" onblur="if (this.value ==\'\') {this.style.color=\'lightgray\';this.value=\''.$defaultValue.'\'}">'.$value.'</textarea>'; 
 	}
 
 	private function createDateInput($name, $defaultValue, $value = 0){
