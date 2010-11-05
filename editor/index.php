@@ -208,7 +208,7 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 		} else {
 			$markers['CONTENT'] = $this->content;
 
-			//$markers['EBENE_LONG_NAME'] = $kalenders[0]->get_Name();
+			$markers['EBENE_LONG_NAME'] = $kalenders[0]->get_Name();
 
 			$markers['BEGIN_LABEL'] = $GLOBALS['LANG']->getLL('beginLabel');
 			$markers['END_LABEL'] = $GLOBALS['LANG']->getLL('endLabel');
@@ -297,7 +297,7 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 
 		}
 		} catch(Exception $e) {
-			die($GLOBALS['LANG']->getLL('snkDown'). $e);
+			die($GLOBALS['LANG']->getLL('snkDown').'<br><pre>'.$e.'</pre>');
 		}
 
 		// Build the <body> for the module
