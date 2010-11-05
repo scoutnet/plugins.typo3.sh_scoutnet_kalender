@@ -92,7 +92,7 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 			</script>
 		';
 
-			// compile document
+		// compile document
 		$markers['FUNC_MENU'] = t3lib_BEfunc::getFuncMenu(
 				0,
 				'SET[mode]',
@@ -101,6 +101,9 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 			);
 
 		$markers['HEADER1_LABEL'] = $GLOBALS['LANG']->getLL('header1Label');
+
+		print_r($GLOBALS['BE_USER']);
+		die();
 
 		$mandatoryAsterisk = '<sup style="color: #ff0000">*</sup>';
 		try {
