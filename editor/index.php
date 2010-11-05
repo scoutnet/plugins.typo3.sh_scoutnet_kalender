@@ -207,7 +207,7 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 
 			$markers['KEYWORDS_FIELD'] = '';
 			foreach ($kategories as $id=>$name) {
-				$markers['KEYWORDS_FIELD'] .= '<input name="keywords['.$id.']" type="checkbox" value="1" id="kw_'.$id.'" '.(array_key_exists($id,$event['Keywords'])?'checked':'').'><label for="kw_'.$id.'">'.$name.'</label><br>';
+				$markers['KEYWORDS_FIELD'] .= '<input name="mod_snk[keywords]['.$id.']" type="checkbox" value="1" id="kw_'.$id.'" '.(array_key_exists($id,$event['Keywords'])?'checked':'').'><label for="kw_'.$id.'">'.$name.'</label><br>';
 			}
 
 			$markers['OWN_KEYWORDS_LABEL'] = $GLOBALS['LANG']->getLL('ownKeywordsLabel');
@@ -218,15 +218,14 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 
 			$markers['GROUP_OR_LEADER_FIELD'] = '';
 			foreach ($kalenders[0]['Forced_Kategories']['sections/leaders'] as $id=>$name) {
-				$markers['GROUP_OR_LEADER_FIELD'] .= '<input name="keywords['.$id.']" type="checkbox" value="1" id="kw_'.$id.'" '.(array_key_exists($id,$event['Keywords'])?'checked':'').'><label for="kw_'.$id.'">'.$name.'</label><br>';
+				$markers['GROUP_OR_LEADER_FIELD'] .= '<input name="mod_snk[keywords]['.$id.']" type="checkbox" value="1" id="kw_'.$id.'" '.(array_key_exists($id,$event['Keywords'])?'checked':'').'><label for="kw_'.$id.'">'.$name.'</label><br>';
 			}
-			//$markers['GROUP_OR_LEADER_FIELD'] = '<input name="keywords[16]" type="checkbox" value="1" id="qf_94a57b"><label for="qf_94a57b">Wölflinge</label><br><input name="keywords[17]" type="checkbox" value="1" id="qf_3525f0"><label for="qf_3525f0">Jungpfadfinder</label><br><input name="keywords[18]" type="checkbox" value="1" id="qf_a608e2"><label for="qf_a608e2">Pfadfinder</label><br><input name="keywords[19]" type="checkbox" value="1" id="qf_08ba19"><label for="qf_08ba19">Rover</label><br><input name="keywords[20]" type="checkbox" value="1" id="qf_0cb919"><label for="qf_0cb919">Leiter</label>';
 
 			if (isset($kalenders[0]['Forced_Kategories']['DPSG-Ausbildung'])) {
 				$markers['DPSG_EDU_LABEL'] = $GLOBALS['LANG']->getLL('dpsgEduLabel');
 				$markers['DPSG_EDU_FIELD'] = '';
 				foreach ($kalenders[0]['Forced_Kategories']['DPSG-Ausbildung'] as $id=>$name) {
-					$markers['DPSG_EDU_FIELD'] .= '<input name="keywords['.$id.']" type="checkbox" value="1" id="kw_'.$id.'" '.(array_key_exists($id,$event['Keywords'])?'checked':'').'><label for="kw_'.$id.'">'.$name.'</label><br>';
+					$markers['DPSG_EDU_FIELD'] .= '<input name="mod_snk[keywords]['.$id.']" type="checkbox" value="1" id="kw_'.$id.'" '.(array_key_exists($id,$event['Keywords'])?'checked':'').'><label for="kw_'.$id.'">'.$name.'</label><br>';
 				}
 			} else {
 				$subpartMarkers['DPSG_EDU_COLUMN'] = '';
@@ -348,7 +347,7 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 			$value = $defaultValue;
 		}
 
-		return '<input maxlength="255" name="'.$name.'" style="color:'.$color.'" type="text" value="'.$value.'" onfocus="if (this.value == \''.$defaultValue.'\') { this.value=\'\'; this.style.color=\'black\';}" onblur="if (this.value ==\'\') {this.style.color=\'lightgray\';this.value=\''.$defaultValue.'\'}">'; 
+		return '<input maxlength="255" name="mod_snk['.$name.']" style="color:'.$color.'" type="text" value="'.$value.'" onfocus="if (this.value == \''.$defaultValue.'\') { this.value=\'\'; this.style.color=\'black\';}" onblur="if (this.value ==\'\') {this.style.color=\'lightgray\';this.value=\''.$defaultValue.'\'}">'; 
 	}
 	private function createTextArea($name, $defaultValue, $value = ""){
 		$color = "black";
@@ -357,7 +356,7 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 			$value = $defaultValue;
 		}
 
-		return '<textarea cols="30" rows="8" name="'.$name.'" style="color:'.$color.'" onfocus="if (this.value == \''.$defaultValue.'\') { this.value=\'\'; this.style.color=\'black\';}" onblur="if (this.value ==\'\') {this.style.color=\'lightgray\';this.value=\''.$defaultValue.'\'}">'.$value.'</textarea>'; 
+		return '<textarea cols="30" rows="8" name="mod_snk['.$name.']" style="color:'.$color.'" onfocus="if (this.value == \''.$defaultValue.'\') { this.value=\'\'; this.style.color=\'black\';}" onblur="if (this.value ==\'\') {this.style.color=\'lightgray\';this.value=\''.$defaultValue.'\'}">'.$value.'</textarea>'; 
 	}
 
 	private function createDateInput($name, $defaultValue, $value = 0){
@@ -365,7 +364,7 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 			$value = $defaultValue;
 		}
 
-		$out = '<input type="hidden" name="'.$name.'" id="'.$name.'_value" value="'.$value.'">';
+		$out = '<input type="hidden" name="mod_snk['.$name.']" id="'.$name.'_value" value="'.$value.'">';
 
 		$day_options = $month_options = $year_options = '';
 
@@ -447,7 +446,7 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 			$value = $defaultValue;
 		}
 
-		$out = '<input type="hidden" name="'.$name.'" id="'.$name.'_value" value="'.$value.'">';
+		$out = '<input type="hidden" name="mod_snk['.$name.']" id="'.$name.'_value" value="'.$value.'">';
 	
 
 		$hour_options = $min_options = '';
