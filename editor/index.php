@@ -53,6 +53,7 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 	public function main() {
 
 		
+		$ids = array(4);
 
 		$docHeaderButtons = $this->getButtons();
 
@@ -91,6 +92,8 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 				'order' => 'start_time desc',
 			);
 
+			$kalenders = $SN->get_kalender_by_global_id($ids);
+
 		if ($_GET['action'] == "edit" || $_GET['action'] == "create") {
 			$this->doc->setModuleTemplate(t3lib_extMgm::extPath('sh_scoutnet_kalender') . 'editor/template_edit.html');
 
@@ -100,7 +103,6 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 			}
 
 			if ($event_id > -1) {
-				$ids = array(4);
 				$events = $SN->get_events_with_ids($ids,array($event_id));
 				if (isset($events[0]))
 					$event = $events[0];
@@ -206,7 +208,7 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 		} else {
 			$markers['CONTENT'] = $this->content;
 
-			$markers['EBENE_LONG_NAME'] = "Diozese Köln";
+			$markers['EBENE_LONG_NAME'] = $kalenders[0]->get_Name();
 
 			$markers['BEGIN_LABEL'] = $GLOBALS['LANG']->getLL('beginLabel');
 			$markers['END_LABEL'] = $GLOBALS['LANG']->getLL('endLabel');
@@ -223,8 +225,7 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 
 
 			$events = array();
-				$ids = array(4);
-				$events = $SN->get_events_for_global_id_with_filter($ids,$filter);
+			$events = $SN->get_events_for_global_id_with_filter($ids,$filter);
 
 			$events_out = '';
 			foreach ($events as $event) {
