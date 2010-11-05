@@ -298,6 +298,7 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 		}
 		} catch(Exception $e) {
 			$this->content = '<span class="termin">'.$GLOBALS['LANG']->getLL('snkDown').'</span>';
+			echo "error";
 		}
 
 		// Build the <body> for the module
