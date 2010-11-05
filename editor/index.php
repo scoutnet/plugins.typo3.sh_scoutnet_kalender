@@ -69,7 +69,13 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 				document.location = URL;
 			}
 		';
-		$this->doc->JScodeArray[] = "var defaultValues = new Array();";
+		$this->doc->JScodeArray[] = "var defaultValues = new Array();
+			function removeDefaultValues(){
+				for (i=length(defaultValues) -1; i >=0; i--){
+					alert(defaultValues[i]);
+				}
+			}
+		"
 		$this->doc->postCode='
 			<script language="javascript" type="text/javascript">
 				script_ended = 1;
@@ -132,7 +138,7 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 				$subpartMarkers['LAST_MODIFIED_FIELD'] = '';
 			}
 
-			$markers['FORM_HEADER'] = '<form action="'.$this->MCONF['_'].'&action=modify" method="post" name="eventForm" id="eventForm" autocomplete="on" onsubmit="alert(defaultValues[\'Title\'])">';
+			$markers['FORM_HEADER'] = '<form action="'.$this->MCONF['_'].'&action=modify" method="post" name="eventForm" id="eventForm" autocomplete="on" onsubmit="removeDefaultValues()">';
 			$markers['HIDDEN_FIELDS'] = '<input type="hidden" name="mod_snk[event_id]" value="'.$event['ID'].'" />';
 
 			$markers['BACK_TO_OVERVIEW_LINK'] = '<a href="'.$this->MCONF['_'].'">» '.$GLOBALS['LANG']->getLL('backToOverview').'</a>';
