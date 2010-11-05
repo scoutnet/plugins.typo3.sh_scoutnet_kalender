@@ -395,7 +395,7 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 		$this->doc->JScodeArray[] = "defaultValues[".$this->defaultValuesCount."] = new Array('".$id."','".$defaultValue."');";
 		$this->defaultValuesCount++;
 
-		return '<input maxlength="255" name="mod_snk['.$name.']" style="color:'.$color.'" type="text" value="'.$value.'" onfocus="if (this.value == \''.$defaultValue.'\') { this.value=\'\'; this.style.color=\'black\';}" onblur="if (this.value ==\'\') {this.style.color=\'lightgray\';this.value=\''.$defaultValue.'\'}">'; 
+		return '<input maxlength="255" id="'.$id.'" name="mod_snk['.$name.']" style="color:'.$color.'" type="text" value="'.$value.'" onfocus="if (this.value == \''.$defaultValue.'\') { this.value=\'\'; this.style.color=\'black\';}" onblur="if (this.value ==\'\') {this.style.color=\'lightgray\';this.value=\''.$defaultValue.'\'}">'; 
 	}
 	private function createTextArea($name, $defaultValue, $value = ""){
 		$color = "black";
