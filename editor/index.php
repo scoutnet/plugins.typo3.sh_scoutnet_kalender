@@ -181,14 +181,7 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 
 			$markers['KEYWORDS_LABEL'] = $GLOBALS['LANG']->getLL('keywordsLabel');
 
-			$keywords = array(
-				'604'=>'AG-Medien',
-				'4'=>'Aktion',
-				);
-
-			//print_r ($event['Keywords']);
-			//die();
-			foreach ($event['Keywords'] as $id=>$name) {
+			foreach ($kalenders[0]['Used_Kategories'] as $id=>$name) {
 				$markers['KEYWORDS_FIELD'] .= '<input name="keywords['.$id.']" type="checkbox" value="1" id="kw_'.$id.'"><label for="kw_'.$id.'">'.$name.'</label><br>';
 			}
 
