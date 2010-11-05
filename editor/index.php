@@ -104,6 +104,10 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 
 		if (!isset($GLOBALS['BE_USER']->user['tx_shscoutnetkalender_scoutnet_apikey']) || $GLOBALS['BE_USER']->user['tx_shscoutnetkalender_scoutnet_apikey'] == '' || count($GLOBALS['BE_USER']->user['tx_shscoutnetkalender_scoutnet_apikey']) != 255){
 			$this->doc->setModuleTemplate(t3lib_extMgm::extPath('sh_scoutnet_kalender') . 'editor/template_noApiKey.html');
+
+			
+			$markers['CONTENT'] = 'Your account is not connected to any Scoutnet User yet. Please use the Login Button to connect your Scoutnet User to this Typo3 user.';
+
 		} else {
 
 			$mandatoryAsterisk = '<sup style="color: #ff0000">*</sup>';
