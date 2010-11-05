@@ -198,6 +198,8 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 				}
 			}
 
+			uasort($kategories,'strcoll');
+
 
 			foreach ($kategories as $id=>$name) {
 				$markers['KEYWORDS_FIELD'] .= '<input name="keywords['.$id.']" type="checkbox" value="1" id="kw_'.$id.'" '.(array_key_exists($id,$event['Keywords'])?'checked':'').'><label for="kw_'.$id.'">'.$name.'</label><br>';
