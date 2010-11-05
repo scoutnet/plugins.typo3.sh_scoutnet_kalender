@@ -109,7 +109,6 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 			$markers['CONTENT'] = $GLOBALS['LANG']->getLL('noApiKeyError');
 			echo "<pre>";
 			print_r($GLOBALS['TYPO3_CONF_VARS']);
-			print_r($GLOBALS);
 			echo "</pre>";
 			die();
 			$markers['SCOUTNET_CONNECT_BUTTON'] = '<form action="https://www.scoutnet.de/community/scoutnetConnect.html" id="scoutnetLogin" method="post" target="_self">
