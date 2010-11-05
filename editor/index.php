@@ -181,7 +181,25 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 
 			$markers['KEYWORDS_LABEL'] = $GLOBALS['LANG']->getLL('keywordsLabel');
 
-			foreach ($kalenders[0]['Used_Kategories'] as $id=>$name) {
+
+			$kategories = $kalenders[0]['Used_Kategories'];
+
+			if( !empty($event['Keywords']) ){
+				foreach( $event['Keywords'] as $id => $keyword ) { 
+					$kategories[$id] = $keyword;
+				}   
+				// this should only remove keywords that are set for the event, but belong to forced_keywords
+				foreach($kalender[0]['Forced_Kategories'] as $forced_keywords_group) {
+					foreach( $forced_keywords_group as $id => $keyword ) { 
+						if(isset($kategories[$id])) {
+							unset($kategories[$id]);
+						}
+					}
+				}
+			}
+
+
+			foreach ($kategories as $id=>$name) {
 				$markers['KEYWORDS_FIELD'] .= '<input name="keywords['.$id.']" type="checkbox" value="1" id="kw_'.$id.'" '.(array_key_exists($id,$event['Keywords'])?'checked':'').'><label for="kw_'.$id.'">'.$name.'</label><br>';
 			}
 
