@@ -92,7 +92,7 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 				'order' => 'start_time desc',
 			);
 
-			$kalenders = $SN->get_kalender_by_global_id($ids);
+			//$kalenders = $SN->get_kalender_by_global_id($ids);
 
 		if ($_GET['action'] == "edit" || $_GET['action'] == "create") {
 			$this->doc->setModuleTemplate(t3lib_extMgm::extPath('sh_scoutnet_kalender') . 'editor/template_edit.html');
@@ -208,7 +208,7 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 		} else {
 			$markers['CONTENT'] = $this->content;
 
-			$markers['EBENE_LONG_NAME'] = $kalenders[0]->get_Name();
+			//$markers['EBENE_LONG_NAME'] = $kalenders[0]->get_Name();
 
 			$markers['BEGIN_LABEL'] = $GLOBALS['LANG']->getLL('beginLabel');
 			$markers['END_LABEL'] = $GLOBALS['LANG']->getLL('endLabel');
