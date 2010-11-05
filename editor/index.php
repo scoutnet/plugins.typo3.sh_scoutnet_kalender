@@ -69,6 +69,7 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 				document.location = URL;
 			}
 		';
+		$this->doc->JScodeArray[] = "var defaultValues = Array();";
 		$this->doc->postCode='
 			<script language="javascript" type="text/javascript">
 				script_ended = 1;
@@ -374,7 +375,7 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 		$id = $this->createIdFromName($name);
 
 		
-		$this->doc->JScodeArray[] = "defaultValues['".$id."'] = '".$defaultValue."'";
+		$this->doc->JScodeArray[] = "defaultValues['".$id."'] = '".$defaultValue."';";
 
 		return '<input maxlength="255" name="mod_snk['.$name.']" style="color:'.$color.'" type="text" value="'.$value.'" onfocus="if (this.value == \''.$defaultValue.'\') { this.value=\'\'; this.style.color=\'black\';}" onblur="if (this.value ==\'\') {this.style.color=\'lightgray\';this.value=\''.$defaultValue.'\'}">'; 
 	}
