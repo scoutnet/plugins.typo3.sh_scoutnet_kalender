@@ -557,9 +557,9 @@ die();
 			$this->doc->JScodeArray[] = $fkt;
 		}
 
-		$out .= '<select name="mod_snk['$name'][d]" id="'.$name.'_day">'.$day_options.'</select>'.
-			'<select name="mod_snk['$name'][m]" id="'.$name.'_month" onchange="setDaysForYearMon(document.getElementById(\''.$name.'_year\').value,this.value,document.getElementById(\''.$name.'_day\'))">'.$month_options.'</select>'.
-			'<select name="mod_snk['$name'][y]" id="'.$name.'_year" onchange="setDaysForYearMon(this.value,document.getElementById(\''.$name.'_month\').value,document.getElementById(\''.$name.'_day\'))">'.$year_options.'</select>';
+		$out .= '<select name="mod_snk['.$name.'][d]" id="'.$name.'_day">'.$day_options.'</select>'.
+			'<select name="mod_snk['.$name.'][m]" id="'.$name.'_month" onchange="setDaysForYearMon(document.getElementById(\''.$name.'_year\').value,this.value,document.getElementById(\''.$name.'_day\'))">'.$month_options.'</select>'.
+			'<select name="mod_snk['.$name.'][y]" id="'.$name.'_year" onchange="setDaysForYearMon(this.value,document.getElementById(\''.$name.'_month\').value,document.getElementById(\''.$name.'_day\'))">'.$year_options.'</select>';
 
 		return $out;
 	}
@@ -586,8 +586,8 @@ die();
 			$min_options .= '<option value="'.$min.'" '.(!$noContent && strftime("%M",$value) - strftime("%M",$value)%5 == $min?'selected':'').'>'.$min.'</option>';
 		}
 
-		$out .= '<select name="mod_snk['$name'][h]" id="'.$name.'_hour">'.$hour_options.'</select>'.
-			'<select name="mod_snk['$name'][m]" id="'.$name.'_min">'.$min_options.'</select>';
+		$out .= '<select name="mod_snk['.$name.'][h]" id="'.$name.'_hour">'.$hour_options.'</select>'.
+			'<select name="mod_snk['.$name.'][m]" id="'.$name.'_min">'.$min_options.'</select>';
 
 		return $out;
 	}
