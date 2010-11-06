@@ -138,9 +138,30 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 				$kalenders = $SN->get_kalender_by_global_id($ids);
 
 				if ($_GET['action'] == 'modify') {
+					$event = array(
+						'ID' => '119482',
+						'SSID' => '151',
+						'Title' => 'Leiterrunde - Karneval 07',
+						'Organizer' => '',
+						'Target_Group' => 'Leiterrunde',
+						'Start' => '1219946400',
+						'End' => '1219953600',
+						'All_Day' => '',
+						'ZIP' => '50374',
+						'Location' => 'Jugendheim',
+						'URL_Text' => '',
+						'URL' => '',
+						'Description' => '',
+						'Stufen' => Array(
+							'0' => '20',
+						),
+						'Keywords' => Array (
+							'44' => 'Leiterrunde',
+							'2' => 'Stamm',
+						)
+					);
 					print_r ($_REQUEST['mod_snk']);
-					die('not Saved!!');
-
+					$info[] = 'not Saved!!';
 				}
 
 				if ($_GET['action'] == 'delete'){
@@ -149,14 +170,10 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 						try {
 							$SN->delete_event($event_id,$GLOBALS['BE_USER']->user['tx_shscoutnetkalender_scoutnet_username'],$GLOBALS['BE_USER']->user['tx_shscoutnetkalender_scoutnet_apikey']);
 
-							$info[] = "Event deleted!";
+							$info[] = $GLOBALS['LANG']->getLL('eventDeleted');
 						} catch (Exception $e) {
-							$info[] = "Error deleting the event. Please Try again (".$e.")";
+							$info[] = sprintf($GLOBALS['LANG']->getLL('errorDeleteEvent'),$e);
 						}
-
-						
-
-					
 					}
 				}
 
@@ -248,7 +265,7 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 
 					$markers['KEYWORDS_LABEL'] = $GLOBALS['LANG']->getLL('keywordsLabel');
 
-					$markers['INFO'] = join("<br>",$info);
+					$markers['INFO'] = count($info)>0?"<br>".join("<br>",$info):'';
 
 					$kategories = $kalenders[0]['Used_Kategories'];
 
@@ -304,7 +321,7 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 					$markers['MANDATORY_LABEL'] = '<span style="font-size:80%;">'.$mandatoryAsterisk.$GLOBALS['LANG']->getLL('mandatoryLabel').'</span>';
 
 				} else {
-					$markers['INFO'] = join("<br>",$info);
+					$markers['INFO'] = count($info)>0?"<br>".join("<br>",$info):'';
 					$markers['CONTENT'] = $this->content;
 
 					$markers['EBENE_LONG_NAME'] = $kalenders[0]->get_Name();
