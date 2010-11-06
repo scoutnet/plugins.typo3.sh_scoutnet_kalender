@@ -151,7 +151,7 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 
 							$info[] = "Event deleted!";
 						} catch (Exception $e) {
-							$info[] = "Error deleting the event. Please Try again";
+							$info[] = "Error deleting the event. Please Try again (".$e.")";
 						}
 
 						
