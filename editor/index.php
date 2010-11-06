@@ -127,6 +127,7 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 								</form>';
 
 		} else {
+			$info = array();
 			$mandatoryAsterisk = '<sup style="color: #ff0000">*</sup>';
 			try {
 				$SN = new tx_shscoutnetwebservice_sn();
@@ -148,9 +149,9 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 						try {
 							$SN->delete_event($event_id,$GLOBALS['BE_USER']->user['tx_shscoutnetkalender_scoutnet_username'],$GLOBALS['BE_USER']->user['tx_shscoutnetkalender_scoutnet_apikey']);
 
-							echo "Event deleted!";
+							$info[] = "Event deleted!";
 						} catch (Exception $e) {
-							echo "Error deleting the event. Please Try again";
+							$info[] = "Error deleting the event. Please Try again";
 						}
 
 						
@@ -247,6 +248,7 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 
 					$markers['KEYWORDS_LABEL'] = $GLOBALS['LANG']->getLL('keywordsLabel');
 
+					$markers['INFO'] = join("<br>",$info);
 
 					$kategories = $kalenders[0]['Used_Kategories'];
 
@@ -302,6 +304,7 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 					$markers['MANDATORY_LABEL'] = '<span style="font-size:80%;">'.$mandatoryAsterisk.$GLOBALS['LANG']->getLL('mandatoryLabel').'</span>';
 
 				} else {
+					$markers['INFO'] = join("<br>",$info);
 					$markers['CONTENT'] = $this->content;
 
 					$markers['EBENE_LONG_NAME'] = $kalenders[0]->get_Name();
