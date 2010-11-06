@@ -246,7 +246,7 @@ die();
 					$markers['END_DATE_FIELD'] = $this->createDateInput('EndDate',-1,time(),$event['End']);
 
 					$markers['END_TIME_LABEL'] = $GLOBALS['LANG']->getLL('endTimeLabel');
-					$markers['END_TIME_FIELD'] = $this->createTimeInput('StartDate',-1,$event['End']);
+					$markers['END_TIME_FIELD'] = $this->createTimeInput('EndTime',-1,$event['End']);
 
 					$markers['LOCATION_LABEL'] = $GLOBALS['LANG']->getLL('locationLabel');
 					$markers['LOCATION_FIELD'] = $this->createTextInput("Location",$GLOBALS['LANG']->getLL('locationLabel'),$event['Location']); 
