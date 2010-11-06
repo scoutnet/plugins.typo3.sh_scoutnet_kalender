@@ -55,8 +55,6 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 	 * @return	void
 	 */
 	public function main() {
-
-		
 		$ids = array(intval($GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['tx_shscoutnetwebservice']['ScoutnetSSID']));
 
 		$docHeaderButtons = $this->getButtons();
@@ -118,6 +116,7 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 
 			
 			$markers['CONTENT'] = $GLOBALS['LANG']->getLL('noApiKeyError');
+			// TODO: do not forget to change the url!!
 			$markers['SCOUTNET_CONNECT_BUTTON'] = '<form action="'.$GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['tx_shscoutnetwebservice']['ScoutnetLoginPage'].'" id="scoutnetLogin" method="post" target="_self">
 									<input type="hidden" name="redirect_url" value="https://www.dpsg-koeln.de/typo3/mod.php?M=user_scoutnet" />
 									<input type="hidden" name="provider" value="'.$GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['tx_shscoutnetwebservice']['ScoutnetProviderName'].'" />
@@ -128,7 +127,6 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 								</form>';
 
 		} else {
-
 			$mandatoryAsterisk = '<sup style="color: #ff0000">*</sup>';
 			try {
 				$SN = new tx_shscoutnetwebservice_sn();
@@ -343,7 +341,7 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 							}
 						}
 
-						$date_with_time = $start_date.(($start_time != '')?',&nbsp;'.$start_time:'').(($end_date.$end_time != '')?' '.$GLOBALS['LANG']->getLL('to').' ':'').($end_date != ''?$end_date:'').(($end_date.$end_time != '')?',&nbsp;':'').($end_time != ''?$end_time:'');
+						$date_with_time = $start_date.(($start_time != '')?',&nbsp;'.$start_time:'').(($end_date.$end_time != '')?' '.$GLOBALS['LANG']->getLL('to').' ':'').($end_date != ''?$end_date:'').(($end_date.$end_time != '')?',&nbsp;':'').($end_time != ''?$end_time:'').count($end_date.$end_time);
 
 
 
