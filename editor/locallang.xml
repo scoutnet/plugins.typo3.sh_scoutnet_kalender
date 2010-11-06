@@ -108,7 +108,7 @@
 
 			<label index="save">ändern</label>
 			<label index="edit">ändern</label>
-			<label index="create">neuesn Termin eintragen</label>
+			<label index="create">neuen Termin eintragen</label>
 			<label index="backToOverview">zurück zur Übersicht</label>
 			<label index="useAsTemplate">als Vorlage</label>
 			<label index="delete">löschen</label>
