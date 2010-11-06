@@ -45,6 +45,10 @@ p {
 	width:100%
 }
 
+#termin-liste-leftcol{
+	width:25%;
+}
+
 #typo3-docbody-content
 {
 	padding: 2em 1em 1em 0;
