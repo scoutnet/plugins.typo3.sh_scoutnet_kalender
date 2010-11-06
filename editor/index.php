@@ -137,8 +137,6 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 
 				$kalenders = $SN->get_kalender_by_global_id($ids);
 
-				print_r ($kalenders);
-
 				if ($_GET['action'] == 'modify') {
 					$event = array(
 						'ID' => $_REQUEST['mod_snk']['event_id'],
@@ -491,8 +489,6 @@ die();
 			$value = $defaultValue;
 		}
 
-		$out = '<input type="hidden" name="mod_snk['.$name.']" id="'.$name.'_value" value="'.$value.'">';
-
 		$day_options = $month_options = $year_options = '';
 
 
@@ -561,9 +557,9 @@ die();
 			$this->doc->JScodeArray[] = $fkt;
 		}
 
-		$out .= '<select id="'.$name.'_day">'.$day_options.'</select>'.
-			'<select id="'.$name.'_month" onchange="setDaysForYearMon(document.getElementById(\''.$name.'_year\').value,this.value,document.getElementById(\''.$name.'_day\'))">'.$month_options.'</select>'.
-			'<select id="'.$name.'_year" onchange="setDaysForYearMon(this.value,document.getElementById(\''.$name.'_month\').value,document.getElementById(\''.$name.'_day\'))">'.$year_options.'</select>';
+		$out .= '<select name="mod_snk['$name'][d]" id="'.$name.'_day">'.$day_options.'</select>'.
+			'<select name="mod_snk['$name'][m]" id="'.$name.'_month" onchange="setDaysForYearMon(document.getElementById(\''.$name.'_year\').value,this.value,document.getElementById(\''.$name.'_day\'))">'.$month_options.'</select>'.
+			'<select name="mod_snk['$name'][y]" id="'.$name.'_year" onchange="setDaysForYearMon(this.value,document.getElementById(\''.$name.'_month\').value,document.getElementById(\''.$name.'_day\'))">'.$year_options.'</select>';
 
 		return $out;
 	}
@@ -572,9 +568,6 @@ die();
 		if ($value == "") {
 			$value = $defaultValue;
 		}
-
-		$out = '<input type="hidden" name="mod_snk['.$name.']" id="'.$name.'_value" value="'.$value.'">';
-	
 
 		$hour_options = $min_options = '';
 
@@ -593,8 +586,8 @@ die();
 			$min_options .= '<option value="'.$min.'" '.(!$noContent && strftime("%M",$value) - strftime("%M",$value)%5 == $min?'selected':'').'>'.$min.'</option>';
 		}
 
-		$out .= '<select id="'.$name.'_hour">'.$hour_options.'</select>'.
-			'<select id="'.$name.'_min">'.$min_options.'</select>';
+		$out .= '<select name="mod_snk['$name'][h]" id="'.$name.'_hour">'.$hour_options.'</select>'.
+			'<select name="mod_snk['$name'][m]" id="'.$name.'_min">'.$min_options.'</select>';
 
 		return $out;
 	}
