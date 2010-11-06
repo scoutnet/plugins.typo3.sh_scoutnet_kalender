@@ -142,7 +142,7 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 				if ($_GET['action'] == 'modify') {
 					$event = array(
 						'ID' => $_REQUEST['mod_snk']['event_id'],
-						'SSID' => $kalenders[0]['SSID'],
+						'SSID' => $kalenders[0]['ID'],
 						'Title' => $_REQUEST['mod_snk']['Title'],
 						'Organizer' => $_REQUEST['mod_snk']['Organizer'],
 						'Target_Group' => $_REQUEST['mod_snk']['TargetGroup'],
