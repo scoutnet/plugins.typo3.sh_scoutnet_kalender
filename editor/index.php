@@ -139,24 +139,23 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 
 				if ($_GET['action'] == 'modify') {
 					$event = array(
-						'ID' => '119482',
-						'SSID' => '151',
-						'Title' => 'Leiterrunde - Karneval 07',
-						'Organizer' => '',
-						'Target_Group' => 'Leiterrunde',
+						'ID' => $_REQUEST['mod_snk']['event_id'],
+						'SSID' => $kalenders[0]['SSID'],
+						'Title' => $_REQUEST['mod_snk']['Title'],
+						'Organizer' => $_REQUEST['mod_snk']['Organizer'],
+						'Target_Group' => $_REQUEST['mod_snk']['TargetGroup'],
 						'Start' => '1219946400',
 						'End' => '1219953600',
 						'All_Day' => '',
-						'ZIP' => '50374',
-						'Location' => 'Jugendheim',
-						'URL_Text' => '',
-						'URL' => '',
-						'Description' => '',
-						'Keywords' => Array (
-							'44' => 'Leiterrunde',
-							'2' => 'Stamm',
-						)
+						'ZIP' => $_REQUEST['mod_snk']['Zip'],
+						'Location' => $_REQUEST['mod_snk']['Location'],
+						'URL_Text' => $_REQUEST['mod_snk']['LinkText'],
+						'URL' => $_REQUEST['mod_snk']['LinkUrl'],
+						'Description' => $_REQUEST['mod_snk']['Info'],
 					);
+
+					$event['Keywords'] = $_REQUEST['mod_snk']['keywords'];
+
 					echo "<pre>";
 					print_r($event);
 					print_r ($_REQUEST['mod_snk']);
