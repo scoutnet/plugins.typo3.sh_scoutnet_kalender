@@ -298,7 +298,7 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 					$markers['ORGANIZER_FIELD'] = $this->createTextInput("Organizer",$GLOBALS['LANG']->getLL('organizerLabel'),$event['Organizer']); 
 
 					$markers['TARGET_GROUP_LABEL'] = $GLOBALS['LANG']->getLL('targetGroupLabel');
-					$markers['TARGET_GROUP_FIELD'] = $this->createTextInput("TargetGroup",$GLOBALS['LANG']->getLL('targetGroupLabel'),$event['TargetGroup']); 
+					$markers['TARGET_GROUP_FIELD'] = $this->createTextInput("TargetGroup",$GLOBALS['LANG']->getLL('targetGroupLabel'),$event['Target_Group']); 
 
 					$markers['ZIP_LABEL'] = $GLOBALS['LANG']->getLL('zipLabel');
 					$markers['ZIP_FIELD'] = $this->createTextInput("Zip",$GLOBALS['LANG']->getLL('zipLabel'),$event['ZIP']); 
