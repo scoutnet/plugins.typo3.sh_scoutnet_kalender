@@ -142,6 +142,23 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 
 				}
 
+				if ($_GET['action'] == 'delete'){
+					$event_id = $_GET['event_id'];
+					if (is_numeric($event_id)) {
+						try {
+							$SN->delete_event($event_id,$GLOBALS['BE_USER']->user['tx_shscoutnetkalender_scoutnet_username'],$GLOBALS['BE_USER']->user['tx_shscoutnetkalender_scoutnet_apikey']);
+
+							echo "Event deleted!";
+						} catch (Exception $e) {
+							echo "Error deleting the event. Please Try again";
+						}
+
+						
+
+					
+					}
+				}
+
 				if ($_GET['action'] == "edit" || $_GET['action'] == "create") {
 					$this->doc->setModuleTemplate(t3lib_extMgm::extPath('sh_scoutnet_kalender') . 'editor/template_edit.html');
 
