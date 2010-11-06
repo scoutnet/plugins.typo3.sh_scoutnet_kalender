@@ -89,6 +89,7 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 						if (field.value.trim().length == 0) {
 							alert(checkEmpty[i][1]);
 							field.focus();
+							field.style.color='black';
 							return false;
 						}
 					}

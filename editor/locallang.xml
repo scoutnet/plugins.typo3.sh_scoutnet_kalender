@@ -20,7 +20,7 @@
 			<label index="beginLabel">Begin</label>
 			<label index="endLabel">End</label>
 			<label index="titleLabel">Title</label>
-			<label index="titleLabelMandatory">You must enter a valide Title</label>
+			<label index="titleLabelMandatory">You must enter a valid Title</label>
 			<label index="actionLabel">Action</label>
 			<label index="startDateLabel">Start Date</label>
 			<label index="startTimeLabel">Start Time</label>
