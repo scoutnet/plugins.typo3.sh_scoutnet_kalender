@@ -237,11 +237,11 @@ die();
 					}
 
 					if ($_GET['action'] == "create") {
-						$event['id'] = -1;
+						$event['ID'] = -1;
 					}
 
 
-					if ($event['id'] == -1) {
+					if ($event['ID'] == -1) {
 						$subpartMarkers['CREATER_FIELD'] = '';
 						$subpartMarkers['LAST_MODIFIED_FIELD'] = '';
 					}
