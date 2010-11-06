@@ -188,6 +188,7 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 						'URL_Text' => $_REQUEST['mod_snk']['LinkText'],
 						'URL' => $_REQUEST['mod_snk']['LinkUrl'],
 						'Description' => $_REQUEST['mod_snk']['Info'],
+						'Stufen' => array(),
 					);
 
 					$event['Keywords'] = $_REQUEST['mod_snk']['keywords'];
