@@ -240,10 +240,10 @@ die();
 					$markers['START_DATE_FIELD'] = $this->createDateInput('StartDate',time(),$event['Start']);
 
 					$markers['START_TIME_LABEL'] = $GLOBALS['LANG']->getLL('startTimeLabel');
-					$markers['START_TIME_FIELD'] = $this->createTimeInput('StartTime',-1,time(),$event['Start']);
+					$markers['START_TIME_FIELD'] = $this->createTimeInput('StartTime',-1,$event['Start']);
 
 					$markers['END_DATE_LABEL'] = $GLOBALS['LANG']->getLL('endDateLabel');
-					$markers['END_DATE_FIELD'] = $this->createDateInput('EndDate',-1,time(),$event['End']);
+					$markers['END_DATE_FIELD'] = $this->createDateInput('EndDate',-1,$event['End']);
 
 					$markers['END_TIME_LABEL'] = $GLOBALS['LANG']->getLL('endTimeLabel');
 					$markers['END_TIME_FIELD'] = $this->createTimeInput('EndTime',-1,$event['End']);
