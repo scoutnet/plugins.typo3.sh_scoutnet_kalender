@@ -381,7 +381,7 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 
 							'EDIT_LINK' => '<a href="'.$this->MCONF['_'].'&event_id='.$event['ID'].'&action=edit">» '.$GLOBALS['LANG']->getLL('edit').'</a>',
 							'USE_AS_TEMPLATE_LINK' => '<a href="'.$this->MCONF['_'].'&event_id='.$event['ID'].'&action=create">» '.$GLOBALS['LANG']->getLL('useAsTemplate').'</a>',
-							'DELETE_LINK' => '<a href="'.$this->MCONF['_'].'&event_id='.$event['ID'].'&action=delete">» '.$GLOBALS['LANG']->getLL('delete').'</a>',
+							'DELETE_LINK' => '<a href="'.$this->MCONF['_'].'&event_id='.$event['ID'].'&action=delete" onclick="return confirm(\''.sprintf($GLOBALS['LANG']->getLL('delQuestion'),nl2br(htmlentities($event['Title'],ENT_COMPAT,'UTF-8'))).'\')">» '.$GLOBALS['LANG']->getLL('delete').'</a>',
 						);
 
 
