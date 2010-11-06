@@ -49,6 +49,10 @@
 
 			<label index="eventDeleted">Event deleted!</label>
 			<label index="errorDeleteEvent">Error deleting the event. Please Try again (%s)</label>
+			<label index="eventCreated">Event Created</label>
+			<label index="errorCreateEvent">Error creating the event. Please Try again (%s)</label>
+			<label index="eventUpdated">Event Updated</label>
+			<label index="errorUpdateEvent">Error updating the event. Please Try again (%s)</label>
 
 			<label index="mandatoryLabel">Mandatory</label>
 
