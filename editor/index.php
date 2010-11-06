@@ -45,6 +45,7 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 
 		$this->usedIds = array();
 		$this->defaultValuesCount = 0;
+		$this->checkEmptyCount = 0;
 
 	}
 
@@ -75,6 +76,18 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 					if (field != null) {
 						if (field.value == defaultValues[i][1]) {
 							field.value = '';
+						}
+					}
+				}
+				return true;
+			}
+			var checkEmpty = new Array();
+			function checkFields(){
+				for (i=checkEmpty.length -1; i >=0; i--){
+					var field = document.getElementById(checkEmpty[i]);
+					if (field != null) {
+						if (field.value.trim().length == 0) {
+							return false;
 						}
 					}
 				}
@@ -227,7 +240,7 @@ die();
 						$subpartMarkers['LAST_MODIFIED_FIELD'] = '';
 					}
 
-					$markers['FORM_HEADER'] = '<form action="'.$this->MCONF['_'].'&action=modify" method="post" name="eventForm" id="eventForm" autocomplete="on" onsubmit="return removeDefaultValues()">';
+					$markers['FORM_HEADER'] = '<form action="'.$this->MCONF['_'].'&action=modify" method="post" name="eventForm" id="eventForm" autocomplete="on" onsubmit="return removeDefaultValues() && checkFields()">';
 					$markers['HIDDEN_FIELDS'] = '<input type="hidden" name="mod_snk[event_id]" value="'.$event['ID'].'" />';
 
 					$markers['BACK_TO_OVERVIEW_LINK'] = '<a href="'.$this->MCONF['_'].'">» '.$GLOBALS['LANG']->getLL('backToOverview').'</a>';
@@ -468,7 +481,7 @@ die();
 		return $id;
 	}
 
-	private function createTextInput($name, $defaultValue, $value = ""){
+	private function createTextInput($name, $defaultValue, $value = "", $mandatory = false){
 		$color = "black";
 		if ($value == "") {
 			$color = "lightgray";
@@ -481,9 +494,14 @@ die();
 		$this->doc->JScodeArray[] = "defaultValues[".$this->defaultValuesCount."] = new Array('".$id."','".$defaultValue."');";
 		$this->defaultValuesCount++;
 
+		if ($mandatory) {
+			$this->doc->JScodeArray[] = "checkEmpty[".$this->checkEmptyCount."] = '".$id."';";
+			$this->checkEmptyCount++;
+		}
+
 		return '<input maxlength="255" id="'.$id.'" name="mod_snk['.$name.']" style="color:'.$color.'" type="text" value="'.$value.'" onfocus="if (this.value == \''.$defaultValue.'\') { this.value=\'\'; this.style.color=\'black\';}" onblur="if (this.value ==\'\') {this.style.color=\'lightgray\';this.value=\''.$defaultValue.'\'}">'; 
 	}
-	private function createTextArea($name, $defaultValue, $value = ""){
+	private function createTextArea($name, $defaultValue, $value = "",$mandatory = false){
 		$color = "black";
 		if ($value == "") {
 			$color = "lightgray";
@@ -493,6 +511,11 @@ die();
 		$id = $this->createIdFromName($name);
 		$this->doc->JScodeArray[] = "defaultValues[".$this->defaultValuesCount."] = new Array('".$id."','".$defaultValue."');";
 		$this->defaultValuesCount++;
+
+		if ($mandatory) {
+			$this->doc->JScodeArray[] = "checkEmpty[".$this->checkEmptyCount."] = '".$id."';";
+			$this->checkEmptyCount++;
+		}
 
 		return '<textarea cols="30" rows="8" id="'.$id.'" name="mod_snk['.$name.']" style="color:'.$color.'" onfocus="if (this.value == \''.$defaultValue.'\') { this.value=\'\'; this.style.color=\'black\';}" onblur="if (this.value ==\'\') {this.style.color=\'lightgray\';this.value=\''.$defaultValue.'\'}">'.$value.'</textarea>'; 
 	}
