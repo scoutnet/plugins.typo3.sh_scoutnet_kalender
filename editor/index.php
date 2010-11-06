@@ -203,11 +203,11 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 						$event['Custom_Keywords'] = $customKeywords;
 
 					try {
-						$SN->write_event($event_id,$event,$GLOBALS['BE_USER']->user['tx_shscoutnetkalender_scoutnet_username'],$GLOBALS['BE_USER']->user['tx_shscoutnetkalender_scoutnet_apikey']);
+						$SN->write_event($event['ID'],$event,$GLOBALS['BE_USER']->user['tx_shscoutnetkalender_scoutnet_username'],$GLOBALS['BE_USER']->user['tx_shscoutnetkalender_scoutnet_apikey']);
 
-						$info[] = $GLOBALS['LANG']->getLL('event'.($event_id == -1?'Created':'Updated'));
+						$info[] = $GLOBALS['LANG']->getLL('event'.($event['ID'] == -1?'Created':'Updated'));
 					} catch (Exception $e) {
-						$info[] = sprintf($GLOBALS['LANG']->getLL('error'.($event_id == -1?'Create':'Update').'Event'),$e);
+						$info[] = sprintf($GLOBALS['LANG']->getLL('error'.($event['ID'] == -1?'Create':'Update').'Event'),$e);
 					}
 				}
 
