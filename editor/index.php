@@ -139,7 +139,7 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 
 				if ($_GET['action'] == 'modify') {
 					$event = array(
-						'ID' => $_REQUEST['mod_snk']['event_id'],
+						'ID' => is_numeric($_REQUEST['mod_snk']['event_id'])?$_REQUEST['mod_snk']['event_id']):-1,
 						'SSID' => $kalenders[0]['ID'],
 						'Title' => $_REQUEST['mod_snk']['Title'],
 						'Organizer' => $_REQUEST['mod_snk']['Organizer'],
@@ -153,10 +153,6 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 						'URL' => $_REQUEST['mod_snk']['LinkUrl'],
 						'Description' => $_REQUEST['mod_snk']['Info'],
 					);
-
-					if (!isset($event['ID'])) {
-						$event['ID'] = -1;
-					}
 
 					$event['Keywords'] = $_REQUEST['mod_snk']['keywords'];
 
