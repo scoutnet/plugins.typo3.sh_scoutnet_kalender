@@ -155,8 +155,6 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 						'Description' => $_REQUEST['mod_snk']['Info'],
 					);
 
-					if ($_REQUEST['mod_snk']['StartDate']['d']
-
 					$event['Keywords'] = $_REQUEST['mod_snk']['keywords'];
 
 					foreach ($_REQUEST['mod_snk']['customKeywords'] as $keyword){
