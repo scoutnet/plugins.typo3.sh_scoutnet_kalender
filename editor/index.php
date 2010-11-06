@@ -146,7 +146,6 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 						'Target_Group' => $_REQUEST['mod_snk']['TargetGroup'],
 						'Start' => mktime(intval($_REQUEST['mod_snk']['StartTime']['h']),intval($_REQUEST['mod_snk']['StartTime']['m']),intval(0),intval($_REQUEST['mod_snk']['StartDate']['m']),intval($_REQUEST['mod_snk']['StartDate']['d']),intval($_REQUEST['mod_snk']['StartDate']['y'])),
 						'End' => mktime(intval($_REQUEST['mod_snk']['EndTime']['h']),intval($_REQUEST['mod_snk']['EndTime']['m']),intval(0),intval($_REQUEST['mod_snk']['EndDate']['m']),intval($_REQUEST['mod_snk']['EndDate']['d']),intval($_REQUEST['mod_snk']['EndDate']['y'])),
-						'test'=> intval(''),
 						'All_Day' => $_REQUEST['mod_snk']['StartTime']['m'] == "" || $_REQUEST['mod_snk']['StartTime']['h'] == "",
 						'ZIP' => $_REQUEST['mod_snk']['Zip'],
 						'Location' => $_REQUEST['mod_snk']['Location'],
