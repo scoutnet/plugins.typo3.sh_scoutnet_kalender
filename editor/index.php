@@ -161,6 +161,7 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 						)
 					);
 					print_r ($_REQUEST['mod_snk']);
+die();
 					$info[] = 'not Saved!!';
 				}
 
