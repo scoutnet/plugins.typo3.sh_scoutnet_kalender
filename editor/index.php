@@ -88,6 +88,7 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 					if (field != null) {
 						if (field.value.trim().length == 0) {
 							alert(checkEmpty[i][1]);
+							field.focus();
 							return false;
 						}
 					}
@@ -267,7 +268,7 @@ die();
 
 					$markers['TITLE_LABEL'] = $GLOBALS['LANG']->getLL('titleLabel');
 					$markers['TITLE_MANDATORY'] = $mandatoryAsterisk; 
-					$markers['TITLE_FIELD'] = $this->createTextInput("Title",$GLOBALS['LANG']->getLL('titleLabel'),$event['Title']); 
+					$markers['TITLE_FIELD'] = $this->createTextInput("Title",$GLOBALS['LANG']->getLL('titleLabel'),$event['Title'],true,$GLOBALS['LANG']->getLL('titleLabelMandatory')); 
 
 					$markers['START_DATE_LABEL'] = $GLOBALS['LANG']->getLL('startDateLabel');
 					$markers['START_DATE_MANDATORY'] = $mandatoryAsterisk;
