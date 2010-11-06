@@ -341,7 +341,7 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 							}
 						}
 
-						$date_with_time = $start_date.(($start_time != '')?',&nbsp;'.$start_time:'').(($end_date.$end_time != '')?' '.$GLOBALS['LANG']->getLL('to').' ':'').($end_date != ''?$end_date:'').(($end_date.$end_time != '')?',&nbsp;':'').($end_time != ''?$end_time:'').count($end_date.$end_time);
+						$date_with_time = $start_date.(($start_time != '')?',&nbsp;'.$start_time:'').(($end_date.$end_time != '')?' '.$GLOBALS['LANG']->getLL('to').' ':'').($end_date != ''?$end_date:'').(($end_date.$end_time != '')?',&nbsp;':'').($end_time != ''?$end_time:'').count($end_date).count($end_time);
 
 
 
