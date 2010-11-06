@@ -152,15 +152,15 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 						'URL_Text' => '',
 						'URL' => '',
 						'Description' => '',
-						'Stufen' => Array(
-							'0' => '20',
-						),
 						'Keywords' => Array (
 							'44' => 'Leiterrunde',
 							'2' => 'Stamm',
 						)
 					);
+					echo "<pre>";
+					print_r($event);
 					print_r ($_REQUEST['mod_snk']);
+					echo "</pre>";
 die();
 					$info[] = 'not Saved!!';
 				}
