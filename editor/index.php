@@ -138,14 +138,27 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 				$kalenders = $SN->get_kalender_by_global_id($ids);
 
 				if ($_GET['action'] == 'modify') {
+			
+					$start = mktime(intval($_REQUEST['mod_snk']['StartTime']['h']),
+						intval($_REQUEST['mod_snk']['StartTime']['m']),intval(0),
+						intval($_REQUEST['mod_snk']['StartDate']['m']),
+						intval($_REQUEST['mod_snk']['StartDate']['d']),
+						intval($_REQUEST['mod_snk']['StartDate']['y']));
+
+					$end = mktime(intval($_REQUEST['mod_snk']['EndTime']['h']),
+						intval($_REQUEST['mod_snk']['EndTime']['m']), intval(0),
+						intval($_REQUEST['mod_snk']['EndDate']['m']==""?$_REQUEST['mod_snk']['StartDate']['m']:$_REQUEST['mod_snk']['EndDate']['m']),
+						intval($_REQUEST['mod_snk']['EndDate']['d']==""?$_REQUEST['mod_snk']['StartDate']['d']:$_REQUEST['mod_snk']['EndDate']['d']),
+						intval($_REQUEST['mod_snk']['EndDate']['y']==""?$_REQUEST['mod_snk']['StartDate']['y']:$_REQUEST['mod_snk']['EndDate']['y']));
+
 					$event = array(
 						'ID' => is_numeric($_REQUEST['mod_snk']['event_id'])?$_REQUEST['mod_snk']['event_id']:-1,
 						'SSID' => $kalenders[0]['ID'],
 						'Title' => $_REQUEST['mod_snk']['Title'],
 						'Organizer' => $_REQUEST['mod_snk']['Organizer'],
 						'Target_Group' => $_REQUEST['mod_snk']['TargetGroup'],
-						'Start' => mktime(intval($_REQUEST['mod_snk']['StartTime']['h']),intval($_REQUEST['mod_snk']['StartTime']['m']),intval(0),intval($_REQUEST['mod_snk']['StartDate']['m']),intval($_REQUEST['mod_snk']['StartDate']['d']),intval($_REQUEST['mod_snk']['StartDate']['y'])),
-						'End' => mktime(intval($_REQUEST['mod_snk']['EndTime']['h']),intval($_REQUEST['mod_snk']['EndTime']['m']),intval(0),intval($_REQUEST['mod_snk']['EndDate']['m']),intval($_REQUEST['mod_snk']['EndDate']['d']),intval($_REQUEST['mod_snk']['EndDate']['y'])),
+						'Start' => $start, 
+						'End' => $end,
 						'All_Day' => $_REQUEST['mod_snk']['StartTime']['m'] == "" || $_REQUEST['mod_snk']['StartTime']['h'] == "",
 						'ZIP' => $_REQUEST['mod_snk']['Zip'],
 						'Location' => $_REQUEST['mod_snk']['Location'],
