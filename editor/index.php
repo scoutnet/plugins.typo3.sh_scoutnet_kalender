@@ -84,9 +84,10 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 			var checkEmpty = new Array();
 			function checkFields(){
 				for (i=checkEmpty.length -1; i >=0; i--){
-					var field = document.getElementById(checkEmpty[i]);
+					var field = document.getElementById(checkEmpty[i][0]);
 					if (field != null) {
 						if (field.value.trim().length == 0) {
+							alert(checkEmpty[i][1]);
 							return false;
 						}
 					}
@@ -488,7 +489,7 @@ die();
 		return $id;
 	}
 
-	private function createTextInput($name, $defaultValue, $value = "", $mandatory = false){
+	private function createTextInput($name, $defaultValue, $value = "", $mandatory = false, $mandatory_text=""){
 		$color = "black";
 		if ($value == "") {
 			$color = "lightgray";
@@ -502,13 +503,13 @@ die();
 		$this->defaultValuesCount++;
 
 		if ($mandatory) {
-			$this->doc->JScodeArray[] = "checkEmpty[".$this->checkEmptyCount."] = '".$id."';";
+			$this->doc->JScodeArray[] = "checkEmpty[".$this->checkEmptyCount."] = new Array('".$id."','".str_replace("'","",$mandatory_text)."');";
 			$this->checkEmptyCount++;
 		}
 
 		return '<input maxlength="255" id="'.$id.'" name="mod_snk['.$name.']" style="color:'.$color.'" type="text" value="'.$value.'" onfocus="if (this.value == \''.$defaultValue.'\') { this.value=\'\'; this.style.color=\'black\';}" onblur="if (this.value ==\'\') {this.style.color=\'lightgray\';this.value=\''.$defaultValue.'\'}">'; 
 	}
-	private function createTextArea($name, $defaultValue, $value = "",$mandatory = false){
+	private function createTextArea($name, $defaultValue, $value = "",$mandatory = false, $mandatory_text = ""){
 		$color = "black";
 		if ($value == "") {
 			$color = "lightgray";
@@ -520,7 +521,7 @@ die();
 		$this->defaultValuesCount++;
 
 		if ($mandatory) {
-			$this->doc->JScodeArray[] = "checkEmpty[".$this->checkEmptyCount."] = '".$id."';";
+			$this->doc->JScodeArray[] = "checkEmpty[".$this->checkEmptyCount."] = new Array('".$id."','".str_replace("'","",$mandatory_text)."');";
 			$this->checkEmptyCount++;
 		}
 
