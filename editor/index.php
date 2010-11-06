@@ -58,8 +58,6 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 
 		
 		$ids = array(intval($GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['tx_shscoutnetwebservice']['ScoutnetSSID']));
-		print_r($ids);
-		die();
 
 		$docHeaderButtons = $this->getButtons();
 
