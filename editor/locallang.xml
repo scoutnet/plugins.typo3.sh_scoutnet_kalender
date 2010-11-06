@@ -6,7 +6,7 @@
 	</meta>
 	<data type="array">
 		<languageKey index="default" type="array">
-			<label index="mlang_tabs_tab">Scoutnet Kalender</label>
+			<label index="mlang_tabs_tab">Scoutnet Calender</label>
 			<label index="to">to</label>
 			<label index="snkDown">Scoutnet Kalender Down?</label>
 
@@ -70,6 +70,73 @@
 			<label index="mon12">December</label>
 
 			<label index="noApiKeyError">Your account is not connected to any Scoutnet User yet. Please use the Login Button to connect your Scoutnet User to this Typo3 user.</label>
+
+		</languageKey>
+		<languageKey index="de" type="array">
+			<label index="mlang_tabs_tab">Scoutnet Kalender</label>
+			<label index="to">bis</label>
+			<label index="snkDown">ist der Scoutnet Kalender nicht verfügbar?</label>
+
+			<label index="createdLabel">Erstellt</label>
+			<label index="createdByLabel">Erstellt von</label>
+			<label index="createdAtLabel">Erstellt am</label>
+			<label index="lastModifiedLabel">Geändert</label>
+			<label index="lastModifiedByLabel">Geändert von</label>
+			<label index="lastModifiedAtLabel">Geändert am</label>
+			<label index="header1Label">Terminverwaltung</label>
+			<label index="beginLabel">Beginn</label>
+			<label index="endLabel">Ende</label>
+			<label index="titleLabel">Titel</label>
+			<label index="titleLabelMandatory">Du musst einen richtigen Titel eingeben!</label>
+			<label index="actionLabel">Aktion</label>
+			<label index="startDateLabel">Startdatum</label>
+			<label index="startTimeLabel">Startzeit</label>
+			<label index="endDateLabel">Enddatum</label>
+			<label index="endTimeLabel">Endzeit</label>
+			<label index="locationLabel">Ortsangabe</label>
+			<label index="organizerLabel">Veranstalter</label>
+			<label index="targetGroupLabel">Zielgruppe</label>
+			<label index="zipLabel">PLZ</label>
+			<label index="linkTextLabel">Link-Text</label>
+			<label index="linkUrlLabel">Link</label>
+			<label index="infoLabel">Info</label>
+
+			<label index="keywordsLabel">Schlüsselbegriffe</label>
+			<label index="ownKeywordsLabel">Eigene</label>
+			<label index="groupOrLeaderLabel">Stufen/Leiter</label>
+			<label index="dpsgEduLabel">DPSG-Ausbildung</label>
+
+			<label index="save">ändern</label>
+			<label index="edit">ändern</label>
+			<label index="create">neuesn Termin eintragen</label>
+			<label index="backToOverview">zurück zur Übersicht</label>
+			<label index="useAsTemplate">als Vorlage</label>
+			<label index="delete">löschen</label>
+			<label index="delQuestion">Bist du dir sicher, dass du den Termin "%s" löschen willst?</label>
+
+			<label index="eventDeleted">Termin gelöscht!</label>
+			<label index="errorDeleteEvent">Fehler beim löschen des Termins. Bitte versuche es später erneut (%s)</label>
+			<label index="eventCreated">Termin erstellt</label>
+			<label index="errorCreateEvent">Fehler beim erstellen des Termins. Bitte versuche es später erneut (%s)</label>
+			<label index="eventUpdated">Termin geändert</label>
+			<label index="errorUpdateEvent">Fehler beim ändern des Termins. Bitte versuche es später erneut (%s)</label>
+
+			<label index="mandatoryLabel">Pflichtfelder</label>
+
+			<label index="mon1">Januar</label>
+			<label index="mon2">Februar</label>
+			<label index="mon3">März</label>
+			<label index="mon4">April</label>
+			<label index="mon5">Mai</label>
+			<label index="mon6">Juni</label>
+			<label index="mon7">Juli</label>
+			<label index="mon8">August</label>
+			<label index="mon9">September</label>
+			<label index="mon10">Oktober</label>
+			<label index="mon11">November</label>
+			<label index="mon12">Dezember</label>
+
+			<label index="noApiKeyError">Dein Account ist noch nicht mit einem Scoutnet Benutzer verbunden. Bitte benutzen den Login Button, um deinen Scoutnet Benutzer mit diesem Typo3 Account zu verbinden.</label>
 
 		</languageKey>
 	</data>
