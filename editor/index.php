@@ -144,15 +144,18 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 						'Title' => $_REQUEST['mod_snk']['Title'],
 						'Organizer' => $_REQUEST['mod_snk']['Organizer'],
 						'Target_Group' => $_REQUEST['mod_snk']['TargetGroup'],
-						'Start' => '1219946400',
-						'End' => '1219953600',
-						'All_Day' => '',
+						'Start' => mktime($_REQUEST['mod_snk']['StartTime']['h'],$_REQUEST['mod_snk']['StartTime']['m'],0,$_REQUEST['mod_snk']['StartDate']['m'],$_REQUEST['mod_snk']['StartDate']['d'],$_REQUEST['mod_snk']['StartDate']['y']),
+						'End' => mktime($_REQUEST['mod_snk']['EndTime']['h'],$_REQUEST['mod_snk']['EndTime']['m'],0,$_REQUEST['mod_snk']['EndDate']['m'],$_REQUEST['mod_snk']['EndDate']['d'],$_REQUEST['mod_snk']['EndDate']['y']),
+						'test'=> intval(''),
+						'All_Day' => $_REQUEST['mod_snk']['StartTime']['m'] == "" || $_REQUEST['mod_snk']['StartTime']['h'] == "",
 						'ZIP' => $_REQUEST['mod_snk']['Zip'],
 						'Location' => $_REQUEST['mod_snk']['Location'],
 						'URL_Text' => $_REQUEST['mod_snk']['LinkText'],
 						'URL' => $_REQUEST['mod_snk']['LinkUrl'],
 						'Description' => $_REQUEST['mod_snk']['Info'],
 					);
+
+					if ($_REQUEST['mod_snk']['StartDate']['d']
 
 					$event['Keywords'] = $_REQUEST['mod_snk']['keywords'];
 
