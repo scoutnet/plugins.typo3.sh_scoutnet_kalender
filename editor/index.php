@@ -137,6 +137,8 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 
 				$kalenders = $SN->get_kalender_by_global_id($ids);
 
+				print_r ($kalenders);
+
 				if ($_GET['action'] == 'modify') {
 					$event = array(
 						'ID' => $_REQUEST['mod_snk']['event_id'],
