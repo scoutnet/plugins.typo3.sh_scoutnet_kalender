@@ -201,7 +201,9 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 
 					if (count($customKeywords) > 0)
 						$event['Custom_Keywords'] = $customKeywords;
-
+					echo "<pre>";
+					print_r($event);
+						die();
 					try {
 						$SN->write_event($event['ID'],$event,$GLOBALS['BE_USER']->user['tx_shscoutnetkalender_scoutnet_username'],$GLOBALS['BE_USER']->user['tx_shscoutnetkalender_scoutnet_apikey']);
 
