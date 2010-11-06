@@ -83,7 +83,6 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 			}
 			var checkEmpty = new Array();
 			function checkFields(){
-				alert(foo);
 				for (i=checkEmpty.length -1; i >=0; i--){
 					var field = document.getElementById(checkEmpty[i]);
 					if (field != null) {
