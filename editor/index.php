@@ -150,15 +150,19 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 								</form>';
 
 
-		} elseif($SN->has_write_permission_to_calender(intval($GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['tx_shscoutnetwebservice']['ScoutnetSSID']),$GLOBALS['BE_USER']->user['tx_shscoutnetkalender_scoutnet_username'],$GLOBALS['BE_USER']->user['tx_shscoutnetkalender_scoutnet_apikey'])) {
-			echo "you are the man";
-			die();
-
 		} else {
 			$info = array();
 			$mandatoryAsterisk = '<sup style="color: #ff0000">*</sup>';
 			try {
 				$SN = new tx_shscoutnetwebservice_sn();
+
+
+				if($SN->has_write_permission_to_calender(intval($GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['tx_shscoutnetwebservice']['ScoutnetSSID']),$GLOBALS['BE_USER']->user['tx_shscoutnetkalender_scoutnet_username'],$GLOBALS['BE_USER']->user['tx_shscoutnetkalender_scoutnet_apikey'])) {
+					echo "you are the man";
+					die();
+				}
+
+
 				$filter = array(
 					'order' => 'start_time desc',
 				);
