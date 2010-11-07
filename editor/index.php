@@ -212,7 +212,7 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 
 						$info[] = $GLOBALS['LANG']->getLL('event'.($event['ID'] == -1?'Created':'Updated'));
 					} catch (Exception $e) {
-						$info[] = sprintf($GLOBALS['LANG']->getLL('error'.($event['ID'] == -1?'Create':'Update').'Event'),$e);
+						$info[] = sprintf($GLOBALS['LANG']->getLL('error'.($event['ID'] == -1?'Create':'Update').'Event'),$e->getMessage());
 					}
 				}
 
@@ -224,7 +224,7 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 
 							$info[] = $GLOBALS['LANG']->getLL('eventDeleted');
 						} catch (Exception $e) {
-							$info[] = sprintf($GLOBALS['LANG']->getLL('errorDeleteEvent'),$e);
+							$info[] = sprintf($GLOBALS['LANG']->getLL('errorDeleteEvent'),$e->getMessage());
 						}
 					}
 				}
