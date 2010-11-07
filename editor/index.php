@@ -474,7 +474,7 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 
 				}
 			} catch(Exception $e) {
-				die($GLOBALS['LANG']->getLL('snkDown').'<br><pre>'.$e.'</pre>');
+				die($GLOBALS['LANG']->getLL('snkDown').'<br><pre>'.$e->getMessage().'</pre>');
 			}
 
 		}
