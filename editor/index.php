@@ -149,7 +149,7 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 									</a>
 								</form>';
 
-			print_r($GLOBAL);
+			print_r($GLOBALS);
 			die();
 
 
