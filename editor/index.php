@@ -141,11 +141,11 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 			$markers['CONTENT'] = $GLOBALS['LANG']->getLL('noApiKeyError');
 			// TODO: do not forget to change the url!!
 			$markers['SCOUTNET_CONNECT_BUTTON'] = '<form action="'.$GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['tx_shscoutnetwebservice']['ScoutnetLoginPage'].'" id="scoutnetLogin" method="post" target="_self">
-									<input type="hidden" name="redirect_url" value="https://www.dpsg-koeln.de/typo3/mod.php?M=user_scoutnet" />
+									<input type="hidden" name="redirect_url" value="http'.($_SERVER['HTTPS']?'s':'').'://'.$GLOBALS['SERVER_NAME'].'/typo3/mod.php?M=user_scoutnet" />
 									<input type="hidden" name="provider" value="'.$GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['tx_shscoutnetwebservice']['ScoutnetProviderName'].'" />
 									<input type="hidden" name="createApiKey" value="1" />
 									<a href="#" onclick="document.getElementById(\'scoutnetLogin\').submit(); return false;">
-										<img src="/typo3conf/ext/sh_scoutnet_fe_auth/res/scoutnetConnect.png" title="scoutnet" alt="scoutnet"/>
+										<img src="'.t3lib_extMgm::siteRelPath('sh_scoutnet_fe_auth').'/res/scoutnetConnect.png" title="scoutnet" alt="scoutnet"/>
 									</a>
 								</form>';
 
