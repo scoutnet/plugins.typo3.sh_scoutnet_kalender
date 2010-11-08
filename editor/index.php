@@ -156,8 +156,9 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 			try {
 				$SN = new tx_shscoutnetwebservice_sn();
 
+				$rights = $SN->has_write_permission_to_calender(intval($GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['tx_shscoutnetwebservice']['ScoutnetSSID']),$GLOBALS['BE_USER']->user['tx_shscoutnetkalender_scoutnet_username'],$GLOBALS['BE_USER']->user['tx_shscoutnetkalender_scoutnet_apikey']);
 
-				if(!$SN->has_write_permission_to_calender(intval($GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['tx_shscoutnetwebservice']['ScoutnetSSID']),$GLOBALS['BE_USER']->user['tx_shscoutnetkalender_scoutnet_username'],$GLOBALS['BE_USER']->user['tx_shscoutnetkalender_scoutnet_apikey'])) {
+				if( $rights != 0) {
 					$this->doc->setModuleTemplate(t3lib_extMgm::extPath('sh_scoutnet_kalender') . 'editor/template_noRights.html');
 
 					$link = $this->MCONF['_'].'&action=requestRight';
