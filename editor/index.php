@@ -163,7 +163,11 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 
 					$link = $this->MCONF['_'].'&action=requestRight';
 			
-					$markers['CONTENT'] = sprintf($GLOBALS['LANG']->getLL('noRightsError'),$link);
+					if ($rights['code'] == 2) {
+						$markers['CONTENT'] = $GLOBALS['LANG']->getLL('noRightsButRequestedError');
+					} else {
+						$markers['CONTENT'] = sprintf($GLOBALS['LANG']->getLL('noRightsError'),$link);
+					}
 				} else {
 
 
