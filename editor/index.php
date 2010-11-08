@@ -149,11 +149,6 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 									</a>
 								</form>';
 
-			echo "<pre>";
-			print_r($GLOBALS);
-			die();
-
-
 		} else {
 			$info = array();
 			$mandatoryAsterisk = '<sup style="color: #ff0000">*</sup>';
