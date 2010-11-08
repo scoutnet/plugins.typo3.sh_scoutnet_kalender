@@ -156,9 +156,21 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 			try {
 				$SN = new tx_shscoutnetwebservice_sn();
 
+				if ($_GET['action'] == 'requestRight') {
+					try {
+						$SN->request_write_permissions_for_calender(intval($GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['tx_shscoutnetwebservice']['ScoutnetSSID']),$GLOBALS['BE_USER']->user['tx_shscoutnetkalender_scoutnet_username'],$GLOBALS['BE_USER']->user['tx_shscoutnetkalender_scoutnet_apikey']);
+
+						$info[] = $GLOBALS['LANG']->getLL('rightRequested');
+					} catch (Exception $e) {
+						$info[] = sprintf($GLOBALS['LANG']->getLL('errorRequstRight'),$e->getMessage());
+					}
+				}
+
 				$rights = $SN->has_write_permission_to_calender(intval($GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['tx_shscoutnetwebservice']['ScoutnetSSID']),$GLOBALS['BE_USER']->user['tx_shscoutnetkalender_scoutnet_username'],$GLOBALS['BE_USER']->user['tx_shscoutnetkalender_scoutnet_apikey']);
 
 				if( $rights['code'] != 0) {
+
+
 					$this->doc->setModuleTemplate(t3lib_extMgm::extPath('sh_scoutnet_kalender') . 'editor/template_noRights.html');
 
 					$link = $this->MCONF['_'].'&action=requestRight';
@@ -334,8 +346,6 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 
 						$markers['KEYWORDS_LABEL'] = $GLOBALS['LANG']->getLL('keywordsLabel');
 
-						$markers['INFO'] = count($info)>0?"<br>".join("<br>",$info):'';
-
 						$kategories = $kalenders[0]['Used_Kategories'];
 
 						if( !empty($event['Keywords']) ){
@@ -390,7 +400,6 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 						$markers['MANDATORY_LABEL'] = '<span style="font-size:80%;">'.$mandatoryAsterisk.$GLOBALS['LANG']->getLL('mandatoryLabel').'</span>';
 
 					} else {
-						$markers['INFO'] = count($info)>0?"<br>".join("<br>",$info):'';
 						$markers['CONTENT'] = $this->content;
 
 						$markers['EBENE_LONG_NAME'] = $kalenders[0]->get_Name();
@@ -485,6 +494,8 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 			}
 
 		}
+
+		$markers['INFO'] = count($info)>0?"<br>".join("<br>",$info):'';
 
 		// Build the <body> for the module
 		$this->content = $this->doc->startPage($GLOBALS['LANG']->getLL('title'));

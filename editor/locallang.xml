@@ -53,6 +53,8 @@
 			<label index="errorCreateEvent">Error creating the event. Please Try again (%s)</label>
 			<label index="eventUpdated">Event Updated</label>
 			<label index="errorUpdateEvent">Error updating the event. Please Try again (%s)</label>
+			<label index="rightRequested">The Right is Requested</label>
+			<label index="errorRequstRight">Error requesting right. Please Try again (%s)</label>
 
 			<label index="mandatoryLabel">Mandatory</label>
 
@@ -71,7 +73,7 @@
 
 			<label index="noApiKeyError">Your account is not connected to any Scoutnet User yet. Please use the Login Button to connect your Scoutnet User to this Typo3 user.</label>
 			<label index="noRightsError">Your Scoutnet User is not allowed to change any Event in this Calender. Please use &lt;a href="%s"&gt;this link&lt;/a&gt; to request write Permissions.</label>
-			<label index="noRightsButRequestedError">You have requested the Permission to write Events in this Calender. Now you have to wait for the Admin to allow you to edit rights. You will recive an email, if the right are granted.</label>
+			<label index="noRightsButRequestedError">You have requested the Permission to write Events in this Calender. Now you have to wait for the Admin to allow you to edit rights. You will recive an email, if the right is granted.</label>
 
 		</languageKey>
 		<languageKey index="de" type="array">
