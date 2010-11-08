@@ -47,9 +47,7 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 		$this->defaultValuesCount = 0;
 		$this->checkEmptyCount = 0;
 
-		print_r($GLOBALS['LANG']);
-		die();
-		setlocale (LC_ALL, 'de_DE');
+		setlocale (LC_ALL, $GLOBALS['LANG']->lang);
 
 	}
 
