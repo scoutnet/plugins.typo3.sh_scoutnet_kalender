@@ -145,7 +145,7 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 									<input type="hidden" name="provider" value="'.$GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['tx_shscoutnetwebservice']['ScoutnetProviderName'].'" />
 									<input type="hidden" name="createApiKey" value="1" />
 									<a href="#" onclick="document.getElementById(\'scoutnetLogin\').submit(); return false;">
-										<img src="'.t3lib_extMgm::extRelPath('sh_scoutnet_fe_auth').'/res/scoutnetConnect.png" title="scoutnet" alt="scoutnet"/>
+										<img src="'.t3lib_extMgm::extRelPath('sh_scoutnet_fe_auth').'res/scoutnetConnect.png" title="scoutnet" alt="scoutnet"/>
 									</a>
 								</form>';
 
