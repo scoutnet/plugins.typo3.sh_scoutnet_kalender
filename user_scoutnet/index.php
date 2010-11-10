@@ -6,6 +6,7 @@ $LANG->includeLLFile('EXT:sh_scoutnet_kalender/user_scoutnet/locallang.xml');
 $BE_USER->modAccess($MCONF, 1);
 
 require_once (t3lib_extMgm::extPath('sh_scoutnet_webservice') . 'sn/class.tx_shscoutnetwebservice_sn.php');
+require_once (PATH_t3lib.'class.t3lib_scbase.php');
 
 // ***************************
 // Script Classes
@@ -31,7 +32,7 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 		$this->doc = t3lib_div::makeInstance('template');
 		$this->doc->setModuleTemplate(t3lib_extMgm::extPath('sh_scoutnet_kalender') . 'user_scoutnet/template_overview.html');
 		$this->doc->backPath = $GLOBALS['BACK_PATH'];
-		$this->doc->getPageRenderer()->loadScriptaculous('effects,dragdrop');
+//		$this->doc->getPageRenderer()->loadScriptaculous('effects,dragdrop');
 		//$this->doc->addStyleSheet( 'tx_shscoutnetkalender', t3lib_extMgm::siteRelPath('sh_scoutnet_kalender') . 'user_scoutnet/style.css');
 	       
 		
