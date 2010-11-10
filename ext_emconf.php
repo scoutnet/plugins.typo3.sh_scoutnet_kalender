@@ -25,15 +25,15 @@ $EM_CONF[$_EXTKEY] = array(
 	'internal' => 0,
 	'uploadfolder' => 0,
 	'createDirs' => '',
-	'modify_tables' => 'tt_content',
+	'modify_tables' => 'tt_content, be_user',
 	'clearCacheOnLoad' => 1,
 	'lockType' => '',
 	'author_company' => '',
-	'version' => '0.10.3',
+	'version' => '1.0.0',
 	'constraints' => array(
 		'depends' => array(
-			'cms' => '',
-			'sh_scoutnet_webservice' => '',
+			'cms' => '4.4',
+			'sh_scoutnet_webservice' => '1.0',
 		),
 		'conflicts' => array(
 		),
