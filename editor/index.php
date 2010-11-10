@@ -144,7 +144,7 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 
 			if (!isset($GLOBALS['BE_USER']->user['tx_shscoutnetkalender_scoutnet_apikey']) || $GLOBALS['BE_USER']->user['tx_shscoutnetkalender_scoutnet_apikey'] == '' || 
 				!isset($GLOBALS['BE_USER']->user['tx_shscoutnetkalender_scoutnet_username']) || $GLOBALS['BE_USER']->user['tx_shscoutnetkalender_scoutnet_username'] == ''){
-					$this->doc->setModuleTemplate(t3lib_extMgm::extPath('sh_scoutnet_kalender') . 'editor/template_noApiKey.html');
+					$this->doc->setModuleTemplate(t3lib_extMgm::extPath('sh_scoutnet_kalender') . 'editor/template_error.html');
 
 
 					$markers['CONTENT'] = $GLOBALS['LANG']->getLL('noApiKeyError');
@@ -172,7 +172,7 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 					$this->doc->setModuleTemplate(t3lib_extMgm::extPath('sh_scoutnet_kalender') . 'editor/template_noRights.html');
 
 					$link = $this->MCONF['_'].'&action=requestRight';
-			
+
 					if ($rights['code'] == 2) {
 						$markers['CONTENT'] = $GLOBALS['LANG']->getLL('noRightsButRequestedError');
 					} else {
@@ -489,6 +489,7 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 				}
 			}
 		} catch(Exception $e) {
+			$this->doc->setModuleTemplate(t3lib_extMgm::extPath('sh_scoutnet_kalender') . 'editor/template_error.html');
 			die($GLOBALS['LANG']->getLL('snkDown').'<br><pre>'.$e->getMessage().'</pre>');
 		}
 
@@ -532,7 +533,7 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 
 		$id = $this->createIdFromName($name);
 
-		
+
 		$this->doc->JScodeArray[] = "defaultValues[".$this->defaultValuesCount."] = new Array('".$id."','".$defaultValue."');";
 		$this->defaultValuesCount++;
 
@@ -612,27 +613,27 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 				days_in_mon = 31;
 				if (mon == 2) {
 					days_in_mon = days_in_feb[year];
-				}
-				
-				if (mon == 4 || mon == 6 || mon == 9 || mon == 11) {
-					days_in_mon = 30;
-				}
+		}
 
-				while (days_in_mon < field.options.length) {
-					field.options[(field.options.length - 1)] = null;
-				}
+		if (mon == 4 || mon == 6 || mon == 9 || mon == 11) {
+			days_in_mon = 30;
+		}
 
-				for (i = 1; i <= days_in_mon; i++){
-					field.options[i] = new Option(i);
-				}
+		while (days_in_mon < field.options.length) {
+			field.options[(field.options.length - 1)] = null;
+		}
 
-				if (oldValue <= days_in_mon) {
-					field.value = oldValue;
-				}
+		for (i = 1; i <= days_in_mon; i++){
+			field.options[i] = new Option(i);
+		}
+
+		if (oldValue <= days_in_mon) {
+			field.value = oldValue;
+		}
 
 
-			}';
-			$this->doc->JScodeArray[] = $fkt;
+		}';
+		$this->doc->JScodeArray[] = $fkt;
 		}
 
 		$out .= '<select name="mod_snk['.$name.'][d]" id="'.$name.'_day">'.$day_options.'</select>'.
