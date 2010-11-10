@@ -7,6 +7,8 @@ $BE_USER->modAccess($MCONF, 1);
 
 require_once (t3lib_extMgm::extPath('sh_scoutnet_webservice') . 'sn/class.tx_shscoutnetwebservice_sn.php');
 
+require_once (PATH_t3lib.'class.t3lib_scbase.php');
+
 // ***************************
 // Script Classes
 // ***************************
