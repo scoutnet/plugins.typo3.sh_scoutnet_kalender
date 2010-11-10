@@ -490,7 +490,8 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 			}
 		} catch(Exception $e) {
 			$this->doc->setModuleTemplate(t3lib_extMgm::extPath('sh_scoutnet_kalender') . 'editor/template_error.html');
-			die($GLOBALS['LANG']->getLL('snkDown').'<br><pre>'.$e->getMessage().'</pre>');
+
+			$markers['CONTENT'] = $GLOBALS['LANG']->getLL('snkDown').'<br><pre>'.$e->getMessage().'</pre>';
 		}
 
 
