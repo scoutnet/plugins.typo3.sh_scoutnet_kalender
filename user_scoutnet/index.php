@@ -36,7 +36,7 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 		//$this->doc->addStyleSheet( 'tx_shscoutnetkalender', t3lib_extMgm::siteRelPath('sh_scoutnet_kalender') . 'user_scoutnet/style.css');
 	       
 		
-		if (version_compare(TYPO3_version, '4.3', '<')) {
+		if (version_compare(TYPO3_version, '4.3', '>')) {
 			$this->doc->addStyleSheet('tx_shscoutnetkalender', t3lib_extMgm::siteRelPath('sh_scoutnet_kalender') . 'user_scoutnet/style.css');
 			$this->doc->addStyleSheet('tx_shscoutnetkalender', t3lib_extMgm::siteRelPath('sh_scoutnet_kalender') . 'user_scoutnet/kalender.css');
 		} else {
