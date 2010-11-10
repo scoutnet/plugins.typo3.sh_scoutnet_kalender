@@ -144,7 +144,7 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 
 			if (!isset($GLOBALS['BE_USER']->user['tx_shscoutnetkalender_scoutnet_apikey']) || $GLOBALS['BE_USER']->user['tx_shscoutnetkalender_scoutnet_apikey'] == '' || 
 				!isset($GLOBALS['BE_USER']->user['tx_shscoutnetkalender_scoutnet_username']) || $GLOBALS['BE_USER']->user['tx_shscoutnetkalender_scoutnet_username'] == ''){
-					$this->doc->setModuleTemplate(t3lib_extMgm::extPath('sh_scoutnet_kalender') . 'editor/template_error.html');
+					$this->doc->setModuleTemplate(t3lib_extMgm::extPath('sh_scoutnet_kalender') . 'editor/template_noApiKey.html');
 
 
 					$markers['CONTENT'] = $GLOBALS['LANG']->getLL('noApiKeyError');
@@ -169,7 +169,7 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 				if( $rights['code'] != 0) {
 
 
-					$this->doc->setModuleTemplate(t3lib_extMgm::extPath('sh_scoutnet_kalender') . 'editor/template_noRights.html');
+					$this->doc->setModuleTemplate(t3lib_extMgm::extPath('sh_scoutnet_kalender') . 'editor/template_error.html');
 
 					$link = $this->MCONF['_'].'&action=requestRight';
 
