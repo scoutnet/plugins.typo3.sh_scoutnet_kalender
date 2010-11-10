@@ -137,28 +137,23 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 			$GLOBALS['BE_USER']->user['tx_shscoutnetkalender_scoutnet_apikey'] = $return_data['api_key'];
 		}
 
-		if (!isset($GLOBALS['BE_USER']->user['tx_shscoutnetkalender_scoutnet_apikey']) || $GLOBALS['BE_USER']->user['tx_shscoutnetkalender_scoutnet_apikey'] == '' || 
-			!isset($GLOBALS['BE_USER']->user['tx_shscoutnetkalender_scoutnet_username']) || $GLOBALS['BE_USER']->user['tx_shscoutnetkalender_scoutnet_username'] == ''){
-			$this->doc->setModuleTemplate(t3lib_extMgm::extPath('sh_scoutnet_kalender') . 'editor/template_noApiKey.html');
+		$info = array();
+		$mandatoryAsterisk = '<sup style="color: #ff0000">*</sup>';
+		try {
+			$SN = new tx_shscoutnetwebservice_sn();
 
-			
-			$markers['CONTENT'] = $GLOBALS['LANG']->getLL('noApiKeyError');
-			// TODO: do not forget to change the url!!
-			$markers['SCOUTNET_CONNECT_BUTTON'] = '<form action="'.$GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['tx_shscoutnetwebservice']['ScoutnetLoginPage'].'" id="scoutnetLogin" method="post" target="_self">
-									<input type="hidden" name="redirect_url" value="http'.($_SERVER['HTTPS']?'s':'').'://'.$GLOBALS['SERVER_NAME'].'/typo3/mod.php?M=user_scoutnet" />
-									<input type="hidden" name="provider" value="'.$GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['tx_shscoutnetwebservice']['ScoutnetProviderName'].'" />
-									<input type="hidden" name="createApiKey" value="1" />
-									<a href="#" onclick="document.getElementById(\'scoutnetLogin\').submit(); return false;">
-										<img src="'.t3lib_extMgm::extRelPath('sh_scoutnet_webservice').'res/scoutnetConnect.png" title="scoutnet" alt="scoutnet"/>
-									</a>
-								</form>';
+			if (!isset($GLOBALS['BE_USER']->user['tx_shscoutnetkalender_scoutnet_apikey']) || $GLOBALS['BE_USER']->user['tx_shscoutnetkalender_scoutnet_apikey'] == '' || 
+				!isset($GLOBALS['BE_USER']->user['tx_shscoutnetkalender_scoutnet_username']) || $GLOBALS['BE_USER']->user['tx_shscoutnetkalender_scoutnet_username'] == ''){
+					$this->doc->setModuleTemplate(t3lib_extMgm::extPath('sh_scoutnet_kalender') . 'editor/template_noApiKey.html');
 
-		} else {
-			$info = array();
-			$mandatoryAsterisk = '<sup style="color: #ff0000">*</sup>';
-			try {
-				$SN = new tx_shscoutnetwebservice_sn();
 
+					$markers['CONTENT'] = $GLOBALS['LANG']->getLL('noApiKeyError');
+					// TODO: do not forget to change the url!!
+					//
+					$markers['SCOUTNET_CONNECT_BUTTON'] = $SN->get_scoutnetConnectLoginButton('http'.($_SERVER['HTTPS']?'s':'').'://'.$GLOBALS['SERVER_NAME'].'/typo3/mod.php?M=user_scoutnet',true);
+					
+					
+			} else {
 				if ($_GET['action'] == 'requestRight') {
 					try {
 						$SN->request_write_permissions_for_calender(intval($GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['tx_shscoutnetwebservice']['ScoutnetSSID']),$GLOBALS['BE_USER']->user['tx_shscoutnetkalender_scoutnet_username'],$GLOBALS['BE_USER']->user['tx_shscoutnetkalender_scoutnet_apikey']);
@@ -492,11 +487,11 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 						$markers['EVENTS'] = $events_out;
 					}
 				}
-			} catch(Exception $e) {
-				die($GLOBALS['LANG']->getLL('snkDown').'<br><pre>'.$e->getMessage().'</pre>');
 			}
-
+		} catch(Exception $e) {
+			die($GLOBALS['LANG']->getLL('snkDown').'<br><pre>'.$e->getMessage().'</pre>');
 		}
+
 
 		$markers['INFO'] = count($info)>0?"<br>".join("<br>",$info):'';
 
