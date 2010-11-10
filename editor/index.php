@@ -60,7 +60,7 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 	 * @return	void
 	 */
 	public function main() {
-		$ids = array(intval($GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['tx_shscoutnetkalender']['ScoutnetSSID']));
+		$ssid = intval($GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['tx_shscoutnetkalender']['ScoutnetSSID']);
 
 		$docHeaderButtons = $this->getButtons();
 
@@ -156,7 +156,7 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 			} else {
 				if ($_GET['action'] == 'requestRight') {
 					try {
-						$SN->request_write_permissions_for_calender(intval($ids),$GLOBALS['BE_USER']->user['tx_shscoutnetkalender_scoutnet_username'],$GLOBALS['BE_USER']->user['tx_shscoutnetkalender_scoutnet_apikey']);
+						$SN->request_write_permissions_for_calender($ssid,$GLOBALS['BE_USER']->user['tx_shscoutnetkalender_scoutnet_username'],$GLOBALS['BE_USER']->user['tx_shscoutnetkalender_scoutnet_apikey']);
 
 						$info[] = $GLOBALS['LANG']->getLL('rightRequested');
 					} catch (Exception $e) {
@@ -164,8 +164,7 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 					}
 				}
 
-				echo $ids[0];
-				$rights = $SN->has_write_permission_to_calender(intval($ids),$GLOBALS['BE_USER']->user['tx_shscoutnetkalender_scoutnet_username'],$GLOBALS['BE_USER']->user['tx_shscoutnetkalender_scoutnet_apikey']);
+				$rights = $SN->has_write_permission_to_calender($ssid,$GLOBALS['BE_USER']->user['tx_shscoutnetkalender_scoutnet_username'],$GLOBALS['BE_USER']->user['tx_shscoutnetkalender_scoutnet_apikey']);
 
 				if( $rights['code'] != 0) {
 
@@ -186,7 +185,7 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 						'order' => 'start_time desc',
 					);
 
-					$kalenders = $SN->get_kalender_by_global_id($ids);
+					$kalenders = $SN->get_kalender_by_global_id(array($ssid));
 
 					if ($_GET['action'] == 'modify') {
 
@@ -266,7 +265,7 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 						}
 
 						if ($event_id > -1) {
-							$events = $SN->get_events_with_ids($ids,array($event_id));
+							$events = $SN->get_events_with_ids(array($ssid),array($event_id));
 							if (isset($events[0]))
 								$event = $events[0];
 						}
@@ -418,7 +417,7 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 
 
 						$events = array();
-						$events = $SN->get_events_for_global_id_with_filter($ids,$filter);
+						$events = $SN->get_events_for_global_id_with_filter(array($ssid),$filter);
 
 						$events_out = '';
 						foreach ($events as $event) {
