@@ -155,6 +155,10 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 					// TODO: do not forget to change the url!!
 					//
 					$markers['SCOUTNET_CONNECT_BUTTON'] = $SN->get_scoutnetConnectLoginButton('http'.($_SERVER['HTTPS']?'s':'').'://'.$GLOBALS['SERVER_NAME'].'/typo3/mod.php?M=user_scoutnet',true);
+
+					echo "<pre>";
+					print_r($_SERVER);
+					die();
 					
 					
 			} else {
