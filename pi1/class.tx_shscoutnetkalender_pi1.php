@@ -52,8 +52,6 @@ class tx_shscoutnetkalender_pi1 extends tslib_pibase {
 		$this->pi_setPiVarDefaults();
 		$this->pi_loadLL();
 		
-		//locale_set_default('de-DE');
-
 		$cssFile = $GLOBALS['TSFE']->tmpl->getFileName($this->conf["cssFile"]);
 
 		$content = '<link rel="stylesheet" type="text/css" href="'.$cssFile.'" media="screen" />'."\n".

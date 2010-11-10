@@ -60,7 +60,7 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 	 * @return	void
 	 */
 	public function main() {
-		$ids = array(intval($GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['tx_shscoutnetwebservice']['ScoutnetSSID']));
+		$ids = array(intval($GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['tx_shscoutnetkalender']['ScoutnetSSID']));
 
 		$docHeaderButtons = $this->getButtons();
 
@@ -127,20 +127,20 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 
 		$markers['HEADER1_LABEL'] = $GLOBALS['LANG']->getLL('header1Label');
 
-		if ($return_data = $this->getData()) {
-			// save api key
-			$sql = "UPDATE be_users SET tx_shscoutnetkalender_scoutnet_apikey='".$return_data['api_key']."', tx_shscoutnetkalender_scoutnet_username='".$return_data['user']."' where uid = '".$GLOBALS['BE_USER']->user['uid']."'";
-
-			$GLOBALS['TYPO3_DB']->sql(TYPO3_db,$sql);
-
-			$GLOBALS['BE_USER']->user['tx_shscoutnetkalender_scoutnet_username'] = $return_data['user'];
-			$GLOBALS['BE_USER']->user['tx_shscoutnetkalender_scoutnet_apikey'] = $return_data['api_key'];
-		}
 
 		$info = array();
 		$mandatoryAsterisk = '<sup style="color: #ff0000">*</sup>';
 		try {
 			$SN = new tx_shscoutnetwebservice_sn();
+			if ($return_data = $SN->getApiKeyFromData()) {
+				// save api key
+				$sql = "UPDATE be_users SET tx_shscoutnetkalender_scoutnet_apikey='".$return_data['api_key']."', tx_shscoutnetkalender_scoutnet_username='".$return_data['user']."' where uid = '".$GLOBALS['BE_USER']->user['uid']."'";
+
+				$GLOBALS['TYPO3_DB']->sql(TYPO3_db,$sql);
+
+				$GLOBALS['BE_USER']->user['tx_shscoutnetkalender_scoutnet_username'] = $return_data['user'];
+				$GLOBALS['BE_USER']->user['tx_shscoutnetkalender_scoutnet_apikey'] = $return_data['api_key'];
+			}
 
 			if (!isset($GLOBALS['BE_USER']->user['tx_shscoutnetkalender_scoutnet_apikey']) || $GLOBALS['BE_USER']->user['tx_shscoutnetkalender_scoutnet_apikey'] == '' || 
 				!isset($GLOBALS['BE_USER']->user['tx_shscoutnetkalender_scoutnet_username']) || $GLOBALS['BE_USER']->user['tx_shscoutnetkalender_scoutnet_username'] == ''){
@@ -156,7 +156,7 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 			} else {
 				if ($_GET['action'] == 'requestRight') {
 					try {
-						$SN->request_write_permissions_for_calender(intval($GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['tx_shscoutnetwebservice']['ScoutnetSSID']),$GLOBALS['BE_USER']->user['tx_shscoutnetkalender_scoutnet_username'],$GLOBALS['BE_USER']->user['tx_shscoutnetkalender_scoutnet_apikey']);
+						$SN->request_write_permissions_for_calender(intval($ids),$GLOBALS['BE_USER']->user['tx_shscoutnetkalender_scoutnet_username'],$GLOBALS['BE_USER']->user['tx_shscoutnetkalender_scoutnet_apikey']);
 
 						$info[] = $GLOBALS['LANG']->getLL('rightRequested');
 					} catch (Exception $e) {
@@ -164,7 +164,7 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 					}
 				}
 
-				$rights = $SN->has_write_permission_to_calender(intval($GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['tx_shscoutnetwebservice']['ScoutnetSSID']),$GLOBALS['BE_USER']->user['tx_shscoutnetkalender_scoutnet_username'],$GLOBALS['BE_USER']->user['tx_shscoutnetkalender_scoutnet_apikey']);
+				$rights = $SN->has_write_permission_to_calender(intval($ids),$GLOBALS['BE_USER']->user['tx_shscoutnetkalender_scoutnet_username'],$GLOBALS['BE_USER']->user['tx_shscoutnetkalender_scoutnet_apikey']);
 
 				if( $rights['code'] != 0) {
 
@@ -677,54 +677,6 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 	 */
 	public function printContent() {
 		echo $this->content;
-	}
-
-	private function getData(){
-		if (isset($this->snData)) {
-			return $this->snData;
-		}   
-
-		if (!isset($_GET['auth'])) {
-			return false;
-		}   
-
-		$z = $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['tx_shscoutnetwebservice']['AES_key'];
-		$iv = $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['tx_shscoutnetwebservice']['AES_iv'];
-
-		$aes = new tx_shscoutnetwebservice_AES($z,"CBC",$iv);
-
-		$base64 = base64_decode(strtr($_GET['auth'], '-_~','+/='));
-
-		if (trim($base64) == "") 
-			return false;
-
-		$data = unserialize(substr($aes->decrypt($base64),strlen($iv)));
-
-
-		$md5 = $data['md5']; unset($data['md5']);
-		$sha1 = $data['sha1']; unset($data['sha1']);
-
-		if (md5(serialize($data)) != $md5) {
-			return false;
-		}   
-
-		if (sha1(serialize($data)) != $sha1) {
-			return false;
-		}   
-
-
-		if (time() - $data['time'] > 3600) {
-			return false;
-		}
-
-		$your_domain = $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['tx_shscoutnetwebservice']['ScoutnetProviderName'];
-
-		if ($data['your_domain'] != $your_domain)
-			return false;
-
-		$this->snData = $data;
-
-		return $data;
 	}
 
 

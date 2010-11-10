@@ -1,0 +1,3 @@
+# cat=plugin.tx_shscoutnetkalender//; type=int; label= Scoutnet SSID (the write Api uses this SSID for writing)
+ScoutnetSSID = 4
+
