@@ -251,7 +251,7 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 						$event_id = $_GET['event_id'];
 						if (is_numeric($event_id)) {
 							try {
-								$SN->delete_event($event_id,$GLOBALS['BE_USER']->user['tx_shscoutnetkalender_scoutnet_username'],$GLOBALS['BE_USER']->user['tx_shscoutnetkalender_scoutnet_apikey']);
+								$SN->delete_event($ssid,$event_id,$GLOBALS['BE_USER']->user['tx_shscoutnetkalender_scoutnet_username'],$GLOBALS['BE_USER']->user['tx_shscoutnetkalender_scoutnet_apikey']);
 
 								$info[] = $GLOBALS['LANG']->getLL('eventDeleted');
 							} catch (Exception $e) {
