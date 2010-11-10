@@ -3,7 +3,7 @@
 ########################################################################
 # Extension Manager/Repository config file for ext "sh_scoutnet_kalender".
 #
-# Auto generated 10-11-2010 17:12
+# Auto generated 10-11-2010 17:16
 #
 # Manual updates:
 # Only the data in the array - everything else is removed by next
