@@ -165,6 +165,7 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 				}
 
 				$rights = $SN->has_write_permission_to_calender(intval($ids),$GLOBALS['BE_USER']->user['tx_shscoutnetkalender_scoutnet_username'],$GLOBALS['BE_USER']->user['tx_shscoutnetkalender_scoutnet_apikey']);
+				echo 'foo';
 
 				if( $rights['code'] != 0) {
 
