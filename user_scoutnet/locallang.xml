@@ -140,7 +140,7 @@
 			<label index="mon11">November</label>
 			<label index="mon12">Dezember</label>
 
-			<label index="noApiKeyError">Dein Account ist noch nicht mit einem Scoutnet Benutzer verbunden. Bitte benutzen den Login Button, um deinen Scoutnet Benutzer mit diesem Typo3 Account zu verbinden.</label>
+			<label index="noApiKeyError">Dein Account ist noch nicht mit einem Scoutnet Benutzer verbunden. Bitte benutze den Login Button, um deinen Scoutnet Benutzer mit diesem Typo3 Account zu verbinden.</label>
 			<label index="noRightsError">Dein Scoutnet Benutzer hat leider keine Rechte an diesem Kalender etwas zu verändern. Klicke &lt;a href="%s"&gt;hier&lt;/a&gt; um diese rechte zu beantragen.</label>
 			<label index="noRightsButRequestedError">Du hast die Rechte an diesem Kalender beantragt. Jetzt musst du darauf warten, das der Admin dieses Kalenders dich frei schaltet. Du bekommst eine mail, sobald dies geschehen ist.</label>
 
