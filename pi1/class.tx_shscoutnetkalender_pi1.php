@@ -157,7 +157,7 @@ class tx_shscoutnetkalender_pi1 extends tslib_pibase {
 
 				if ($new_monat != $monat) {
 					$subarray = array(
-						'###MONATS_NAME###'=>htmlentities(strftime("%B '%y",$event['Start']),ENT_COMPAT,'UTF-8'),
+						'###MONATS_NAME###'=>htmlentities(strftime("%B '%y",$event['Start'])),
 					);
 
 					$subcontent .= $this->cObj->substituteMarkerArray($monats_header_template,$subarray);
