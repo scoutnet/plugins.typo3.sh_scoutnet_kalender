@@ -65,7 +65,7 @@ class tx_shscoutnetkalender_pi1 extends tslib_pibase {
 				'document.addEventListener(\'DOMContentLoaded\', function(){ return snk_finish(\'\'); }, false);'."\n".
 			'</script>'."\n";
 		
-		$ids = split(",",$this->cObj->data["tx_shscoutnetkalender_ids"]);
+		$ids = explode(",",$this->cObj->data["tx_shscoutnetkalender_ids"]);
 
 		$events = array();
 		try {
@@ -77,11 +77,11 @@ class tx_shscoutnetkalender_pi1 extends tslib_pibase {
 			);
 
 			if (isset($this->cObj->data["tx_shscoutnetkalender_kat_ids"]) && trim($this->cObj->data["tx_shscoutnetkalender_kat_ids"])) {
-				$filter['kategories'] = split(",",$this->cObj->data["tx_shscoutnetkalender_kat_ids"]);
+				$filter['kategories'] = explode(",",$this->cObj->data["tx_shscoutnetkalender_kat_ids"]);
 			}
 
 			if (isset($this->cObj->data["tx_shscoutnetkalender_stufen_ids"]) && trim($this->cObj->data["tx_shscoutnetkalender_stufen_ids"])) {
-				$filter['stufen'] = split(",",$this->cObj->data["tx_shscoutnetkalender_stufen_ids"]);
+				$filter['stufen'] = explode(",",$this->cObj->data["tx_shscoutnetkalender_stufen_ids"]);
 			}
 
 			if (isset($this->piVars['addids']) && count($this->piVars['addids']) > 0 && is_array($this->piVars['addids'])) {
@@ -92,7 +92,7 @@ class tx_shscoutnetkalender_pi1 extends tslib_pibase {
 
 			$optionalKalenders = Array();
 			if (isset($this->cObj->data["tx_shscoutnetkalender_optids"]) && trim($this->cObj->data["tx_shscoutnetkalender_optids"])) {
-				$optids = split(",",$this->cObj->data["tx_shscoutnetkalender_optids"]);
+				$optids = explode(",",$this->cObj->data["tx_shscoutnetkalender_optids"]);
 				$optionalKalenders = $SN->get_kalender_by_global_id($optids);
 			}
 
