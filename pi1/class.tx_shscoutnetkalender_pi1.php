@@ -169,9 +169,9 @@ class tx_shscoutnetkalender_pi1 extends tslib_pibase {
 				$kategorien = "";
 
 				foreach ($event['Keywords'] as $kategorie) {
-						if ($kategorien != "")
-							$kategorien .= ", ";
-						$kategorien .= $kategorie;
+					if ($kategorien != "")
+						$kategorien .= ", ";
+					$kategorien .= $kategorie;
 				}
 
 				$datum = substr(strftime("%A",$event['Start']),0,2).",&nbsp;".strftime("%d.%m.",$event['Start']);
