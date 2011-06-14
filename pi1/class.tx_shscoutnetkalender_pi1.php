@@ -204,7 +204,7 @@ class tx_shscoutnetkalender_pi1 extends tslib_pibase {
 					$event_id = intval($this->piVars["event_id"]);
 				}
 
-				$titel = ($showDetails?'<a href="#snk-termin-'.$event['ID'].'" class="snk-termin-link'.($event_id === $event['ID']?'-opened':'').'" onclick="if(snk_show_termin) return snk_show_termin('.$event['ID'].',this);">':'').nl2br(htmlentities($event['Title'],ENT_COMPAT,'UTF-8')).($showDetails?'</a>':'');
+				$titel = ($showDetails?'<a href="#snk-termin-'.$event['ID'].'" class="snk-termin-link'.($event_id === intval($event['ID'])?'-opened':'').'" onclick="if(snk_show_termin) return snk_show_termin('.$event['ID'].',this);">':'').nl2br(htmlentities($event['Title'],ENT_COMPAT,'UTF-8')).($showDetails?'</a>':'');
 
 				$subarray = array(
 					'###EBENE###'=>$ebene,
@@ -240,7 +240,7 @@ class tx_shscoutnetkalender_pi1 extends tslib_pibase {
 						'###TARGET_GROUP_LABEL###' => $this->pi_getLL('targetGroup'),
 						'###URL_LABEL###' => $this->pi_getLL('url'),
 						'###AUTHOR_LABEL###' => $this->pi_getLL('author'),
-						'###EINTRAG_STYLE###' => $event_id === $event['ID']?' style="display: table-row;"':'nothing',
+						'###EINTRAG_STYLE###' => $event_id === intval($event['ID'])?' style="display: table-row;"':'',
 					);
 
 					$subcontent .= $this->cObj->substituteMarkerArray($detail_template,$subarray);
