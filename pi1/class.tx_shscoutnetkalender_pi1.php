@@ -199,7 +199,12 @@ class tx_shscoutnetkalender_pi1 extends tslib_pibase {
 
 				$showDetails = trim($event['Description']).trim($event['ZIP']).trim($event['Location']).trim($event['Organizer']).trim($event['Target_Group']).trim($event['URL']);
 
-				$titel = ($showDetails?'<a href="#snk-termin-'.$event['ID'].'" class="snk-termin-link" onclick="if(snk_show_termin) return snk_show_termin('.$event['ID'].',this);">':'').nl2br(htmlentities($event['Title'],ENT_COMPAT,'UTF-8')).($showDetails?'</a>':'');
+				$event_id = null;
+				if (isset($this->piVars['event_id']) && intval($this->piVars['event_id']) > 0) {
+					$event_id = intval($this->piVars["event_id"]);
+				}
+
+				$titel = ($showDetails?'<a href="#snk-termin-'.$event['ID'].'" class="snk-termin-link'.($event_id === $event['ID']?'-opened':'').'" onclick="if(snk_show_termin) return snk_show_termin('.$event['ID'].',this);">':'').nl2br(htmlentities($event['Title'],ENT_COMPAT,'UTF-8')).($showDetails?'</a>':'');
 
 				$subarray = array(
 					'###EBENE###'=>$ebene,
@@ -213,7 +218,6 @@ class tx_shscoutnetkalender_pi1 extends tslib_pibase {
 				$subcontent .= $this->cObj->substituteMarkerArray($termin_template,$subarray);
 
 				if ($showDetails) {
-
 					$detail_template = $termin_detail_template;
 					$detail_template = $this->cObj->substituteSubpart($detail_template,"###CONTENT_DESCRIPTION###",trim($event['Description'])?$this->cObj->getSubpart($detail_template,"###CONTENT_DESCRIPTION###"):"");
 					$detail_template = $this->cObj->substituteSubpart($detail_template,"###CONTENT_ORT###",trim($event['ZIP']).trim($event['Location'])?$this->cObj->getSubpart($detail_template,"###CONTENT_ORT###"):"");
@@ -236,6 +240,7 @@ class tx_shscoutnetkalender_pi1 extends tslib_pibase {
 						'###TARGET_GROUP_LABEL###' => $this->pi_getLL('targetGroup'),
 						'###URL_LABEL###' => $this->pi_getLL('url'),
 						'###AUTHOR_LABEL###' => $this->pi_getLL('author'),
+						'###EINTRAG_STYLE###' => $event_id === $event['ID']?' style="display: table-row;"':'',
 					);
 
 					$subcontent .= $this->cObj->substituteMarkerArray($detail_template,$subarray);
