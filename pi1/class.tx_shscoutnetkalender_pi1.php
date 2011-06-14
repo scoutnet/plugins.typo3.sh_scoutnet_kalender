@@ -240,7 +240,7 @@ class tx_shscoutnetkalender_pi1 extends tslib_pibase {
 						'###TARGET_GROUP_LABEL###' => $this->pi_getLL('targetGroup'),
 						'###URL_LABEL###' => $this->pi_getLL('url'),
 						'###AUTHOR_LABEL###' => $this->pi_getLL('author'),
-						'###EINTRAG_STYLE###' => $event_id === $event['ID']?' style="display: table-row;"':'',
+						'###EINTRAG_STYLE###' => $event_id === $event['ID']?' style="display: table-row;"':'nothing',
 					);
 
 					$subcontent .= $this->cObj->substituteMarkerArray($detail_template,$subarray);
