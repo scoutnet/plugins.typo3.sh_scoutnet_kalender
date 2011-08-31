@@ -367,6 +367,10 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 							unset($kategories[1]);
 						}
 
+						// add Stufen
+						foreach ($event['Stufen'] as $stufe) {
+							$event['Keywords'][$stufe['Keywords_ID']] = $stufe['bezeichnung'];
+						}
 
 						uasort($kategories,'strcoll');
 
