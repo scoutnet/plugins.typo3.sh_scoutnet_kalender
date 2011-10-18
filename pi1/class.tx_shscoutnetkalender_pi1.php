@@ -89,6 +89,7 @@ class tx_shscoutnetkalender_pi1 extends tslib_pibase {
 			}
 
 			$events = $SN->get_events_for_global_id_with_filter($ids,$filter);
+			echo '..';
 
 			$optionalKalenders = Array();
 			if (isset($this->cObj->data["tx_shscoutnetkalender_optids"]) && trim($this->cObj->data["tx_shscoutnetkalender_optids"])) {
