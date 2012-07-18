@@ -9,3 +9,9 @@ build:
 
 build/%.t3x:
 	php bin/create_t3x.php src $(NAME) build/
+
+tag:
+	@if [ ! -n $$(git tag -l $(CURRENTVERSION)) ]; then git tag -a $(CURRENTVERSION) -m "version $(CURRENTVERSION)"; fi
+
+clean:
+	rm -rf build
