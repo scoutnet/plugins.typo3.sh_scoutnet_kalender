@@ -152,9 +152,8 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 
 
 					$markers['CONTENT'] = $GLOBALS['LANG']->getLL('noApiKeyError');
-					// TODO: do not forget to change the url!!
-
-					$markers['SCOUTNET_CONNECT_BUTTON'] = $SN->get_scoutnetConnectLoginButton('http'.($_SERVER['HTTPS']?'s':'').'://'.$_SERVER['HTTP_HOST'].'/typo3/mod.php?M=user_scoutnet',true);
+					$url = 'http'.($_SERVER['HTTPS']?'s':'').'://'.$_SERVER['HTTP_HOST'].substr($_SERVER['REQUEST_URI'],0,strpos($_SERVER['REQUEST_URI'],'mod.php')+7).'?M=user_scoutnet';
+					$markers['SCOUTNET_CONNECT_BUTTON'] = $SN->get_scoutnetConnectLoginButton($url,true);
 
 			} else {
 				if ($_GET['action'] == 'requestRight') {
