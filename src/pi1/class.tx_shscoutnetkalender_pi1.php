@@ -51,6 +51,7 @@ class tx_shscoutnetkalender_pi1 extends tslib_pibase {
 		$this->conf=$conf;
 		$this->pi_setPiVarDefaults();
 		$this->pi_loadLL();
+
 		
 		$cssFile = $GLOBALS['TSFE']->tmpl->getFileName($this->conf["cssFile"]);
 
@@ -157,7 +158,7 @@ class tx_shscoutnetkalender_pi1 extends tslib_pibase {
 
 				if ($new_monat != $monat) {
 					$subarray = array(
-						'###MONATS_NAME###'=>htmlentities(strftime("%B '%y",$event['Start'])),
+						'###MONATS_NAME###'=>htmlentities(strftime("%B '%y",$event['Start']), ENT_COMPAT | ENT_HTML401, 'UTF-8'),
 					);
 
 					$subcontent .= $this->cObj->substituteMarkerArray($monats_header_template,$subarray);
