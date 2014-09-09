@@ -1,23 +1,21 @@
 <?php
 
-########################################################################
-# Extension Manager/Repository config file for ext "sh_scoutnet_kalender".
-#
-# Auto generated 30-04-2013 17:41
-#
-# Manual updates:
-# Only the data in the array - everything else is removed by next
-# writing. "version" and "dependencies" must not be touched!
-########################################################################
+/***************************************************************
+ * Extension Manager/Repository config file for ext "sh_scoutnet_kalender".
+ *
+ * Auto generated 03-05-2013 19:13
+ *
+ * Manual updates:
+ * Only the data in the array - everything else is removed by next
+ * writing. "version" and "dependencies" must not be touched!
+ ***************************************************************/
 
-$EM_CONF[$_EXTKEY] = array(
+$EM_CONF[$_EXTKEY] = array (
 	'title' => 'Official Scoutnet Calendar Plugin',
 	'description' => 'Official Typo3 plugin to display scoutnet.de calendar',
 	'category' => 'plugin',
 	'shy' => 0,
-	'version' => '2.0.4',
-	'dependencies' => '',
-	'conflicts' => '',
+	'version' => '2.0.6',
 	'priority' => '',
 	'loadOrder' => '',
 	'module' => 'user_scoutnet',
@@ -25,22 +23,20 @@ $EM_CONF[$_EXTKEY] = array(
 	'uploadfolder' => 0,
 	'createDirs' => '',
 	'modify_tables' => 'tt_content, be_user',
-	'clearcacheonload' => 1,
+	'clearcacheonload' => 0,
 	'lockType' => '',
 	'author' => 'Stefan "Muetze" Horst',
 	'author_email' => 'muetze@scoutnet.de',
 	'author_company' => '',
-	'CGLcompliance' => '',
-	'CGLcompliance_note' => '',
-	'constraints' => array(
-		'depends' => array(
-			'cms' => '',
-			'typo3' => '4.5.0-6.0.99',
+	'CGLcompliance' => NULL,
+	'CGLcompliance_note' => NULL,
+	'constraints' => array (
+		'depends' => array (
+			'typo3' => '4.5.0-6.2.99',
 			'sh_scoutnet_webservice' => '1.0',
 		),
-		'conflicts' => array(
-		),
-		'suggests' => array(
+		'conflicts' => '',
+		'suggests' => array (
 		),
 	),
 );

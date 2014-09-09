@@ -28,7 +28,6 @@
  */
 
 
-require_once(PATH_tslib.'class.tslib_pibase.php');
 require_once (t3lib_extMgm::extPath('sh_scoutnet_webservice') . 'sn/class.tx_shscoutnetwebservice_sn.php');
 
 
@@ -73,7 +72,7 @@ class tx_shscoutnetkalender_pi1 extends tslib_pibase {
 			$SN = new tx_shscoutnetwebservice_sn();
 
 			$filter = array(
-				'limit'=>'40',
+				'limit'=>'999',
 				'after'=>'now()',
 			);
 

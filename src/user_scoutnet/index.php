@@ -6,7 +6,7 @@ $LANG->includeLLFile('EXT:sh_scoutnet_kalender/user_scoutnet/locallang.xml');
 $BE_USER->modAccess($MCONF, 1);
 
 require_once (t3lib_extMgm::extPath('sh_scoutnet_webservice') . 'sn/class.tx_shscoutnetwebservice_sn.php');
-require_once (PATH_t3lib.'class.t3lib_scbase.php');
+//require_once (PATH_t3lib.'class.t3lib_scbase.php');
 
 // ***************************
 // Script Classes
@@ -140,7 +140,7 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 				// save api key
 				$sql = "UPDATE be_users SET tx_shscoutnetkalender_scoutnet_apikey='".$return_data['api_key']."', tx_shscoutnetkalender_scoutnet_username='".$return_data['user']."' where uid = '".$GLOBALS['BE_USER']->user['uid']."'";
 
-				$GLOBALS['TYPO3_DB']->sql(TYPO3_db,$sql);
+				$GLOBALS['TYPO3_DB']->sql_query($sql);
 
 				$GLOBALS['BE_USER']->user['tx_shscoutnetkalender_scoutnet_username'] = $return_data['user'];
 				$GLOBALS['BE_USER']->user['tx_shscoutnetkalender_scoutnet_apikey'] = $return_data['api_key'];
