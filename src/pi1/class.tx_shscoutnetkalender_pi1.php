@@ -28,8 +28,7 @@
  */
 
 
-require_once (t3lib_extMgm::extPath('sh_scoutnet_webservice') . 'sn/class.tx_shscoutnetwebservice_sn.php');
-
+require_once(\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath('sh_scoutnet_webservice') . 'sn/class.tx_shscoutnetwebservice_sn.php');
 
 class tx_shscoutnetkalender_pi1 extends tslib_pibase {
 	var $prefixId = 'tx_shscoutnetkalender_pi1';		// Same as class name
@@ -72,7 +71,7 @@ class tx_shscoutnetkalender_pi1 extends tslib_pibase {
 			$SN = new tx_shscoutnetwebservice_sn();
 
 			$filter = array(
-				'limit'=>'999',
+				'limit'=> isset($this->conf["limit"]) ? $this->conf["limit"] : 999,
 				'after'=>'now()',
 			);
 
@@ -225,6 +224,7 @@ class tx_shscoutnetkalender_pi1 extends tslib_pibase {
 					$detail_template = $this->cObj->substituteSubpart($detail_template,"###CONTENT_TARGET_GROUP###",trim($event['Target_Group'])?$this->cObj->getSubpart($detail_template,"###CONTENT_TARGET_GROUP###"):"");
 					$detail_template = $this->cObj->substituteSubpart($detail_template,"###CONTENT_URL###",trim($event['URL'])?$this->cObj->getSubpart($detail_template,"###CONTENT_URL###"):"");
 
+					$subarray_tmp = $subarray;
 					$subarray = array(
 						'###EINTRAG_ID###'=>$event['ID'],
 						'###DESCRIPTION###'=>htmlentities($event['Description'],ENT_COMPAT,'UTF-8'),
@@ -241,7 +241,38 @@ class tx_shscoutnetkalender_pi1 extends tslib_pibase {
 						'###URL_LABEL###' => $this->pi_getLL('url'),
 						'###AUTHOR_LABEL###' => $this->pi_getLL('author'),
 						'###EINTRAG_STYLE###' => $event_id === intval($event['ID'])?' style="display: table-row;"':'',
+
+						'###EBENE_LABEL###' => $this->pi_getLL('ebene'),
+						'###DATE_LABEL###' => $this->pi_getLL('date'),
+						'###TIME_LABEL###' => $this->pi_getLL('time'),
+						'###TITLE_LABEL###' => $this->pi_getLL('title'),
+						'###STUFE_LABEL###' => $this->pi_getLL('stufe'),
+						'###CLASSES_LABEL###' => $this->pi_getLL('classes'),
 					);
+                                        
+					// Stufen: ID der ersten Stufe mit ins Template geben
+					if(is_object($event)) {
+						$stufen = $event["Stufen"];
+					}
+					$stufen_firstchild = $stufen[0];
+					if(is_object($stufen_firstchild)) {
+						$stufen_id = $stufen_firstchild->offsetGet("id");
+						$subarray["###STUFEN_ID###"] = $stufen_id;
+					}
+					
+					// Label der Stufen kommasepariert ins Template geben
+					if(is_array($stufen)) {
+						$stufen_label = array();
+						foreach ($stufen as $stufe) {
+							if(is_object($stufe)) {
+								$stufe_id = $stufe["id"];
+								$stufen_label[] = $this->pi_getLL("label_stufe_" . $stufe_id);
+							}
+						}
+						$subarray["###STUFEN_LABEL###"] = implode(", ", $stufen_label);
+					}
+					
+					$subarray = array_merge($subarray, $subarray_tmp);
 
 					$subcontent .= $this->cObj->substituteMarkerArray($detail_template,$subarray);
 				}
