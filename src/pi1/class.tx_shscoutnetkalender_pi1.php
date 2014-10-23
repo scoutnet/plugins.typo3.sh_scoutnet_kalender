@@ -266,7 +266,7 @@ class tx_shscoutnetkalender_pi1 extends tslib_pibase {
 						foreach ($stufen as $stufe) {
 							if(is_object($stufe)) {
 								$stufe_id = $stufe["id"];
-								$stufen_label[] = $this->pi_getLL($stufe_id);
+								$stufen_label[] = $this->pi_getLL("label_stufe_" . $stufe_id);
 							}
 						}
 						$subarray["###STUFEN_LABEL###"] = implode(", ", $stufen_label);

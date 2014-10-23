@@ -20,6 +20,11 @@
 			<label index="organizer">Host</label>
 			<label index="targetGroup">Target Audience</label>
 			<label index="url">Link</label>
+			<label index="label_stufe_1">Wölflinge</label>
+			<label index="label_stufe_2">Jungpfadfinder</label>
+			<label index="label_stufe_3">Pfadfinder</label>
+			<label index="label_stufe_4">Rover</label>
+			<label index="label_stufe_5">Leiter</label>
 			<label index="author">Created by</label>
 			<label index="stammesAuswahl">Show this calendars additional:</label> 
 		</languageKey>
@@ -38,6 +43,11 @@
 			<label index="organizer">Veranstalter</label>
 			<label index="targetGroup">Zielgruppe</label>
 			<label index="url">Link</label>
+			<label index="label_stufe_1">Wölflinge</label>
+			<label index="label_stufe_2">Jungpfadfinder</label>
+			<label index="label_stufe_3">Pfadfinder</label>
+			<label index="label_stufe_4">Rover</label>
+			<label index="label_stufe_5">Leiter</label>
 			<label index="author">Eingetragen von</label>
 			<label index="stammesAuswahl">Zusätzlich diese Kalender Anzeigen:</label> 
 		</languageKey>
