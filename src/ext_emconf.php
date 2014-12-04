@@ -15,7 +15,7 @@ $EM_CONF[$_EXTKEY] = array (
 	'description' => 'Official Typo3 plugin to display scoutnet.de calendar',
 	'category' => 'plugin',
 	'shy' => 0,
-	'version' => '2.0.8',
+	'version' => '2.0.9',
 	'priority' => '',
 	'loadOrder' => '',
 	'module' => 'user_scoutnet',
@@ -32,7 +32,7 @@ $EM_CONF[$_EXTKEY] = array (
 	'CGLcompliance_note' => NULL,
 	'constraints' => array (
 		'depends' => array (
-			'typo3' => '4.5.0-6.2.99',
+			'typo3' => '4.5.0-7.0.99',
 			'sh_scoutnet_webservice' => '1.0',
 		),
 		'conflicts' => '',

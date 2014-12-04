@@ -5,13 +5,12 @@ $LANG->includeLLFile('EXT:sh_scoutnet_kalender/user_scoutnet/locallang.xml');
 
 $BE_USER->modAccess($MCONF, 1);
 
-require_once (t3lib_extMgm::extPath('sh_scoutnet_webservice') . 'sn/class.tx_shscoutnetwebservice_sn.php');
-//require_once (PATH_t3lib.'class.t3lib_scbase.php');
+require_once (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath('sh_scoutnet_webservice') . 'sn/class.tx_shscoutnetwebservice_sn.php');
 
 // ***************************
 // Script Classes
 // ***************************
-class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
+class SC_mod_user_scoutnet_kalender_editor_index extends \TYPO3\CMS\Backend\Module\BaseScriptClass {
 
 	protected $pageinfo;
 
@@ -28,23 +27,23 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 
 		$this->jsDateFktSet = false;
 
-			// initialize document
-		$this->doc = t3lib_div::makeInstance('template');
-		$this->doc->setModuleTemplate(t3lib_extMgm::extPath('sh_scoutnet_kalender') . 'user_scoutnet/template_overview.html');
+		// initialize document
+		$this->doc = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('\TYPO3\CMS\Backend\Template\DocumentTemplate');
+		$this->doc->setModuleTemplate(\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath('sh_scoutnet_kalender') . 'user_scoutnet/template_overview.html');
 		$this->doc->backPath = $GLOBALS['BACK_PATH'];
 //		$this->doc->getPageRenderer()->loadScriptaculous('effects,dragdrop');
-		//$this->doc->addStyleSheet( 'tx_shscoutnetkalender', t3lib_extMgm::siteRelPath('sh_scoutnet_kalender') . 'user_scoutnet/style.css');
+		//$this->doc->addStyleSheet( 'tx_shscoutnetkalender', \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::siteRelPath('sh_scoutnet_kalender') . 'user_scoutnet/style.css');
 	       
 		
 		if (version_compare(TYPO3_version, '4.3', '<')) {
-			$this->doc->JScode .= '<link rel="stylesheet" type="text/css" href="' .t3lib_extMgm::extRelPath('sh_scoutnet_kalender') . 'user_scoutnet/style.css">';
-			$this->doc->JScode .= '<link rel="stylesheet" type="text/css" href="' .t3lib_extMgm::extRelPath('sh_scoutnet_kalender') . 'user_scoutnet/kalender.css">';
+			$this->doc->JScode .= '<link rel="stylesheet" type="text/css" href="' .\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath('sh_scoutnet_kalender') . 'user_scoutnet/style.css">';
+			$this->doc->JScode .= '<link rel="stylesheet" type="text/css" href="' .\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath('sh_scoutnet_kalender') . 'user_scoutnet/kalender.css">';
 		} elseif (version_compare(TYPO3_version, '4.4', '<')) {
-			$this->doc->addStyleSheet('tx_shscoutnetkalender', t3lib_extMgm::siteRelPath('sh_scoutnet_kalender') . 'user_scoutnet/style.css');
-			$this->doc->addStyleSheet('tx_shscoutnetkalender', t3lib_extMgm::siteRelPath('sh_scoutnet_kalender') . 'user_scoutnet/kalender.css');
+			$this->doc->addStyleSheet('tx_shscoutnetkalender', \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::siteRelPath('sh_scoutnet_kalender') . 'user_scoutnet/style.css');
+			$this->doc->addStyleSheet('tx_shscoutnetkalender', \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::siteRelPath('sh_scoutnet_kalender') . 'user_scoutnet/kalender.css');
 		} else {
-			$this->doc->JScode .= '<link rel="stylesheet" type="text/css" href="' . t3lib_div::createVersionNumberedFilename(t3lib_div::resolveBackPath($this->doc->backPath . t3lib_extMgm::extRelPath('sh_scoutnet_kalender') . 'user_scoutnet/style.css')) . '" />';
-			$this->doc->JScode .= '<link rel="stylesheet" type="text/css" href="' . t3lib_div::createVersionNumberedFilename(t3lib_div::resolveBackPath($this->doc->backPath . t3lib_extMgm::extRelPath('sh_scoutnet_kalender') . 'user_scoutnet/kalender.css')) . '" />';
+			$this->doc->JScode .= '<link rel="stylesheet" type="text/css" href="' . \TYPO3\CMS\Core\Utility\GeneralUtility::createVersionNumberedFilename(\TYPO3\CMS\Core\Utility\GeneralUtility::resolveBackPath($this->doc->backPath . \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath('sh_scoutnet_kalender') . 'user_scoutnet/style.css')) . '" />';
+			$this->doc->JScode .= '<link rel="stylesheet" type="text/css" href="' . \TYPO3\CMS\Core\Utility\GeneralUtility::createVersionNumberedFilename(\TYPO3\CMS\Core\Utility\GeneralUtility::resolveBackPath($this->doc->backPath . \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath('sh_scoutnet_kalender') . 'user_scoutnet/kalender.css')) . '" />';
 		}
 
 		$this->usedIds = array();
@@ -122,7 +121,7 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 		';
 
 		// compile document
-		$markers['FUNC_MENU'] = t3lib_BEfunc::getFuncMenu(
+		$markers['FUNC_MENU'] = \TYPO3\CMS\Backend\Utility\BackendUtility::getFuncMenu(
 				0,
 				'SET[mode]',
 				$this->MOD_SETTINGS['mode'],
@@ -148,7 +147,7 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 
 			if (!isset($GLOBALS['BE_USER']->user['tx_shscoutnetkalender_scoutnet_apikey']) || $GLOBALS['BE_USER']->user['tx_shscoutnetkalender_scoutnet_apikey'] == '' || 
 				!isset($GLOBALS['BE_USER']->user['tx_shscoutnetkalender_scoutnet_username']) || $GLOBALS['BE_USER']->user['tx_shscoutnetkalender_scoutnet_username'] == ''){
-					$this->doc->setModuleTemplate(t3lib_extMgm::extPath('sh_scoutnet_kalender') . 'user_scoutnet/template_noApiKey.html');
+					$this->doc->setModuleTemplate(\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath('sh_scoutnet_kalender') . 'user_scoutnet/template_noApiKey.html');
 
 
 					$markers['CONTENT'] = $GLOBALS['LANG']->getLL('noApiKeyError');
@@ -171,7 +170,7 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 				if( $rights['code'] != 0) {
 
 
-					$this->doc->setModuleTemplate(t3lib_extMgm::extPath('sh_scoutnet_kalender') . 'user_scoutnet/template_error.html');
+					$this->doc->setModuleTemplate(\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath('sh_scoutnet_kalender') . 'user_scoutnet/template_error.html');
 
 					$link = $this->MCONF['_'].'&action=requestRight';
 
@@ -259,7 +258,7 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 					}
 
 					if ($_GET['action'] == "edit" || $_GET['action'] == "create") {
-						$this->doc->setModuleTemplate(t3lib_extMgm::extPath('sh_scoutnet_kalender') . 'user_scoutnet/template_edit.html');
+						$this->doc->setModuleTemplate(\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath('sh_scoutnet_kalender') . 'user_scoutnet/template_edit.html');
 
 						$event_id = $_GET['event_id'];
 						if (!isset($event_id) || !is_numeric($event_id)) {
@@ -417,9 +416,9 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 
 
 
-						$event_template = t3lib_parsehtml::getSubpart($this->doc->moduleTemplate,'###EVENT_TEMPLATE###');
-						$year_change_template = t3lib_parsehtml::getSubpart($this->doc->moduleTemplate,'###YEAR_CHANGE_TEMPLATE###');
-						$last_modified_template = t3lib_parsehtml::getSubpart($event_template,'###LAST_MODIFIED###');
+						$event_template = \TYPO3\CMS\Core\Html\HtmlParser::getSubpart($this->doc->moduleTemplate,'###EVENT_TEMPLATE###');
+						$year_change_template = \TYPO3\CMS\Core\Html\HtmlParser::getSubpart($this->doc->moduleTemplate,'###YEAR_CHANGE_TEMPLATE###');
+						$last_modified_template = \TYPO3\CMS\Core\Html\HtmlParser::getSubpart($event_template,'###LAST_MODIFIED###');
 
 
 						$events = array();
@@ -430,7 +429,7 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 
 							if($previous_year != strftime('%Y',$event['Start'])) {
 								$previous_year = strftime('%Y',$event['Start']);
-								$events_out .= t3lib_parsehtml::substituteMarkerArray($year_change_template,array('YEAR'=>strftime('%Y',$event['Start'])),'###|###');
+								$events_out .= \TYPO3\CMS\Core\Html\HtmlParser::substituteMarkerArray($year_change_template,array('YEAR'=>strftime('%Y',$event['Start'])),'###|###');
 
 							}
 
@@ -486,7 +485,7 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 
 							$last_modified = isset($event['Last_Modified_By']) && $event['Last_Modified_By'] != ''?$last_modified_template:'';
 
-							$events_out .= t3lib_parsehtml::substituteMarkerArray(t3lib_parsehtml::substituteSubpart($event_template,'###LAST_MODIFIED###',$last_modified),$event_markers,'###|###');
+							$events_out .= \TYPO3\CMS\Core\Html\HtmlParser::substituteMarkerArray(\TYPO3\CMS\Core\Html\HtmlParser::substituteSubpart($event_template,'###LAST_MODIFIED###',$last_modified),$event_markers,'###|###');
 						}
 
 
@@ -495,7 +494,7 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 				}
 			}
 		} catch(Exception $e) {
-			$this->doc->setModuleTemplate(t3lib_extMgm::extPath('sh_scoutnet_kalender') . 'user_scoutnet/template_error.html');
+			$this->doc->setModuleTemplate(\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath('sh_scoutnet_kalender') . 'user_scoutnet/template_error.html');
 
 			$markers['CONTENT'] = $GLOBALS['LANG']->getLL('snkDown').'<br><pre>'.$e->getMessage().'</pre>';
 		}
@@ -707,37 +706,37 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 		$title = $GLOBALS['LANG']->sL($GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['taskcenter'][$extKey][$taskClass]['title']);
 
 		if (class_exists($taskClass)) {
-			$taskInstance = t3lib_div::makeInstance($taskClass, $this);
+			$taskInstance = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance($taskClass, $this);
 
 			if ($taskInstance instanceof tx_taskcenter_Task) {
 					// check if the task is restricted to admins only
 				if ($this->checkAccess($extKey, $taskClass)) {
 					$actionContent .= $taskInstance->getTask();
 				} else {
-					$flashMessage = t3lib_div::makeInstance(
-						't3lib_FlashMessage',
+					$flashMessage = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(
+						'\TYPO3\CMS\Core\Messaging\FlashMessage',
 						$GLOBALS['LANG']->getLL('error-access', TRUE),
 						$GLOBALS['LANG']->getLL('error_header'),
-						t3lib_FlashMessage::ERROR
+						\TYPO3\CMS\Core\Messaging\FlashMessage::ERROR
 					);
 					$actionContent .= $flashMessage->render();
 				}
 			} else {
 					// error if the task is not an instance of tx_taskcenter_Task
-				$flashMessage = t3lib_div::makeInstance(
-					't3lib_FlashMessage',
+				$flashMessage = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(
+					'\TYPO3\CMS\Core\Messaging\FlashMessage',
 					sprintf($GLOBALS['LANG']->getLL('error_no-instance', TRUE), $taskClass, 'tx_taskcenter_Task'),
 					$GLOBALS['LANG']->getLL('error_header'),
-					t3lib_FlashMessage::ERROR
+					\TYPO3\CMS\Core\Messaging\FlashMessage::ERROR
 				);
 				$actionContent .= $flashMessage->render();
 			}
 		} else {
-			$flashMessage = t3lib_div::makeInstance(
-				't3lib_FlashMessage',
+			$flashMessage = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(
+				'\TYPO3\CMS\Core\Messaging\FlashMessage',
 				$GLOBALS['LANG']->sL('LLL:EXT:taskcenter/task/locallang.xml:mlang_labels_tabdescr'),
 				$GLOBALS['LANG']->sL('LLL:EXT:taskcenter/task/locallang.xml:mlang_tabs_tab'),
-				t3lib_FlashMessage::INFO
+				\TYPO3\CMS\Core\Messaging\FlashMessage::INFO
 			);
 			$actionContent .= $flashMessage->render();
 		}
@@ -812,7 +811,7 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 
 			// change the sorting of items to the user's one
 		if ($mainMenu) {
-			$this->doc->getPageRenderer()->addJsFile(t3lib_extMgm::extRelPath('taskcenter') . 'res/tasklist.js');
+			$this->doc->getPageRenderer()->addJsFile(\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath('taskcenter') . 'res/tasklist.js');
 			$userSorting = unserialize($GLOBALS['BE_USER']->uc['taskcenter']['sorting']);
 			if (is_array($userSorting)) {
 				$newSorting = array();
@@ -834,14 +833,14 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 					// Check for custom icon
 				if (!empty($item['icon'])) {
 					if (strpos($item['icon'], '<img ') === FALSE) {
-						$absIconPath = t3lib_div::getFileAbsFilename($item['icon']);
+						$absIconPath = \TYPO3\CMS\Core\Utility\GeneralUtility::getFileAbsFilename($item['icon']);
 							// If the file indeed exists, assemble relative path to it
 						if (file_exists($absIconPath)) {
 							$icon = $GLOBALS['BACK_PATH'] . '../' . str_replace(PATH_site, '', $absIconPath);
 							$icon = '<img src="' . $icon . '" title="' . $title . '" alt="' . $title . '" />';
 						}
 						if (@is_file($icon)) {
-							$icon = '<img' . t3lib_iconworks::skinImg($GLOBALS['BACK_PATH'], $icon, 'width="16" height="16"') . ' title="' . $title . '" alt="' . $title . '" />';
+							$icon = '<img' . \TYPO3\CMS\Backend\Utility\IconUtility::skinImg($GLOBALS['BACK_PATH'], $icon, 'width="16" height="16"') . ' title="' . $title . '" alt="' . $title . '" />';
 						}
 					} else {
 						$icon = $item['icon'];
@@ -873,7 +872,7 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 
 					// Main menu: Render additional syntax to sort tasks
 				if ($mainMenu) {
-					$dragIcon = '<img' . t3lib_iconWorks::skinImg($GLOBALS['BACK_PATH'], 'gfx/move.gif', 'width="16" height="16" hspace="2"') . ' title="' . $GLOBALS['LANG']->sL('LLL:EXT:lang/locallang_core.php:labels.move', 1) . '" alt="" />';
+					$dragIcon = '<img' . \TYPO3\CMS\Backend\Utility\IconUtility::skinImg($GLOBALS['BACK_PATH'], 'gfx/move.gif', 'width="16" height="16" hspace="2"') . ' title="' . $GLOBALS['LANG']->sL('LLL:EXT:lang/locallang_core.php:labels.move', 1) . '" alt="" />';
 					$section = '<div class="down">&nbsp;</div>
 								<div class="drag">' . $dragIcon . '</div>';
 					$backgroundClass = 't3-row-header ';
@@ -906,7 +905,7 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 	protected function indexAction() {
 		$content = '';
 		$tasks = array();
-		$icon = t3lib_extMgm::extRelPath('taskcenter') . 'task/task.gif';
+		$icon = \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath('taskcenter') . 'task/task.gif';
 
 			// render the tasks only if there are any available
 		if (is_array($GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['taskcenter']) && count($GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['taskcenter']) > 0) {
@@ -921,11 +920,11 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 
 						// Check for custom icon
 					if (!empty($task['icon'])) {
-						$icon = t3lib_div::getFileAbsFilename($task['icon']);
+						$icon = \TYPO3\CMS\Core\Utility\GeneralUtility::getFileAbsFilename($task['icon']);
 					}
 
 					if (class_exists($taskClass)) {
-						$taskInstance = t3lib_div::makeInstance($taskClass, $this);
+						$taskInstance = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance($taskClass, $this);
 						if ($taskInstance instanceof tx_taskcenter_Task) {
 							$taskDescriptionHtml = $taskInstance->getOverview();
 						}
@@ -946,11 +945,11 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 
 			$content .= $this->renderListMenu($tasks, TRUE);
 		} else {
-			$flashMessage = t3lib_div::makeInstance(
-				't3lib_FlashMessage',
+			$flashMessage = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(
+				'\TYPO3\CMS\Core\Messaging\FlashMessage',
 				$GLOBALS['LANG']->getLL('no-tasks', TRUE),
 				'',
-				t3lib_FlashMessage::INFO
+				\TYPO3\CMS\Core\Messaging\FlashMessage::INFO
 			);
 			$this->content .= $flashMessage->render();
 		}
@@ -966,7 +965,7 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 	 */
 	protected function getButtons() {
 		$buttons = array(
-			'csh' => t3lib_BEfunc::cshItem('_MOD_web_func', '', $GLOBALS['BACK_PATH']),
+			'csh' => \TYPO3\CMS\Backend\Utility\BackendUtility::cshItem('_MOD_web_func', '', $GLOBALS['BACK_PATH']),
 			'shortcut' => '',
 			'open_new_window' => $this->openInNewWindow()
 		);
@@ -1054,10 +1053,10 @@ class SC_mod_user_scoutnet_kalender_editor_index extends t3lib_SCbase {
 	 * @return	string	Hyperlink with icon and appropriate JavaScript
 	 */
 	protected function openInNewWindow() {
-		$url = t3lib_div::getIndpEnv('TYPO3_REQUEST_SCRIPT');
+		$url = \TYPO3\CMS\Core\Utility\GeneralUtility::getIndpEnv('TYPO3_REQUEST_SCRIPT');
 		$onClick = "devlogWin=window.open('" . $url . "','taskcenter','width=790,status=0,menubar=1,resizable=1,location=0,scrollbars=1,toolbar=0');return false;";
 		$content = '<a href="#" onclick="' . htmlspecialchars($onClick).'">' .
-					'<img' . t3lib_iconWorks::skinImg($GLOBALS['BACK_PATH'],'gfx/open_in_new_window.gif', 'width="19" height="14"') . ' title="' . $GLOBALS['LANG']->sL('LLL:EXT:lang/locallang_core.php:labels.openInNewWindow', 1) . '" class="absmiddle" alt="" />' .
+					'<img' . \TYPO3\CMS\Backend\Utility\IconUtility::skinImg($GLOBALS['BACK_PATH'],'gfx/open_in_new_window.gif', 'width="19" height="14"') . ' title="' . $GLOBALS['LANG']->sL('LLL:EXT:lang/locallang_core.php:labels.openInNewWindow', 1) . '" class="absmiddle" alt="" />' .
 					'</a>';
 		return $content;
 	}
@@ -1073,7 +1072,7 @@ if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/sh_scou
 
 
 // Make instance:
-$SOBE = t3lib_div::makeInstance('SC_mod_user_scoutnet_kalender_editor_index');
+$SOBE = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('SC_mod_user_scoutnet_kalender_editor_index');
 
 // Include files?
 foreach($SOBE->include_once as $INC_FILE) {

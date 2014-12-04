@@ -45,11 +45,8 @@ $tempColumns = Array (
 	),
 );
 
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTCAcolumns("tt_content",$tempColumns,1);
 
-t3lib_div::loadTCA("tt_content");
-t3lib_extMgm::addTCAcolumns("tt_content",$tempColumns,1);
-
-t3lib_div::loadTCA('tt_content');
 $TCA['tt_content']['types']['list']['subtypes_excludelist'][$_EXTKEY.'_pi1']='layout,select_key';
 $TCA['tt_content']['types']['list']['subtypes_addlist'][$_EXTKEY.'_pi1']='tx_shscoutnetkalender_ids,tx_shscoutnetkalender_optids,tx_shscoutnetkalender_kat_ids,tx_shscoutnetkalender_stufen_ids';
 
@@ -74,22 +71,21 @@ $tempColumns = Array (
 );
 
 
-t3lib_div::loadTCA('be_users');
-t3lib_extMgm::addTCAcolumns('be_users',$tempColumns,1);
-t3lib_extMgm::addToAllTCAtypes('be_users','--div--;LLL:EXT:sh_scoutnet_kalender/locallang_db.xml:be_users.tx_shscoutnetkalender_scounet_tab, tx_shscoutnetkalender_scoutnet_username, tx_shscoutnetkalender_scoutnet_apikey');
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTCAcolumns('be_users',$tempColumns,1);
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes('be_users','--div--;LLL:EXT:sh_scoutnet_kalender/locallang_db.xml:be_users.tx_shscoutnetkalender_scounet_tab, tx_shscoutnetkalender_scoutnet_username, tx_shscoutnetkalender_scoutnet_apikey');
 
 
 // add plugins
-t3lib_extMgm::addPlugin(Array('LLL:EXT:sh_scoutnet_kalender/locallang_db.xml:tt_content.list_type_pi1', $_EXTKEY.'_pi1'),'list_type');
-t3lib_extMgm::addStaticFile($_EXTKEY,"pi1/static/","Scoutnet calendar");
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPlugin(Array('LLL:EXT:sh_scoutnet_kalender/locallang_db.xml:tt_content.list_type_pi1', $_EXTKEY.'_pi1'),'list_type');
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addStaticFile($_EXTKEY,"pi1/static/","Scoutnet calendar");
 
 
 // add backend user modul
-if (TYPO3_MODE == 'BE') {
-	$TBE_MODULES_EXT["xMOD_db_new_content_el"]["addElClasses"]["tx_shscoutnetkalender_pi1_wizicon"] = t3lib_extMgm::extPath($_EXTKEY).'pi1/class.tx_shscoutnetkalender_pi1_wizicon.php';
+if (TYPO3_MODE === 'BE') {
+	$TBE_MODULES_EXT["xMOD_db_new_content_el"]["addElClasses"]["tx_shscoutnetkalender_pi1_wizicon"] = \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath($_EXTKEY).'pi1/class.tx_shscoutnetkalender_pi1_wizicon.php';
 
-	t3lib_extMgm::addModulePath('scoutnet_kalender', t3lib_extMgm::extPath($_EXTKEY) . 'user_scoutnet/');
-	t3lib_extMgm::addModule('user','scoutnet', '', t3lib_extMgm::extPath($_EXTKEY) . 'user_scoutnet/');
+	\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addModulePath('scoutnet_kalender', \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath($_EXTKEY) . 'user_scoutnet/');
+	\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addModule('user','scoutnet', '', \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath($_EXTKEY) . 'user_scoutnet/');
 
 //	$GLOBALS['TYPO3_CONF_VARS']['BE']['AJAX']['Taskcenter::saveCollapseState']      = 'EXT:taskcenter/classes/class.tx_taskcenter_status.php:tx_taskcenter_status->saveCollapseState';
 //	$GLOBALS['TYPO3_CONF_VARS']['BE']['AJAX']['Taskcenter::saveSortingState']       = 'EXT:taskcenter/classes/class.tx_taskcenter_status.php:tx_taskcenter_status->saveSortingState';
