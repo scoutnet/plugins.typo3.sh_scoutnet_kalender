@@ -50,7 +50,9 @@ class tx_shscoutnetkalender_pi1 extends tslib_pibase {
 		$this->pi_setPiVarDefaults();
 		$this->pi_loadLL();
 
-		
+		$old_timezone = ini_get('date.timezone');
+		date_default_timezone_set('UTC');
+
 		$cssFile = $GLOBALS['TSFE']->tmpl->getFileName($this->conf["cssFile"]);
 
 		$content = '<link rel="stylesheet" type="text/css" href="'.$cssFile.'" media="screen" />'."\n".
@@ -301,6 +303,8 @@ class tx_shscoutnetkalender_pi1 extends tslib_pibase {
 		} catch(Exception $e) {
 			$content .= '<span class="termin">'.$this->pi_getLL('snkDown').'('.$e->getMessage().')'.'</span>';
 		}
+
+		date_default_timezone_set($old_timezone);
 	
 		return $this->pi_wrapInBaseClass($content);
 	}

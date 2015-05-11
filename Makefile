@@ -2,7 +2,9 @@
 NAME=sh_scoutnet_kalender
 CURRENTVERSION=$(shell cat src/ext_emconf.php | grep "'version' =>" | cut -d "'" -f 4)
 
-default: build build/$(NAME)_$(CURRENTVERSION).zip
+default: build zip
+
+zip: build/$(NAME)_$(CURRENTVERSION).zip
 
 build:
 	mkdir build
