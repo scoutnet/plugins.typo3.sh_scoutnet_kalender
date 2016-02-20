@@ -1,7 +1,23 @@
 # Const
-plugin.tx_shscoutnetkalender_pi1 {
-  templateFile = EXT:sh_scoutnet_kalender/pi1/scoutnet_kalender.tmpl
-  cssFile = EXT:sh_scoutnet_kalender/pi1/kalender.css
-  limit = 40
+plugin.tx_shscoutnetkalender {
+	view {
+		# cat=plugin.tx_shscoutnetkalender/file; type=string; label=Path to template root (FE)
+		templateRootPath = EXT:sh_scoutnet_kalender/Resources/Private/Templates/
+		# cat=plugin.tx_shscoutnetkalender/file; type=string; label=Path to template partials (FE)
+		partialRootPath = EXT:sh_scoutnet_kalender/Resources/Private/Partials/
+		# cat=plugin.tx_shscoutnetkalender/file; type=string; label=Path to template layouts (FE)
+		layoutRootPath = EXT:sh_scoutnet_kalender/Resources/Private/Layouts/
+	}
+	persistence {
+		# cat=plugin.tx_shscoutnetkalender//a; type=string; label=Default storage PID
+		storagePid =
+	}
+	settings {
+		# cat=plugin.tx_shscoutnetkalender/design; type=string; label=Template File
+		templateFile = EXT:sh_scoutnet_kalender/pi1/scoutnet_kalender.tmpl
+		# cat=plugin.tx_shscoutnetkalender/design; type=string; label=CSS File
+		cssFile = EXT:sh_scoutnet_kalender/pi1/kalender.css
+		# cat=plugin.tx_shscoutnetkalender/events; type=string; label=Limit
+		limit = 40
+	}
 }
-

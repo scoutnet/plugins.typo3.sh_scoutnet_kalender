@@ -1,8 +1,21 @@
-# Setup
-tt_content.sh_scoutnet_kalender_pi1.10 >
+plugin.tx_shscoutnetkalender {
+	view {
+		templateRootPath = {$plugin.tx_shscoutnetkalender.view.templateRootPath}
+		partialRootPath = {$plugin.tx_shscoutnetkalender.view.partialRootPath}
+		layoutRootPath = {$plugin.tx_shscoutnetkalender.view.layoutRootPath}
+	}
+	persistence {
+		storagePid = {$plugin.tx_shscoutnetkalender.persistence.storagePid}
+		recursive = 1
+	}
+	features {
+		# uncomment the following line to enable the new Property Mapper.
+		# rewrittenPropertyMapper = 1 
+	}
 
-plugin.tx_shscoutnetkalender_pi1 {
-  templateFile = {$plugin.tx_shscoutnetkalender_pi1.templateFile}
-  cssFile = {$plugin.tx_shscoutnetkalender_pi1.cssFile}
-  limit = {$plugin.tx_shscoutnetkalender_pi1.limit}
+	settings {
+		templateFile = {$plugin.tx_shscoutnetkalender.settings.templateFile}
+		cssFile = {$plugin.tx_shscoutnetkalender.settings.cssFile}
+		limit = {$plugin.tx_shscoutnetkalender.settings.limit}
+	}
 }
