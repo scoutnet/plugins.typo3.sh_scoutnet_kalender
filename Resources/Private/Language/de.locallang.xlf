@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<xliff version="1.0">
+    <file product-name="sh_scoutnet_kalender" target-language="de" source-language="en" date="2015-02-19T17:33:19Z" datatype="plaintext" original="locallang">
+        <body>
+            <trans-unit id="snkDown">
+                <target>z.Z. ist der Scoutnet Kalender nicht erreichbar.&amp;lt;br&amp;gt;Bitte versuch es zu einem späteren Zeitpunkt noch einmal.</target>
+                <source>The ScoutNet calendar server is not Reachable.&lt;br&gt;Please try again later.</source>
+            </trans-unit>
+            <trans-unit id="stammesAuswahl">
+                <target>Zusätzlich diese Kalender Anzeigen:</target>
+                <source>Show this calendars additional:</source>
+            </trans-unit>
+            <trans-unit id="ebene">
+                <target>Ebene</target>
+                <source>ebene</source>
+            </trans-unit>
+            <trans-unit id="date">
+                <target>Datum</target>
+                <source>date</source>
+            </trans-unit>
+            <trans-unit id="time">
+                <target>Zeit</target>
+                <source>time</source>
+            </trans-unit>
+            <trans-unit id="title">
+                <target>Titel</target>
+                <source>title</source>
+            </trans-unit>
+            <trans-unit id="section">
+                <target>Stufe</target>
+                <source>section</source>
+            </trans-unit>
+            <trans-unit id="categorie">
+                <target>Kategorien</target>
+                <source>categories</source>
+            </trans-unit>
+            <trans-unit id="addEvent">
+                <target>Termin hinzufügen</target>
+                <source>add Event</source>
+            </trans-unit>
+            <trans-unit id="poweredBy">
+                <target>Powered By</target>
+                <source>powered by</source>
+            </trans-unit>
+            <trans-unit id="description">
+                <target>Beschreibung</target>
+                <source>description</source>
+            </trans-unit>
+            <trans-unit id="location">
+                <target>Ort</target>
+                <source>location</source>
+            </trans-unit>
+            <trans-unit id="organizer">
+                <target>Veranstalter</target>
+                <source>host</source>
+            </trans-unit>
+            <trans-unit id="targetGroup">
+                <target>Zielgruppe</target>
+                <source>target group</source>
+            </trans-unit>
+            <trans-unit id="URL">
+                <target>Link</target>
+                <source>url</source>
+            </trans-unit>
+            <trans-unit id="author">
+                <target>Eingetragen von</target>
+                <source>author</source>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

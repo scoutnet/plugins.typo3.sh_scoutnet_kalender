@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<xliff version="1.0">
+    <file datatype="plaintext" date="2015-02-19T17:33:19Z" original="locallang" product-name="sh_scoutnet_kalender" source-language="en">
+        <body>
+        <trans-unit id="snkDown">
+                <source>The ScoutNet calendar server is not Reachable.&lt;br&gt;Please try again later.</source>
+            </trans-unit>
+            <trans-unit id="stammesAuswahl">
+                <source>Show this calendars additional:</source>
+            </trans-unit>
+        <trans-unit id="ebene">
+                <source>ebene</source>
+            </trans-unit>
+        <trans-unit id="date">
+                <source>date</source>
+            </trans-unit>
+        <trans-unit id="time">
+                <source>time</source>
+            </trans-unit>
+        <trans-unit id="title">
+                <source>title</source>
+            </trans-unit>
+        <trans-unit id="section">
+                <source>section</source>
+            </trans-unit>
+        <trans-unit id="categorie">
+                <source>categories</source>
+            </trans-unit>
+        <trans-unit id="addEvent">
+                <source>add Event</source>
+            </trans-unit>
+        <trans-unit id="poweredBy">
+                <source>powered by</source>
+            </trans-unit>
+        <trans-unit id="description">
+                <source>description</source>
+            </trans-unit>
+        <trans-unit id="location">
+                <source>location</source>
+            </trans-unit>
+        <trans-unit id="organizer">
+                <source>host</source>
+            </trans-unit>
+        <trans-unit id="targetGroup">
+                <source>target group</source>
+            </trans-unit>
+        <trans-unit id="URL">
+                <source>url</source>
+            </trans-unit>
+        <trans-unit id="author">
+                <source>author</source>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

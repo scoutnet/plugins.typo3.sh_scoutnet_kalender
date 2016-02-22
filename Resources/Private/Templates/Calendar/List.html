@@ -2,14 +2,14 @@
 <f:layout name="Default" />
 <f:section name="main">
     <f:if condition="{error}">
-        <f:then><f:translate key="snkDown">Scoutnet server Down: </f:translate>{error}</f:then>
+        <f:then><f:translate key="snkDown">Scoutnet server Down: </f:translate> ({error})</f:then>
         <f:else>
             <div id="snk-{kalender.0.ID}" class="snk">
                 <div class="snk-body">
 
                     <f:if condition="{optionalKalenders -> f:count()} > 0">
                         <div id="snk-stammesAuswahl">
-                            Stammes Auswahl<br>
+                            <f:translate key="stammesAuswahl" /><br>
                             <f:form action="list" method="post">
                                 <f:for each="{optionalKalenders}" as="optionalKalender">
                                     <f:form.checkbox onclick="form.submit();" checked="{optionalKalender.Selected}" name="addids[]" value="{optionalKalender.ID}" id="add_id_{optionalKalender.ID}" title="{optionalKalender._Name}" /><label for="add_id_{optionalKalender.ID}">&nbsp;<f:format.raw>{optionalKalender._Name}</f:format.raw></label>
@@ -23,13 +23,13 @@
                         <table>
                             <tr class="snk-headings-row">
                                 <f:if condition="{kalender -> f:count()} > 1">
-                                    <th class="snk-eintrag-ebene-ueberschrift">Ebene</th>
+                                    <th class="snk-eintrag-ebene-ueberschrift"><f:translate key="ebene" /></th>
                                 </f:if>
-                                <th class="snk-eintrag-datum-ueberschrift">Datum</th>
-                                <th class="snk-eintrag-zeit-ueberschrift">Zeit</th>
-                                <th class="snk-eintrag-titel-ueberschrift">Titel</th>
-                                <th class="snk-eintrag-stufen-ueberschrift">Stufe</th>
-                                <th class="snk-eintrag-kategorien-ueberschrift">Kategorie</th>
+                                <th class="snk-eintrag-datum-ueberschrift"><f:translate key="date" /></th>
+                                <th class="snk-eintrag-zeit-ueberschrift"><f:translate key="time" /></th>
+                                <th class="snk-eintrag-titel-ueberschrift"><f:translate key="title" /></th>
+                                <th class="snk-eintrag-stufen-ueberschrift"><f:translate key="section" /></th>
+                                <th class="snk-eintrag-kategorien-ueberschrift"><f:translate key="categorie" /></th>
                             </tr>
 
                             <f:if condition="{events}"><f:then>
@@ -50,10 +50,10 @@
                 </div>
                 <div class="snk-footer">
                     <div class="snk-hinzufuegen">
-                        <a href="https://www.scoutnet.de/community/kalender/events.html?task=create&amp;SSID={kalender.0.ID}" target="_top">add Event</a>
+                        <a href="https://www.scoutnet.de/community/kalender/events.html?task=create&amp;SSID={kalender.0.ID}" target="_top"><f:translate key="addEvent" /></a>
                     </div>
                     <div class="snk-powered-by">
-                        powered_by <span><f:link.external uri="www.scoutnet.de/kalender/" defaultScheme="https" target="_top">ScoutNet.DE</f:link.external></span>
+                        <f:translate key="poweredBy" />&nbsp;<span><f:link.external uri="www.scoutnet.de/kalender/" defaultScheme="https" target="_top">ScoutNet.DE</f:link.external></span>
                     </div>
                 </div>
             </div>

@@ -32,12 +32,12 @@
 <tr id="snk-termin-{event.ID}" class="snk-termin-infos" <f:if condition="{eventId} == {event.ID}">style="display: table-row;"</f:if>>
     <td colspan="6">
         <dl>
-            <f:if condition="{event.Description}"><dt class="snk-eintrag-beschreibung">Description</dt><dd>{event.Description}</dd></f:if>
-            <f:if condition="{event.Location}"><dt class="snk-eintrag-ort">Location</dt><dd>{event.ZIP} {event.Location}</dd></f:if>
-            <f:if condition="{event.Organizer}"><dt class="snk-eintrag-veranstalter">Organizer</dt><dd>{event.Organizer}</dd></f:if>
-            <f:if condition="{event.Target_Group}"><dt class="snk-eintrag-zielgruppe">Target Group</dt><dd>{event.Target_Group}</dd></f:if>
-            <f:if condition="{event.URL}"><dt class="snk-eintrag-url-label">URL</dt><dd class="snk-eintrag-url"><f:link.external target="_blank" uri="{event.URL}"><f:if condition="{event.URL_Text}"><f:then>{event.URL_Text}</f:then><f:else>{event.URL}</f:else></f:if></f:link.external></dd></f:if>
-            <dt class="snk-eintrag-autor">Author</dt><dd>{event.Author._full_name}</dd>
+            <f:if condition="{event.Description}"><dt class="snk-eintrag-beschreibung"><f:translate key="description" /></dt><dd>{event.Description}</dd></f:if>
+            <f:if condition="{event.Location}"><dt class="snk-eintrag-ort"><f:translate key="location" /></dt><dd>{event.ZIP} {event.Location}</dd></f:if>
+            <f:if condition="{event.Organizer}"><dt class="snk-eintrag-veranstalter"><f:translate key="organizer" /></dt><dd>{event.Organizer}</dd></f:if>
+            <f:if condition="{event.Target_Group}"><dt class="snk-eintrag-zielgruppe"><f:translate key="targetGroup" /></dt><dd>{event.Target_Group}</dd></f:if>
+            <f:if condition="{event.URL}"><dt class="snk-eintrag-url-label"><f:translate key="URL" /></dt><dd class="snk-eintrag-url"><f:link.external target="_blank" uri="{event.URL}"><f:if condition="{event.URL_Text}"><f:then>{event.URL_Text}</f:then><f:else>{event.URL}</f:else></f:if></f:link.external></dd></f:if>
+            <dt class="snk-eintrag-autor"><f:translate key="author" /></dt><dd>{event.Author._full_name}</dd>
         </dl>
     </td>
 </tr>
