@@ -49,7 +49,7 @@ class CalendarController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 		$old_timezone = ini_get('date.timezone');
 		date_default_timezone_set('UTC');
 
-		$cssFile = $GLOBALS['TSFE']->tmpl->getFileName($this->settings["cssFile"]);
+		$cssFile = $GLOBALS['TSFE']->tmpl->getFileName("EXT:sh_scoutnet_kalender/Resources/Public/Css/kalender.css");
 
 		// Include CSS and JS
 		$GLOBALS['TSFE']->additionalHeaderData['tx_sh_scoutnet_Kalender'] = '<link rel="stylesheet" type="text/css" href="' . $cssFile . '" media="screen" />' . "\n" .

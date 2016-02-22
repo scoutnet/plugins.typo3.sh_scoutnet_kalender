@@ -13,10 +13,6 @@ plugin.tx_shscoutnetkalender {
 		storagePid =
 	}
 	settings {
-		# cat=plugin.tx_shscoutnetkalender/design; type=string; label=Template File
-		templateFile = EXT:sh_scoutnet_kalender/pi1/scoutnet_kalender.tmpl
-		# cat=plugin.tx_shscoutnetkalender/design; type=string; label=CSS File
-		cssFile = EXT:sh_scoutnet_kalender/pi1/kalender.css
 		# cat=plugin.tx_shscoutnetkalender/events; type=string; label=Limit
 		limit = 40
 	}

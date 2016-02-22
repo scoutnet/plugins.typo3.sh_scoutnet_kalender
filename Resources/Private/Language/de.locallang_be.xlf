@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<xliff version="1.0">
+    <file product-name="sh_scoutnet_kalender" target-language="de" source-language="en" date="2015-02-19T17:33:19Z" datatype="plaintext" original="locallang_be">
+        <body>
+            <trans-unit id="calendar.title">
+                <target>ScoutNet Kalender</target>
+                <source>ScoutNet calendar</source>
+            </trans-unit>
+            <trans-unit id="calendar.description">
+                <target>Fügt einen Scoutnet Kalender in die Seite ein</target>
+                <source>Adds a ScoutNet calendar to the page</source>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>
