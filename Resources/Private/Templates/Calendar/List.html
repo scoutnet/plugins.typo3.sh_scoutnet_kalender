@@ -1,0 +1,64 @@
+{namespace snk=ScoutNet\ShScoutnetKalender\ViewHelpers}
+<f:layout name="Default" />
+<f:section name="main">
+    <f:if condition="{error}">
+        <f:then><f:translate key="snkDown">Scoutnet server Down: </f:translate>{error}</f:then>
+        <f:else>
+            <div id="snk-{kalender.0.ID}" class="snk">
+                <div class="snk-body">
+
+                    <f:if condition="{optionalKalenders -> f:count()} > 0">
+                        <div id="snk-stammesAuswahl">
+                            Stammes Auswahl<br>
+                            <f:form action="list" method="post">
+                                <f:for each="{optionalKalenders}" as="optionalKalender">
+                                    <f:form.checkbox onclick="form.submit();" checked="{optionalKalender.Selected}" name="addids[]" value="{optionalKalender.ID}" id="add_id_{optionalKalender.ID}" title="{optionalKalender._Name}" /><label for="add_id_{optionalKalender.ID}">&nbsp;<f:format.raw>{optionalKalender._Name}</f:format.raw></label>
+                                </f:for>
+                            </f:form><br>
+                        </div>
+                    </f:if>
+
+
+                    <div class="snk-termine">
+                        <table>
+                            <tr class="snk-headings-row">
+                                <f:if condition="{kalender -> f:count()} > 1">
+                                    <th class="snk-eintrag-ebene-ueberschrift">Ebene</th>
+                                </f:if>
+                                <th class="snk-eintrag-datum-ueberschrift">Datum</th>
+                                <th class="snk-eintrag-zeit-ueberschrift">Zeit</th>
+                                <th class="snk-eintrag-titel-ueberschrift">Titel</th>
+                                <th class="snk-eintrag-stufen-ueberschrift">Stufe</th>
+                                <th class="snk-eintrag-kategorien-ueberschrift">Kategorie</th>
+                            </tr>
+
+                            <f:if condition="{events}"><f:then>
+                                <f:groupedFor each="{events}" as="events_per_year" groupBy="StartYear" groupKey="year">
+                                    <f:groupedFor each="{events_per_year}" as="events_per_month" groupBy="StartMonth" groupKey="month">
+                                    <tr>
+                                        <th colspan="6" class="snk-monat-heading"><f:format.date date="01.{month}.{year}" format="%B '%y" /></th>
+                                    </tr>
+                                <f:for each="{events_per_month}" as="event">
+                                    <f:render partial="Calendar/Event" arguments="{event:event, kalender: kalender, eventId: eventId}" />
+                                </f:for>
+                                </f:groupedFor>
+                                </f:groupedFor>
+
+                            </f:then><f:else></f:else></f:if>
+                        </table>
+                    </div>
+                </div>
+                <div class="snk-footer">
+                    <div class="snk-hinzufuegen">
+                        <a href="https://www.scoutnet.de/community/kalender/events.html?task=create&amp;SSID={kalender.0.ID}" target="_top">add Event</a>
+                    </div>
+                    <div class="snk-powered-by">
+                        powered_by <span><f:link.external uri="www.scoutnet.de/kalender/" defaultScheme="https" target="_top">ScoutNet.DE</f:link.external></span>
+                    </div>
+                </div>
+            </div>
+
+        </f:else>
+    </f:if>
+</f:section>
+
