@@ -1,0 +1,44 @@
+{namespace snk=ScoutNet\ShScoutnetKalender\ViewHelpers}
+
+<tr>
+    <f:if condition="{kalender -> f:count()} > 1"><td class="snk-eintrag-ebene"><f:format.raw>{event.Kalender._long_Name}</f:format.raw></td></f:if>
+    <td class="snk-eintrag-datum"><f:format.crop maxCharacters="2" append="" respectWordBoundaries="FALSE"><f:format.date date="{event.Start}" format="%A" /></f:format.crop>,&nbsp;<f:format.date date="{event.Start}" format="%d.%m." /><f:if condition="{event.OneDay}">&nbsp;-&nbsp;<f:format.crop maxCharacters="2" append="" respectWordBoundaries="FALSE"><f:format.date date="{event.End}" format="%A" /></f:format.crop>,&nbsp;<f:format.date date="{event.End}" format="%d.%m." /></f:if></td>
+
+    <td class="snk-eintrag-zeit">
+        <f:if condition="{event.All_Day}">
+            <f:then></f:then>
+            <f:else>
+                <f:format.date date="{event.Start}" format="%H:%M" /><f:if condition="{event.End}"><f:if condition="{event.Start} != {event.End}">&nbsp;-&nbsp;<f:format.date date="{event.End}" format="%H:%M" /></f:if></f:if>
+            </f:else>
+        </f:if>
+    </td>
+    <td class="snk-eintrag-titel">
+        <f:if condition="{event.ShowDetails}">
+            <f:then>
+                <a href="#snk-termin-{event.ID}" name="snk-termin-{event.ID}" class="snk-termin-link<f:if condition="{eventId} == {event.ID}">-opened</f:if>" onclick="if(snk_show_termin) return snk_show_termin({event.ID},this);">
+                    {event.Title}
+                </a>
+            </f:then>
+            <f:else>{event.Title}</f:else>
+        </f:if>
+    </td>
+
+    <td class="snk-eintrag-stufe"><f:format.raw>{event._Stufen_Images}</f:format.raw></td>
+    <td class="snk-eintrag-kategorien"><snk:implode values="{event.Keywords}">{object}</snk:implode></td>
+</tr>
+
+<f:if condition="{event.ShowDetails}">
+
+<tr id="snk-termin-{event.ID}" class="snk-termin-infos" <f:if condition="{eventId} == {event.ID}">style="display: table-row;"</f:if>>
+    <td colspan="6">
+        <dl>
+            <f:if condition="{event.Description}"><dt class="snk-eintrag-beschreibung">Description</dt><dd>{event.Description}</dd></f:if>
+            <f:if condition="{event.Location}"><dt class="snk-eintrag-ort">Location</dt><dd>{event.ZIP} {event.Location}</dd></f:if>
+            <f:if condition="{event.Organizer}"><dt class="snk-eintrag-veranstalter">Organizer</dt><dd>{event.Organizer}</dd></f:if>
+            <f:if condition="{event.Target_Group}"><dt class="snk-eintrag-zielgruppe">Target Group</dt><dd>{event.Target_Group}</dd></f:if>
+            <f:if condition="{event.URL}"><dt class="snk-eintrag-url-label">URL</dt><dd class="snk-eintrag-url"><f:link.external target="_blank" uri="{event.URL}"><f:if condition="{event.URL_Text}"><f:then>{event.URL_Text}</f:then><f:else>{event.URL}</f:else></f:if></f:link.external></dd></f:if>
+            <dt class="snk-eintrag-autor">Author</dt><dd>{event.Author._full_name}</dd>
+        </dl>
+    </td>
+</tr>
+</f:if>
