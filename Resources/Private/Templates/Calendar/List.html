@@ -35,11 +35,11 @@
                             <f:if condition="{events}"><f:then>
                                 <f:groupedFor each="{events}" as="events_per_year" groupBy="StartYear" groupKey="year">
                                     <f:groupedFor each="{events_per_year}" as="events_per_month" groupBy="StartMonth" groupKey="month">
-                                    <tr>
+                                    <tr class="snk-monat-row">
                                         <th colspan="6" class="snk-monat-heading"><f:format.date date="01.{month}.{year}" format="%B '%y" /></th>
                                     </tr>
-                                <f:for each="{events_per_month}" as="event">
-                                    <f:render partial="Calendar/Event" arguments="{event:event, kalender: kalender, eventId: eventId}" />
+                                <f:for each="{events_per_month}" as="event" iteration="iterator">
+                                    <f:render partial="Calendar/Event" arguments="{event:event, kalender: kalender, eventId: eventId, iterator: iterator}" />
                                 </f:for>
                                 </f:groupedFor>
                                 </f:groupedFor>

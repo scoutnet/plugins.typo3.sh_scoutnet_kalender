@@ -43,25 +43,22 @@ class CalendarController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 	 * @param array $addids
 	 * @param integer $eventId
 	 */
-	public function listAction($addids = array(), $eventId = null)
-	{
+	public function listAction($addids = array(), $eventId = null) {
 		$this->cObj = $this->configurationManager->getContentObject();
 		$old_timezone = ini_get('date.timezone');
 		date_default_timezone_set('UTC');
 
-		$cssFile = $GLOBALS['TSFE']->tmpl->getFileName("EXT:sh_scoutnet_kalender/Resources/Public/Css/kalender.css");
+		$cssFile = $GLOBALS['TSFE']->tmpl->getFileName($this->settings['cssFile']);
+		$jsFolder = $GLOBALS['TSFE']->tmpl->getFileName('EXT:sh_scoutnet_kalender/Resources/Public/JS/');
 
-		// Include CSS and JS
-		$GLOBALS['TSFE']->additionalHeaderData['tx_sh_scoutnet_Kalender'] = '<link rel="stylesheet" type="text/css" href="' . $cssFile . '" media="screen" />' . "\n" .
-			'<script type="text/javascript" src="https://kalender.scoutnet.de/2.0/templates/scoutnet/behavior.js"></script>' . "\n" .
-			'<script type="text/javascript" src="https://kalender.scoutnet.de/js/base2-p.js"></script>' . "\n" .
-			'<script type="text/javascript" src="https://kalender.scoutnet.de/js/base2-dom-p.js"></script>' . "\n" .
-			'<style type="text/css" media="all"> .snk-termin-infos{ display:none; } .snk-footer { margin-bottom: 20px; } .snk-termine {width: auto; margin-right: 5px;}</style>' . "\n" .
-			'<script type="text/javascript">' . "\n" .
-			'base2.DOM.bind(document);' . "\n" .
-			'snk_init();' . "\n" .
-			'document.addEventListener(\'DOMContentLoaded\', function(){ return snk_finish(\'\'); }, false);' . "\n" .
-			'</script>' . "\n";
+		//\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($jsFolder);
+
+		// add CSS and Javascript
+		$GLOBALS['TSFE']->additionalHeaderData['tx_sh_scoutnet_Kalender'] =
+			'<link rel="stylesheet" type="text/css" href="' . $cssFile . '" media="screen" />' . "\n" .
+			'<script type="text/javascript" src="'.$jsFolder.'base2-p.js"></script>' . "\n" .
+			'<script type="text/javascript" src="'.$jsFolder.'base2-dom-p.js"></script>' . "\n" .
+			'<script type="text/javascript" src="'.$jsFolder.'kalender.js"></script>' . "\n";
 
 		$ids = explode(",", $this->cObj->data["tx_shscoutnetkalender_ids"]);
 

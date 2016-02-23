@@ -4,7 +4,7 @@
 	border-bottom-color:#6E1C32;
 	border-bottom-width:1px;
 	line-height:160%;
-        color: #6E1C32;
+    color: #6E1C32;
 }
 .snk A:hover {
 	text-decoration:none;
@@ -12,9 +12,10 @@
 	border-bottom-color:#6E1C32;
 	border-bottom-width:1px;
 	line-height:160%;
-        color: #6E1C32;
+	color: #6E1C32;
 }
 
+.snk label,
 .snk{
 	color: #6E1C32;
 	/*font-family: Verdana, Sans-Serif;*/
@@ -75,4 +76,24 @@ tr.snk-headings-row th{
 }
 .snk-eintrag-ebene {
 	text-align:right;
+}
+
+.snk-termin-row-even {
+	background: rgba(0, 51, 153, 0.1);
+}
+
+.snk-termin-row-odd {
+}
+
+.snk-termin-infos{
+	display:none;
+}
+
+.snk-footer {
+	margin-bottom: 20px;
+}
+
+.snk-termine {
+	width: auto;
+	margin-right: 5px;
 }

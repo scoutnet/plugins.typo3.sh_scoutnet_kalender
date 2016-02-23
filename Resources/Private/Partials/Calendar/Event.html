@@ -1,6 +1,6 @@
 {namespace snk=ScoutNet\ShScoutnetKalender\ViewHelpers}
 
-<tr>
+<tr class="snk-termin-row-{f:if(condition:iterator.isOdd, then: 'odd', else: 'even')}">
     <f:if condition="{kalender -> f:count()} > 1"><td class="snk-eintrag-ebene"><f:format.raw>{event.Kalender._long_Name}</f:format.raw></td></f:if>
     <td class="snk-eintrag-datum"><f:format.crop maxCharacters="2" append="" respectWordBoundaries="FALSE"><f:format.date date="{event.Start}" format="%A" /></f:format.crop>,&nbsp;<f:format.date date="{event.Start}" format="%d.%m." /><f:if condition="{event.OneDay}">&nbsp;-&nbsp;<f:format.crop maxCharacters="2" append="" respectWordBoundaries="FALSE"><f:format.date date="{event.End}" format="%A" /></f:format.crop>,&nbsp;<f:format.date date="{event.End}" format="%d.%m." /></f:if></td>
 
@@ -29,7 +29,7 @@
 
 <f:if condition="{event.ShowDetails}">
 
-<tr id="snk-termin-{event.ID}" class="snk-termin-infos" <f:if condition="{eventId} == {event.ID}">style="display: table-row;"</f:if>>
+<tr id="snk-termin-{event.ID}" class="snk-termin-infos snk-termin-row-{f:if(condition:iterator.isOdd, then: 'odd', else: 'even')}" <f:if condition="{eventId} == {event.ID}">style="display: table-row;"</f:if>>
     <td colspan="6">
         <dl>
             <f:if condition="{event.Description}"><dt class="snk-eintrag-beschreibung"><f:translate key="description" /></dt><dd>{event.Description}</dd></f:if>
