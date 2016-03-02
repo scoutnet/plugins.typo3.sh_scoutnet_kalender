@@ -1,0 +1,15 @@
+
+
+<f:form.validationResults for="{object}">
+	<f:if condition="{validationResults.flattenedErrors}">
+		<f:for each="{validationResults.flattenedErrors}" key="propertyName" as="errors">
+			<div class="alert alert-danger" role="alert">
+				<!--{propertyName}-->
+				<strong><f:translate key="tx_shscoutnetcommunity_domain_model_user.{propertyName}">{propertyName}</f:translate>:</strong>
+				<ul>
+					<f:for each="{errors}" as="propertyError"><li><f:translate key="error.{propertyError.code}" arguments="{propertyError.arguments}">{propertyError.message} ({propertyError.code}) </f:translate></li></f:for>
+				</ul>
+			</div>
+		</f:for>
+</f:if>
+</f:form.validationResults>

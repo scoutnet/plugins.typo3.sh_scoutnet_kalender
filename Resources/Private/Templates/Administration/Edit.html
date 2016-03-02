@@ -5,7 +5,10 @@
 <h1 style="margin-left: -10px"><f:translate key="event.edit.headline">Kalender: Termin</f:translate></h1>
 <h2><f:translate key="event.edit.subheadline">Datensatz bearbeiten</f:translate></h2>
 
-<f:form action="update" name="event" object="{event}" >
+	<f:render partial="FormErrors" arguments="{object:ContactFormItem}"/>
+
+
+	<f:form action="update" name="event" object="{event}" >
 	<f:render partial="Administration/EditForm" arguments="{generatedCategories: '{generatedCategories}', allSectionCategories:'{allSectionCategories}', forcedCategories: '{forcedCategories}', event: '{event}', verband: '{verband}'}" />
 
 <br>

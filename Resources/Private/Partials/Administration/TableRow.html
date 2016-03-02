@@ -23,8 +23,8 @@
 <tr>
 	<td class="terminlinks" colspan="2">
 		<small>
-			<f:translate key="event.list.created">erstellt</f:translate>: {event.createdBy.fullName}, <community:format.strftime date="{event.createdAt}" format="%x %H:%M" />
-			<f:if condition="{event.changedBy}"> | <f:translate key="event.list.changed">zuletzt geändert</f:translate>: {event.changedBy.fullName}, <community:format.strftime date="{event.changedAt}" format="%x %H:%M" /></f:if>
+			<f:translate key="event.list.created">erstellt</f:translate>: {event.createdBy.fullName}, <community:format.strftime date="{event.createdAt}" format="%d.%m.%Y %H:%M" />
+			<f:if condition="{event.changedBy}"> | <f:translate key="event.list.changed">zuletzt geändert</f:translate>: {event.changedBy.fullName}, <community:format.strftime date="{event.changedAt}" format="%d.%m.%Y %H:%M" /></f:if>
 		</small>
 	</td>
 </tr>

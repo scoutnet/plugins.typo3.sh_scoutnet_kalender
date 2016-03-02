@@ -2,7 +2,7 @@
 {namespace community=ScoutNet\ShScoutnetCommunity\ViewHelpers}
 
 <tr class="snk-termin-row-{f:if(condition:iterator.isOdd, then: 'odd', else: 'even')}">
-    <f:if condition="{kalender -> f:count()} > 1"><td class="snk-eintrag-ebene"><f:format.raw>{event.Kalender._long_Name}</f:format.raw></td></f:if>
+    <f:if condition="{kalender -> f:count()} > 1"><td class="snk-eintrag-ebene"><f:format.raw>{event.structure._long_Name}</f:format.raw></td></f:if>
     <td class="snk-eintrag-datum"><f:format.crop maxCharacters="2" append="" respectWordBoundaries="FALSE"><f:format.date date="{event.startTimestamp}" format="%A" /></f:format.crop>,&nbsp;<f:format.date date="{event.startTimestamp}" format="%d.%m." /><f:if condition="{event.showEndDate}">&nbsp;-&nbsp;<f:format.crop maxCharacters="2" append="" respectWordBoundaries="FALSE"><f:format.date date="{event.endTimestamp}" format="%A" /></f:format.crop>,&nbsp;<f:format.date date="{event.endTimestamp}" format="%d.%m." /></f:if>
     </td>
 

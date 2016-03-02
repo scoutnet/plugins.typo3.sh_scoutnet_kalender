@@ -61,19 +61,36 @@ class AdministrationController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionC
 	protected $authHelper = null;
 
 	/**
-	 * @var \ScoutNet\ShScoutnetKalender\Domain\Repository\BackendUserRepository
+	 * @var \ScoutNet\ShScoutnetWebservice\Domain\Repository\BackendUserRepository
 	 * @inject
 	 */
 	protected $backendUserRepository;
 
-
-
-
-
 	protected $extConfig = null;
 
+	/**
+	 * action initializeAction
+	 *
+	 * @return void
+	 */
 	public function initializeAction() {
 		parent::initializeAction();
+
+		//set Default mapping for dates
+		if (isset($this->arguments['event'])) {
+			// set date format
+			$mappingConfig = $this->arguments['event']->getPropertyMappingConfiguration();
+			$mappingConfig->forProperty('startDate')->setTypeConverterOption(
+				'TYPO3\\CMS\\Extbase\\Property\\TypeConverter\\DateTimeConverter',
+				\TYPO3\CMS\Extbase\Property\TypeConverter\DateTimeConverter::CONFIGURATION_DATE_FORMAT,
+				'd.m.Y'
+			);
+			$mappingConfig->forProperty('endDate')->setTypeConverterOption(
+				'TYPO3\\CMS\\Extbase\\Property\\TypeConverter\\DateTimeConverter',
+				\TYPO3\CMS\Extbase\Property\TypeConverter\DateTimeConverter::CONFIGURATION_DATE_FORMAT,
+				'd.m.Y'
+			);
+		}
 
 		// load the extConfig
 		$this->extConfig = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['sh_scoutnet_kalender']);
@@ -172,12 +189,80 @@ class AdministrationController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionC
 	 * @return void
 	 */
 	public function editAction(\ScoutNet\ShScoutnetWebservice\Domain\Model\Event $event) {
-		$this->_loadAllCategories($event->getStructure(), $event);
+		if ($this->checkRights()) {
+			$this->_loadAllCategories($event->getStructure(), $event);
 
-		// set event
-		$this->view->assign('event', $event);
-		$this->view->assign('verband', $event->getStructure()->getVerband());
-		//\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($event);
+			// set event
+			$this->view->assign('event', $event);
+			$this->view->assign('verband', $event->getStructure()->getVerband());
+			//\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($event);
+		}
+	}
+
+	/**
+	 * action edit
+	 *
+	 * @param \ScoutNet\ShScoutnetWebservice\Domain\Model\Event $event
+	 * @param \array $categories
+	 * @param \array $customCategories
+	 * @return void
+	 */
+	public function updateAction(\ScoutNet\ShScoutnetWebservice\Domain\Model\Event $event, $categories, $customCategories) {
+
+		/*
+		$start = mktime(intval($_REQUEST['mod_snk']['StartTime']['h']),
+			intval($_REQUEST['mod_snk']['StartTime']['m']),intval(0),
+			intval($_REQUEST['mod_snk']['StartDate']['m']),
+			intval($_REQUEST['mod_snk']['StartDate']['d']),
+			intval($_REQUEST['mod_snk']['StartDate']['y']));
+
+		$end = mktime(intval($_REQUEST['mod_snk']['EndTime']['h']),
+			intval($_REQUEST['mod_snk']['EndTime']['m']), intval(0),
+			intval($_REQUEST['mod_snk']['EndDate']['m']==""?$_REQUEST['mod_snk']['StartDate']['m']:$_REQUEST['mod_snk']['EndDate']['m']),
+			intval($_REQUEST['mod_snk']['EndDate']['d']==""?$_REQUEST['mod_snk']['StartDate']['d']:$_REQUEST['mod_snk']['EndDate']['d']),
+			intval($_REQUEST['mod_snk']['EndDate']['y']==""?$_REQUEST['mod_snk']['StartDate']['y']:$_REQUEST['mod_snk']['EndDate']['y']));
+
+		$event = array(
+			'ID' => is_numeric($_REQUEST['mod_snk']['event_id'])?$_REQUEST['mod_snk']['event_id']:-1,
+			'SSID' => $kalenders[0]['ID'],
+			'Title' => $_REQUEST['mod_snk']['Title'],
+			'Organizer' => $_REQUEST['mod_snk']['Organizer'],
+			'Target_Group' => $_REQUEST['mod_snk']['TargetGroup'],
+			'Start' => $start,
+			'End' => $end,
+			'All_Day' => $_REQUEST['mod_snk']['StartTime']['m'] == "" || $_REQUEST['mod_snk']['StartTime']['h'] == "",
+			'ZIP' => $_REQUEST['mod_snk']['Zip'],
+			'Location' => $_REQUEST['mod_snk']['Location'],
+			'URL_Text' => $_REQUEST['mod_snk']['LinkText'],
+			'URL' => $_REQUEST['mod_snk']['LinkUrl'],
+			'Description' => $_REQUEST['mod_snk']['Info'],
+			'Stufen' => array(),
+		);
+
+		$event['Keywords'] = $_REQUEST['mod_snk']['keywords'];
+
+		foreach ($_REQUEST['mod_snk']['customKeywords'] as $keyword){
+			if (strlen(trim($keyword)) > 0) {
+				$customKeywords[] = trim($keyword);
+			}
+		}
+
+		if (count($customKeywords) > 0)
+			$event['Custom_Keywords'] = $customKeywords;
+
+		try {
+			$SN->write_event($event['ID'],$event,$GLOBALS['BE_USER']->user['tx_shscoutnetkalender_scoutnet_username'],$GLOBALS['BE_USER']->user['tx_shscoutnetkalender_scoutnet_apikey']);
+
+			$info[] = $GLOBALS['LANG']->getLL('event'.($event['ID'] == -1?'Created':'Updated'));
+		} catch (Exception $e) {
+			$info[] = sprintf($GLOBALS['LANG']->getLL('error'.($event['ID'] == -1?'Create':'Update').'Event'),$e->getMessage());
+		}
+		*/
+
+
+
+
+		return "foo";
 	}
 
 	/**
@@ -187,7 +272,6 @@ class AdministrationController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionC
 	public function deleteAction(\ScoutNet\ShScoutnetWebservice\Domain\Model\Event $event = null) {
 		// set event
 		$this->view->assign('event', $event);
-
 	}
 
 	/**
@@ -195,8 +279,24 @@ class AdministrationController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionC
 	 * @ignorevalidation $event
 	 */
 	public function removeAction(\ScoutNet\ShScoutnetWebservice\Domain\Model\Event $event = null) {
-		// set event
-		$this->view->assign('event', $event);
+		if ($this->checkRights()) {
+			/** @var \ScoutNet\ShScoutnetKalender\Domain\Model\BackendUser $be_user */
+			$be_user = $this->backendUserRepository->findByUid($GLOBALS['BE_USER']->user["uid"]);
+
+
+			$ssid = $this->extConfig['ScoutnetSSID'];
+			try {
+				$this->eventRepository->delete_event($ssid, $event->getUid(), $be_user->getTxShscoutnetkalenderScoutnetUsername(), $be_user->getTxShscoutnetkalenderScoutnetApikey());
+
+				$this->addFlashMessage('event Deleted');
+
+				$this->redirect('list');
+			} catch (Exception $e) {
+				// TODO: handle error with flash message
+				$this->addFlashMessage('Cannot connect to Server'.$e->getMessage(),'Error', \TYPO3\CMS\Core\Messaging\AbstractMessage::ERROR);
+				$this->view->assign('error', $e->getMessage());
+			}
+		}
 
 	}
 
