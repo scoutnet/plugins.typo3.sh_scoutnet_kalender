@@ -1,14 +1,14 @@
 {namespace community=ScoutNet\ShScoutnetCommunity\ViewHelpers}
-<f:layout name="Default" />
+<f:layout name="Backend/Default" />
 
-<f:section name="main">
+<f:section name="content">
 <h1 style="margin-left: -10px"><f:translate key="event.new.headline">Kalender: Termine</f:translate></h1>
 <h2><f:translate key="event.new.subheadline">Datensatz erstellen</f:translate></h2>
 
 <f:form action="create" name="event" object="{event}" >
 	<f:form.hidden property="structure" />
 
-	<f:render partial="Events/EditForm" arguments="{generatedCategories: '{generatedCategories}', allSectionCategories:'{allSectionCategories}', forcedCategories: '{forcedCategories}', event: '{event}', verband: '{verband}'}" />
+	<f:render partial="Administration/EditForm" arguments="{generatedCategories: '{generatedCategories}', allSectionCategories:'{allSectionCategories}', forcedCategories: '{forcedCategories}', event: '{event}', verband: '{verband}'}" />
 
 <br>
 

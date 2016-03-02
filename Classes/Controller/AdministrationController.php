@@ -23,6 +23,7 @@ namespace ScoutNet\ShScoutnetKalender\Controller;
 *
 *  This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
+
 /**
  * Plugin 'Scoutnet calendar' for the 'sh_scoutnet_kalender' extension.
  *
@@ -33,7 +34,7 @@ namespace ScoutNet\ShScoutnetKalender\Controller;
 class AdministrationController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController {
 	const ERROR_UNKNOWN_ERROR = 0;
 	const ERROR_NO_RIGHTS = 1;
-	const ERROR_NO_CONECTION = 2;
+	const ERROR_NO_CONNECTION = 2;
 	const ERROR_RIGHTS_PENDING = 3;
 
 	/**
@@ -106,7 +107,7 @@ class AdministrationController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionC
 	private function checkRights() {
 		$ssid = $this->extConfig['ScoutnetSSID'];
 
-		/** @var \ScoutNet\ShScoutnetKalender\Domain\Model\BackendUser $be_user */
+		/** @var \ScoutNet\ShScoutnetWebservice\Domain\Model\BackendUser $be_user */
 		$be_user = $this->backendUserRepository->findByUid($GLOBALS['BE_USER']->user["uid"]);
 		//\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($be_user);
 
@@ -170,8 +171,10 @@ class AdministrationController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionC
 				);
 
 				// load Events from ScoutNet
-				$this->view->assign('events', $this->eventRepository->get_events_for_global_id_with_filter(array($ssid), $filter));
-				$this->view->assign('kalender', $this->structureRepository->findKalenderByGlobalid($ssid)[0]);
+				$structure = $this->structureRepository->findByUid($ssid);
+
+				$this->view->assign('structure', $structure);
+				$this->view->assign('events', $this->eventRepository->findByStructureAndFilter($structure, $filter));
 			} catch (\Exception $e) {
 				// TODO: handle error with flash message
 				$this->addFlashMessage('Cannot connect to Server'.$e->getMessage(),'Error', \TYPO3\CMS\Core\Messaging\AbstractMessage::ERROR);
@@ -180,6 +183,82 @@ class AdministrationController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionC
 			}
 		}
 	}
+
+
+	/**
+	 * @param \ScoutNet\ShScoutnetWebservice\Domain\Model\Structure  $structure
+	 * @param \ScoutNet\ShScoutnetWebservice\Domain\Model\Event|null $event
+     */
+	public function newAction(\ScoutNet\ShScoutnetWebservice\Domain\Model\Structure $structure, \ScoutNet\ShScoutnetWebservice\Domain\Model\Event $event = null) {
+		if ($this->checkRights()) {
+			if ($event === null) {
+				$event = new \ScoutNet\ShScoutnetWebservice\Domain\Model\Event();
+				$event->setStructure($structure);
+				$event->setStartDate(new \DateTime());
+			}
+
+			$this->_loadAllCategories($event->getStructure(), $event);
+
+			// set event
+			$this->view->assign('event', $event);
+			$this->view->assign('verband', $event->getStructure()->getVerband());
+		}
+	}
+
+	/**
+	 * @param \ScoutNet\ShScoutnetWebservice\Domain\Model\Event $event
+	 */
+	public function templateAction(\ScoutNet\ShScoutnetWebservice\Domain\Model\Event $event) {
+		$this->_loadAllCategories($event->getStructure(), $event);
+
+		$newEvent = new \ScoutNet\ShScoutnetWebservice\Domain\Model\Event();
+		$newEvent->setStructure($event->getStructure());
+
+		// copy all properties
+		$newEvent->copyProperties($event);
+
+		// set event
+		$this->view->assign('event', $newEvent);
+		$this->view->assign('verband', $newEvent->getStructure()->getVerband());
+	}
+
+
+	public function createAction(\ScoutNet\ShScoutnetWebservice\Domain\Model\Event $event) {
+		$categorieObjects = array();
+		foreach ($categories as $uid => $selected) {
+			// skip not selected
+			if ($selected == 0) continue;
+
+			$categorieObjects[] = $this->categorieRepository->findByUid($uid);
+		}
+
+		foreach ($customCategories as $categorie){
+			if (strlen(trim($categorie)) > 0) {
+				$cat = new \ScoutNet\ShScoutnetWebservice\Domain\Model\Categorie();
+				$cat->setText(trim($categorie));
+				$categorieObjects[] = $cat;
+			}
+		}
+
+		$event->setCategories($categorieObjects);
+
+		if ($this->checkRights()) {
+			try {
+				$this->eventRepository->add($event);
+
+				$this->addFlashMessage('event saved');
+
+				$this->redirect('list');
+			} catch (Exception $e) {
+				// TODO: handle error with flash message
+				$this->addFlashMessage('Cannot connect to Server'.$e->getMessage(),'Error', \TYPO3\CMS\Core\Messaging\AbstractMessage::ERROR);
+				$this->view->assign('error', $e->getMessage());
+				$this->redirect('error');
+			}
+		}
+
+	}
+
 
 	/**
 	 * action edit
@@ -208,61 +287,38 @@ class AdministrationController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionC
 	 * @return void
 	 */
 	public function updateAction(\ScoutNet\ShScoutnetWebservice\Domain\Model\Event $event, $categories, $customCategories) {
+		$categorieObjects = array();
+		foreach ($categories as $uid => $selected) {
+			// skip not selected
+			if ($selected == 0) continue;
 
-		/*
-		$start = mktime(intval($_REQUEST['mod_snk']['StartTime']['h']),
-			intval($_REQUEST['mod_snk']['StartTime']['m']),intval(0),
-			intval($_REQUEST['mod_snk']['StartDate']['m']),
-			intval($_REQUEST['mod_snk']['StartDate']['d']),
-			intval($_REQUEST['mod_snk']['StartDate']['y']));
+			$categorieObjects[] = $this->categorieRepository->findByUid($uid);
+		}
 
-		$end = mktime(intval($_REQUEST['mod_snk']['EndTime']['h']),
-			intval($_REQUEST['mod_snk']['EndTime']['m']), intval(0),
-			intval($_REQUEST['mod_snk']['EndDate']['m']==""?$_REQUEST['mod_snk']['StartDate']['m']:$_REQUEST['mod_snk']['EndDate']['m']),
-			intval($_REQUEST['mod_snk']['EndDate']['d']==""?$_REQUEST['mod_snk']['StartDate']['d']:$_REQUEST['mod_snk']['EndDate']['d']),
-			intval($_REQUEST['mod_snk']['EndDate']['y']==""?$_REQUEST['mod_snk']['StartDate']['y']:$_REQUEST['mod_snk']['EndDate']['y']));
-
-		$event = array(
-			'ID' => is_numeric($_REQUEST['mod_snk']['event_id'])?$_REQUEST['mod_snk']['event_id']:-1,
-			'SSID' => $kalenders[0]['ID'],
-			'Title' => $_REQUEST['mod_snk']['Title'],
-			'Organizer' => $_REQUEST['mod_snk']['Organizer'],
-			'Target_Group' => $_REQUEST['mod_snk']['TargetGroup'],
-			'Start' => $start,
-			'End' => $end,
-			'All_Day' => $_REQUEST['mod_snk']['StartTime']['m'] == "" || $_REQUEST['mod_snk']['StartTime']['h'] == "",
-			'ZIP' => $_REQUEST['mod_snk']['Zip'],
-			'Location' => $_REQUEST['mod_snk']['Location'],
-			'URL_Text' => $_REQUEST['mod_snk']['LinkText'],
-			'URL' => $_REQUEST['mod_snk']['LinkUrl'],
-			'Description' => $_REQUEST['mod_snk']['Info'],
-			'Stufen' => array(),
-		);
-
-		$event['Keywords'] = $_REQUEST['mod_snk']['keywords'];
-
-		foreach ($_REQUEST['mod_snk']['customKeywords'] as $keyword){
-			if (strlen(trim($keyword)) > 0) {
-				$customKeywords[] = trim($keyword);
+		foreach ($customCategories as $categorie){
+			if (strlen(trim($categorie)) > 0) {
+				$cat = new \ScoutNet\ShScoutnetWebservice\Domain\Model\Categorie();
+				$cat->setText(trim($categorie));
+				$categorieObjects[] = $cat;
 			}
 		}
 
-		if (count($customKeywords) > 0)
-			$event['Custom_Keywords'] = $customKeywords;
+		$event->setCategories($categorieObjects);
 
-		try {
-			$SN->write_event($event['ID'],$event,$GLOBALS['BE_USER']->user['tx_shscoutnetkalender_scoutnet_username'],$GLOBALS['BE_USER']->user['tx_shscoutnetkalender_scoutnet_apikey']);
+		if ($this->checkRights()) {
+			try {
+				$this->eventRepository->update($event);
 
-			$info[] = $GLOBALS['LANG']->getLL('event'.($event['ID'] == -1?'Created':'Updated'));
-		} catch (Exception $e) {
-			$info[] = sprintf($GLOBALS['LANG']->getLL('error'.($event['ID'] == -1?'Create':'Update').'Event'),$e->getMessage());
+				$this->addFlashMessage('event saved');
+
+				$this->redirect('list');
+			} catch (Exception $e) {
+				// TODO: handle error with flash message
+				$this->addFlashMessage('Cannot connect to Server'.$e->getMessage(),'Error', \TYPO3\CMS\Core\Messaging\AbstractMessage::ERROR);
+				$this->view->assign('error', $e->getMessage());
+				$this->redirect('error');
+			}
 		}
-		*/
-
-
-
-
-		return "foo";
 	}
 
 	/**
@@ -280,13 +336,8 @@ class AdministrationController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionC
 	 */
 	public function removeAction(\ScoutNet\ShScoutnetWebservice\Domain\Model\Event $event = null) {
 		if ($this->checkRights()) {
-			/** @var \ScoutNet\ShScoutnetKalender\Domain\Model\BackendUser $be_user */
-			$be_user = $this->backendUserRepository->findByUid($GLOBALS['BE_USER']->user["uid"]);
-
-
-			$ssid = $this->extConfig['ScoutnetSSID'];
 			try {
-				$this->eventRepository->delete_event($ssid, $event->getUid(), $be_user->getTxShscoutnetkalenderScoutnetUsername(), $be_user->getTxShscoutnetkalenderScoutnetApikey());
+				$this->eventRepository->delete($event);
 
 				$this->addFlashMessage('event Deleted');
 

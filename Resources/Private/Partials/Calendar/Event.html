@@ -26,7 +26,7 @@
     </td>
 
     <td class="snk-eintrag-stufe"><f:format.raw>{event.stufenImages}</f:format.raw></td>
-    <td class="snk-eintrag-kategorien"><snk:implode values="{event.categories}">{object}</snk:implode></td>
+    <td class="snk-eintrag-kategorien"><snk:implode values="{event.categories}" lastDelimiter=", ">{object.text}</snk:implode></td>
 </tr>
 
 <f:if condition="{event.showDetails}">

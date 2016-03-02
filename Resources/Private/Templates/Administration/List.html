@@ -3,9 +3,9 @@
 <f:section name="content">
     <h1>Edit Termine</h1>
 
-    <h2>{kalender.verband} {kalender.ident}</h2>
+    <h2>{structure.verband} {structure.ident}</h2>
 
-    <!--f:link.action action="new" arguments="{kalender: kalender}" class="btn btn-link tx_shscoutnetcalendarserver_newLink"><f:translate key="event.buttons.new">event.buttons.new</f:translate></f:link.action-->
+    <f:link.action action="new" arguments="{structure: structure}" class="btn btn-link tx_shscoutnetcalendarserver_newLink"><f:translate key="event.buttons.new">event.buttons.new</f:translate></f:link.action>
     <f:if condition="{events -> f:count()} > 0"><f:then>
         <!-- eventsliste -->
         <table>
@@ -23,7 +23,7 @@
                     </th>
                 </tr>
                 <f:for each="{events_per_year}" as="event">
-                    <f:render partial="Administration/TableRow" arguments="{event:event, stamm: kalender}" />
+                    <f:render partial="Administration/TableRow" arguments="{event:event}" />
                 </f:for>
             </f:groupedFor>
             </tbody>

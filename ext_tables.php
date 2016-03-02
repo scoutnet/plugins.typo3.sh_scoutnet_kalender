@@ -17,7 +17,7 @@ if (TYPO3_MODE === 'BE') {
 		'scoutnet',         // Name of the module
 		'',             // Position of the module
 		array(          // Allowed controller action combinations
-			'Administration' => 'list, register, error, requestRights, edit, update, delete, remove, template, add, create',
+			'Administration' => 'list, register, error, requestRights, edit, update, delete, remove, new, template, create',
 		),
 		array(          // Additional configuration
 			'access'    => 'user,group',
