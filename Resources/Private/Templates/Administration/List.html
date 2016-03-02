@@ -1,0 +1,35 @@
+{namespace snk=ScoutNet\ShScoutnetKalender\ViewHelpers}
+<f:layout name="Backend/Default" />
+<f:section name="content">
+    <h1>Edit Termine</h1>
+
+    <h2>{kalender.verband} {kalender.ident}</h2>
+
+    <!--f:link.action action="new" arguments="{kalender: kalender}" class="btn btn-link tx_shscoutnetcalendarserver_newLink"><f:translate key="event.buttons.new">event.buttons.new</f:translate></f:link.action-->
+    <f:if condition="{events -> f:count()} > 0"><f:then>
+        <!-- eventsliste -->
+        <table>
+            <thead>
+            <tr>
+                <th><f:translate key="event.list.begin">Beginn</f:translate>/<f:translate key="event.list.end">Ende</f:translate></th>
+                <th><f:translate key="event.list.title">Titel</f:translate>/<f:translate key="event.list.action">Aktion</f:translate></th>
+            </tr>
+            </thead>
+            <tbody>
+            <f:groupedFor each="{events}" as="events_per_year" groupBy="startYear" groupKey="year">
+                <tr>
+                    <th colspan="2">
+                        {year}
+                    </th>
+                </tr>
+                <f:for each="{events_per_year}" as="event">
+                    <f:render partial="Administration/TableRow" arguments="{event:event, stamm: kalender}" />
+                </f:for>
+            </f:groupedFor>
+            </tbody>
+        </table>
+    </f:then><f:else>
+        <p> - <f:translate key="event.list.noEntries">Keine Einträge</f:translate> - </p>
+    </f:else></f:if>
+</f:section>
+

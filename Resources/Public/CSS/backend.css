@@ -1,0 +1,101 @@
+﻿@import "style.css";
+
+textarea.f3-form-error {
+    background-color:#FF9F9F;
+    border: 1px #FF0000 solid;
+}
+
+input.f3-form-error {
+    background-color:#FF9F9F;
+    border: 1px #FF0000 solid;
+}
+
+/*
+	.tx-sh-scoutnet-calendarserver table {
+		border-collapse:separate;
+		border-spacing:10px;
+	}
+
+	.tx-sh-scoutnet-calendarserver table th {
+		font-weight:bold;
+	}
+
+	.tx-sh-scoutnet-calendarserver table td {
+		vertical-align:top;
+	}
+*/
+.typo3-messages .message-error {
+    color:red;
+}
+
+.typo3-messages .message-ok {
+    color:green;
+}
+
+.tx-sh-scoutnet-calendarserver .tx_shscoutnetcalendarserver_newLink,
+.tx_shscoutnetcalendarserver_editLink,
+.tx_shscoutnetcalendarserver_deleteLink{
+    color: #f7961e;
+}
+
+
+.tx-sh-scoutnet-calendarserver SMALL {
+    font-size: 75%;
+}
+.tx-sh-scoutnet-calendarserver FIELDSET {
+    padding: 10px 10px 0 10px;
+    margin: 5px 0 15px 0;
+}
+.tx-sh-scoutnet-calendarserver LEGEND {
+    font-weight: bold;
+}
+
+.tx-sh-scoutnet-calendarserver TABLE {
+    width: 100%;
+    border-bottom: 1px solid silver;
+}
+.tx-sh-scoutnet-calendarserver TABLE TD,
+.tx-sh-scoutnet-calendarserver TABLE TH {
+    padding: 2px 5px;
+}
+.tx-sh-scoutnet-calendarserver TABLE TH {
+    border-bottom: 1px solid silver;
+}
+
+.tx-sh-scoutnet-calendarserver .zoom,
+.tx-sh-scoutnet-calendarserver .zoom INPUT, .tx-sh-scoutnet-calendarserver INPUT.zoom,
+.tx-sh-scoutnet-calendarserver .zoom LABEL, .tx-sh-scoutnet-calendarserver LABEL.zoom,
+.tx-sh-scoutnet-calendarserver .zoom TEXTAREA, .tx-sh-scoutnet-calendarserver TEXTAREA.zoom {
+    font-size: 120%;
+}
+
+.tx-sh-scoutnet-calendarserver .hinweis {
+    color: darkgray;
+    line-height: 109%;
+}
+
+
+.tx-sh-scoutnet-calendarserver .terminlinks {
+    padding-bottom: 15px;
+}
+
+.tx-sh-scoutnet-calendarserver .terminlinks SMALL,
+.tx-sh-scoutnet-calendarserver #rechteverwaltung SMALL {
+    color: darkgray;
+}
+
+.tx-sh-scoutnet-calendarserver #rechteverwaltung FIELDSET OL, .tx-sh-scoutnet-calendarserver FIELDSET UL {
+    margin: 15px 0;
+}
+.tx-sh-scoutnet-calendarserver #rechteverwaltung FIELDSET LI {
+    margin-bottom: 8px;
+}
+
+.tx-sh-scoutnet-calendarserver #kalender-input-field-table,
+.tx-sh-scoutnet-calendarserver #kalender-input-field-table TABLE {
+    border: 0;
+}
+.tx-sh-scoutnet-calendarserver .trenner TD {
+    border-bottom: 1px solid silver;
+    font-size: 2px;
+}
