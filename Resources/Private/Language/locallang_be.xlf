@@ -3,10 +3,37 @@
     <file product-name="sh_scoutnet_kalender" source-language="en" date="2015-02-19T17:33:19Z" datatype="plaintext" original="locallang_be">
         <body>
             <trans-unit id="calendar.title">
-                <source>ScoutNet calendar</source>
+                <source>ScoutNet Calendar</source>
             </trans-unit>
             <trans-unit id="calendar.description">
-                <source>Adds a ScoutNet calendar to the page</source>
+                <source>Adds a ScoutNet Calendar to the Page</source>
+            </trans-unit>
+            <trans-unit id="tt_content.list_type_pi1">
+                <source>ScoutNet Calendar</source>
+            </trans-unit>
+            <trans-unit id="tt_content.tx_shscoutnetkalender_ids">
+                <source>Calendar IDs</source>
+            </trans-unit>
+            <trans-unit id="tt_content.tx_shscoutnetkalender_optids">
+                <source>Optional Calendar IDs</source>
+            </trans-unit>
+            <trans-unit id="tt_content.tx_shscoutnetkalender_kat_ids">
+                <source>Show only these Categorie IDs</source>
+            </trans-unit>
+            <trans-unit id="tt_content.tx_shscoutnetkalender_stufen_ids">
+                <source>Show only these Section IDs</source>
+            </trans-unit>
+            <trans-unit id="be_users.tx_shscoutnetkalender_scounet_tab">
+                <source>ScoutNet Calendar</source>
+            </trans-unit>
+            <trans-unit id="be_users.tx_shscoutnetkalender_scoutnet_username">
+                <source>ScoutNet Username</source>
+            </trans-unit>
+            <trans-unit id="be_users.tx_shscoutnetkalender_scoutnet_apikey">
+                <source>Apikey</source>
+            </trans-unit>
+            <trans-unit id="plugin.calendar">
+                <source>ScoutNet Calendar</source>
             </trans-unit>
         </body>
     </file>

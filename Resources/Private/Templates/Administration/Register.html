@@ -1,0 +1,10 @@
+{namespace snk=ScoutNet\ShScoutnetKalender\ViewHelpers}
+<f:layout name="Backend/Default" />
+<f:section name="content">
+	<h1>Event Manager</h1>
+			<span style="color:red; font-size:90%">{info}</span>
+	<p>
+		Your account is not connected to any ScoutNet User yet. Please use the Login Button to connect your ScoutNet User to this Typo3 User.
+    </p>
+    <snk:scoutNetConnectButton />
+</f:section>

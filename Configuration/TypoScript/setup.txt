@@ -18,3 +18,10 @@ plugin.tx_shscoutnetkalender {
 		limit = {$plugin.tx_shscoutnetkalender.settings.limit}
 	}
 }
+
+module.tx_shscoutnetkalender {
+	settings < plugin.tx_shscoutnetkalender.settings
+	persistence < plugin.tx_shscoutnetkalender.persistence
+	view < plugin.tx_shscoutnetkalender.view
+}
+

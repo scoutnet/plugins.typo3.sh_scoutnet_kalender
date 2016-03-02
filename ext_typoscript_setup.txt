@@ -1,0 +1,17 @@
+
+config.tx_extbase{
+	persistence{
+		classes{
+			TYPO3\CMS\Extbase\Domain\Model\BackendUser {
+				subclasses {
+					BackendUser = ScoutNet\ShScoutnetKalender\Domain\Model\BackendUser
+				}
+			}
+			ScoutNet\ShScoutnetKalender\Domain\Model\BackendUser {
+				mapping {
+					tableName = be_users
+							}
+			}
+		}
+	}
+}

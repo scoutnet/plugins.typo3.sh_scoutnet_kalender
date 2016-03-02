@@ -30,13 +30,18 @@ namespace ScoutNet\ShScoutnetKalender\Controller;
  */
 
 
-class CalendarController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
-{
+class CalendarController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController {
 	/**
 	 * @var \ScoutNet\ShScoutnetWebservice\Domain\Repository\EventRepository
 	 * @inject
 	 */
 	protected $eventRepository = null;
+
+	/**
+	 * @var \ScoutNet\ShScoutnetWebservice\Domain\Repository\StructureRepository
+	 * @inject
+	 */
+	protected $structureRepository = null;
 
 
 	/**
@@ -82,30 +87,22 @@ class CalendarController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 		$events = array();
 		try {
 			$events = $this->eventRepository->get_events_for_global_id_with_filter($ids, $filter);
-			$kalender = $this->eventRepository->get_kalender_by_global_id($ids);
+			$kalender = $this->structureRepository->findKalenderByGlobalid($ids);
 
 			$optionalKalenders = Array();
 			if (isset($this->cObj->data["tx_shscoutnetkalender_optids"]) && trim($this->cObj->data["tx_shscoutnetkalender_optids"])) {
 				$optids = explode(",", $this->cObj->data["tx_shscoutnetkalender_optids"]);
-				$optionalKalenders = $this->eventRepository->get_kalender_by_global_id($optids);
+				$optKalenders = $this->structureRepository->findKalenderByGlobalid($optids);
 			}
 
-			foreach ($optionalKalenders as $optionalKalender) {
-				$optionalKalender['Selected'] = in_array($optionalKalender['ID'], $ids);
+			foreach ($optKalenders as $optionalKalender) {
+				$optionalKalenders[] = array(
+					'selected' => in_array($optionalKalender->getUid(), $ids),
+					'kalender' => $optionalKalender,
+				);
 			}
 
 			//\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($events);
-
-
-			// create startYear and startMonth
-			foreach ($events as $event) {
-				$event['StartYear'] = $event['Start']->format('Y');
-				$event['StartMonth'] = $event['Start']->format('m');
-				$event['OneDay'] = !isset($event['End']) || $event['Start']->format('dmy') == $event['End']->format('dmy');
-
-
-				$event['ShowDetails'] = trim($event['Description']) . trim($event['ZIP']) . trim($event['Location']) . trim($event['Organizer']) . trim($event['Target_Group']) . trim($event['URL']) !== '';
-			}
 		} catch (\Exception $e) {
 			$this->view->assign('error', $e->getMessage());
 		}

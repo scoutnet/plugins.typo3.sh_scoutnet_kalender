@@ -1,0 +1,16 @@
+{namespace community=ScoutNet\ShScoutnetCommunity\ViewHelpers}
+<f:layout name="Backend/Default" />
+
+<f:section name="content">
+<h1 style="margin-left: -10px"><f:translate key="event.edit.headline">Kalender: Termin</f:translate></h1>
+<h2><f:translate key="event.edit.subheadline">Datensatz bearbeiten</f:translate></h2>
+
+<f:form action="update" name="event" object="{event}" >
+	<f:render partial="Administration/EditForm" arguments="{generatedCategories: '{generatedCategories}', allSectionCategories:'{allSectionCategories}', forcedCategories: '{forcedCategories}', event: '{event}', verband: '{verband}'}" />
+
+<br>
+	<f:form.submit value="{f:translate(key:'event.buttons.save')}" class="btn btn-default" />
+	<f:link.action action="list" arguments="{structure: event.structure}" class="btn btn-link"><f:translate key="event.buttons.cancel">event.buttons.cancel</f:translate></f:link.action>
+</f:form>
+
+</f:section>

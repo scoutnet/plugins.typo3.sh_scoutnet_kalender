@@ -1,0 +1,14 @@
+<f:form.validationResults for="{id}">
+<div class="form-group has-feedback {f:if(condition: validationResults.errors, then:'has-error')}">
+	<label class="control-label" for="{id}"><f:translate key="{trans_id}">{trans_id}</f:translate></label>
+	<f:form.textfield class="form-control" type="{type}" name="{name}" value="{value}" id="{id}" placeholder="{f:translate(key:'{trans_id}')}"/>
+	<f:if condition="{mandatory}">
+	<span class="form-control-feedback glyphicon glyphicon-asterisk" aria-hidden="true"></span>
+	</f:if>
+	<f:if condition="{validationResults.errors}"><f:then>
+	<small><f:for each="{validationResults.errors}" as="propertyError"><f:translate key="error.{propertyError.code}" arguments="{propertyError.arguments}">{propertyError.message} ({propertyError.code}) </f:translate></f:for></small>
+	</f:then><f:else>
+	<f:if condition="{hint}"><small><f:translate key="{trans_id}.hint">{trans_id}.hint</f:translate></small></f:if>
+	</f:else></f:if>
+</div>
+</f:form.validationResults>

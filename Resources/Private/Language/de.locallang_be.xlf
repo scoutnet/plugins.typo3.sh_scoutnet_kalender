@@ -4,11 +4,47 @@
         <body>
             <trans-unit id="calendar.title">
                 <target>ScoutNet Kalender</target>
-                <source>ScoutNet calendar</source>
+                <source>ScoutNet Calendar</source>
             </trans-unit>
             <trans-unit id="calendar.description">
                 <target>Fügt einen Scoutnet Kalender in die Seite ein</target>
-                <source>Adds a ScoutNet calendar to the page</source>
+                <source>Adds a ScoutNet Calendar to the Page</source>
+            </trans-unit>
+            <trans-unit id="tt_content.list_type_pi1">
+                <target>ScoutNet Kalender</target>
+                <source>ScoutNet Calendar</source>
+            </trans-unit>
+            <trans-unit id="tt_content.tx_shscoutnetkalender_ids">
+                <target>Kalender IDs</target>
+                <source>Calendar IDs</source>
+            </trans-unit>
+            <trans-unit id="tt_content.tx_shscoutnetkalender_optids">
+                <target>Optionale Kalender IDs</target>
+                <source>Optional Calendar IDs</source>
+            </trans-unit>
+            <trans-unit id="tt_content.tx_shscoutnetkalender_kat_ids">
+                <target>Zeige nur diese Kategorie IDs an</target>
+                <source>Show only these Categorie IDs</source>
+            </trans-unit>
+            <trans-unit id="tt_content.tx_shscoutnetkalender_stufen_ids">
+                <target>Zeige nur diese Stufen IDs an</target>
+                <source>Show only these Section IDs</source>
+            </trans-unit>
+            <trans-unit id="be_users.tx_shscoutnetkalender_scounet_tab">
+                <target>ScoutNet Kalender</target>
+                <source>ScoutNet Calendar</source>
+            </trans-unit>
+            <trans-unit id="be_users.tx_shscoutnetkalender_scoutnet_username">
+                <target>ScoutNet Benutzername</target>
+                <source>ScoutNet Username</source>
+            </trans-unit>
+            <trans-unit id="be_users.tx_shscoutnetkalender_scoutnet_apikey">
+                <target>Apikey</target>
+                <source>Apikey</source>
+            </trans-unit>
+            <trans-unit id="plugin.calendar">
+                <target>ScoutNet Kalender</target>
+                <source>ScoutNet Calendar</source>
             </trans-unit>
         </body>
     </file>

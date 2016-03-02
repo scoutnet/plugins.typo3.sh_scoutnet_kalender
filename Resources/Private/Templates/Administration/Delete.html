@@ -1,0 +1,21 @@
+{namespace community=ScoutNet\ShScoutnetCommunity\ViewHelpers}
+<f:layout name="Backend/Default" />
+
+<f:section name="content">
+<h1 style="margin-left: -10px"><f:translate key="event.delete.headline">Kalender: Termine</f:translate></h1>
+
+<h2><f:translate key="event.delete.subheadline">Datensatz löschen</f:translate></h2>
+
+<div id="pfadiindex_text">
+	<f:translate key="event.delete.welcomeText">
+	<p>Willst du den Datensatz wirklich löschen?</p>
+	</f:translate>
+</div>
+
+<p>
+<f:link.action action="remove" arguments="{event: event}" class="btn btn-success"><f:translate key="event.buttons.remove">event.buttons.remove</f:translate></f:link.action>
+<f:link.action action="list" arguments="{structure: event.structure}" class="btn btn-danger"><f:translate key="event.buttons.cancel">event.buttons.cancel</f:translate></f:link.action>
+
+</p>
+
+</f:section>

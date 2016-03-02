@@ -1,0 +1,30 @@
+{namespace community=ScoutNet\ShScoutnetCommunity\ViewHelpers}
+
+<tr class="termindatum">
+	<td>
+		<community:format.strftime date="{event.startTimestamp}" format="%a,&nbsp;%x" />
+		<f:if condition="{event.startTime}"><community:format.strftime date="{event.startTimestamp}" format="%H:%M" /></f:if>
+
+		<f:if condition="{event.showEndDateOrTime}"><f:translate key="event.list.till">bis</f:translate></f:if>
+		<f:if condition="{event.showEndDate}"><br /><community:format.strftime date="{event.endTimestamp}" format="%a,&nbsp;%x" /></f:if>
+		<f:if condition="{event.showEndTime}"><community:format.strftime date="{event.endTimestamp}" format="%H:%M" /></f:if>
+	</td>
+	<td>
+		<strong>{event.title}</strong>
+		<br>
+		<strong>
+			<f:link.action action="edit" class="tx_shscoutnetcalendarserver_editLink" arguments="{event: event}" title="{f:translate(key:'event.buttons.edit')}">✎ <f:translate key="event.buttons.edit">ändern</f:translate></f:link.action>
+		</strong> | 
+		<f:link.action action="template" class="tx_shscoutnetcalendarserver_editLink" arguments="{event: event}" title="{f:translate(key:'event.buttons.template')}">» <f:translate key="event.buttons.template">als&nbsp;Vorlage</f:translate></f:link.action> | 
+		<f:link.action action="delete" class="tx_shscoutnetcalendarserver_deleteLink" arguments="{event: event}" title="{f:translate(key:'event.buttons.delete')}">✗ <f:translate key="event.buttons.delete">löschen</f:translate></f:link.action>
+	</td>
+</tr>
+
+<tr>
+	<td class="terminlinks" colspan="2">
+		<small>
+			<f:translate key="event.list.created">erstellt</f:translate>: {event.createdBy.fullName}, <community:format.strftime date="{event.createdAt}" format="%x %H:%M" />
+			<f:if condition="{event.changedBy}"> | <f:translate key="event.list.changed">zuletzt geändert</f:translate>: {event.changedBy.fullName}, <community:format.strftime date="{event.changedAt}" format="%x %H:%M" /></f:if>
+		</small>
+	</td>
+</tr>

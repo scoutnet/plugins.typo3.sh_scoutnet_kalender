@@ -12,7 +12,7 @@
                             <f:translate key="stammesAuswahl" /><br>
                             <f:form action="list" method="post">
                                 <f:for each="{optionalKalenders}" as="optionalKalender">
-                                    <f:form.checkbox onclick="form.submit();" checked="{optionalKalender.Selected}" name="addids[]" value="{optionalKalender.ID}" id="add_id_{optionalKalender.ID}" title="{optionalKalender._Name}" /><label for="add_id_{optionalKalender.ID}">&nbsp;<f:format.raw>{optionalKalender._Name}</f:format.raw></label>
+                                    <f:form.checkbox onclick="form.submit();" checked="{optionalKalender.selected}" name="addids[]" value="{optionalKalender.kalender.uid}" id="add_id_{optionalKalender.kalender.uid}" title="{optionalKalender.kalender.ident}" /><label for="add_id_{optionalKalender.kalender.uid}">&nbsp;{optionalKalender.kalender.ident}</label>
                                 </f:for>
                             </f:form><br>
                         </div>
@@ -33,8 +33,8 @@
                             </tr>
 
                             <f:if condition="{events}"><f:then>
-                                <f:groupedFor each="{events}" as="events_per_year" groupBy="StartYear" groupKey="year">
-                                    <f:groupedFor each="{events_per_year}" as="events_per_month" groupBy="StartMonth" groupKey="month">
+                                <f:groupedFor each="{events}" as="events_per_year" groupBy="startYear" groupKey="year">
+                                    <f:groupedFor each="{events_per_year}" as="events_per_month" groupBy="startMonth" groupKey="month">
                                     <tr class="snk-monat-row">
                                         <th colspan="6" class="snk-monat-heading"><f:format.date date="01.{month}.{year}" format="%B '%y" /></th>
                                     </tr>

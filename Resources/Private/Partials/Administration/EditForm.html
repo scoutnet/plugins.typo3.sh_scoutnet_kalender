@@ -1,0 +1,126 @@
+{namespace community=ScoutNet\ShScoutnetCommunity\ViewHelpers}
+
+<div class="row">
+	<div class="col-xs-6 col-sm-6 col-md-6">
+	<f:render partial="ViewHelpers/TextFieldWithError" arguments="{property:'title', mandatory: 'true', object: 'event'}" />
+
+	<f:form.validationResults for="event.startDate">
+		<div class="form-group has-feedback {f:if(condition: validationResults.errors, then:'has-error')}">
+			<label class="control-label" for="startDate"><f:translate key="event.startDate">event.startDate</f:translate></label>
+			<f:form.textfield property="startDate" id="startDate" value="{f:format.date(date: '{event.startDate}', format: 'd.m.Y')}" class="form-control datepicker" placeholder="{f:translate(key:'event.startDate')}" />
+			<span class="form-control-feedback glyphicon glyphicon-asterisk" aria-hidden="true"></span>
+			<f:if condition="{validationResults.errors}">
+			<small><f:for each="{validationResults.errors}" as="propertyError"><f:translate key="error.{propertyError.code}" arguments="{propertyError.arguments}">{propertyError.message} ({propertyError.code}) </f:translate></f:for></small>
+			</f:if>
+		</div>
+	</f:form.validationResults>
+
+	<f:form.validationResults for="event.startTime">
+		<div class="form-group has-feedback {f:if(condition: validationResults.errors, then:'has-error')}">
+			<label class="control-label" for="startTime"><f:translate key="event.startTime">event.startTime</f:translate></label>
+			<f:form.textfield property="startTime" id="startTime" value="{f:format.date(date: '{event.startTime}', format: 'H:i')}" class="form-control timepicker" placeholder="{f:translate(key:'event.startTime')}" />
+			<f:if condition="{validationResults.errors}">
+			<small><f:for each="{validationResults.errors}" as="propertyError"><f:translate key="error.{propertyError.code}" arguments="{propertyError.arguments}">{propertyError.message} ({propertyError.code}) </f:translate></f:for></small>
+			</f:if>
+		</div>
+	</f:form.validationResults>
+
+	<f:form.validationResults for="event.endDate">
+		<div class="form-group has-feedback {f:if(condition: validationResults.errors, then:'has-error')}">
+			<label class="control-label" for="endDate"><f:translate key="event.endDate">event.endDate</f:translate></label>
+			<f:form.textfield property="endDate" id="endDate" value="{f:format.date(date: '{event.endDate}', format: 'd.m.Y')}" class="form-control datepicker" placeholder="{f:translate(key:'event.endDate')}" />
+			<f:if condition="{validationResults.errors}">
+			<small><f:for each="{validationResults.errors}" as="propertyError"><f:translate key="error.{propertyError.code}" arguments="{propertyError.arguments}">{propertyError.message} ({propertyError.code}) </f:translate></f:for></small>
+			</f:if>
+		</div>
+	</f:form.validationResults>
+	<f:form.validationResults for="event.endTime">
+		<div class="form-group has-feedback {f:if(condition: validationResults.errors, then:'has-error')}">
+			<label class="control-label" for="endTime"><f:translate key="event.endTime">event.endTime</f:translate></label>
+			<f:form.textfield property="endTime" id="endTime" value="{f:format.date(date: '{event.endTime}', format: 'H:i')}" class="form-control timepicker" placeholder="{f:translate(key:'event.endTime')}" />
+			<f:if condition="{validationResults.errors}">
+			<small><f:for each="{validationResults.errors}" as="propertyError"><f:translate key="error.{propertyError.code}" arguments="{propertyError.arguments}">{propertyError.message} ({propertyError.code}) </f:translate></f:for></small>
+			</f:if>
+		</div>
+	</f:form.validationResults>
+
+	<f:render partial="ViewHelpers/TextFieldWithError" arguments="{property:'location', object: 'event'}" />
+	<f:render partial="ViewHelpers/TextFieldWithError" arguments="{property:'organizer', object: 'event'}" />
+
+	<f:render partial="ViewHelpers/TextFieldWithError" arguments="{property:'targetGroup', object: 'event'}" />
+	<f:render partial="ViewHelpers/TextFieldWithError" arguments="{property:'zip', object: 'event'}" />
+
+	<f:render partial="ViewHelpers/TextFieldWithError" arguments="{property:'urlText', object: 'event'}" />
+	<f:render partial="ViewHelpers/TextFieldWithError" arguments="{property:'url', object: 'event'}" />
+
+	<f:form.validationResults for="event.description">
+		<div class="form-group has-feedback {f:if(condition: validationResults.errors, then:'has-error')}">
+			<label class="control-label" for="description"><f:translate key="event.description">event.description</f:translate></label>
+			<f:form.textarea class="form-control" property="description" style="height: 20em" id="description" placeholder="{f:translate(key:'event.description')}"/>
+			<f:if condition="{validationResults.errors}">
+			<small><f:for each="{validationResults.errors}" as="propertyError"><f:translate key="error.{propertyError.code}" arguments="{propertyError.arguments}">{propertyError.message} ({propertyError.code}) </f:translate></f:for></small>
+			</f:if>
+		</div>
+	</f:form.validationResults>
+
+	</div>
+	<div class="col-xs-6 col-sm-6 col-md-6">
+	<f:form.validationResults for="event.categories">
+		<div class="form-group has-feedback {f:if(condition: validationResults.errors, then:'has-error')}">
+			<label class="control-label"><f:translate key="event.categories">event.categories</f:translate></label><br>
+
+			<f:for each="{generatedCategories}" as="categorie">
+				<f:form.checkbox name="categories[{categorie.uid}]" value="1" id="qf_{categorie.uid}" checked="{categorie.available}"/>&nbsp;
+				<label for="qf_{categorie.uid}">{categorie.text}</label><br>
+			</f:for>
+
+			<f:if condition="{validationResults.errors}">
+			<small><f:for each="{validationResults.errors}" as="propertyError"><f:translate key="error.{propertyError.code}" arguments="{propertyError.arguments}">{propertyError.message} ({propertyError.code}) </f:translate></f:for></small>
+			</f:if>
+		</div>
+	</f:form.validationResults>
+
+	<f:form.validationResults for="event.customCategories">
+		<div class="form-group has-feedback {f:if(condition: validationResults.errors, then:'has-error')}">
+			<label class="control-label" for="customCategories"><f:translate key="event.customCategories">event.customCategories</f:translate></label><br>
+
+			<f:form.textfield class="form-control" name="customCategories[]" id="customCategories" placeholder="{f:translate(key:'event.customCategories')}"/>
+			<f:form.textfield class="form-control" name="customCategories[]" id="customCategories2" placeholder="{f:translate(key:'event.customCategories')}"/>
+
+			<f:if condition="{validationResults.errors}">
+			<small><f:for each="{validationResults.errors}" as="propertyError"><f:translate key="error.{propertyError.code}" arguments="{propertyError.arguments}">{propertyError.message} ({propertyError.code}) </f:translate></f:for></small>
+			</f:if>
+		</div>
+	</f:form.validationResults>
+
+	<f:form.validationResults for="event.group">
+		<div class="form-group has-feedback {f:if(condition: validationResults.errors, then:'has-error')}">
+			<label class="control-label"><f:translate key="event.group">event.group</f:translate></label><br>
+
+			<f:for each="{allSectionCategories}" as="categorie">
+				<f:form.checkbox name="categories[{categorie.uid}]" value="1" id="qf_{categorie.uid}" checked="{categorie.available}"/>&nbsp;
+				<label for="qf_{categorie.uid}">{categorie.text}</label><br>
+			</f:for>
+
+			<f:if condition="{validationResults.errors}">
+			<small><f:for each="{validationResults.errors}" as="propertyError"><f:translate key="error.{propertyError.code}" arguments="{propertyError.arguments}">{propertyError.message} ({propertyError.code}) </f:translate></f:for></small>
+			</f:if>
+		</div>
+	</f:form.validationResults>
+
+	<f:form.validationResults for="event.forced{verband}">
+		<div class="form-dpsgEducation has-feedback {f:if(condition: validationResults.errors, then:'has-error')}">
+			<label class="control-label"><f:translate key="event.forced{verband}">event.forced{verband}</f:translate></label><br>
+
+			<f:for each="{forcedCategories}" as="categorie">
+				<f:form.checkbox name="categories[{categorie.uid}]" value="1" id="qf_{categorie.uid}" checked="{categorie.available}"/>&nbsp;
+				<label for="qf_{categorie.uid}">{categorie.text}</label><br>
+			</f:for>
+
+			<f:if condition="{validationResults.errors}">
+			<small><f:for each="{validationResults.errors}" as="propertyError"><f:translate key="error.{propertyError.code}" arguments="{propertyError.arguments}">{propertyError.message} ({propertyError.code}) </f:translate></f:for></small>
+			</f:if>
+		</div>
+	</f:form.validationResults>
+	</div>
+</div>
