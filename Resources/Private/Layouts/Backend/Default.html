@@ -36,7 +36,18 @@
             <div id="typo3-inner-docbody" style="padding-top: 0; padding-right: 15px; padding-left: 15px;">
                 <f:flashMessages renderMode="div" />
                 <div class="box box_white">
-                    <f:render section="content" />
+
+                    <f:if condition="{error}">
+                        <f:then>
+                            <h1>Error</h1>
+                            <p>
+                                <f:translate key="error.server.{errorID}" arguments="{errorArguments}" htmlEscape="false">{error} ({errorID})</f:translate>
+                            </p>
+                        </f:then>
+                        <f:else>
+                            <f:render section="content" />
+                        </f:else>
+                    </f:if>
                 </div>
             </div>
         </div>

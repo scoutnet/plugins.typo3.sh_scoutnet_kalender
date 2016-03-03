@@ -1,13 +1,13 @@
 {namespace snk=ScoutNet\ShScoutnetKalender\ViewHelpers}
 
 <tr class="snk-termin-row-{f:if(condition:iterator.isOdd, then: 'odd', else: 'even')}">
-    <f:if condition="{kalender -> f:count()} > 1"><td class="snk-eintrag-ebene"><f:format.raw>{event.structure._long_Name}</f:format.raw></td></f:if>
+    <f:if condition="{structures -> f:count()} > 1"><td class="snk-eintrag-ebene"><f:format.raw>{event.structure.longName}</f:format.raw></td></f:if>
     <td class="snk-eintrag-datum"><f:format.crop maxCharacters="2" append="" respectWordBoundaries="FALSE"><f:format.date date="{event.startTimestamp}" format="%A" /></f:format.crop>,&nbsp;<f:format.date date="{event.startTimestamp}" format="%d.%m." /><f:if condition="{event.showEndDate}">&nbsp;-&nbsp;<f:format.crop maxCharacters="2" append="" respectWordBoundaries="FALSE"><f:format.date date="{event.endTimestamp}" format="%A" /></f:format.crop>,&nbsp;<f:format.date date="{event.endTimestamp}" format="%d.%m." /></f:if>
     </td>
 
     <td class="snk-eintrag-zeit">
         <f:if condition="{event.allDayEvent}">
-            <f:then></f:then>
+            <f:then />
             <f:else>
                 <f:format.date date="{event.startTimestamp}" format="%H:%M" /><f:if condition="{event.showEndTime}">&nbsp;-&nbsp;<f:format.date date="{event.endTimestamp}" format="%H:%M" /></f:if>
             </f:else>
@@ -16,7 +16,7 @@
     <td class="snk-eintrag-titel">
         <f:if condition="{event.ShowDetails}">
             <f:then>
-                <a href="#snk-termin-{event.uid}" name="snk-termin-{event.uid}" class="snk-termin-link<f:if condition="{eventId} == {event.uid}">-opened</f:if>" onclick="if(snk_show_termin) return snk_show_termin({event.uid},this);">
+                <a href="#snk-termin-{event.uid}" name="snk-termin-{event.uid}" class="snk-termin-link{f:if(condition:'{eventId} == {event.uid}', then: '-opened')}" onclick="if(snk_show_termin) return snk_show_termin({event.uid},this);">
                     {event.Title}
                 </a>
             </f:then>
@@ -30,7 +30,7 @@
 
 <f:if condition="{event.showDetails}">
 
-<tr id="snk-termin-{event.uid}" class="snk-termin-infos snk-termin-row-{f:if(condition:iterator.isOdd, then: 'odd', else: 'even')}" <f:if condition="{eventId} == {event.uid}">style="display: table-row;"</f:if>>
+<tr id="snk-termin-{event.uid}" class="snk-termin-infos snk-termin-row-{f:if(condition:iterator.isOdd, then: 'odd', else: 'even')}" style="{f:if(condition:'{eventId} == {event.uid}', then:'display: table-row;')}">
     <td colspan="6">
         <dl>
             <f:if condition="{event.Description}"><dt class="snk-eintrag-beschreibung"><f:translate key="description" /></dt><dd>{event.Description}</dd></f:if>

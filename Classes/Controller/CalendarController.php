@@ -43,6 +43,10 @@ class CalendarController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 	 */
 	protected $structureRepository = null;
 
+	/**
+	 * @var \TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer
+	 */
+	protected $cObj = null;
 
 	/**
 	 * @param array $addids
@@ -80,21 +84,23 @@ class CalendarController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 			$ids = array_merge($ids, $addids);
 		}
 
+		$structures = array();
+		$optionalStructures = array();
 		$events = array();
 		try {
-			$kalender = $this->structureRepository->findKalenderByGlobalid($ids);
-			$events = $this->eventRepository->get_events_for_global_id_with_filter($ids, $filter);
+			$structures = $this->structureRepository->findByUids($ids);
+			$events = $this->eventRepository->findByStructuresAndFilter($structures, $filter);
 
-			$optionalKalenders = Array();
+			$optStructures = Array();
 			if (isset($this->cObj->data["tx_shscoutnetkalender_optids"]) && trim($this->cObj->data["tx_shscoutnetkalender_optids"])) {
 				$optids = explode(",", $this->cObj->data["tx_shscoutnetkalender_optids"]);
-				$optKalenders = $this->structureRepository->findKalenderByGlobalid($optids);
+				$optStructures = $this->structureRepository->findByUids($optids);
 			}
 
-			foreach ($optKalenders as $optionalKalender) {
-				$optionalKalenders[] = array(
-					'selected' => in_array($optionalKalender->getUid(), $ids),
-					'kalender' => $optionalKalender,
+			foreach ($optStructures as $optionalStructure) {
+				$optionalStructures[] = array(
+					'selected' => in_array($optionalStructure->getUid(), $ids),
+					'structure' => $optionalStructure,
 				);
 			}
 
@@ -105,8 +111,8 @@ class CalendarController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 
 
 		$this->view->assign('events', $events);
-		$this->view->assign('kalender', $kalender);
-		$this->view->assign('optionalKalenders', $optionalKalenders);
+		$this->view->assign('structures', $structures);
+		$this->view->assign('optionalStructures', $optionalStructures);
 		$this->view->assign('eventId', intval($eventId));
 	}
 }

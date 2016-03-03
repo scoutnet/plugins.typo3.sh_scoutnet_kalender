@@ -2,17 +2,17 @@
 <f:layout name="Default" />
 <f:section name="main">
     <f:if condition="{error}">
-        <f:then><f:translate key="snkDown">Scoutnet server Down: </f:translate> ({error})</f:then>
+        <f:then><f:translate key="snkDown">ScoutNet server Down: </f:translate> ({error})</f:then>
         <f:else>
-            <div id="snk-{kalender.0.ID}" class="snk">
+            <div id="snk-{structures.0.uid}" class="snk">
                 <div class="snk-body">
 
-                    <f:if condition="{optionalKalenders -> f:count()} > 0">
+                    <f:if condition="{optionalStructures -> f:count()} > 0">
                         <div id="snk-stammesAuswahl">
                             <f:translate key="stammesAuswahl" /><br>
                             <f:form action="list" method="post">
-                                <f:for each="{optionalKalenders}" as="optionalKalender">
-                                    <f:form.checkbox onclick="form.submit();" checked="{optionalKalender.selected}" name="addids[]" value="{optionalKalender.kalender.uid}" id="add_id_{optionalKalender.kalender.uid}" title="{optionalKalender.kalender.ident}" /><label for="add_id_{optionalKalender.kalender.uid}">&nbsp;{optionalKalender.kalender.ident}</label>
+                                <f:for each="{optionalStructures}" as="optionalStructure">
+                                    <f:form.checkbox onclick="form.submit();" checked="{optionalStructure.selected}" name="addids[]" value="{optionalStructure.structure.uid}" id="add_id_{optionalStructure.structure.uid}" title="{optionalStructure.structure.ident}" /><label for="add_id_{optionalStructure.structure.uid}">&nbsp;{optionalStructure.structure.ident}</label>
                                 </f:for>
                             </f:form><br>
                         </div>
@@ -22,7 +22,7 @@
                     <div class="snk-termine">
                         <table>
                             <tr class="snk-headings-row">
-                                <f:if condition="{kalender -> f:count()} > 1">
+                                <f:if condition="{structures -> f:count()} > 1">
                                     <th class="snk-eintrag-ebene-ueberschrift"><f:translate key="ebene" /></th>
                                 </f:if>
                                 <th class="snk-eintrag-datum-ueberschrift"><f:translate key="date" /></th>
@@ -39,7 +39,7 @@
                                         <th colspan="6" class="snk-monat-heading"><f:format.date date="01.{month}.{year}" format="%B '%y" /></th>
                                     </tr>
                                 <f:for each="{events_per_month}" as="event" iteration="iterator">
-                                    <f:render partial="Calendar/Event" arguments="{event:event, kalender: kalender, eventId: eventId, iterator: iterator}" />
+                                    <f:render partial="Calendar/Event" arguments="{event:event, structures: structures, eventId: eventId, iterator: iterator}" />
                                 </f:for>
                                 </f:groupedFor>
                                 </f:groupedFor>
@@ -50,7 +50,7 @@
                 </div>
                 <div class="snk-footer">
                     <div class="snk-hinzufuegen">
-                        <a href="https://www.scoutnet.de/community/kalender/events.html?task=create&amp;SSID={kalender.0.ID}" target="_top"><f:translate key="addEvent" /></a>
+                        <a href="https://www.scoutnet.de/community/kalender/events.html?task=create&amp;SSID={structures.0.uid}" target="_top"><f:translate key="addEvent" /></a>
                     </div>
                     <div class="snk-powered-by">
                         <f:translate key="poweredBy" />&nbsp;<span><f:link.external uri="www.scoutnet.de/kalender/" defaultScheme="https" target="_top">ScoutNet.DE</f:link.external></span>

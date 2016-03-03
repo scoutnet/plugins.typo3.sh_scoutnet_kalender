@@ -204,6 +204,22 @@
             <trans-unit id="event.feedback.created">
                 <source>Event created</source>
             </trans-unit>
+
+            <trans-unit id="error.server.noApiKey">
+                <source>Your account is not connected to any Scoutnet User yet. Please use the Login Button to connect your Scoutnet User to this Typo3 user.</source>
+            </trans-unit>
+            <trans-unit id="error.server.noRights">
+                <source>Your Scoutnet User is not allowed to change any Event in this Calender. Please use &lt;a href="%s"&gt;this link&lt;/a&gt; to request write Permissions.</source>
+            </trans-unit>
+            <trans-unit id="error.server.rightsPending">
+                <source>You have requested the Permission to write Events in this Calender. Now you have to wait for the Admin to allow you to edit rights. You will recive an email, if the right is granted.</source>
+            </trans-unit>
+            <trans-unit id="error.server.errorUnknown">
+                <source>An Unknown error occurred. Please try again later.</source>
+            </trans-unit>
+            <trans-unit id="error.server.noConnection">
+                <source>You have no Connection to the ScoutNet Server. Please try again later.</source>
+            </trans-unit>
         </body>
     </file>
 </xliff>

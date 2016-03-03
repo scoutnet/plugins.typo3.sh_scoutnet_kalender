@@ -32,10 +32,10 @@ namespace ScoutNet\ShScoutnetKalender\Controller;
 
 
 class AdministrationController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController {
-	const ERROR_UNKNOWN_ERROR = 0;
-	const ERROR_NO_RIGHTS = 1;
-	const ERROR_NO_CONNECTION = 2;
-	const ERROR_RIGHTS_PENDING = 3;
+	const ERROR_UNKNOWN_ERROR = "errorUnknown";
+	const ERROR_NO_RIGHTS = "noRights";
+	const ERROR_NO_CONNECTION = "noConnection";
+	const ERROR_RIGHTS_PENDING = 'rightsPending';
 
 	/**
 	 * @var \ScoutNet\ShScoutnetWebservice\Domain\Repository\EventRepository
@@ -106,6 +106,7 @@ class AdministrationController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionC
 
 	private function checkRights() {
 		$ssid = $this->extConfig['ScoutnetSSID'];
+		$structure = $this->structureRepository->findByUid($ssid);
 
 		/** @var \ScoutNet\ShScoutnetWebservice\Domain\Model\BackendUser $be_user */
 		$be_user = $this->backendUserRepository->findByUid($GLOBALS['BE_USER']->user["uid"]);
@@ -122,7 +123,8 @@ class AdministrationController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionC
 
 				$this->backendUserRepository->update($be_user);
 			} catch (\Exception $e) {
-				// TODO: handle error with flash message
+				$this->addFlashMessage('Cannot connect to Server'.$e->getMessage(),'Error', \TYPO3\CMS\Core\Messaging\AbstractMessage::ERROR);
+				$this->view->assign('error', self::ERROR_NO_CONNECTION);
 			}
 
 		}
@@ -132,7 +134,7 @@ class AdministrationController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionC
 			$this->redirect('register');
 		} else {
 			try {
-				$rights = $this->structureRepository->hasWritePermissionsToCalender($ssid,$be_user->getTxShscoutnetkalenderScoutnetUsername(),$be_user->getTxShscoutnetkalenderScoutnetApikey());
+				$rights = $this->structureRepository->hasWritePermissionsToStructure($structure);
 
 				switch ($rights['code']) {
 					case \ScoutNet\ShScoutnetWebservice\Domain\Repository\StructureRepository::AUTH_WRITE_ALLOWED:
@@ -140,21 +142,23 @@ class AdministrationController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionC
 						return true;
 						break;
 					case \ScoutNet\ShScoutnetWebservice\Domain\Repository\StructureRepository::AUTH_NO_RIGHT:
-						$this->redirect('error', Null, Null, array('error'=> self::ERROR_NO_RIGHTS));
+						$link = $this->controllerContext->getUriBuilder()->uriFor('requestRights');
+						$this->view->assign('error', "You have no rights");
+						$this->view->assign('errorID', self::ERROR_NO_RIGHTS);
+						$this->view->assign('errorArguments', array($link));
 						break;
 					case \ScoutNet\ShScoutnetWebservice\Domain\Repository\StructureRepository::AUTH_PENDING:
-						$this->redirect('error', Null, Null, array('error'=> self::ERROR_RIGHTS_PENDING));
+						$this->view->assign('error', "Your Rights are Pending");
+						$this->view->assign('errorID', self::ERROR_RIGHTS_PENDING);
 						break;
 					default:
-						$this->redirect('error', Null, Null, array('error'=> self::ERROR_UNKNOWN_ERROR));
+						$this->addFlashMessage('Cannot connect to Server', \TYPO3\CMS\Core\Messaging\AbstractMessage::ERROR);
+						$this->view->assign('error', self::ERROR_UNKNOWN_ERROR);
 						break;
 				}
-
-				//\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($rights);
 			} catch (\Exception $e) {
-				// TODO: handle error with flash message
-				$this->view->assign('error', $e->getMessage());
-				return false;
+				$this->addFlashMessage('Cannot connect to Server'.$e->getMessage(),'Error', \TYPO3\CMS\Core\Messaging\AbstractMessage::ERROR);
+				$this->view->assign('error', self::ERROR_NO_CONNECTION);
 			}
 		}
 
@@ -167,7 +171,6 @@ class AdministrationController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionC
 			try {
 				$filter = array(
 					'order' => 'start_time desc',
-					'limit' => '5',
 				);
 
 				// load Events from ScoutNet
@@ -176,10 +179,8 @@ class AdministrationController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionC
 				$this->view->assign('structure', $structure);
 				$this->view->assign('events', $this->eventRepository->findByStructureAndFilter($structure, $filter));
 			} catch (\Exception $e) {
-				// TODO: handle error with flash message
 				$this->addFlashMessage('Cannot connect to Server'.$e->getMessage(),'Error', \TYPO3\CMS\Core\Messaging\AbstractMessage::ERROR);
-				$this->view->assign('error', $e->getMessage());
-
+				$this->view->assign('error', self::ERROR_NO_CONNECTION);
 			}
 		}
 	}
@@ -254,14 +255,11 @@ class AdministrationController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionC
 			try {
 				$this->eventRepository->add($event);
 
-				$this->addFlashMessage('event saved');
-
+				$this->addFlashMessage('event created');
 				$this->redirect('list');
 			} catch (\Exception $e) {
-				// TODO: handle error with flash message
 				$this->addFlashMessage('Cannot connect to Server'.$e->getMessage(),'Error', \TYPO3\CMS\Core\Messaging\AbstractMessage::ERROR);
-				$this->view->assign('error', $e->getMessage());
-				$this->redirect('error');
+				$this->view->assign('error', self::ERROR_NO_CONNECTION);
 			}
 		}
 
@@ -318,13 +316,10 @@ class AdministrationController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionC
 				$this->eventRepository->update($event);
 
 				$this->addFlashMessage('event saved');
-
 				$this->redirect('list');
 			} catch (\Exception $e) {
-				// TODO: handle error with flash message
 				$this->addFlashMessage('Cannot connect to Server'.$e->getMessage(),'Error', \TYPO3\CMS\Core\Messaging\AbstractMessage::ERROR);
-				$this->view->assign('error', $e->getMessage());
-				$this->redirect('error');
+				$this->view->assign('error', self::ERROR_NO_CONNECTION);
 			}
 		}
 	}
@@ -351,9 +346,8 @@ class AdministrationController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionC
 
 				$this->redirect('list');
 			} catch (\Exception $e) {
-				// TODO: handle error with flash message
 				$this->addFlashMessage('Cannot connect to Server'.$e->getMessage(),'Error', \TYPO3\CMS\Core\Messaging\AbstractMessage::ERROR);
-				$this->view->assign('error', $e->getMessage());
+				$this->view->assign('error', self::ERROR_NO_CONNECTION);
 			}
 		}
 
@@ -379,19 +373,18 @@ class AdministrationController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionC
 	}
 
 	public function requestRightsAction() {
-		/*
-					if ($rights['code'] == 2) {
-						$markers['CONTENT'] = $GLOBALS['LANG']->getLL('noRightsButRequestedError');
-					} else {
-						$markers['CONTENT'] = sprintf($GLOBALS['LANG']->getLL('noRightsError'),$link);
-					}
-		*/
+		$ssid = $this->extConfig['ScoutnetSSID'];
+		try {
+			$structure = $this->structureRepository->findByUid($ssid);
+			$this->structureRepository->requestWritePermissionsForStructure($structure);
+
+		} catch (\Exception $e) {
+			$this->addFlashMessage('Cannot connect to Server'.$e->getMessage(),'Error', \TYPO3\CMS\Core\Messaging\AbstractMessage::ERROR);
+			$this->view->assign('error', self::ERROR_NO_CONNECTION);
+		}
+
+		$this->redirect('list');
 	}
-/*
-	public function errorAction($error = self::ERROR_NO_RIGHTS) {
-		return "error".$error;
-	}
-*/
 
 
 	/**

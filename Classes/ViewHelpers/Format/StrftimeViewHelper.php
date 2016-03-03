@@ -11,7 +11,7 @@ class StrftimeViewHelper extends AbstractViewHelper {
 	 * @param string $format Format String which is taken to format the Date/Time
 	 *
 	 * @return string Formatted date
-	 * @throws \TYPO3\CMS\Fluid\ViewHelpers\Exception
+	 * @throws \Exception
 	 */
 	public function render($date = NULL, $format = '%A, %d. %B %Y') {
 		if ($date === NULL) {
@@ -24,8 +24,8 @@ class StrftimeViewHelper extends AbstractViewHelper {
 		if ($date instanceof \DateTime) {
 			try {
 				return strftime($format, $date->getTimestamp());
-			} catch (Exception $exception) {
-				throw new \TYPO3\CMS\Fluid\ViewHelpers\Exception('"' . $date . '" was DateTime and could not be converted to UNIX-Timestamp by DateTime.', 200000001);
+			} catch (\Exception $exception) {
+				throw new \Exception('"' . $date . '" was DateTime and could not be converted to UNIX-Timestamp by DateTime.', 200000001);
 			}
 		}
 		return strftime($format, (int)$date);

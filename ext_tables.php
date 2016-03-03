@@ -1,6 +1,7 @@
 <?php
 if (!defined ('TYPO3_MODE')) die ('Access denied.');
 
+/** @var string $_EXTKEY */
 // add static file with configs
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addStaticFile($_EXTKEY, 'Configuration/TypoScript', 'Scoutnet Kalender');
 

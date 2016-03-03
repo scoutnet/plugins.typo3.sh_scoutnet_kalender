@@ -105,3 +105,8 @@ input.f3-form-error {
     background-color: #f7961e !important;
     border-color: #574c3d !important;
 }
+
+.alert {
+    padding: 10px !important;
+    padding-left: 35px !important;
+}

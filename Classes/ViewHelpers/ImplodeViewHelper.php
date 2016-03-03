@@ -28,7 +28,7 @@ namespace ScoutNet\ShScoutnetKalender\ViewHelpers;
 
 class ImplodeViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper {
 	/**
-	 * @param object $values
+	 * @param array $values
 	 * @param string $delimiter
 	 * @param string $lastDelimiter
 	 * @return string
