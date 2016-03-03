@@ -8,47 +8,201 @@
             <trans-unit id="stammesAuswahl">
                 <source>Show this calendars additional:</source>
             </trans-unit>
-        <trans-unit id="ebene">
+            <trans-unit id="ebene">
                 <source>ebene</source>
             </trans-unit>
-        <trans-unit id="date">
+            <trans-unit id="date">
                 <source>date</source>
             </trans-unit>
-        <trans-unit id="time">
+            <trans-unit id="time">
                 <source>time</source>
             </trans-unit>
-        <trans-unit id="title">
+            <trans-unit id="title">
                 <source>title</source>
             </trans-unit>
-        <trans-unit id="section">
+            <trans-unit id="section">
                 <source>section</source>
             </trans-unit>
-        <trans-unit id="categorie">
+            <trans-unit id="categorie">
                 <source>categories</source>
             </trans-unit>
-        <trans-unit id="addEvent">
+            <trans-unit id="addEvent">
                 <source>add Event</source>
             </trans-unit>
-        <trans-unit id="poweredBy">
+            <trans-unit id="poweredBy">
                 <source>powered by</source>
             </trans-unit>
-        <trans-unit id="description">
+            <trans-unit id="description">
                 <source>description</source>
             </trans-unit>
-        <trans-unit id="location">
+            <trans-unit id="location">
                 <source>location</source>
             </trans-unit>
-        <trans-unit id="organizer">
+            <trans-unit id="organizer">
                 <source>host</source>
             </trans-unit>
-        <trans-unit id="targetGroup">
+            <trans-unit id="targetGroup">
                 <source>target group</source>
             </trans-unit>
-        <trans-unit id="URL">
+            <trans-unit id="URL">
                 <source>url</source>
             </trans-unit>
-        <trans-unit id="author">
+            <trans-unit id="author">
                 <source>author</source>
+            </trans-unit>
+
+
+
+            <trans-unit id="feedback.noRights">
+                <source>You do not have rights to edit any group.</source>
+            </trans-unit>
+            <trans-unit id="feedback.noRightsForGroup">
+                <source>You do not have rights to edit this group.</source>
+            </trans-unit>
+
+            <trans-unit id="event.list.headline">
+                <source>Calendar: Event</source>
+            </trans-unit>
+            <trans-unit id="event.list.overview.subheadline">
+                <source>edit which Group?</source>
+            </trans-unit>
+            <trans-unit id="event.list.begin">
+                <source>begin</source>
+            </trans-unit>
+            <trans-unit id="event.list.end">
+                <source>end</source>
+            </trans-unit>
+            <trans-unit id="event.list.title">
+                <source>title</source>
+            </trans-unit>
+            <trans-unit id="event.list.action">
+                <source>action</source>
+            </trans-unit>
+            <trans-unit id="event.list.till">
+                <source>till</source>
+            </trans-unit>
+            <trans-unit id="event.buttons.edit">
+                <source>edit</source>
+            </trans-unit>
+            <trans-unit id="event.buttons.create">
+                <source>create</source>
+            </trans-unit>
+            <trans-unit id="event.buttons.template">
+                <source>as template</source>
+            </trans-unit>
+            <trans-unit id="event.buttons.new">
+                <source>create new Event</source>
+            </trans-unit>
+            <trans-unit id="event.buttons.delete">
+                <source>delete</source>
+            </trans-unit>
+            <trans-unit id="event.list.created">
+                <source>created</source>
+            </trans-unit>
+            <trans-unit id="event.list.changed">
+                <source>last changed</source>
+            </trans-unit>
+
+            <trans-unit id="event.edit.headline">
+                <source>Calendar: Event</source>
+            </trans-unit>
+            <trans-unit id="event.edit.subheadline">
+                <source>edit Event</source>
+            </trans-unit>
+            <trans-unit id="event.buttons.cancel">
+                <source>cancel</source>
+            </trans-unit>
+            <trans-unit id="event.buttons.save">
+                <source>save</source>
+            </trans-unit>
+
+            <trans-unit id="event.title">
+                <source>title</source>
+            </trans-unit>
+            <trans-unit id="event.startDate">
+                <source>start date</source>
+            </trans-unit>
+            <trans-unit id="event.startTime">
+                <source>start time</source>
+            </trans-unit>
+            <trans-unit id="event.endDate">
+                <source>end date</source>
+            </trans-unit>
+            <trans-unit id="event.endTime">
+                <source>end time</source>
+            </trans-unit>
+            <trans-unit id="event.location">
+                <source>location</source>
+            </trans-unit>
+            <trans-unit id="event.organizer">
+                <source>organizer</source>
+            </trans-unit>
+            <trans-unit id="event.targetGroup">
+                <source>target group</source>
+            </trans-unit>
+            <trans-unit id="event.zip">
+                <source>zip</source>
+            </trans-unit>
+            <trans-unit id="event.urlText">
+                <source>url label</source>
+            </trans-unit>
+            <trans-unit id="event.url">
+                <source>url</source>
+            </trans-unit>
+            <trans-unit id="event.description">
+                <source>info</source>
+            </trans-unit>
+            <trans-unit id="event.categories">
+                <source>categories</source>
+            </trans-unit>
+            <trans-unit id="event.customCategories">
+                <source>custom categories</source>
+            </trans-unit>
+            <trans-unit id="event.group">
+                <source>group/ leader</source>
+            </trans-unit>
+            <trans-unit id="event.forcedDPSG">
+                <source>DPSG Education</source>
+            </trans-unit>
+            <trans-unit id="event.forced">
+                <source>Groups</source>
+            </trans-unit>
+            <trans-unit id="event.forcedBDP">
+                <source>Federal Courses</source>
+            </trans-unit>
+
+            <trans-unit id="event.feedback.saved">
+                <source>Saved Event.</source>
+            </trans-unit>
+
+
+
+            <trans-unit id="event.delete.headline">
+                <source>Calendar: Event</source>
+            </trans-unit>
+            <trans-unit id="event.delete.subheadline">
+                <source>delete Event</source>
+            </trans-unit>
+            <trans-unit id="event.delete.welcomeText">
+                <source>Do you realy want to delete the Event?</source>
+            </trans-unit>
+            <trans-unit id="event.buttons.remove">
+                <source>remove</source>
+            </trans-unit>
+
+            <trans-unit id="event.feedback.removed">
+                <source>Event deleted</source>
+            </trans-unit>
+
+            <trans-unit id="event.new.headline">
+                <source>Calendar: Event</source>
+            </trans-unit>
+            <trans-unit id="event.new.subheadline">
+                <source>create Event</source>
+            </trans-unit>
+
+            <trans-unit id="event.feedback.created">
+                <source>Event created</source>
             </trans-unit>
         </body>
     </file>

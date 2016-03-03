@@ -32,7 +32,7 @@ input.f3-form-error {
     color:green;
 }
 
-.tx-sh-scoutnet-calendarserver .tx_shscoutnetcalendarserver_newLink,
+.tx_shscoutnetcalendarserver_newLink,
 .tx_shscoutnetcalendarserver_editLink,
 .tx_shscoutnetcalendarserver_deleteLink{
     color: #f7961e;
@@ -98,4 +98,10 @@ input.f3-form-error {
 .tx-sh-scoutnet-calendarserver .trenner TD {
     border-bottom: 1px solid silver;
     font-size: 2px;
+}
+
+.btn-default {
+    color: #fff;
+    background-color: #f7961e !important;
+    border-color: #574c3d !important;
 }

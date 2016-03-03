@@ -66,6 +66,208 @@
                 <target>Eingetragen von</target>
                 <source>author</source>
             </trans-unit>
+
+
+
+
+            <trans-unit id="feedback.noRights">
+                <source>You do not have rights to edit any group.</source>
+                <target>Du hast nicht die benötigten Rechte an einer Gruppe.</target>
+            </trans-unit>
+            <trans-unit id="feedback.noRightsForGroup">
+                <source>You do not have rights to edit this group.</source>
+                <target>Du hast nicht die benötigten Rechte an dieser Gruppe.</target>
+            </trans-unit>
+
+            <trans-unit id="event.list.headline">
+                <source>Calendar: Event</source>
+                <target>Kalender: Termine</target>
+            </trans-unit>
+            <trans-unit id="event.list.overview.subheadline">
+                <source>edit which Group?</source>
+                <target>Welche Gruppe bearbeiten?</target>
+            </trans-unit>
+            <trans-unit id="event.list.begin">
+                <source>begin</source>
+                <target>Begin</target>
+            </trans-unit>
+            <trans-unit id="event.list.end">
+                <source>end</source>
+                <target>Ende</target>
+            </trans-unit>
+            <trans-unit id="event.list.title">
+                <source>title</source>
+                <target>Titel</target>
+            </trans-unit>
+            <trans-unit id="event.list.action">
+                <source>action</source>
+                <target>Aktion</target>
+            </trans-unit>
+            <trans-unit id="event.list.till">
+                <source>till</source>
+                <target>bis</target>
+            </trans-unit>
+            <trans-unit id="event.buttons.edit">
+                <source>edit</source>
+                <target>bearbeiten</target>
+            </trans-unit>
+            <trans-unit id="event.buttons.create">
+                <source>create</source>
+                <target>erstellen</target>
+            </trans-unit>
+            <trans-unit id="event.buttons.template">
+                <source>as template</source>
+                <target>als Vorlage</target>
+            </trans-unit>
+            <trans-unit id="event.buttons.new">
+                <source>create new Event</source>
+                <target>neuen Termin erstellen</target>
+            </trans-unit>
+            <trans-unit id="event.buttons.delete">
+                <source>delete</source>
+                <target>löschen</target>
+            </trans-unit>
+            <trans-unit id="event.list.created">
+                <source>created</source>
+                <target>erstellt</target>
+            </trans-unit>
+            <trans-unit id="event.list.changed">
+                <source>last changed</source>
+                <target>zuletzt geändert</target>
+            </trans-unit>
+
+            <trans-unit id="event.edit.headline">
+                <source>Calendar: Event</source>
+                <target>Kalender: Termine</target>
+            </trans-unit>
+            <trans-unit id="event.edit.subheadline">
+                <source>edit Event</source>
+                <target>Termin bearbeiten</target>
+            </trans-unit>
+            <trans-unit id="event.buttons.cancel">
+                <source>cancel</source>
+                <target>abbrechen</target>
+            </trans-unit>
+            <trans-unit id="event.buttons.save">
+                <source>save</source>
+                <target>speichern</target>
+            </trans-unit>
+
+            <trans-unit id="event.title">
+                <source>title</source>
+                <target>Title</target>
+            </trans-unit>
+            <trans-unit id="event.startDate">
+                <source>start date</source>
+                <target>Startdatum</target>
+            </trans-unit>
+            <trans-unit id="event.startTime">
+                <source>start time</source>
+                <target>Startzeit</target>
+            </trans-unit>
+            <trans-unit id="event.endDate">
+                <source>end date</source>
+                <target>Enddatum</target>
+            </trans-unit>
+            <trans-unit id="event.endTime">
+                <source>end time</source>
+                <target>Endzeit</target>
+            </trans-unit>
+            <trans-unit id="event.location">
+                <source>location</source>
+                <target>Ortsangabe</target>
+            </trans-unit>
+            <trans-unit id="event.organizer">
+                <source>organizer</source>
+                <target>Veranstalter</target>
+            </trans-unit>
+            <trans-unit id="event.targetGroup">
+                <source>target group</source>
+                <target>Zielgruppe</target>
+            </trans-unit>
+            <trans-unit id="event.zip">
+                <source>zip</source>
+                <target>PLZ</target>
+            </trans-unit>
+            <trans-unit id="event.urlText">
+                <source>url label</source>
+                <target>Link-Text</target>
+            </trans-unit>
+            <trans-unit id="event.url">
+                <source>url</source>
+                <target>Link</target>
+            </trans-unit>
+            <trans-unit id="event.description">
+                <source>info</source>
+                <target>Info</target>
+            </trans-unit>
+            <trans-unit id="event.categories">
+                <source>categories</source>
+                <target>Kategorie</target>
+            </trans-unit>
+            <trans-unit id="event.customCategories">
+                <source>custom categories</source>
+                <target>Eigene Kategorie</target>
+            </trans-unit>
+            <trans-unit id="event.group">
+                <source>group/ leader</source>
+                <target>Stufen/ Leiter</target>
+            </trans-unit>
+            <trans-unit id="event.forcedDPSG">
+                <source>DPSG Education</source>
+                <target>DPSG-Ausbildung</target>
+            </trans-unit>
+            <trans-unit id="event.forced">
+                <source>Groups</source>
+                <target>Verbände</target>
+            </trans-unit>
+            <trans-unit id="event.forcedBDP">
+                <source>Federal Courses</source>
+                <target>Bundeskurse</target>
+            </trans-unit>
+
+            <trans-unit id="event.feedback.saved">
+                <source>Saved Event.</source>
+                <target>Termin gespeichert</target>
+            </trans-unit>
+
+
+
+            <trans-unit id="event.delete.headline">
+                <source>Calendar: Event</source>
+                <target>Kalender: Termine</target>
+            </trans-unit>
+            <trans-unit id="event.delete.subheadline">
+                <source>delete Event</source>
+                <target>Termin gelöscht</target>
+            </trans-unit>
+            <trans-unit id="event.delete.welcomeText">
+                <source><![CDATA[<p>Do you realy want to delete the Event?</p>]]></source>
+                <target><![CDATA[<p>Willst du den Termin wirklich löschen?</p>]]></target>
+            </trans-unit>
+            <trans-unit id="event.buttons.remove">
+                <source>remove</source>
+                <target>löschen</target>
+            </trans-unit>
+
+            <trans-unit id="event.feedback.removed">
+                <source>Event deleted</source>
+                <target>Termin gelöscht.</target>
+            </trans-unit>
+
+            <trans-unit id="event.new.headline">
+                <source>Calendar: Event</source>
+                <target>Kalender: Termine</target>
+            </trans-unit>
+            <trans-unit id="event.new.subheadline">
+                <source>create Event</source>
+                <target>Termin erstellen</target>
+            </trans-unit>
+
+            <trans-unit id="event.feedback.created">
+                <source>Event created</source>
+                <target>Termin erstellt</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

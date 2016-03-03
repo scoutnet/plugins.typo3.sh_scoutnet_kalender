@@ -50,15 +50,9 @@ class CalendarController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 	 */
 	public function listAction($addids = array(), $eventId = null) {
 		$this->cObj = $this->configurationManager->getContentObject();
-		/*
-		$old_timezone = ini_get('date.timezone');
-		date_default_timezone_set('UTC');
-		*/
 
 		$cssFile = $GLOBALS['TSFE']->tmpl->getFileName($this->settings['cssFile']);
 		$jsFolder = $GLOBALS['TSFE']->tmpl->getFileName('EXT:sh_scoutnet_kalender/Resources/Public/JS/');
-
-		//\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($jsFolder);
 
 		// add CSS and Javascript
 		$GLOBALS['TSFE']->additionalHeaderData['tx_sh_scoutnet_Kalender'] =
@@ -88,8 +82,8 @@ class CalendarController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 
 		$events = array();
 		try {
-			$events = $this->eventRepository->get_events_for_global_id_with_filter($ids, $filter);
 			$kalender = $this->structureRepository->findKalenderByGlobalid($ids);
+			$events = $this->eventRepository->get_events_for_global_id_with_filter($ids, $filter);
 
 			$optionalKalenders = Array();
 			if (isset($this->cObj->data["tx_shscoutnetkalender_optids"]) && trim($this->cObj->data["tx_shscoutnetkalender_optids"])) {
@@ -114,7 +108,5 @@ class CalendarController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 		$this->view->assign('kalender', $kalender);
 		$this->view->assign('optionalKalenders', $optionalKalenders);
 		$this->view->assign('eventId', intval($eventId));
-
-		//date_default_timezone_set($old_timezone);
 	}
 }

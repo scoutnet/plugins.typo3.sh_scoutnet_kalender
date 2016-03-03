@@ -25,7 +25,7 @@ namespace ScoutNet\ShScoutnetKalender\Controller;
 ***************************************************************/
 
 /**
- * Plugin 'Scoutnet calendar' for the 'sh_scoutnet_kalender' extension.
+ * Plugin 'ScoutNet Calendar' for the 'sh_scoutnet_kalender' extension.
  *
  * @author	Stefan Horst <stefan.horst@dpsg-koeln.de>
  */
@@ -223,7 +223,15 @@ class AdministrationController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionC
 	}
 
 
-	public function createAction(\ScoutNet\ShScoutnetWebservice\Domain\Model\Event $event) {
+	/**
+	 * action create
+	 *
+	 * @param \ScoutNet\ShScoutnetWebservice\Domain\Model\Event $event
+	 * @param \array $categories
+	 * @param \array $customCategories
+	 * @return void
+	 */
+	public function createAction(\ScoutNet\ShScoutnetWebservice\Domain\Model\Event $event, $categories, $customCategories) {
 		$categorieObjects = array();
 		foreach ($categories as $uid => $selected) {
 			// skip not selected
@@ -249,7 +257,7 @@ class AdministrationController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionC
 				$this->addFlashMessage('event saved');
 
 				$this->redirect('list');
-			} catch (Exception $e) {
+			} catch (\Exception $e) {
 				// TODO: handle error with flash message
 				$this->addFlashMessage('Cannot connect to Server'.$e->getMessage(),'Error', \TYPO3\CMS\Core\Messaging\AbstractMessage::ERROR);
 				$this->view->assign('error', $e->getMessage());
@@ -312,7 +320,7 @@ class AdministrationController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionC
 				$this->addFlashMessage('event saved');
 
 				$this->redirect('list');
-			} catch (Exception $e) {
+			} catch (\Exception $e) {
 				// TODO: handle error with flash message
 				$this->addFlashMessage('Cannot connect to Server'.$e->getMessage(),'Error', \TYPO3\CMS\Core\Messaging\AbstractMessage::ERROR);
 				$this->view->assign('error', $e->getMessage());
@@ -342,7 +350,7 @@ class AdministrationController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionC
 				$this->addFlashMessage('event Deleted');
 
 				$this->redirect('list');
-			} catch (Exception $e) {
+			} catch (\Exception $e) {
 				// TODO: handle error with flash message
 				$this->addFlashMessage('Cannot connect to Server'.$e->getMessage(),'Error', \TYPO3\CMS\Core\Messaging\AbstractMessage::ERROR);
 				$this->view->assign('error', $e->getMessage());
@@ -397,6 +405,7 @@ class AdministrationController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionC
 			'DPSG' => array('name' => 'dpsg', 'color' => '#C1B38F'),
 			'PSG' => array('name' => 'psg', 'color' => '#99ccff'),
 			'VCP' => array('name' => 'vcp', 'color' => '#ccccff'),
+			'' => array('name'=>'wosm', 'color' => '#622599'),
 		);
 
 		$verband = array_rand($verbaende);

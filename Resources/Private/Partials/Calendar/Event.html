@@ -1,5 +1,4 @@
 {namespace snk=ScoutNet\ShScoutnetKalender\ViewHelpers}
-{namespace community=ScoutNet\ShScoutnetCommunity\ViewHelpers}
 
 <tr class="snk-termin-row-{f:if(condition:iterator.isOdd, then: 'odd', else: 'even')}">
     <f:if condition="{kalender -> f:count()} > 1"><td class="snk-eintrag-ebene"><f:format.raw>{event.structure._long_Name}</f:format.raw></td></f:if>
