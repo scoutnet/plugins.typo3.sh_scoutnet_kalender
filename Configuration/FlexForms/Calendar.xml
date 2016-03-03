@@ -1,0 +1,54 @@
+<T3DataStructure>
+	<meta>
+		<langDisable>1</langDisable>
+	</meta>
+	<sheets>
+		<sDEF>
+			<ROOT>
+				<TCEforms>
+					<sheetTitle>LLL:EXT:sh_scoutnet_kalender/Resources/Private/Language/locallang_csh_tt_content.xlf:tt_content.pi_flexform.sheet_scoutnet</sheetTitle>
+				</TCEforms>
+				<type>array</type>
+				<el>
+					<settings.ssids>
+						<TCEforms>
+							<label>LLL:EXT:sh_scoutnet_kalender/Resources/Private/Language/locallang_csh_tt_content.xlf:tt_content.pi_flexform.ssids</label>
+							<config>
+								<type>input</type>
+								<size>30</size>
+								<eval>required,trim,nospace</eval>
+							</config>
+						</TCEforms>
+					</settings.ssids>
+					<settings.optSsids>
+						<TCEforms>
+							<label>LLL:EXT:sh_scoutnet_kalender/Resources/Private/Language/locallang_csh_tt_content.xlf:tt_content.pi_flexform.optSsids</label>
+							<config>
+								<type>input</type>
+								<size>30</size>
+								<eval>trim,nospace</eval>
+							</config>
+						</TCEforms>
+					</settings.optSsids>
+					<settings.categories>
+						<TCEforms>
+							<label>LLL:EXT:sh_scoutnet_kalender/Resources/Private/Language/locallang_csh_tt_content.xlf:tt_content.pi_flexform.categories</label>
+							<config>
+								<type>select</type>
+								<itemsProcFunc>ScoutNet\ShScoutnetKalender\Helpers\BackendHelpers->getCategories</itemsProcFunc>
+								<multiple>true</multiple>
+								<maxitems>10</maxitems>
+								<items>
+									<numIndex index="0" type="array">
+										<numIndex index="0"></numIndex>
+										<numIndex index="1"></numIndex>
+									</numIndex>
+								</items>
+							</config>
+						</TCEforms>
+					</settings.categories>
+				</el>
+			</ROOT>
+		</sDEF>
+	</sheets>
+</T3DataStructure>

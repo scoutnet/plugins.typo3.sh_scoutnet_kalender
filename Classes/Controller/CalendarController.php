@@ -44,17 +44,10 @@ class CalendarController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 	protected $structureRepository = null;
 
 	/**
-	 * @var \TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer
-	 */
-	protected $cObj = null;
-
-	/**
 	 * @param array $addids
 	 * @param integer $eventId
 	 */
 	public function listAction($addids = array(), $eventId = null) {
-		$this->cObj = $this->configurationManager->getContentObject();
-
 		$cssFile = $GLOBALS['TSFE']->tmpl->getFileName($this->settings['cssFile']);
 		$jsFolder = $GLOBALS['TSFE']->tmpl->getFileName('EXT:sh_scoutnet_kalender/Resources/Public/JS/');
 
@@ -65,20 +58,22 @@ class CalendarController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 			'<script type="text/javascript" src="'.$jsFolder.'base2-dom-p.js"></script>' . "\n" .
 			'<script type="text/javascript" src="'.$jsFolder.'kalender.js"></script>' . "\n";
 
-		$ids = explode(",", $this->cObj->data["tx_shscoutnetkalender_ids"]);
+		$ids = explode(",", $this->settings["ssids"]);
 
 		$filter = array(
 			'limit' => isset($this->settings["limit"]) ? $this->settings["limit"] : 999,
 			'after' => 'now()',
 		);
 
-		if (isset($this->cObj->data["tx_shscoutnetkalender_kat_ids"]) && trim($this->cObj->data["tx_shscoutnetkalender_kat_ids"])) {
-			$filter['kategories'] = explode(",", $this->cObj->data["tx_shscoutnetkalender_kat_ids"]);
+		if (isset($this->settings["categories"]) && trim($this->settings["categories"])) {
+			$filter['kategories'] = explode(",", $this->settings["categories"]);
 		}
 
+		/*
 		if (isset($this->cObj->data["tx_shscoutnetkalender_stufen_ids"]) && trim($this->cObj->data["tx_shscoutnetkalender_stufen_ids"])) {
 			$filter['stufen'] = explode(",", $this->cObj->data["tx_shscoutnetkalender_stufen_ids"]);
 		}
+		*/
 
 		if (isset($addids) && count($addids) > 0 && is_array($addids)) {
 			$ids = array_merge($ids, $addids);
@@ -92,8 +87,8 @@ class CalendarController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 			$events = $this->eventRepository->findByStructuresAndFilter($structures, $filter);
 
 			$optStructures = Array();
-			if (isset($this->cObj->data["tx_shscoutnetkalender_optids"]) && trim($this->cObj->data["tx_shscoutnetkalender_optids"])) {
-				$optids = explode(",", $this->cObj->data["tx_shscoutnetkalender_optids"]);
+			if (isset($this->settings["optSsids"]) && trim($this->settings["optSsids"])) {
+				$optids = explode(",", $this->settings["optSsids"]);
 				$optStructures = $this->structureRepository->findByUids($optids);
 			}
 
@@ -109,6 +104,7 @@ class CalendarController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 			$this->view->assign('error', $e->getMessage());
 		}
 
+		//\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($this->settings);
 
 		$this->view->assign('events', $events);
 		$this->view->assign('structures', $structures);

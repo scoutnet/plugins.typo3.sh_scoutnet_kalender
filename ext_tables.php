@@ -10,7 +10,6 @@ if (TYPO3_MODE === 'BE') {
 	\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPageTSConfig('<INCLUDE_TYPOSCRIPT: source="FILE:EXT:sh_scoutnet_kalender/Configuration/TypoScript/pageTsConfig.ts">');
 
 
-
     // add backend user modul
 	\TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerModule(
 		'ScoutNet.' . $_EXTKEY,

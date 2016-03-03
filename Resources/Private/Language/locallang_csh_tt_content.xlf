@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<xliff version="1.0">
+    <file product-name="sh_scoutnet_kalender" source-language="en" date="2015-02-19T17:33:19Z" datatype="plaintext" original="locallang_csh_tt_content">
+        <body>
+            <trans-unit id="tt_content.pi_flexform.sheet_scoutnet">
+                <source>ScoutNet Calendar</source>
+            </trans-unit>
+            <trans-unit id="tt_content.pi_flexform.ssids">
+                <source>Calendar SSIDs</source>
+            </trans-unit>
+            <trans-unit id="tt_content.pi_flexform.optSsids">
+                <source>Optional Calendar SSIDs</source>
+            </trans-unit>
+            <trans-unit id="tt_content.pi_flexform.categories">
+                <source>Show only these Categories</source>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>
