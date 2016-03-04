@@ -15,6 +15,9 @@ tr.snk-headings-row th{
 	line-height: 90%;
 	padding: 5px;
 }
+.snk-termine td{
+	padding: 3px;
+}
 .snk-powered-by {
 	width: 50%;
 	font-size: small;
@@ -42,10 +45,6 @@ tr.snk-headings-row th{
 
 .snk-termin-infos dd {
 	margin-left: 10px;
-}
-
-.snk-eintrag-ebene {
-	text-align:right;
 }
 
 .snk-termin-row-even {
