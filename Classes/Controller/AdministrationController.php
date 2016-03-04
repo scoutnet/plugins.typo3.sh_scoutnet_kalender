@@ -118,8 +118,8 @@ class AdministrationController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionC
 				$data = $this->authHelper->getApiKeyFromData($_GET['auth']);
 				//\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($data);
 
-				$be_user->setTxShscoutnetkalenderScoutnetUsername($data['user']);
-				$be_user->setTxShscoutnetkalenderScoutnetApikey($data['api_key']);
+				$be_user->setTxShscoutnetUsername($data['user']);
+				$be_user->setTxShscoutnetApikey($data['api_key']);
 
 				$this->backendUserRepository->update($be_user);
 			} catch (\Exception $e) {
@@ -129,7 +129,7 @@ class AdministrationController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionC
 
 		}
 
-		if (trim($be_user->getTxShscoutnetkalenderScoutnetApikey()) == '' || trim($be_user->getTxShscoutnetkalenderScoutnetUsername()) == '') {
+		if (trim($be_user->getTxShscoutnetApikey()) == '' || trim($be_user->getTxShscoutnetUsername()) == '') {
 			// if we do not have a username or api key redirect to register
 			$this->redirect('register');
 		} else {

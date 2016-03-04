@@ -1,56 +1,23 @@
-.snk A, .snk A:visited {
-	text-decoration:none;
-	border-bottom: 1px dashed #6E1C32;
-	line-height:160%;
-    color: #6E1C32;
-}
-.snk A:hover {
-	text-decoration:none;
-	border-bottom: 1px solid #6E1C32;
-	line-height:160%;
-	color: #6E1C32;
-}
-
-.snk label,
-.snk{
-	color: #6E1C32;
-	/*font-family: Verdana, Sans-Serif;*/
-}
-
-.snk-datum, .snk-uhrzeit{
-	color: white;
-	display: inline;
-}
-.snk-uhrzeit{
-	color: white;
-	display: block;
-}
-.snk-termine{
-	width: 640px;
-	overflow:hidden;
-}
-.snk-termine{
-	text-align: center;
-}
 .snk-termine table{
 	width:100%;
 }
+
 tr.snk-headings-row th{
-	color: #6E1C32;
+	color: black;
 	background-color: transparent;
 	line-height: 120%;
-	padding: 0;
-	text-align:center;
+	padding: 5px;
+	text-align:left;
 }
 .snk-termine th{
-	color: white;
-	text-align: left;
-	background-color: #003399;
+	color: #f7961e;
+	background-color: black;
 	line-height: 90%;
 	padding: 5px;
 }
-.snk-powered-by{
+.snk-powered-by {
 	width: 50%;
+	font-size: small;
 	font-weight: bold;
 	text-align: right;
 	float: left;
@@ -59,6 +26,7 @@ tr.snk-headings-row th{
 	width: 49%;
 	float: left;
 	font-weight: bold;
+	font-size: small;
 }
 .snk-termin-infos dl{
 	border: 1px solid black;
@@ -67,9 +35,15 @@ tr.snk-headings-row th{
 	margin: 0 0 5px 10px;
 	padding: 10px 20px 20px 20px;
 }
+
 .snk-termin-infos dt{
 	font-weight: bold;
 }
+
+.snk-termin-infos dd {
+	margin-left: 10px;
+}
+
 .snk-eintrag-ebene {
 	text-align:right;
 }
