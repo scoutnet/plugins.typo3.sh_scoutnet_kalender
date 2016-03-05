@@ -13,10 +13,10 @@ build/%.t3x:
 	php bin/create_t3x.php src $(NAME) build/
 
 build/%.zip:
-	git archive -o "${NAME}_$(CURRENTVERSION).zip" $(CURRENTVERSION)
+	git archive -o "build/${NAME}_$(CURRENTVERSION).zip" $(CURRENTVERSION)
 
 tag:
-	@if [ ! -n $$(git tag -l $(CURRENTVERSION)) ]; then git tag -a $(CURRENTVERSION) -m "version $(CURRENTVERSION)"; fi
+	@if [ ! -n "$$(git tag -l $(CURRENTVERSION))" ]; then git tag $(CURRENTVERSION); fi
 
 clean:
 	rm -rf build
