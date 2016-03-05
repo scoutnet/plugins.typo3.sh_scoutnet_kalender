@@ -28,11 +28,10 @@ class BackendHelpers {
 
     /**
      * @param array $fConfig
-     * @param \TYPO3\CMS\Backend\Form\FormEngine $fObj
      *
      * @return void
      */
-    public function getCategories(&$fConfig, $fObj) {
+    public function getCategories(&$fConfig) {
 // fetch repository
         $pluginConfiguration = array(
             'pluginName'    => 'scoutnet',
@@ -52,7 +51,7 @@ class BackendHelpers {
         $categories = $categorieRepository->findAll();
         // change conf
         foreach ($categories as $categorie) {
-            array_push($fConfig[items], array(
+            array_push($fConfig['items'], array(
                 $categorie->getText(),
                 $categorie->getUid()
             ));
