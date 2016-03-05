@@ -233,36 +233,36 @@ class AdministrationController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionC
 	 * @return void
 	 */
 	public function createAction(\ScoutNet\ShScoutnetWebservice\Domain\Model\Event $event, $categories, $customCategories) {
-		$categorieObjects = array();
-		foreach ($categories as $uid => $selected) {
-			// skip not selected
-			if ($selected == 0) continue;
-
-			$categorieObjects[] = $this->categorieRepository->findByUid($uid);
-		}
-
-		foreach ($customCategories as $categorie){
-			if (strlen(trim($categorie)) > 0) {
-				$cat = new \ScoutNet\ShScoutnetWebservice\Domain\Model\Categorie();
-				$cat->setText(trim($categorie));
-				$categorieObjects[] = $cat;
-			}
-		}
-
-		$event->setCategories($categorieObjects);
-
 		if ($this->checkRights()) {
+			$categorieObjects = array();
+			foreach ($categories as $uid => $selected) {
+				// skip not selected
+				if ($selected == 0) continue;
+
+				$categorieObjects[] = $this->categorieRepository->findByUid($uid);
+			}
+
+			foreach ($customCategories as $categorie){
+				if (strlen(trim($categorie)) > 0) {
+					$cat = new \ScoutNet\ShScoutnetWebservice\Domain\Model\Categorie();
+					$cat->setText(trim($categorie));
+					$categorieObjects[] = $cat;
+				}
+			}
+
+			$event->setCategories($categorieObjects);
+
 			try {
 				$this->eventRepository->add($event);
 
 				$this->addFlashMessage('event created');
-				$this->redirect('list');
 			} catch (\Exception $e) {
 				$this->addFlashMessage('Cannot connect to Server'.$e->getMessage(),'Error', \TYPO3\CMS\Core\Messaging\AbstractMessage::ERROR);
 				$this->view->assign('error', self::ERROR_NO_CONNECTION);
 			}
 		}
 
+		$this->redirect('list');
 	}
 
 
@@ -293,35 +293,35 @@ class AdministrationController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionC
 	 * @return void
 	 */
 	public function updateAction(\ScoutNet\ShScoutnetWebservice\Domain\Model\Event $event, $categories, $customCategories) {
-		$categorieObjects = array();
-		foreach ($categories as $uid => $selected) {
-			// skip not selected
-			if ($selected == 0) continue;
-
-			$categorieObjects[] = $this->categorieRepository->findByUid($uid);
-		}
-
-		foreach ($customCategories as $categorie){
-			if (strlen(trim($categorie)) > 0) {
-				$cat = new \ScoutNet\ShScoutnetWebservice\Domain\Model\Categorie();
-				$cat->setText(trim($categorie));
-				$categorieObjects[] = $cat;
-			}
-		}
-
-		$event->setCategories($categorieObjects);
-
 		if ($this->checkRights()) {
+            $categorieObjects = array();
+            foreach ($categories as $uid => $selected) {
+                // skip not selected
+                if ($selected == 0) continue;
+
+                $categorieObjects[] = $this->categorieRepository->findByUid($uid);
+            }
+
+            foreach ($customCategories as $categorie){
+                if (strlen(trim($categorie)) > 0) {
+                    $cat = new \ScoutNet\ShScoutnetWebservice\Domain\Model\Categorie();
+                    $cat->setText(trim($categorie));
+                    $categorieObjects[] = $cat;
+                }
+            }
+
+            $event->setCategories($categorieObjects);
+
 			try {
 				$this->eventRepository->update($event);
 
 				$this->addFlashMessage('event saved');
-				$this->redirect('list');
 			} catch (\Exception $e) {
 				$this->addFlashMessage('Cannot connect to Server'.$e->getMessage(),'Error', \TYPO3\CMS\Core\Messaging\AbstractMessage::ERROR);
 				$this->view->assign('error', self::ERROR_NO_CONNECTION);
 			}
 		}
+		$this->redirect('list');
 	}
 
 	/**
@@ -343,14 +343,12 @@ class AdministrationController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionC
 				$this->eventRepository->delete($event);
 
 				$this->addFlashMessage('event Deleted');
-
-				$this->redirect('list');
 			} catch (\Exception $e) {
 				$this->addFlashMessage('Cannot connect to Server'.$e->getMessage(),'Error', \TYPO3\CMS\Core\Messaging\AbstractMessage::ERROR);
 				$this->view->assign('error', self::ERROR_NO_CONNECTION);
 			}
 		}
-
+		$this->redirect('list');
 	}
 
 	/**
