@@ -25,13 +25,5 @@ if (TYPO3_MODE === 'BE') {
 			'labels'    => 'LLL:EXT:'.$_EXTKEY.'/Resources/Private/Language/locallang_modcalendar.xlf',
 		)
 	);
-
-	/*
-	\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addModulePath('scoutnet_kalender', \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath($_EXTKEY) . 'user_scoutnet/');
-	\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addModule('user','scoutnet', '', \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath($_EXTKEY) . 'user_scoutnet/');
-	*/
-
-//	$GLOBALS['TYPO3_CONF_VARS']['BE']['AJAX']['Taskcenter::saveCollapseState']      = 'EXT:taskcenter/classes/class.tx_taskcenter_status.php:tx_taskcenter_status->saveCollapseState';
-//	$GLOBALS['TYPO3_CONF_VARS']['BE']['AJAX']['Taskcenter::saveSortingState']       = 'EXT:taskcenter/classes/class.tx_taskcenter_status.php:tx_taskcenter_status->saveSortingState';
 }
 
