@@ -43,7 +43,7 @@ class BackendHelpers {
         $objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Object\\ObjectManager');
 
         /** @var \ScoutNet\ShScoutnetWebservice\Domain\Repository\CategorieRepository $categorieRepository */
-        $categorieRepository = $objectManager->get('\ScoutNet\ShScoutnetWebservice\Domain\Repository\CategorieRepository');
+        $categorieRepository = $objectManager->get('ScoutNet\ShScoutnetWebservice\Domain\Repository\CategorieRepository');
 
    //     $configurationManager = $objectManager->get('TYPO3\\CMS\Extbase\\Configuration\\ConfigurationManager');
    //     $configuration = $configurationManager->getConfiguration(ConfigurationManager::CONFIGURATION_TYPE_SETTINGS, 'ShScoutnetKalender');
