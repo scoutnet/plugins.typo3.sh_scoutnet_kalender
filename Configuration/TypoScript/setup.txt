@@ -1,8 +1,21 @@
 plugin.tx_shscoutnetkalender {
+	mvc.callDefaultActionIfActionCantBeResolved = 1
+
 	view {
-		templateRootPath = {$plugin.tx_shscoutnetkalender.view.templateRootPath}
-		partialRootPath = {$plugin.tx_shscoutnetkalender.view.partialRootPath}
-		layoutRootPath = {$plugin.tx_shscoutnetkalender.view.layoutRootPath}
+		templateRootPaths {
+			0 = EXT:sh_scoutnet_kalender/Resources/Private/Templates/
+            1 = {$plugin.tx_shscoutnetkalender.view.templateRootPath}
+		}
+
+		partialRootPaths {
+			0 = EXT:sh_scoutnet_kalender/Resources/Private/Partials/
+			1 = {$plugin.tx_shscoutnetkalender.view.partialRootPath}
+		}
+
+		layoutRootPaths {
+			0 = EXT:sh_scoutnet_kalender/Resources/Private/Layouts/
+			1 = {$plugin.tx_shscoutnetkalender.view.layoutRootPath}
+		}
 	}
 	persistence {
 		storagePid = {$plugin.tx_shscoutnetkalender.persistence.storagePid}
