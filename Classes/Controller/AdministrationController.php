@@ -415,7 +415,7 @@ class AdministrationController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionC
 		}
 
 		// use the f:uri.resource view helper to render resource url
-		$uri = $this->objectManager->get('\TYPO3\CMS\Fluid\ViewHelpers\Uri\ResourceViewHelper')->render('img/stoff_tile_'.$verbaende[$verband]['name'].'.png','sh_scoutnet_kalender');
+		$uri = $this->objectManager->get('TYPO3\CMS\Fluid\ViewHelpers\Uri\ResourceViewHelper')->render('img/stoff_tile_'.$verbaende[$verband]['name'].'.png','sh_scoutnet_kalender');
 
 		//\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($uri);
 		$this->view->assign('background_style', 'background-color: '.$verbaende[$verband]['color'].';background-image: url(\''.$uri.'\')');
