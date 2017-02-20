@@ -28,5 +28,8 @@
 	},
 	"replace": {
 		"typo3-ter/sh-scoutnet-kalender": "self.version"
-	}
+	},
+	"repositories": [
+		  { "type": "composer", "url": "https://composer.typo3.org/" }
+	]
 }
