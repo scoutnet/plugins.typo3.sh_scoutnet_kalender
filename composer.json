@@ -16,10 +16,10 @@
 	"support": {
 		"issues": "https://bitbucket.org/scoutnet/plugins.typo3.sh_scoutnet_kalender"
 	},
-	"version": "3.0.3",
+	"version": "3.0.4",
 	"require": {
 		"typo3/cms-core": "^6.2.14 || ^7.6.0",
-		"scoutnet/sh-scoutnet-webservice": "^2.0"
+		"scoutnet/sh-scoutnet-webservice": "^2.0.0"
 	},
 	"autoload": {
 		"psr-4": {
@@ -27,7 +27,6 @@
 		}
 	},
 	"replace": {
-		"sh-scoutnet-kalender": "self.version",
 		"typo3-ter/sh-scoutnet-kalender": "self.version"
 	}
 }
