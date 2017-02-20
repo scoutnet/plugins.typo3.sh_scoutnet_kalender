@@ -16,7 +16,7 @@ build/%.zip:
 	git archive -o "build/${NAME}_$(CURRENTVERSION).zip" $(CURRENTVERSION)
 
 tag:
-	@if [ ! -n "$$(git tag -l $(CURRENTVERSION))" ]; then git tag $(CURRENTVERSION); fi
+	@if [ ! -n "$$(git tag -l $(CURRENTVERSION))" ]; then git tag -a $(CURRENTVERSION) -m "Version $(CURRENTVERSION)"; fi
 
 clean:
 	rm -rf build
