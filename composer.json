@@ -18,7 +18,7 @@
 	},
 	"version": "3.0.3",
 	"require": {
-		"typo3/cms-core": "^6.2.14 || ^7.6.0"
+		"typo3/cms-core": "^6.2.14 || ^7.6.0",
 		"scoutnet/sh-scoutnet-webservice": "^2.0"
 	},
 	"autoload": {
