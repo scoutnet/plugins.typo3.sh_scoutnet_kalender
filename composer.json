@@ -1,0 +1,33 @@
+{
+	"name": "scoutnet/sh-scoutnet-kalender",
+	"type": "typo3-cms-extension",
+	"description" : "Official Typo3 plugin to display scoutnet.de calendar",
+	"homepage": "https://bitbucket.org/scoutnet/plugins.typo3.sh_scoutnet_kalender",
+	"authors": [
+		{
+			"name": "Stefan Horst",
+			"email": "muetze@scoutnet.de",
+			"homepage": "https://www.scoutnet.de",
+			"role": "Developer"
+		}
+	],
+	"license": ["GPL-2.0+"],
+	"keywords": ["TYPO3 CMS", "ScoutNet", "Pfadfinder", "ScoutNet Kalender"],
+	"support": {
+		"issues": "https://bitbucket.org/scoutnet/plugins.typo3.sh_scoutnet_kalender"
+	},
+	"version": "3.0.3",
+	"require": {
+		"typo3/cms-core": "^6.2.14 || ^7.6.0"
+		"scoutnet/sh-scoutnet-webservice": "^2.0"
+	},
+	"autoload": {
+		"psr-4": {
+			"ScoutNet\\ShScoutnetKalender\\": "Classes/"
+		}
+	},
+	"replace": {
+		"sh-scoutnet-kalender": "self.version",
+		"typo3-ter/sh-scoutnet-kalender": "self.version"
+	}
+}
