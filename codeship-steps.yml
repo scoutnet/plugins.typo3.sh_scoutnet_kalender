@@ -1,0 +1,3 @@
+- name: sh_scoutnet_kalender
+  service: sh_scoutnet_kalender
+  command: bash -c "cd /opt/typo3; export TYPO3_PATH_WEB=/opt/typo3/web; vendor/bin/phpunit --color -c web/typo3conf/ext/sh_scoutnet_kalender/Tests/Builds/UnitTests.xml"

@@ -1,0 +1,5 @@
+sh_scoutnet_kalender:
+  build: 
+    image: typo3.sh_scoutnet_kalender
+    dockerfile_path: Dockerfile
+  cached: true
