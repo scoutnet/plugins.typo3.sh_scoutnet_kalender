@@ -12,11 +12,8 @@ pipelines:
           - cd ..
           - apt-get update && apt-get install -y unzip git
           - curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
-          - git clone --single-branch --branch TYPO3_7-6 --depth 1 https://github.com/TYPO3/TYPO3.CMS.git typo3_core
-          - mv typo3_core/* .
-          - composer self-update
-          - composer install
+          - composer create-project scoutnet/test_environment
+          - cd test_environment
           - composer require scoutnet/sh-scoutnet-webservice
-          - mkdir -p uploads typo3temp typo3conf/ext
-          - mv plugins.typo3.sh_scoutnet_kalender typo3conf/ext/sh_scoutnet_kalender
-          - bin/phpunit --color -c typo3conf/ext/sh_scoutnet_kalender/Tests/Builds/UnitTests.xml
+          - mv ../plugins.typo3.sh_scoutnet_kalender web/typo3conf/ext/sh_scoutnet_kalender
+          - export TYPO3_PATH_WEB=web; vendor/bin/phpunit --color -c web/typo3conf/ext/sh_scoutnet_kalender/Tests/Builds/UnitTests.xml
