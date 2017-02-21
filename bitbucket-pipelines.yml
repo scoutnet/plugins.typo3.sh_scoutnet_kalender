@@ -9,12 +9,13 @@ pipelines:
   default:
     - step:
         script: # Modify the commands below to build your repository.
-          - pwd
+          - dir=$(pwd)
           - cd ..
+          - pwd
           - apt-get update && apt-get install -y unzip git
           - curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
           - composer create-project scoutnet/test_environment
           - cd test_environment
           - composer require scoutnet/sh-scoutnet-webservice
-          - cp -r ../tmp web/typo3conf/ext/sh_scoutnet_kalender
+          - cp -r $dir web/typo3conf/ext/sh_scoutnet_kalender
           - export TYPO3_PATH_WEB=web; vendor/bin/phpunit --color -c web/typo3conf/ext/sh_scoutnet_kalender/Tests/Builds/UnitTests.xml
