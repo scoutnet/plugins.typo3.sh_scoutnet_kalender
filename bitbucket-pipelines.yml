@@ -3,7 +3,7 @@
 # Only use spaces to indent your .yml configuration.
 # -----
 # You can specify a custom docker image from Docker Hub as your build environment.
-image: php:5.6
+image: scoutnet/typo3.test_environment
 
 pipelines:
   default:
@@ -11,8 +11,6 @@ pipelines:
         script: # Modify the commands below to build your repository.
           - BUILD_DIR=$(pwd)
           - cd ..
-          - apt-get update && apt-get install -y unzip git
-          - curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
           - composer create-project scoutnet/test_environment
           - cd test_environment
           - composer require scoutnet/sh-scoutnet-webservice
