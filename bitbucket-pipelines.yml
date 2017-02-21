@@ -10,9 +10,7 @@ pipelines:
     - step:
         script: # Modify the commands below to build your repository.
           - BUILD_DIR=$(pwd)
-          - cd ..
-          - composer create-project scoutnet/test_environment
-          - cd test_environment
+          - cd /opt/typo3
           - composer require scoutnet/sh-scoutnet-webservice
           - cp -r $BUILD_DIR web/typo3conf/ext/sh_scoutnet_kalender
           - export TYPO3_PATH_WEB=web; vendor/bin/phpunit --color -c web/typo3conf/ext/sh_scoutnet_kalender/Tests/Builds/UnitTests.xml
