@@ -16,4 +16,6 @@ pipelines:
           - cd test_environment
           - composer require scoutnet/sh-scoutnet-webservice
           - cp -r ../data web/typo3conf/ext/sh_scoutnet_kalender
+          - ls -la web/typo3conf/ext/
+          - ls -la web/typo3conf/ext/sh_scoutnet_kalender
           - export TYPO3_PATH_WEB=web; vendor/bin/phpunit --color -c web/typo3conf/ext/sh_scoutnet_kalender/Tests/Builds/UnitTests.xml
