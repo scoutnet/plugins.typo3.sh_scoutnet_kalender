@@ -10,6 +10,8 @@ pipelines:
     - step:
         script: # Modify the commands below to build your repository.
           - cd ..
+          - apt-get update && apt-get install -y unzip git
+          - curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
           - git clone --single-branch --branch TYPO3_7-6 --depth 1 https://github.com/TYPO3/TYPO3.CMS.git typo3_core
           - mv typo3_core/* .
           - composer self-update
