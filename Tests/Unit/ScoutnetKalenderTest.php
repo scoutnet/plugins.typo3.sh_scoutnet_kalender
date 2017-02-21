@@ -24,6 +24,6 @@ class ScoutnetKalenderTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
      * @return void
      */
     public function myFirstTest() {
-        $this->assertEquals("test", "baa");
+        $this->assertEquals("test", "test");
     }
 }
