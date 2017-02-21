@@ -16,7 +16,7 @@ pipelines:
           - mv typo3_core/* .
           - composer self-update
           - composer install
-          - composer require scoutnet/sh_scoutnet_webservice
+          - composer require scoutnet/sh-scoutnet-webservice
           - mkdir -p uploads typo3temp typo3conf/ext
           - mv plugins.typo3.sh_scoutnet_kalender typo3conf/ext/sh_scoutnet_kalender
           - bin/phpunit --color -c typo3conf/ext/sh_scoutnet_kalender/Tests/Builds/UnitTests.xml
