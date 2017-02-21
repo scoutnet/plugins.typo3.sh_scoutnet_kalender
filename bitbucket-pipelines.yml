@@ -3,7 +3,7 @@
 # Only use spaces to indent your .yml configuration.
 # -----
 # You can specify a custom docker image from Docker Hub as your build environment.
-image: phpunit/phpunit:4.8.16
+image: php/php:5.6
 
 pipelines:
   default:
@@ -17,4 +17,4 @@ pipelines:
           - composer require scoutnet/sh_scoutnet_webservice
           - mkdir -p uploads typo3temp typo3conf/ext
           - mv plugins.typo3.sh_scoutnet_kalender typo3conf/ext/sh_scoutnet_kalender
-          - phpunit --color -c typo3conf/ext/sh_scoutnet_kalender/Tests/Builds/UnitTests.xml
+          - bin/phpunit --color -c typo3conf/ext/sh_scoutnet_kalender/Tests/Builds/UnitTests.xml
