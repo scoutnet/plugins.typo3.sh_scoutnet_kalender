@@ -7,7 +7,7 @@ typo3_test:
     - .:/opt/typo3/web/typo3conf/ext/sh_scoutnet_kalender
 
 build_host:
-  image: centos7
+  image: centos
   cached: true
   volumes:
     - .:/opt/data
