@@ -1,3 +1,8 @@
-- name: sh_scoutnet_kalender
-  service: sh_scoutnet_kalender
-  command: bash -c "cd /opt/typo3; export TYPO3_PATH_WEB=/opt/typo3/web; vendor/bin/phpunit --color -c web/typo3conf/ext/sh_scoutnet_kalender/Tests/Builds/UnitTests.xml"
+- name: run test
+  service: typo3_test
+  command: bash -c "cd /opt/typo3; composer require scoutnet/sh-scoutnet-webservice; vendor/bin/phpunit --color -c web/typo3conf/ext/sh_scoutnet_kalender/Tests/Builds/UnitTests.xml"
+
+- name: build
+  service: build_host
+  type: push
+  command: bash -c "cd /opt/data; make"

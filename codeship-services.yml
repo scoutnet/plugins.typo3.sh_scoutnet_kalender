@@ -1,5 +1,13 @@
-sh_scoutnet_kalender:
-  build: 
-    image: typo3.sh_scoutnet_kalender
-    dockerfile_path: Dockerfile
+typo3_test:
+  image: scoutnet/typo3.test_environment
+  environment:
+    TYPO3_PATH_WEB: /opt/typo3/web
   cached: true
+  volumes:
+    - .:/opt/typo3/web/typo3conf/ext/sh_scoutnet_kalender
+
+build_host:
+  image: centos7
+  cached: true
+  volumes:
+    - .:/opt/data
