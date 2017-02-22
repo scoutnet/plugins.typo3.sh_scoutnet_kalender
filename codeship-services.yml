@@ -8,6 +8,5 @@ typo3_test:
 
 build_host:
   image: centos
-  cached: true
   volumes:
     - .:/opt/data
