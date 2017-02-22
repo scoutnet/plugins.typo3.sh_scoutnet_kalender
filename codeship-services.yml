@@ -7,6 +7,6 @@ typo3_test:
     - .:/opt/typo3/web/typo3conf/ext/sh_scoutnet_kalender
 
 build_host:
-  image: centos
+  image: debian:jessie
   volumes:
     - .:/opt/data
