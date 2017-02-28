@@ -12,5 +12,6 @@ build_host:
   build:
     image: scoutnetbuild
     dockerfile_path: Build/Dockerfile.build
+  cached: true
   volumes:
     - .:/opt/data
