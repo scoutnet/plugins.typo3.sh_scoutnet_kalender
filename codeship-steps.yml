@@ -1,6 +1,6 @@
 - name: run test
   service: typo3_test
-  command: bash -c "cd /opt/typo3; composer require scoutnet/sh-scoutnet-webservice; vendor/bin/phpunit --color -c web/typo3conf/ext/sh_scoutnet_kalender/Tests/Builds/UnitTests.xml"
+  command: bash -c "cd /opt/typo3; vendor/bin/phpunit --color -c web/typo3conf/ext/sh_scoutnet_kalender/Tests/Builds/UnitTests.xml"
 
 - name: build
   service: build_host

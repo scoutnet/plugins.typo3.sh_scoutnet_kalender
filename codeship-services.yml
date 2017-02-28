@@ -1,5 +1,7 @@
 typo3_test:
-  image: scoutnet/typo3.test_environment
+  build:
+    image: scoutnetdev
+    dockerfile_path: Build/Dockerfile.ci
   environment:
     TYPO3_PATH_WEB: /opt/typo3/web
   cached: true
@@ -7,6 +9,8 @@ typo3_test:
     - .:/opt/typo3/web/typo3conf/ext/sh_scoutnet_kalender
 
 build_host:
-  image: debian:jessie
+  build:
+    image: scoutnetbuild
+    dockerfile_path: Build/Dockerfile.build
   volumes:
     - .:/opt/data

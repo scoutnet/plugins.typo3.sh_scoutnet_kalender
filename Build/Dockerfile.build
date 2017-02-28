@@ -1,0 +1,4 @@
+FROM debian:jessie
+
+WORKDIR /opt/typo3
+RUN composer require scoutnet/sh-scoutnet-webservice
