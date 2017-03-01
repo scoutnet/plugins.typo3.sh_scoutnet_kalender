@@ -3,3 +3,4 @@
 Build export-ignore
 codeship-services.yml export-ignore
 codeship-steps.yml export-ignore
+Makefile export-ignore
