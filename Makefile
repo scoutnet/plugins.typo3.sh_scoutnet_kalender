@@ -24,3 +24,7 @@ checkVersion:
 	[ "$(GIT_VERSION)" = "$(CURRENTVERSION)" ]
 	[ "$(GIT_VERSION)" = "$(COMPOSER_VERSION)" ]
 
+deploy: checkVersion zip
+	mkdir build/${NAME}
+	unzip Build/${NAME}_$(CURRENTVERSION).zip -d Build/${NAME}
+	cd Build && composer require namelesscoder/typo3-repository-client

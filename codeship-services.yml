@@ -1,7 +1,7 @@
 typo3_test:
   build:
     image: scoutnetdev
-    dockerfile_path: Build/Dockerfile.ci
+    dockerfile_path: Docker/Dockerfile.ci
   environment:
     TYPO3_PATH_WEB: /opt/typo3/web
     SHELL: /bin/sh
@@ -12,7 +12,7 @@ typo3_test:
 build_host:
   build:
     image: scoutnetbuild
-    dockerfile_path: Build/Dockerfile.build
+    dockerfile_path: Docker/Dockerfile.build
   environment:
     SHELL: /bin/bash
   cached: true
