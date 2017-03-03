@@ -9,7 +9,7 @@ default: zip
 zip: Build/$(NAME)_$(CURRENTVERSION).zip
 
 Build/%.zip: checkVersion
-	git archive -o "Build/${NAME}_$(CURRENTVERSION).zip" $(CURRENTVERSION)
+	git archive -o "Build/$(NAME)_$(CURRENTVERSION).zip" $(CURRENTVERSION)
 
 tag:
 	@if [ ! -n "$$(git tag -l $(CURRENTVERSION))" ]; then git tag -a $(CURRENTVERSION) -m "Version $(CURRENTVERSION)"; fi
@@ -24,7 +24,12 @@ checkVersion:
 	[ "$(GIT_VERSION)" = "$(CURRENTVERSION)" ]
 	[ "$(GIT_VERSION)" = "$(COMPOSER_VERSION)" ]
 
-deploy: checkVersion zip
-	mkdir build/${NAME}
-	unzip Build/${NAME}_$(CURRENTVERSION).zip -d Build/${NAME}
+deploy: checkVersion Build/$(NAME)_$(CURRENTVERSION).zip
+	# clean build folder
+	-@[ -d build/$(NAME) ] && rm -rf build/$(NAME)
+	mkdir build/$(NAME)
+	unzip Build/$(NAME)_$(CURRENTVERSION).zip -d Build/$(NAME)
+	# install ter uploader
 	cd Build && composer require namelesscoder/typo3-repository-client
+	cd Build && vendor/bin/upload $(NAME) $(TYPO3_TER_USER) $(TYPO3_TER_PASSWORD)
+
