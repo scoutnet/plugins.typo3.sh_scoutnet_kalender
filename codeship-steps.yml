@@ -14,4 +14,4 @@
 - name: build
   tag: ^[0-9]+[.][0-9]+[.][0-9]+$
   service: build_host
-  command: bash -c "cd /opt/data; make"
+  command: bash -c "cd /opt/data; make deploy"
