@@ -58,5 +58,6 @@ deploy: checkVersion Build/$(NAME)_$(CURRENTVERSION).zip
 	unzip Build/$(NAME)_$(CURRENTVERSION).zip -d Build/$(NAME)
 	# install ter uploader
 	cd Build && composer require namelesscoder/typo3-repository-client
-	cd Build && vendor/bin/upload $(NAME) $(TYPO3_TER_USER) $(TYPO3_TER_PASSWORD) "$(shell git tag -l $(CURRENTVERSION) -n99 | sed "s/^$(CURRENTVERSION)[ ]*//g" | sed "s/^[ ]*//g")"
+	@cd Build && vendor/bin/upload $(NAME) $(TYPO3_TER_USER) $(TYPO3_TER_PASSWORD) "$(shell git tag -l $(CURRENTVERSION) -n99 | sed "s/^$(CURRENTVERSION)[ ]*//g" | sed "s/^[ ]*//g")"
+	@echo "uploaded $(CURRENTVERSION)"
 
