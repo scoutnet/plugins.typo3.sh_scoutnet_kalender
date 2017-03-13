@@ -19,22 +19,25 @@ stepPatchVersion:
 	@echo NEXT Version: $(NEXTPATCHVERSION)
 	@cat ext_emconf.php | sed "s/'version' => '$(CURRENTVERSION)'/'version' => '$(NEXTPATCHVERSION)'/g" > ext_emconf_new.php && mv ext_emconf_new.php ext_emconf.php
 	@cat composer.json | sed 's/"version": "$(CURRENTVERSION)"/"version": "$(NEXTPATCHVERSION)"/g' > composer_new.json && mv composer_new.json composer.json
+	@git add ex_emconf.php composer.json && git commit -m "new patch $(NEXTPATCHVERSION)"
 	@make tag
 
 stepMinorVersion:
 	@echo NEXT Version: $(NEXTMINORVERSION)
 	@cat ext_emconf.php | sed "s/'version' => '$(CURRENTVERSION)'/'version' => '$(NEXTMINORVERSION)'/g" > ext_emconf_new.php && mv ext_emconf_new.php ext_emconf.php
 	@cat composer.json | sed 's/"version": "$(CURRENTVERSION)"/"version": "$(NEXTMINORVERSION)"/g' > composer_new.json && mv composer_new.json composer.json
+	@git add ex_emconf.php composer.json && git commit -m "new minor Version $(NEXTMINORVERSION)"
 	@make tag
 
 stepMajorVersion:
 	@echo NEXT Version: $(NEXTMAJORVERSION)
 	@cat ext_emconf.php | sed "s/'version' => '$(CURRENTVERSION)'/'version' => '$(NEXTMAJORVERSION)'/g" > ext_emconf_new.php && mv ext_emconf_new.php ext_emconf.php
 	@cat composer.json | sed 's/"version": "$(CURRENTVERSION)"/"version": "$(NEXTMAJORVERSION)"/g' > composer_new.json && mv composer_new.json composer.json
+	@git add ex_emconf.php composer.json && git commit -m "new Version $(NEXTMAJORVERSION)"
 	@make tag
 
 tag:
-	@if [ ! -n "$$(git tag -l $(CURRENTVERSION))" ]; then git tag -a $(CURRENTVERSION) -m "Version $(CURRENTVERSION)"; fi
+	@if [ ! -n "$$(git tag -l $(CURRENTVERSION))" ]; then git tag -a $(CURRENTVERSION); fi
 
 clean:
 	rm -rf Build/*.zip
