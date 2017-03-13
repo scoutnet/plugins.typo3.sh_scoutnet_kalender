@@ -1,10 +1,9 @@
 FROM php:7.0-cli
 
-RUN docker-php-ext-install -j$(nproc) soap
+RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y \\
+	libxml2-dev build-essential libpq-dev nodejs apt-utils git unzip\\
+	&& diocker-php-ext-install -j$(nproc) soap
 
-# update and install dependencies
-RUN apt-get update -qq
-RUN DEBIAN_FRONTEND=noninteractive apt-get install -y build-essential libpq-dev nodejs apt-utils git unzip
 
 # install composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
