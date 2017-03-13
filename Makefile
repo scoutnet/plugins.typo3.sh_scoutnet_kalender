@@ -50,7 +50,6 @@ checkVersion:
 	@echo COMPOSER_VERSION: $(COMPOSER_VERSION)
 	[ "$(GIT_VERSION)" = "$(CURRENTVERSION)" ]
 	[ "$(GIT_VERSION)" = "$(COMPOSER_VERSION)" ]
-	php -r "new SoapClient('');"
 
 deploy: checkVersion Build/$(NAME)_$(CURRENTVERSION).zip
 	# clean build folder
