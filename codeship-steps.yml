@@ -7,7 +7,6 @@
   command: bash -c "cd /opt/typo3/web/typo3conf/ext/sh_scoutnet_kalender; find . -name \*.php | parallel --gnu php -d display_errors=stderr -l {} > /dev/null"
 
 - name: check_version
-  tag: ^[0-9]+[.][0-9]+[.][0-9]+$
   service: build_host
   command: bash -c "cd /opt/data; make checkVersion"
 
