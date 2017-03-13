@@ -13,6 +13,7 @@ default: zip
 zip: Build/$(NAME)_$(CURRENTVERSION).zip
 
 Build/%.zip: checkVersion
+	-@[ -d Build ] && mkdir Build
 	git archive -o "Build/$(NAME)_$(CURRENTVERSION).zip" $(CURRENTVERSION)
 
 stepPatchVersion:
@@ -51,8 +52,8 @@ checkVersion:
 
 deploy: checkVersion Build/$(NAME)_$(CURRENTVERSION).zip
 	# clean build folder
-	-@[ -d build/$(NAME) ] && rm -rf build/$(NAME)
-	mkdir build/$(NAME)
+	-@[ -d Build/$(NAME) ] && rm -rf Build/$(NAME)
+	mkdir Build/$(NAME)
 	unzip Build/$(NAME)_$(CURRENTVERSION).zip -d Build/$(NAME)
 	# install ter uploader
 	cd Build && composer require namelesscoder/typo3-repository-client
