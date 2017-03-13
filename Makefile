@@ -39,6 +39,7 @@ stepMajorVersion:
 
 tag:
 	@if [ ! -n "$$(git tag -l $(CURRENTVERSION))" ]; then git tag -a $(CURRENTVERSION); fi
+	@echo You can now use git push --tags to push all changes to github
 
 clean:
 	rm -rf Build/*.zip
