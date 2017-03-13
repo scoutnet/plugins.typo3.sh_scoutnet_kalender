@@ -1,7 +1,7 @@
 FROM php:7.0-cli
 
 RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y \\
-	libxml2-dev build-essential libpq-dev nodejs apt-utils git unzip\\
+	libxml2 build-essential libpq-dev nodejs apt-utils git unzip \\
 	&& diocker-php-ext-install -j$(nproc) soap
 
 
