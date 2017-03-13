@@ -15,6 +15,7 @@ build_host:
     dockerfile_path: Docker/Dockerfile.build
   environment:
     SHELL: /bin/bash
+  encrypted_env_file: deployment.env.encrypted
   cached: true
   volumes:
     - .:/opt/data
