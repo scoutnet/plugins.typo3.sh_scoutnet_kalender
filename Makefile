@@ -13,7 +13,7 @@ default: zip
 zip: Build/$(NAME)_$(CURRENTVERSION).zip
 
 Build/%.zip: checkVersion
-	-@[ -d Build ] && mkdir Build
+	-@[ -d Build ] || mkdir Build
 	git archive -o "Build/$(NAME)_$(CURRENTVERSION).zip" $(CURRENTVERSION)
 
 stepPatchVersion:
