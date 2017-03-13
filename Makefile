@@ -4,12 +4,34 @@ CURRENTVERSION=$(shell cat ext_emconf.php | grep "'version' =>" | cut -d "'" -f 
 GIT_VERSION=$(shell git tag | sort | tail -n 1)
 COMPOSER_VERSION=$(shell php -r "echo json_decode(file_get_contents('composer.json'))->version;")
 
+NEXTPATCHVERSION=$(shell php -r 'list($$a,$$b,$$c) = (explode(".","$(CURRENTVERSION)", 3)); echo "$$a.$$b.".($$c+1);')
+NEXTMINORVERSION=$(shell php -r 'list($$a,$$b,$$c) = (explode(".","$(CURRENTVERSION)", 3)); echo "$$a.".($$b+1).".0";')
+NEXTMAJORVERSION=$(shell php -r 'list($$a,$$b,$$c) = (explode(".","$(CURRENTVERSION)", 3)); echo ($$a + 1).".0.0";')
+
 default: zip
 
 zip: Build/$(NAME)_$(CURRENTVERSION).zip
 
 Build/%.zip: checkVersion
 	git archive -o "Build/$(NAME)_$(CURRENTVERSION).zip" $(CURRENTVERSION)
+
+stepPatchVersion:
+	@echo NEXT Version: $(NEXTPATCHVERSION)
+	@cat ext_emconf.php | sed "s/'version' => '$(CURRENTVERSION)'/'version' => '$(NEXTPATCHVERSION)'/g" > ext_emconf_new.php && mv ext_emconf_new.php ext_emconf.php
+	@cat composer.json | sed 's/"version": "$(CURRENTVERSION)"/"version": "$(NEXTPATCHVERSION)"/g' > composer_new.json && mv composer_new.json composer.json
+	@make tag
+
+stepMinorVersion:
+	@echo NEXT Version: $(NEXTMINORVERSION)
+	@cat ext_emconf.php | sed "s/'version' => '$(CURRENTVERSION)'/'version' => '$(NEXTMINORVERSION)'/g" > ext_emconf_new.php && mv ext_emconf_new.php ext_emconf.php
+	@cat composer.json | sed 's/"version": "$(CURRENTVERSION)"/"version": "$(NEXTMINORVERSION)"/g' > composer_new.json && mv composer_new.json composer.json
+	@make tag
+
+stepMajorVersion:
+	@echo NEXT Version: $(NEXTMAJORVERSION)
+	@cat ext_emconf.php | sed "s/'version' => '$(CURRENTVERSION)'/'version' => '$(NEXTMAJORVERSION)'/g" > ext_emconf_new.php && mv ext_emconf_new.php ext_emconf.php
+	@cat composer.json | sed 's/"version": "$(CURRENTVERSION)"/"version": "$(NEXTMAJORVERSION)"/g' > composer_new.json && mv composer_new.json composer.json
+	@make tag
 
 tag:
 	@if [ ! -n "$$(git tag -l $(CURRENTVERSION))" ]; then git tag -a $(CURRENTVERSION) -m "Version $(CURRENTVERSION)"; fi
