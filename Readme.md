@@ -1,6 +1,7 @@
+[ ![Codeship Status for scoutnet/plugins.typo3.sh_scoutnet_kalender](https://app.codeship.com/projects/0b78d0d0-da9e-0134-84fb-369bc7fb7901/status?branch=master)](https://img.shields.io/codeship/0b78d0d0-da9e-0134-84fb-369bc7fb7901/master.svg)
+---
 ScoutNet Kalender Plugin for TYPO3
 ==================================
-[ ![Codeship Status for scoutnet/plugins.typo3.sh_scoutnet_kalender](https://app.codeship.com/projects/0b78d0d0-da9e-0134-84fb-369bc7fb7901/status?branch=master)](https://img.shields.io/codeship/0b78d0d0-da9e-0134-84fb-369bc7fb7901/master.svg)
 This is the official ScoutNet.de Kalender Plugin for TYPO3. If you are a scouting Group from Germany you can use our Service and manage your events on our Servers.
 
 Install
