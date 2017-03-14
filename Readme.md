@@ -1,4 +1,4 @@
-[ ![Codeship Status for scoutnet/plugins.typo3.sh_scoutnet_kalender](https://app.codeship.com/projects/0b78d0d0-da9e-0134-84fb-369bc7fb7901/status?branch=master)](https://img.shields.io/codeship/0b78d0d0-da9e-0134-84fb-369bc7fb7901/master.svg)
+[ ![Codeship Status for scoutnet/plugins.typo3.sh_scoutnet_kalender](https://img.shields.io/codeship/0b78d0d0-da9e-0134-84fb-369bc7fb7901/master.svg)](https://app.codeship.com/projects/203751)
 ---
 ScoutNet Kalender Plugin for TYPO3
 ==================================
