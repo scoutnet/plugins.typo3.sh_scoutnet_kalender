@@ -4,7 +4,8 @@
 /* called before body is loaded */
 function snk_init(){
     /* enable stylesheet that hides all termin details, doesn't work in safari */
-    document.getElementsByTagName('style')[0].media = 'screen';
+	// TODO: fix this
+    //document.getElementsByTagName('style')[0].media = 'screen';
 }
 
 /* called after DOM is complete */
@@ -50,8 +51,6 @@ function snk_show_termin( termin_id, link ){
     return false;
 }
 
-// bind DOM to document
-base2.DOM.bind(document);
 snk_init();
 
 document.addEventListener('DOMContentLoaded', function(){
