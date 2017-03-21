@@ -54,5 +54,5 @@ function snk_show_termin( termin_id, link ){
 snk_init();
 
 document.addEventListener('DOMContentLoaded', function(){
-    return snk_finish('');
+//    return snk_finish('');
 }, false);
