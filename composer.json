@@ -27,6 +27,13 @@
 		}
 	},
 	"replace": {
-		"typo3-ter/sh-scoutnet-kalender": "self.version"
+		"typo3-ter/sh-scoutnet-kalender": "self.version",
+		"sh_scoutnet_kalender": "self.version"
+	},
+	"extra": {
+		"branch-alias": {
+			"dev-master": "3.0.x-dev",
+			"dev-development": "3.0.x-dev"
+		}
 	}
 }

@@ -9,4 +9,8 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 WORKDIR /opt
 
 RUN /usr/local/bin/composer require namelesscoder/typo3-repository-client
+RUN apt-get install -y wget && wget https://storage.googleapis.com/golang/go1.8.linux-amd64.tar.gz && tar -C /usr/local -xzf go1.8.linux-amd64.tar.gz
+RUN /usr/local/go/bin/go get github.com/aktau/github-release
+
+env PATH /usr/local/go/bin:/root/go/bin:$PATH
 
