@@ -38,7 +38,7 @@ class ViewMock {
     /**
      * @return array
      */
-    public function getView(): array
+    public function getView()
     {
         return $this->view;
     }
