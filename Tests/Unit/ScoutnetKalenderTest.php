@@ -38,16 +38,14 @@ class ViewMock {
     /**
      * @return array
      */
-    public function getView()
-    {
+    public function getView() {
         return $this->view;
     }
 
     /**
      * @param array $view
      */
-    public function setView(array $view)
-    {
+    public function setView(array $view) {
         $this->view = $view;
     }
 }
