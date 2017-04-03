@@ -5,7 +5,7 @@ ci_host:
     SHELL: /bin/sh
   cached: true
   volumes:
-    - .:/opt/typo3/web/typo3conf/ext/sh_scoutnet_kalender
+    - .:/opt/sh_scoutnet_kalender
 
 build_host:
   image: scoutnet/buildhost
