@@ -91,7 +91,16 @@ class ScoutnetKalenderTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 
         $cc->listAction();
 
-        $this->assertEquals( $event->getUid(), $view->getView()['events'][0]->getUid());
-        $this->assertEquals( $structure->getUid(), $view->getView()['structures'][0]->getUid());
+        /** @var \ScoutNet\ShScoutnetWebservice\Domain\Model\Event[] $events */
+        $events = $view->getView()['events'];
+
+        /** @var \ScoutNet\ShScoutnetWebservice\Domain\Model\Structure[] $structures */
+        $structures = $view->getView()['structures'];
+
+        $this->assertEquals( 1, count($events));
+        $this->assertEquals( 1, count($structures));
+
+        $this->assertEquals( $event->getUid(), $events[0]->getUid());
+        $this->assertEquals( $structure->getUid(), $structures[0]->getUid());
     }
 }
