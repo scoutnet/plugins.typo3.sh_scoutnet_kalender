@@ -27,14 +27,21 @@ namespace ScoutNet\ShScoutnetKalender\ViewHelpers;
  ***************************************************************/
 
 class ScoutNetConnectButtonViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper {
-	/**
-	 * @var \ScoutNet\ShScoutnetWebservice\Helpers\ScoutNetConnectHelper
-	 * @inject
-	 */
-	protected $scoutNetConnectHelper = null;
+    /**
+     * @var \ScoutNet\ShScoutnetWebservice\Helpers\ScoutnetApiHelper
+     * @inject
+     */
+    protected $scoutnetApiHelper = null;
 
 	public function render() {
 		$url = \TYPO3\CMS\Backend\Utility\BackendUtility::getModuleUrl('user_ShScoutnetKalenderScoutnet',array(),False,True);
-		return $this->scoutNetConnectHelper->getScoutNetConnectLoginButton($url, true);
+        $lang = $GLOBALS['LANG']->lang;
+
+        if ($lang == 'default')
+            $lang = 'en';
+
+        $image = \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath('sh_scoutnet_webservice').'Resources/Public/Images/scoutnetConnect.png';
+
+        return $this->scoutnetApiHelper->getScoutnetApi()->get_scoutnet_connect_login_button($url, true, $image, $lang);
 	}
 }
