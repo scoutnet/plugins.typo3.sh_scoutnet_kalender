@@ -16,7 +16,7 @@
 	"support": {
 		"issues": "https://github.com/scoutnet/plugins.typo3.sh_scoutnet_kalender/issues"
 	},
-	"version": "3.0.6",
+	"version": "3.0.7",
 	"require": {
 		"typo3/cms": "^7.6.0",
 		"scoutnet/sh-scoutnet-webservice": "^2.0.0"
