@@ -8,10 +8,7 @@ pipeline {
     stages {
         stage('Test'){
             steps {
-                # Check for php errors
                 sh 'docker run --rm -e SHELL=/bin/sh -e TYPO3_PATH_WEB -w /opt/typo3/web/typo3conf/ext/sh_scoutnet_kalender -v `pwd`:/opt/typo3/web/typo3conf/ext/sh_scoutnet_kalender -i scoutnet/cihost:latest sh -c "find . -name \\*.php | grep -v "./Build/" | parallel --gnu php -d display_errors=stderr -l {}"'
-
-                # run unit tests
                 sh 'docker run --rm -e TYPO3_PATH_WEB -w /opt/typo3 -v `pwd`:/opt/typo3/web/typo3conf/ext/sh_scoutnet_kalender -i scoutnet/cihost:latest sh -c "composer require scoutnet/sh-scoutnet-webservice; vendor/bin/phpunit --color -c web/typo3conf/ext/sh_scoutnet_kalender/Tests/Builds/UnitTests.xml"'
             }
         }
