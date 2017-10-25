@@ -1,4 +1,4 @@
-[![Codeship](https://img.shields.io/codeship/0b78d0d0-da9e-0134-84fb-369bc7fb7901/master.svg)](https://app.codeship.com/projects/203751)
+[![Build Status](https://jenkins.scoutnet.eu/buildStatus/icon?job=scoutnet/plugins.typo3.sh_scoutnet_kalender/master)](https://jenkins.scoutnet.eu/job/scoutnet/job/plugins.typo3.sh_scoutnet_kalender/job/master/)
 [![Packagist](https://img.shields.io/packagist/v/scoutnet/sh-scoutnet-kalender.svg)](https://packagist.org/packages/scoutnet/sh-scoutnet-kalender)
 [![Packagist](https://img.shields.io/packagist/dt/scoutnet/sh-scoutnet-kalender.svg?label=packagist%20downloads)](https://packagist.org/packages/scoutnet/sh-scoutnet-kalender)
 [![Packagist](https://img.shields.io/packagist/l/scoutnet/sh-scoutnet-kalender.svg)](https://packagist.org/packages/scoutnet/sh-scoutnet-kalender)
