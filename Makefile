@@ -12,7 +12,7 @@ NEXTPATCHVERSION=$(shell php -r 'list($$a,$$b,$$c) = (explode(".","$(CURRENTVERS
 NEXTMINORVERSION=$(shell php -r 'list($$a,$$b,$$c) = (explode(".","$(CURRENTVERSION)", 3)); echo "$$a.".($$b+1).".0";')
 NEXTMAJORVERSION=$(shell php -r 'list($$a,$$b,$$c) = (explode(".","$(CURRENTVERSION)", 3)); echo ($$a + 1).".0.0";')
 
-COMMIT_MESSAGE=$(shell git tag -l $(CURRENTVERSION) -n99 | sed "s/^$(CURRENTVERSION)[ ]*//g" | sed "s/^[ ]*//g" | sed -e ':a' -e 'N' -e '$$!ba' -e 's/\n//g')
+COMMIT_MESSAGE=$(shell git tag -l $(CURRENTVERSION) -n99 | sed "s/^$(CURRENTVERSION)[ ]*//g" | sed "s/^[ ]*//g" | sed -e ':a' -e 'N' -e '$$!ba' -e "s/\n/<br>/g")
 
 default: zip
 
@@ -50,7 +50,7 @@ tag:
 release: checkVersion Build/$(NAME)_$(CURRENTVERSION).zip
 	@if [ -z "$(GITHUB_TOKEN)" ]; then echo "Please Set ENV GITHUB_TOKEN"; exit 2; fi
 	@echo "* Upload Release $(CURRENTVERSION) to Github"
-	@github-release release -t $(CURRENTVERSION) -d "Release of version $(CURRENTVERSION)$(COMMIT_MESSAGE)"
+	@github-release release -t $(CURRENTVERSION) -d "Release of version $(CURRENTVERSION)<br><br>$(COMMIT_MESSAGE)"
 	@github-release upload -t $(CURRENTVERSION) -f Build/$(NAME)_$(CURRENTVERSION).zip -n "$(NAME)_$(CURRENTVERSION).zip"
 	@echo "* Upload Done"
 
