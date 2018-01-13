@@ -17,5 +17,7 @@ plugin.tx_shscoutnetkalender {
 		cssFile = EXT:sh_scoutnet_kalender/Resources/Public/CSS/kalender.css
 		# cat=plugin.tx_shscoutnetkalender/events; type=string; label=Limit
 		limit = 40
+		# cat=plugin.tx_shscoutnetkalender/design; type=string; label=html template File
+		htmlFile = EXT:sh_scoutnet_kalender/Resources/Private/Templates/Calendar/List.html
 	}
 }

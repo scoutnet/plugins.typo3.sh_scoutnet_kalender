@@ -29,6 +29,7 @@ plugin.tx_shscoutnetkalender {
 	settings {
 		cssFile = {$plugin.tx_shscoutnetkalender.settings.cssFile}
 		limit = {$plugin.tx_shscoutnetkalender.settings.limit}
+		htmlFile = {$plugin.tx_shscoutnetkalender.settings.htmlFile}
 	}
 }
 

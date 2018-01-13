@@ -49,6 +49,7 @@ class CalendarController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 	 */
 	public function listAction($addids = array(), $eventId = null) {
 		$cssFile = $GLOBALS['TSFE']->tmpl->getFileName($this->settings['cssFile']);
+		$htmlFile = $GLOBALS['TSFE']->tmpl->getFileName($this->settings['htmlFile']);
 		$jsFolder = $GLOBALS['TSFE']->tmpl->getFileName('EXT:sh_scoutnet_kalender/Resources/Public/JS/');
 
 		// add CSS and Javascript
@@ -98,6 +99,8 @@ class CalendarController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 					'structure' => $optionalStructure,
 				);
 			}
+
+		$this->view->setTemplatePathAndFilename($htmlFile);
 
 			//\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($events);
 		} catch (\Exception $e) {

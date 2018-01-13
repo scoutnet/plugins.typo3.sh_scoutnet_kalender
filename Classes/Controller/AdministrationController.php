@@ -56,6 +56,12 @@ class AdministrationController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionC
 	protected $categorieRepository = null;
 
 	/**
+	 * @var \ScoutNet\ShScoutnetWebservice\Helpers\AuthHelper
+	 * @inject
+	 */
+	protected $authHelper = null;
+
+	/**
 	 * @var \ScoutNet\ShScoutnetWebservice\Domain\Repository\BackendUserRepository
 	 * @inject
 	 */
@@ -109,8 +115,8 @@ class AdministrationController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionC
 		// check if we get the login
 		if (isset($_GET['logintype']) && $_GET['logintype'] === 'login' && isset($_GET['auth'])) {
 			try {
-			    $scoutnetApi = new \Scoutnet\Api\ScoutnetApi();
-			    $data = $scoutnetApi->getApiKeyFromData();
+				$data = $this->authHelper->getApiKeyFromData($_GET['auth']);
+				//\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($data);
 
 				$be_user->setTxShscoutnetUsername($data['user']);
 				$be_user->setTxShscoutnetApikey($data['api_key']);
@@ -130,7 +136,7 @@ class AdministrationController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionC
 			try {
 				$rights = $this->structureRepository->hasWritePermissionsToStructure($structure);
 
-				switch ($rights) {
+				switch ($rights['code']) {
 					case \ScoutNet\ShScoutnetWebservice\Domain\Repository\StructureRepository::AUTH_WRITE_ALLOWED:
 						// return no error
 						return true;
