@@ -1,8 +1,10 @@
 <?php
 namespace ScoutNet\ShScoutnetKalender\Controller;
 
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use TYPO3\CMS\Extbase\Annotation\Inject;
+use TYPO3\CMS\Frontend\Resource\FilePathSanitizer;
 
 /***************************************************************
 *  Copyright notice
@@ -46,13 +48,16 @@ class CalendarController extends ActionController {
 	 */
 	protected $structureRepository = null;
 
+
 	/**
 	 * @param array $addids
 	 * @param integer $eventId
 	 */
 	public function listAction($addids = array(), $eventId = null) {
-		$cssFile = $GLOBALS['TSFE']->tmpl->getFileName($this->settings['cssFile']);
-		$jsFolder = $GLOBALS['TSFE']->tmpl->getFileName('EXT:sh_scoutnet_kalender/Resources/Public/JS/');
+	    $filePathSanitizer = GeneralUtility::makeInstance(FilePathSanitizer::class);
+
+        $cssFile = $filePathSanitizer->sanitize($this->settings['cssFile']);
+        $jsFolder = dirname($filePathSanitizer->sanitize('EXT:sh_scoutnet_kalender/Resources/Public/JS/base2-p.js')).'/';
 
 		// add CSS and Javascript
 		$GLOBALS['TSFE']->additionalHeaderData['tx_sh_scoutnet_Kalender'] =
