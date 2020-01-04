@@ -3,6 +3,8 @@ namespace ScoutNet\ShScoutnetKalender\Controller;
 
 use TYPO3\CMS\Core\Configuration\ExtensionConfiguration;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
+use TYPO3\CMS\Extbase\Annotation\Inject;
 
 /***************************************************************
 *  Copyright notice
@@ -34,7 +36,8 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  */
 
 
-class AdministrationController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController {
+
+class AdministrationController extends ActionController {
 	const ERROR_UNKNOWN_ERROR = "errorUnknown";
 	const ERROR_NO_RIGHTS = "noRights";
 	const ERROR_NO_CONNECTION = "noConnection";
@@ -42,31 +45,31 @@ class AdministrationController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionC
 
 	/**
 	 * @var \ScoutNet\ShScoutnetWebservice\Domain\Repository\EventRepository
-	 * @TYPO3\CMS\Extbase\Annotation\Inject
+	 * @Inject
 	 */
 	protected $eventRepository = null;
 
 	/**
 	 * @var \ScoutNet\ShScoutnetWebservice\Domain\Repository\StructureRepository
-	 * @TYPO3\CMS\Extbase\Annotation\Inject
+	 * @Inject
 	 */
 	protected $structureRepository = null;
 
 	/**
 	 * @var \ScoutNet\ShScoutnetWebservice\Domain\Repository\CategorieRepository
-	 * @TYPO3\CMS\Extbase\Annotation\Inject
+	 * @Inject
 	 */
 	protected $categorieRepository = null;
 
 	/**
 	 * @var \ScoutNet\ShScoutnetWebservice\Helpers\AuthHelper
-	 * @TYPO3\CMS\Extbase\Annotation\Inject
+	 * @Inject
 	 */
 	protected $authHelper = null;
 
 	/**
 	 * @var \ScoutNet\ShScoutnetWebservice\Domain\Repository\BackendUserRepository
-	 * @TYPO3\CMS\Extbase\Annotation\Inject
+	 * @Inject
 	 */
 	protected $backendUserRepository;
 

@@ -4,6 +4,7 @@ namespace ScoutNet\ShScoutnetKalender\ViewHelpers;
 use TYPO3\CMS\Backend\Routing\UriBuilder;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
+use TYPO3\CMS\Extbase\Annotation\Inject;
 
 /***************************************************************
  *
@@ -34,7 +35,7 @@ class ScoutNetConnectButtonViewHelper extends AbstractViewHelper
 {
 	/**
 	 * @var \ScoutNet\ShScoutnetWebservice\Helpers\ScoutNetConnectHelper
-	 * @TYPO3\CMS\Extbase\Annotation\Inject
+	 * @Inject
 	 */
 	protected $scoutNetConnectHelper = null;
 

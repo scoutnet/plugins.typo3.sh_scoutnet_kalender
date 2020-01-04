@@ -1,6 +1,9 @@
 <?php
 namespace ScoutNet\ShScoutnetKalender\Controller;
 
+use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
+use TYPO3\CMS\Extbase\Annotation\Inject;
+
 /***************************************************************
 *  Copyright notice
 *
@@ -30,16 +33,16 @@ namespace ScoutNet\ShScoutnetKalender\Controller;
  */
 
 
-class CalendarController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController {
+class CalendarController extends ActionController {
 	/**
 	 * @var \ScoutNet\ShScoutnetWebservice\Domain\Repository\EventRepository
-	 * @TYPO3\CMS\Extbase\Annotation\Inject
+	 * @Inject
 	 */
 	protected $eventRepository = null;
 
 	/**
 	 * @var \ScoutNet\ShScoutnetWebservice\Domain\Repository\StructureRepository
-	 * @TYPO3\CMS\Extbase\Annotation\Inject
+	 * @Inject
 	 */
 	protected $structureRepository = null;
 
