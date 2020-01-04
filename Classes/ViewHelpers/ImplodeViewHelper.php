@@ -48,13 +48,14 @@ class ImplodeViewHelper extends AbstractViewHelper {
 	    $delimiter = $this->arguments['delimiter'];
 	    $lastDelimiter = $this->arguments['lastDelimiter'];
 
-	    if (is_null($delimiter)) {
-	        $delimiter = ', ';
-	    }
-
 		if ($values instanceof QueryResult) $values = $values->toArray();
 
-		if ($lastDelimiter === null) {
+        if ($delimiter === null) {
+            $delimiter = ', ';
+        }
+
+
+        if ($lastDelimiter === null) {
 			$lastDelimiter = ' '. LocalizationUtility::translate( 'community.mergeViewHelper.and', 'sh_scoutnet_community').' ';
 		}
 
