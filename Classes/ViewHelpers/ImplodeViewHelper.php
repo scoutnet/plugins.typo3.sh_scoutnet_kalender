@@ -1,6 +1,8 @@
 <?php
 namespace ScoutNet\ShScoutnetKalender\ViewHelpers;
 
+use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
+
 /***************************************************************
  *
  *  Copyright notice
@@ -26,7 +28,7 @@ namespace ScoutNet\ShScoutnetKalender\ViewHelpers;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
-class ImplodeViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper {
+class ImplodeViewHelper extends AbstractViewHelper {
 	/**
 	 * @param array $values
 	 * @param string $delimiter
