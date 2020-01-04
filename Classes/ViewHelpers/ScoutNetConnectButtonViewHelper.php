@@ -1,6 +1,9 @@
 <?php
 namespace ScoutNet\ShScoutnetKalender\ViewHelpers;
 
+use TYPO3\CMS\Backend\Routing\UriBuilder;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+
 /***************************************************************
  *
  *  Copyright notice
@@ -34,7 +37,9 @@ class ScoutNetConnectButtonViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\A
 	protected $scoutNetConnectHelper = null;
 
 	public function render() {
-		$url = \TYPO3\CMS\Backend\Utility\BackendUtility::getModuleUrl('user_ShScoutnetKalenderScoutnet',array(),False,True);
-		return $this->scoutNetConnectHelper->getScoutNetConnectLoginButton($url, true);
+        $uriBuilder = GeneralUtility::makeInstance(UriBuilder::class);
+        $uri = $uriBuilder->buildUriFromRoute('user_ShScoutnetKalenderScoutnet', []);
+
+		return $this->scoutNetConnectHelper->getScoutNetConnectLoginButton($uri, true);
 	}
 }
