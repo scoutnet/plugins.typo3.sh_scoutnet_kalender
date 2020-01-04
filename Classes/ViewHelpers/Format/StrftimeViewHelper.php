@@ -1,7 +1,8 @@
 <?php
 namespace ScoutNet\ShScoutnetKalender\ViewHelpers\Format;
 
-use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper;
+use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
+
 class StrftimeViewHelper extends AbstractViewHelper {
 
 	/**
