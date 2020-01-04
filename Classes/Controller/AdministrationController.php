@@ -108,6 +108,9 @@ class AdministrationController extends ActionController {
 	private function checkRights() {
         $ssid = GeneralUtility::makeInstance(ExtensionConfiguration::class)->get('sh_scoutnet_kalender', 'ScoutnetSSID');
 
+        if (!is_numeric($ssid) or $ssid <=0 )
+            return false;
+
 		$structure = $this->structureRepository->findByUid($ssid);
 
 		/** @var \ScoutNet\ShScoutnetWebservice\Domain\Model\BackendUser $be_user */

@@ -19,16 +19,16 @@
                 </div>
             </div>
         </div>
-	<div id="typo3-docbody" style="background-color: {background_color}; background-image: url('{f:uri.resource(path:'{background_image}')}');">
+        <div id="typo3-docbody" style="background-color: {background_color}; background-image: url('{f:uri.resource(path:'{background_image}')}');">
             <div id="typo3-inner-docbody" style="padding-top: 0; padding-right: 15px; padding-left: 15px;">
-                <f:flashMessages renderMode="div" />
+                <f:flashMessages />
                 <div class="box box_white">
 
                     <f:if condition="{error}">
                         <f:then>
                             <h1>Error</h1>
                             <p>
-                                <f:translate key="error.server.{errorID}" arguments="{errorArguments}" htmlEscape="false">{error} ({errorID})</f:translate>
+                                <f:translate key="error.server.{errorID}" arguments="{errorArguments}">{error} ({errorID})</f:translate>
                             </p>
                         </f:then>
                         <f:else>

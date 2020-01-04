@@ -11,7 +11,7 @@
  ***************************************************************/
 
 /** @var string $_EXTKEY */
-$EM_CONF[$_EXTKEY] = array(
+$EM_CONF[$_EXTKEY] = [
 	'title' => 'Official Scoutnet Calendar Plugin',
 	'description' => 'Official Typo3 plugin to display scoutnet.de calendar',
 	'category' => 'plugin',
@@ -22,15 +22,13 @@ $EM_CONF[$_EXTKEY] = array(
 	'uploadfolder' => '0',
 	'createDirs' => '',
 	'clearCacheOnLoad' => 1,
-	'version' => '3.0.7',
-	'constraints' => array(
-		'depends' => array(
-			'typo3' => '6.2.0-7.6.99',
-			'sh_scoutnet_webservice' => '2.0.0-2.0.99',
-		),
-		'conflicts' => array(
-		),
-		'suggests' => array(
-		),
-	),
-);
+	'version' => '4.0.0',
+	'constraints' => [
+		'depends' => [
+			'typo3' => '9.0.0-9.5.99',
+			'sh_scoutnet_webservice' => '3.0.0-3.99.99',
+		],
+		'conflicts' => [],
+		'suggests' => [],
+	],
+];

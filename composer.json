@@ -25,7 +25,7 @@
 	"require": {
 		"typo3/cms-core": "^9.5",
 		"typo3/cms-extensionmanager": "^9.5",
-		"scoutnet/sh-scoutnet-webservice": "dev-typo3_9"
+		"scoutnet/sh-scoutnet-webservice": "^3.0"
 	},
 	"config": {
 		"vendor-dir": ".Build/vendor",
@@ -59,7 +59,7 @@
 	},
 	"extra": {
 		"branch-alias": {
-			"dev-development": "4.0.x-dev",
+			"dev-development": "5.0.x-dev",
 			"dev-typo3_9": "4.0.x-dev"
 		},
 		"typo3/cms": {
