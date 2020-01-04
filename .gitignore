@@ -1,5 +1,6 @@
-Build
-.idea
-codeship.aes
-deployment.env
-
+.Build/
+Tests/Build/.env
+/Build/
+composer.lock
+auth.json
+Tests/Acceptance/Support/_generated
