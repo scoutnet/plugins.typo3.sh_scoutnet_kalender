@@ -1,17 +1,14 @@
 <?php
 
-use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
-use TYPO3\CMS\Extbase\Utility\ExtensionUtility;
-
 if (!defined ('TYPO3_MODE')) die ('Access denied.');
 
 if (TYPO3_MODE === 'BE') {
 	// add Wizicon
-	ExtensionManagementUtility::addPageTSConfig('<INCLUDE_TYPOSCRIPT: source="FILE:EXT:sh_scoutnet_kalender/Configuration/TypoScript/pageTsConfig.ts">');
+	\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPageTSConfig('<INCLUDE_TYPOSCRIPT: source="FILE:EXT:sh_scoutnet_kalender/Configuration/TypoScript/pageTsConfig.ts">');
 
 
     // add backend user modul
-	ExtensionUtility::registerModule(
+	\TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerModule(
 		'ScoutNet.sh_scoutnet_kalender',
 		'user',          // Main area
 		'scoutnet',         // Name of the module
