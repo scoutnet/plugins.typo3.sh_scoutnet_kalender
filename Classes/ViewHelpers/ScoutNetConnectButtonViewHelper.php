@@ -3,6 +3,7 @@ namespace ScoutNet\ShScoutnetKalender\ViewHelpers;
 
 use TYPO3\CMS\Backend\Routing\UriBuilder;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper;
 
 /***************************************************************
  *
@@ -29,7 +30,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
-class ScoutNetConnectButtonViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper {
+class ScoutNetConnectButtonViewHelper extends AbstractViewHelper {
 	/**
 	 * @var \ScoutNet\ShScoutnetWebservice\Helpers\ScoutNetConnectHelper
 	 * @TYPO3\CMS\Extbase\Annotation\Inject
