@@ -1,6 +1,8 @@
 <?php
 namespace ScoutNet\ShScoutnetKalender\ViewHelpers;
 
+use TYPO3\CMS\Extbase\Persistence\Generic\QueryResult;
+use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
 
 /***************************************************************
@@ -29,17 +31,31 @@ use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
  ***************************************************************/
 
 class ImplodeViewHelper extends AbstractViewHelper {
+
+    public function initializeArguments()
+    {
+        parent::initializeArguments();
+        $this->registerArgument('values', 'array', 'The Values to be merged together', true);
+        $this->registerArgument('delimiter', 'string', 'The delimiter', false);
+        $this->registerArgument('lastDelimiter', 'string', 'The last delimiter, if different from the others', false);
+    }
+
 	/**
-	 * @param array $values
-	 * @param string $delimiter
-	 * @param string $lastDelimiter
 	 * @return string
 	 */
-	public function render($values, $delimiter = ', ', $lastDelimiter = null) {
-		if ($values instanceof \TYPO3\CMS\Extbase\Persistence\Generic\QueryResult) $values = $values->toArray();
+	public function render() {
+	    $values = $this->arguments['values'];
+	    $delimiter = $this->arguments['delimiter'];
+	    $lastDelimiter = $this->arguments['lastDelimiter'];
+
+	    if (is_null($delimiter)) {
+	        $delimiter = ', ';
+	    }
+
+		if ($values instanceof QueryResult) $values = $values->toArray();
 
 		if ($lastDelimiter === null) {
-			$lastDelimiter = ' '.\TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate( 'community.mergeViewHelper.and', 'sh_scoutnet_community').' ';
+			$lastDelimiter = ' '. LocalizationUtility::translate( 'community.mergeViewHelper.and', 'sh_scoutnet_community').' ';
 		}
 
 		if (count($values) == 0) {
@@ -55,8 +71,6 @@ class ImplodeViewHelper extends AbstractViewHelper {
 		} else {
 			$last_element = array_pop($values);
 			$first_element = array_shift($values);
-
-			//\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($values,'values');
 
 			// render object
 			if ($this->templateVariableContainer->exists('object')) $this->templateVariableContainer->remove('object');
