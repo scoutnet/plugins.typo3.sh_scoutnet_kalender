@@ -38,6 +38,52 @@ If you want to contribute, feel free to do so. The Repo is located here:
 
 https://github.com/scoutnet/plugins.typo3.sh_scoutnet_kalender
 
+just run `make composerInstall`
+
+Testing
+-------
+Needed: GnuMake, PHP, Docker and docker-compose
+
+Init: 
+
+`make init`
+
+To Run all the Tests call:
+
+`make test`
+
+you can use the -phpx suffix to indicate which php version you want to check e.g. `make test-php72`
+
+for only testing a special function or php version there are different suffixes. For Example:
+
+- `make lintTest-php72`
+- `make unitTest-php73`
+- `make unitTest`        Will call Unit tests with php7.2 and php 7.3
+
+Testing with PhpStorm: Setup new remote PHP interpreter.
+Docker-Compose:
+ - compose file: `Tests/Build/docker-compose.yml`
+ - service: ` functional_mariadb`
+ 
+Set up new Test Framework:
+ - path to phpunit: `bin/phpunit`
+ - default config: `vendor/typo3/testing-framework/Resources/Core/Build/UnitTests.xml`
+ - add path mappings: `<abs. Path to this dir>` -> `<abs. Path to this dir>` (all paths mapped like on your host)
+ 
+Set up new Run Configuration for `Unit Tests`:
+ - Test Scope: `<abs. Path to this dir>/Tests/Unit`
+ - Custom Working Directory: `<abs. Path to this dir>/.Build/`
+ 
+Set up new Run Configuration for `Functional Tests`:
+ - Test Scope: `<abs. Path to this dir>/Tests/Functional`
+ - Custom Working Directory: `<abs. Path to this dir>/.Build/`
+ - Use alternative configuration File: `<aps. Path to this dir>/.Build/vendor/typo3/testing-framework/Resources/Core/Build/FunctionalTests.xml`
+ - Environment variables: `typo3DatabaseUsername=root;typo3DatabasePassword=funcp;typo3DatabaseHost=mariadb10;typo3DatabaseName=func_test`
+ 
+Happy Testing
+
+
+
 Author
 ------
 If you have any questions reganding this software, you can send me an email to muetze@scoutnet.de

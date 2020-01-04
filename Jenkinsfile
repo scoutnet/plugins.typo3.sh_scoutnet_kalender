@@ -1,6 +1,7 @@
 pipeline {
     agent any
 
+
     environment {
         TYPO3_PATH_WEB = '/opt/typo3/web'
     }
@@ -8,13 +9,37 @@ pipeline {
     stages {
         stage('Test'){
             steps {
-                sh 'docker run --rm -e SHELL=/bin/sh -e TYPO3_PATH_WEB -w /opt/typo3/web/typo3conf/ext/sh_scoutnet_kalender -v `pwd`:/opt/typo3/web/typo3conf/ext/sh_scoutnet_kalender -i scoutnet/cihost:latest sh -c "find . -name \\*.php | grep -v "./Build/" | parallel --gnu php -d display_errors=stderr -l {}"'
-                sh 'docker run --rm -e TYPO3_PATH_WEB -w /opt/typo3 -v `pwd`:/opt/typo3/web/typo3conf/ext/sh_scoutnet_kalender -i scoutnet/cihost:latest sh -c "composer require scoutnet/sh-scoutnet-webservice; vendor/bin/phpunit --color -c web/typo3conf/ext/sh_scoutnet_kalender/Tests/Builds/UnitTests.xml"'
-            }
-        }
-        stage('Build'){
-            steps {
-                sh "echo test"
+                withCredentials([usernamePassword(credentialsId: 'REPO_AUTH', passwordVariable: 'REPO_AUTH_PASSWORD', usernameVariable: 'REPO_AUTH_USER')]) {
+                    script {
+                        def PHP_VERSIONS = ['7.2', '7.3']
+                        def tests = [:]
+
+                        sh "echo '{\"http-basic\": {\"repo.scoutnet.de\": {\"username\": \"${REPO_AUTH_USER}\", \"password\": \"${REPO_AUTH_PASSWORD}\"}}}' > auth.json"
+                        sh "make composerInstall"
+                        sh "make composerUpdate"
+                        sh "make composerValidate"
+
+                        for (x in PHP_VERSIONS) {
+                            def PHP_VERSION = x.replace('.','')
+
+                            tests[PHP_VERSION] = {
+                                echo "Testing PHP Version ${PHP_VERSION}"
+                                sh "make lintTest-php${PHP_VERSION}"
+                                sh "make unitTest-php${PHP_VERSION}"
+                            }
+                        }
+                        parallel tests
+
+// no functional and acceptance tests for now
+//                         for (x in PHP_VERSIONS) {
+//                             def PHP_VERSION = x.replace('.','')
+//
+//                                 sh "make functionalTest-php${PHP_VERSION}"
+//                                 sh "make acceptanceTest-php${PHP_VERSION}"
+//                         }
+                        sh 'rm -f auth.json'
+                    }
+                }
             }
         }
         stage('Deploy'){
@@ -34,9 +59,25 @@ pipeline {
         }
         stage('Notify') {
             steps {
-                slackSend color: 'good', message: 'Building sh_scoutnet_kalender: Done'
+                withCredentials([usernamePassword(credentialsId: 'REPO_AUTH', passwordVariable: 'REPO_AUTH_PASSWORD', usernameVariable: 'REPO_AUTH_USER')]) {
+                    sh 'curl -s -u ${REPO_AUTH_USER}:${REPO_AUTH_PASSWORD} https://repo.scoutnet.de/trigger.php'
+                }
             }
         }
 
+    }
+    post {
+        always {
+            script {
+                sh 'rm -f auth.json'
+
+                if (currentBuild.currentResult == 'FAILURE') {
+                    color = 'danger'
+                } else {
+                    color = 'good'
+                }
+                slackSend color: color, message: "<${env.JOB_URL}|${env.JOB_NAME}>: Build ${currentBuild.currentResult}"
+            }
+        }
     }
 }
