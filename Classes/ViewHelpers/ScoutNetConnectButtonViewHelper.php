@@ -1,10 +1,10 @@
 <?php
 namespace ScoutNet\ShScoutnetKalender\ViewHelpers;
 
+use ScoutNet\ShScoutnetWebservice\Helpers\ScoutNetConnectHelper;
 use TYPO3\CMS\Backend\Routing\UriBuilder;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
-use TYPO3\CMS\Extbase\Annotation\Inject;
 
 /***************************************************************
  *
@@ -33,16 +33,11 @@ use TYPO3\CMS\Extbase\Annotation\Inject;
 
 class ScoutNetConnectButtonViewHelper extends AbstractViewHelper
 {
-	/**
-	 * @var \ScoutNet\ShScoutnetWebservice\Helpers\ScoutNetConnectHelper
-	 * @Inject
-	 */
-	protected $scoutNetConnectHelper = null;
-
 	public function render() {
         $uriBuilder = GeneralUtility::makeInstance(UriBuilder::class);
         $uri = $uriBuilder->buildUriFromRoute('user_ShScoutnetKalenderScoutnet', []);
 
-		return $this->scoutNetConnectHelper->getScoutNetConnectLoginButton($uri, true);
+        $scoutNetConnectHelper = GeneralUtility::makeInstance(ScoutNetConnectHelper::class);
+		return $scoutNetConnectHelper->getScoutNetConnectLoginButton($uri, true);
 	}
 }

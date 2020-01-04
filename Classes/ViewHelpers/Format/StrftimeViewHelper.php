@@ -2,21 +2,35 @@
 namespace ScoutNet\ShScoutnetKalender\ViewHelpers\Format;
 
 use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
+use TYPO3Fluid\Fluid\Core\Rendering\RenderingContextInterface;
+use TYPO3Fluid\Fluid\Core\ViewHelper\Traits\CompileWithContentArgumentAndRenderStatic;
 
 class StrftimeViewHelper extends AbstractViewHelper {
+    use CompileWithContentArgumentAndRenderStatic;
 
-	/**
-	 * Render the supplied DateTime object as a formatted date using strftime.
-	 *
-	 * @param mixed  $date   either a DateTime object or a string (UNIX-Timestamp)
-	 * @param string $format Format String which is taken to format the Date/Time
-	 *
-	 * @return string Formatted date
-	 * @throws \Exception
-	 */
-	public function render($date = NULL, $format = '%A, %d. %B %Y') {
+    public function initializeArguments()
+    {
+        parent::initializeArguments();
+        $this->registerArgument('date', 'mixed', 'either a DateTime object or a string (UNIX-Timestamp)', false, Null);
+        $this->registerArgument('format', 'string', 'Format String which is taken to format the Date/Time', false, '%A, %d. %B %Y');
+    }
+
+    /**
+     * Render the supplied DateTime object as a formatted date using strftime.
+     *
+     * @param array                                                      $arguments
+     * @param \Closure                                                   $renderChildrenClosure
+     * @param \TYPO3Fluid\Fluid\Core\Rendering\RenderingContextInterface $renderingContext
+     *
+     * @return string Formatted date
+     * @throws \Exception
+     */
+	public static function renderStatic(array $arguments, \Closure $renderChildrenClosure, RenderingContextInterface $renderingContext) {
+	    $format = $arguments['format'];
+	    $date = $arguments['date'];
+
 		if ($date === NULL) {
-			$date = $this->renderChildren();
+			$date = $renderChildrenClosure();
 			if ($date === NULL) {
 				return '';
 			}
@@ -32,4 +46,3 @@ class StrftimeViewHelper extends AbstractViewHelper {
 		return strftime($format, (int)$date);
 	}
 }
-?>
