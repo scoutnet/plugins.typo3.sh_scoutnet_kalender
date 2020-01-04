@@ -1,6 +1,9 @@
 <?php
 namespace ScoutNet\ShScoutnetKalender\Controller;
 
+use TYPO3\CMS\Core\Configuration\ExtensionConfiguration;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+
 /***************************************************************
 *  Copyright notice
 *
@@ -67,8 +70,6 @@ class AdministrationController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionC
 	 */
 	protected $backendUserRepository;
 
-	protected $extConfig = null;
-
 	/**
 	 * action initializeAction
 	 *
@@ -92,9 +93,6 @@ class AdministrationController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionC
 				'd.m.Y'
 			);
 		}
-
-		// load the extConfig
-		$this->extConfig = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['sh_scoutnet_kalender']);
 	}
 
 	public function initializeView($view) {
@@ -105,7 +103,8 @@ class AdministrationController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionC
 	}
 
 	private function checkRights() {
-		$ssid = $this->extConfig['ScoutnetSSID'];
+        $ssid = GeneralUtility::makeInstance(ExtensionConfiguration::class)->get('sh_scoutnet_kalender', 'ScoutnetSSID');
+
 		$structure = $this->structureRepository->findByUid($ssid);
 
 		/** @var \ScoutNet\ShScoutnetWebservice\Domain\Model\BackendUser $be_user */
@@ -167,7 +166,7 @@ class AdministrationController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionC
 
 	public function listAction() {
 		if ($this->checkRights()) {
-			$ssid = $this->extConfig['ScoutnetSSID'];
+            $ssid = GeneralUtility::makeInstance(ExtensionConfiguration::class)->get('sh_scoutnet_kalender', 'ScoutnetSSID');
 			try {
 				$filter = array(
 					'order' => 'start_time desc',
@@ -371,7 +370,7 @@ class AdministrationController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionC
 	}
 
 	public function requestRightsAction() {
-		$ssid = $this->extConfig['ScoutnetSSID'];
+        $ssid = GeneralUtility::makeInstance(ExtensionConfiguration::class)->get('sh_scoutnet_kalender', 'ScoutnetSSID');
 		try {
 			$structure = $this->structureRepository->findByUid($ssid);
 			$this->structureRepository->requestWritePermissionsForStructure($structure);
@@ -389,7 +388,7 @@ class AdministrationController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionC
 	 * Set the Background color for the calendar we use
      */
 	private function setBackground() {
-		$ssid = $this->extConfig['ScoutnetSSID'];
+        $ssid = GeneralUtility::makeInstance(ExtensionConfiguration::class)->get('sh_scoutnet_kalender', 'ScoutnetSSID');
 
 		$verbaende = array(
 			'BDP' => array('name' => 'bdp', 'color' => '#3333cc'),
