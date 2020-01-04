@@ -33,13 +33,13 @@ namespace ScoutNet\ShScoutnetKalender\Controller;
 class CalendarController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController {
 	/**
 	 * @var \ScoutNet\ShScoutnetWebservice\Domain\Repository\EventRepository
-	 * @inject
+	 * @TYPO3\CMS\Extbase\Annotation\Inject
 	 */
 	protected $eventRepository = null;
 
 	/**
 	 * @var \ScoutNet\ShScoutnetWebservice\Domain\Repository\StructureRepository
-	 * @inject
+	 * @TYPO3\CMS\Extbase\Annotation\Inject
 	 */
 	protected $structureRepository = null;
 

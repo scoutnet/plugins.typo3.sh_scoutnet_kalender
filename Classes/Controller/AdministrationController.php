@@ -39,31 +39,31 @@ class AdministrationController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionC
 
 	/**
 	 * @var \ScoutNet\ShScoutnetWebservice\Domain\Repository\EventRepository
-	 * @inject
+	 * @TYPO3\CMS\Extbase\Annotation\Inject
 	 */
 	protected $eventRepository = null;
 
 	/**
 	 * @var \ScoutNet\ShScoutnetWebservice\Domain\Repository\StructureRepository
-	 * @inject
+	 * @TYPO3\CMS\Extbase\Annotation\Inject
 	 */
 	protected $structureRepository = null;
 
 	/**
 	 * @var \ScoutNet\ShScoutnetWebservice\Domain\Repository\CategorieRepository
-	 * @inject
+	 * @TYPO3\CMS\Extbase\Annotation\Inject
 	 */
 	protected $categorieRepository = null;
 
 	/**
 	 * @var \ScoutNet\ShScoutnetWebservice\Helpers\AuthHelper
-	 * @inject
+	 * @TYPO3\CMS\Extbase\Annotation\Inject
 	 */
 	protected $authHelper = null;
 
 	/**
 	 * @var \ScoutNet\ShScoutnetWebservice\Domain\Repository\BackendUserRepository
-	 * @inject
+	 * @TYPO3\CMS\Extbase\Annotation\Inject
 	 */
 	protected $backendUserRepository;
 
@@ -270,7 +270,7 @@ class AdministrationController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionC
 	 * action edit
 	 *
 	 * @param \ScoutNet\ShScoutnetWebservice\Domain\Model\Event $event
-	 * @ignorevalidation $event
+	 * @TYPO3\CMS\Extbase\Annotation\IgnoreValidation("event")
 	 * @return void
 	 */
 	public function editAction(\ScoutNet\ShScoutnetWebservice\Domain\Model\Event $event) {
@@ -326,7 +326,7 @@ class AdministrationController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionC
 
 	/**
 	 * @param \ScoutNet\ShScoutnetWebservice\Domain\Model\Event $event
-	 * @ignorevalidation $event
+     * @TYPO3\CMS\Extbase\Annotation\IgnoreValidation("event")
      */
 	public function deleteAction(\ScoutNet\ShScoutnetWebservice\Domain\Model\Event $event = null) {
 		// set event
@@ -335,7 +335,7 @@ class AdministrationController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionC
 
 	/**
 	 * @param \ScoutNet\ShScoutnetWebservice\Domain\Model\Event $event
-	 * @ignorevalidation $event
+     * @TYPO3\CMS\Extbase\Annotation\IgnoreValidation("event")
 	 */
 	public function removeAction(\ScoutNet\ShScoutnetWebservice\Domain\Model\Event $event = null) {
 		if ($this->checkRights()) {
