@@ -18,7 +18,10 @@ namespace ScoutNet\ShScoutnetKalender\Tests\Unit;
 /**
  * Testcase for class ScoutNet\ShScoutnetKalender\Test
  */
-class ScoutnetKalenderTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
+
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
+
+class ScoutnetKalenderTest extends UnitTestCase {
     /**
      * @test
      * @return void

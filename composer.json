@@ -1,4 +1,10 @@
 {
+	"repositories": [
+		{
+			"type": "composer",
+			"url": "https://composer.typo3.org/"
+		}
+	],
 	"name": "scoutnet/sh-scoutnet-kalender",
 	"type": "typo3-cms-extension",
 	"description" : "Official Typo3 plugin to display scoutnet.de calendar",
@@ -16,24 +22,52 @@
 	"support": {
 		"issues": "https://github.com/scoutnet/plugins.typo3.sh_scoutnet_kalender/issues"
 	},
-	"version": "3.0.7",
 	"require": {
-		"typo3/cms": "^7.6.0",
-		"scoutnet/sh-scoutnet-webservice": "^2.0.0"
+		"typo3/cms-core": "^9.5",
+		"typo3/cms-extensionmanager": "^9.5",
+		"scoutnet/sh-scoutnet-webservice": "dev-typo3_9"
+	},
+	"config": {
+		"vendor-dir": ".Build/vendor",
+		"bin-dir": ".Build/bin"
+	},
+	"require-dev": {
+		"typo3/testing-framework": "^4.13.1",
+		"typo3/cms-frontend": "^9.5",
+		"typo3/cms-install": "^9.5",
+		"typo3/cms-about": "^9.5",
+		"typo3/cms-fluid-styled-content": "^9.5",
+		"codeception/codeception": "^2.4"
 	},
 	"autoload": {
 		"psr-4": {
 			"ScoutNet\\ShScoutnetKalender\\": "Classes/"
 		}
 	},
+	"autoload-dev": {
+		"psr-4": {
+			"ScoutNet\\ShScoutnetKalender\\Tests\\": "Tests"
+		}
+	},
 	"replace": {
-		"typo3-ter/sh-scoutnet-kalender": "self.version",
-		"sh_scoutnet_kalender": "self.version"
+		"typo3-ter/sh-scoutnet-kalender": "self.version"
+	},
+	"scripts": {
+		"post-autoload-dump": [
+			"TYPO3\\TestingFramework\\Composer\\ExtensionTestEnvironment::prepare"
+		]
 	},
 	"extra": {
 		"branch-alias": {
-			"dev-master": "3.0.x-dev",
-			"dev-development": "3.0.x-dev"
+			"dev-development": "4.0.x-dev",
+			"dev-typo3_9": "4.0.x-dev"
+		},
+		"typo3/cms": {
+			"app-dir": ".Build",
+			"cms-package-dir": "{$vendor-dir}/typo3/cms",
+			"web-dir": ".Build/Web",
+			"extension-key": "sh_scoutnet_kalender",
+			"composer-mode": false
 		}
 	}
 }
