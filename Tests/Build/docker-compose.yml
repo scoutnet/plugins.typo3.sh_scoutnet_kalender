@@ -326,6 +326,9 @@ services:
           set -x
         fi
         php -v | grep '^PHP';
+        if egrep '^use ' *.php; then
+          exit 1
+        fi
         find . -name \\*.php ! -path "./.Build/\\*" -print0 | xargs -0 -n1 -P4 php -n -c /etc/php/cli-no-xdebug/php.ini -l >/dev/null
       "
 
