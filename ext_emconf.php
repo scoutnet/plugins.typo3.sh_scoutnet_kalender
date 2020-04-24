@@ -3,11 +3,6 @@
 /***************************************************************
  * Extension Manager/Repository config file for ext "sh_scoutnet_kalender".
  *
- * Auto generated 03-05-2013 19:13
- *
- * Manual updates:
- * Only the data in the array - anything else is removed by next write.
- * "version" and "dependencies" must not be touched!
  ***************************************************************/
 
 /** @var string $_EXTKEY */
@@ -22,11 +17,11 @@ $EM_CONF[$_EXTKEY] = [
 	'uploadfolder' => '0',
 	'createDirs' => '',
 	'clearCacheOnLoad' => 1,
-	'version' => '4.0.1',
+	'version' => '5.0.0',
 	'constraints' => [
 		'depends' => [
-			'typo3' => '9.0.0-9.5.99',
-			'sh_scoutnet_webservice' => '3.0.0-3.99.99',
+			'typo3' => '10.0.0-10.4.99',
+			'sh_scoutnet_webservice' => '4.0.0-4.99.99',
 		],
 		'conflicts' => [],
 		'suggests' => [],
