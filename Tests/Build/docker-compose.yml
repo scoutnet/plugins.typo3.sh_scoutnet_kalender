@@ -1,3 +1,7 @@
+# This file is a generic Scoutnet docker-compose.yml file. The original is found in the dummy extension
+# https://github.com/scoutnet/plugins.typo3.scoutnet_dummy/blob/master/Tests/Build/docker-compose.yml
+# DOCKER_COMPOSE Version: 1.0.0
+
 version: '2.3'
 services:
   chrome:

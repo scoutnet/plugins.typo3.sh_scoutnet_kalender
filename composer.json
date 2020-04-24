@@ -17,27 +17,30 @@
 			"role": "Developer"
 		}
 	],
-	"license": ["GPL-2.0+"],
+	"license": ["GPL-2.0-or-later"],
 	"keywords": ["TYPO3 CMS", "ScoutNet", "Pfadfinder", "ScoutNet Kalender"],
 	"support": {
 		"issues": "https://github.com/scoutnet/plugins.typo3.sh_scoutnet_kalender/issues"
 	},
 	"require": {
-		"typo3/cms-core": "^9.5",
-		"typo3/cms-extensionmanager": "^9.5",
-		"scoutnet/sh-scoutnet-webservice": "^3.0"
+		"typo3/cms-core": "^10.4",
+		"typo3/cms-extensionmanager": "^10.4",
+		"scoutnet/sh-scoutnet-webservice": "^4.0"
 	},
 	"config": {
 		"vendor-dir": ".Build/vendor",
 		"bin-dir": ".Build/bin"
 	},
 	"require-dev": {
-		"typo3/testing-framework": "^4.13.1",
-		"typo3/cms-frontend": "^9.5",
-		"typo3/cms-install": "^9.5",
-		"typo3/cms-about": "^9.5",
-		"typo3/cms-fluid-styled-content": "^9.5",
-		"codeception/codeception": "^2.4"
+		"typo3/testing-framework": "^6.2",
+		"typo3/cms-frontend": "^10.4",
+		"typo3/cms-install": "^10.4",
+		"typo3/cms-about": "^10.4",
+		"typo3/cms-fluid-styled-content": "^10.4",
+		"phpspec/prophecy": "~1.0",
+		"codeception/codeception": "^4.1",
+		"codeception/module-webdriver": "^1.0",
+		"codeception/module-asserts": "^1.2"
 	},
 	"autoload": {
 		"psr-4": {
@@ -59,8 +62,8 @@
 	},
 	"extra": {
 		"branch-alias": {
-			"dev-development": "5.0.x-dev",
-			"dev-typo3_9": "4.0.x-dev"
+			"dev-master": "5.0.x-dev",
+			"dev-typo3_v9": "4.0.x-dev"
 		},
 		"typo3/cms": {
 			"app-dir": ".Build",
