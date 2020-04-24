@@ -72,5 +72,6 @@
 			"extension-key": "sh_scoutnet_kalender",
 			"composer-mode": false
 		}
-	}
+	},
+	"minimum-stability": "dev"
 }
