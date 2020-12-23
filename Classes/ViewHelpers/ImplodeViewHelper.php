@@ -43,7 +43,7 @@ class ImplodeViewHelper extends AbstractViewHelper {
 	/**
 	 * @return string
 	 */
-	public function render() {
+	public function render(): string {
 	    $values = $this->arguments['values'];
 	    $delimiter = $this->arguments['delimiter'];
 	    $lastDelimiter = $this->arguments['lastDelimiter'];
@@ -64,6 +64,7 @@ class ImplodeViewHelper extends AbstractViewHelper {
 		} elseif (count($values) == 1) {
 			$value = array_pop($values);
 
+			// TODO: check alternatives
 			// remove if it exists
 			if ($this->templateVariableContainer->exists('object')) $this->templateVariableContainer->remove('object');
 			$this->templateVariableContainer->add('object', $value);

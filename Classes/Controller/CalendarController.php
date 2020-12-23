@@ -1,6 +1,7 @@
 <?php
 namespace ScoutNet\ShScoutnetKalender\Controller;
 
+use Exception;
 use ScoutNet\ShScoutnetWebservice\Domain\Repository\EventRepository;
 use ScoutNet\ShScoutnetWebservice\Domain\Repository\StructureRepository;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -40,26 +41,32 @@ class CalendarController extends ActionController {
 	/**
 	 * @var \ScoutNet\ShScoutnetWebservice\Domain\Repository\EventRepository
 	 */
-    private $eventRepository = null;
+    private $eventRepository;
 
-	public function injectEventRepository(EventRepository $eventRepository) {
-	    $this->eventRepository = $eventRepository;
+    /**
+     * @var \ScoutNet\ShScoutnetWebservice\Domain\Repository\StructureRepository
+     */
+    private $structureRepository;
+
+    /**
+     * CalendarController constructor.
+     *
+     * @param \ScoutNet\ShScoutnetWebservice\Domain\Repository\EventRepository     $eventRepository
+     * @param \ScoutNet\ShScoutnetWebservice\Domain\Repository\StructureRepository $structureRepository
+     */
+    public function __construct(
+        EventRepository $eventRepository,
+        StructureRepository $structureRepository
+    ) {
+        $this->eventRepository = $eventRepository;
+        $this->structureRepository = $structureRepository;
     }
 
-	/**
-	 * @var \ScoutNet\ShScoutnetWebservice\Domain\Repository\StructureRepository
-	 */
-    private $structureRepository = null;
-
-	public function injectStructureRepository(StructureRepository $structureRepository) {
-	    $this->structureRepository = $structureRepository;
-    }
-
-	/**
-	 * @param array $addids
-	 * @param integer $eventId
-	 */
-	public function listAction($addids = array(), $eventId = null) {
+    /**
+     * @param array|null $addids
+     * @param int|null   $eventId
+     */
+	public function listAction(?array $addids = [], ?int $eventId = null) {
 	    $filePathSanitizer = GeneralUtility::makeInstance(FilePathSanitizer::class);
 
         $cssFile = $filePathSanitizer->sanitize($this->settings['cssFile']);
@@ -74,10 +81,10 @@ class CalendarController extends ActionController {
 
 		$ids = explode(",", $this->settings["ssids"]);
 
-		$filter = array(
+		$filter = [
 			'limit' => isset($this->settings["limit"]) ? $this->settings["limit"] : 999,
 			'after' => 'now()',
-		);
+        ];
 
 		if (isset($this->settings["categories"]) && trim($this->settings["categories"])) {
 			$filter['kategories'] = explode(",", $this->settings["categories"]);
@@ -93,32 +100,28 @@ class CalendarController extends ActionController {
 			$ids = array_merge($ids, $addids);
 		}
 
-		$structures = array();
-		$optionalStructures = array();
-		$events = array();
+		$structures = [];
+		$optionalStructures = [];
+		$events = [];
 		try {
 			$structures = $this->structureRepository->findByUids($ids);
 			$events = $this->eventRepository->findByStructuresAndFilter($structures, $filter);
 
-			$optStructures = Array();
+			$optStructures = [];
 			if (isset($this->settings["optSsids"]) && trim($this->settings["optSsids"])) {
 				$optids = explode(",", $this->settings["optSsids"]);
 				$optStructures = $this->structureRepository->findByUids($optids);
 			}
 
 			foreach ($optStructures as $optionalStructure) {
-				$optionalStructures[] = array(
+				$optionalStructures[] = [
 					'selected' => in_array($optionalStructure->getUid(), $ids),
 					'structure' => $optionalStructure,
-				);
+                ];
 			}
-
-			//\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($events);
-		} catch (\Exception $e) {
+		} catch (Exception $e) {
 			$this->view->assign('error', $e->getMessage());
 		}
-
-		//\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($this->settings);
 
 		$this->view->assign('events', $events);
 		$this->view->assign('structures', $structures);

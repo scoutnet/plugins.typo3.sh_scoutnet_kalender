@@ -2,6 +2,9 @@
 
 namespace ScoutNet\ShScoutnetKalender\Helpers;
 
+use ScoutNet\ShScoutnetWebservice\Domain\Repository\CategoryRepository;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+
 /***************************************************************
  *  Copyright notice
  *
@@ -31,19 +34,9 @@ class BackendHelpers {
      *
      * @return void
      */
-    public function getCategories(&$fConfig) {
-// fetch repository
-        $pluginConfiguration = array(
-            'pluginName'    => 'scoutnet',
-            'vendorName'    => 'ScoutNet',
-            'extensionName' => 'ShScoutnetKalender',
-        );
-        $bootstrap = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Core\\Bootstrap');
-        $bootstrap->initialize($pluginConfiguration);
-        $objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Object\\ObjectManager');
-
-        /** @var \ScoutNet\ShScoutnetWebservice\Domain\Repository\CategorieRepository $categorieRepository */
-        $categorieRepository = $objectManager->get('ScoutNet\ShScoutnetWebservice\Domain\Repository\CategorieRepository');
+    public function getCategories(array &$fConfig) {
+        /** @var CategoryRepository $categorieRepository */
+        $categorieRepository = GeneralUtility::makeInstance(CategoryRepository::class);
 
    //     $configurationManager = $objectManager->get('TYPO3\\CMS\Extbase\\Configuration\\ConfigurationManager');
    //     $configuration = $configurationManager->getConfiguration(ConfigurationManager::CONFIGURATION_TYPE_SETTINGS, 'ShScoutnetKalender');
@@ -51,10 +44,10 @@ class BackendHelpers {
         $categories = $categorieRepository->findAll();
         // change conf
         foreach ($categories as $categorie) {
-            array_push($fConfig['items'], array(
+            array_push($fConfig['items'], [
                 $categorie->getText(),
                 $categorie->getUid()
-            ));
+            ]);
         }
     }
 

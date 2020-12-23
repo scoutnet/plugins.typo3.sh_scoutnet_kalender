@@ -1,6 +1,9 @@
 <?php
 namespace ScoutNet\ShScoutnetKalender\ViewHelpers\Format;
 
+use Closure;
+use DateTime;
+use Exception;
 use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
 use TYPO3Fluid\Fluid\Core\Rendering\RenderingContextInterface;
 use TYPO3Fluid\Fluid\Core\ViewHelper\Traits\CompileWithContentArgumentAndRenderStatic;
@@ -25,7 +28,7 @@ class StrftimeViewHelper extends AbstractViewHelper {
      * @return string Formatted date
      * @throws \Exception
      */
-	public static function renderStatic(array $arguments, \Closure $renderChildrenClosure, RenderingContextInterface $renderingContext) {
+	public static function renderStatic(array $arguments, Closure $renderChildrenClosure, RenderingContextInterface $renderingContext): string {
 	    $format = $arguments['format'];
 	    $date = $arguments['date'];
 
@@ -36,11 +39,11 @@ class StrftimeViewHelper extends AbstractViewHelper {
 			}
 		}
 
-		if ($date instanceof \DateTime) {
+		if ($date instanceof DateTime) {
 			try {
 				return strftime($format, $date->getTimestamp());
-			} catch (\Exception $exception) {
-				throw new \Exception('"' . $date . '" was DateTime and could not be converted to UNIX-Timestamp by DateTime.', 200000001);
+			} catch (Exception $exception) {
+				throw new Exception('"' . $date . '" was DateTime and could not be converted to UNIX-Timestamp by DateTime.', 200000001);
 			}
 		}
 		return strftime($format, (int)$date);

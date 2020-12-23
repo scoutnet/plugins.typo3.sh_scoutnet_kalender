@@ -2,6 +2,7 @@
 namespace ScoutNet\ShScoutnetKalender\ViewHelpers;
 
 use ScoutNet\ShScoutnetWebservice\Helpers\ScoutNetConnectHelper;
+use TYPO3\CMS\Backend\Routing\Exception\RouteNotFoundException;
 use TYPO3\CMS\Backend\Routing\UriBuilder;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
@@ -33,10 +34,19 @@ use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
 
 class ScoutNetConnectButtonViewHelper extends AbstractViewHelper
 {
-	public function render() {
+    /**
+     * @return string
+     * @throws \ScoutNet\ShScoutnetWebservice\Exceptions\ScoutNetExceptionMissingConfVar
+     * @throws \TYPO3\CMS\Backend\Routing\Exception\RouteNotFoundException
+     * @throws \TYPO3\CMS\Core\Configuration\Exception\ExtensionConfigurationExtensionNotConfiguredException
+     * @throws \TYPO3\CMS\Core\Configuration\Exception\ExtensionConfigurationPathDoesNotExistException
+     */
+	public function render(): string {
+	    /** @var UriBuilder $uriBuilder */
         $uriBuilder = GeneralUtility::makeInstance(UriBuilder::class);
         $uri = $uriBuilder->buildUriFromRoute('user_ShScoutnetKalenderScoutnet', []);
 
+        /** @var ScoutNetConnectHelper $scoutNetConnectHelper */
         $scoutNetConnectHelper = GeneralUtility::makeInstance(ScoutNetConnectHelper::class);
 		return $scoutNetConnectHelper->getScoutNetConnectLoginButton($uri, true);
 	}

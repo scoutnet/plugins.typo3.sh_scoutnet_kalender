@@ -35,6 +35,8 @@
 							<label>LLL:EXT:sh_scoutnet_kalender/Resources/Private/Language/locallang_csh_tt_content.xlf:tt_content.pi_flexform.categories</label>
 							<config>
 								<type>select</type>
+								<renderType>selectMultipleSideBySide</renderType>
+
 								<itemsProcFunc>ScoutNet\ShScoutnetKalender\Helpers\BackendHelpers->getCategories</itemsProcFunc>
 								<multiple>true</multiple>
 								<maxitems>10</maxitems>
