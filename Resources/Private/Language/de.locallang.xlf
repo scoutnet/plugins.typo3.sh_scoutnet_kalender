@@ -3,7 +3,7 @@
     <file product-name="sh_scoutnet_kalender" target-language="de" source-language="en" date="2015-02-19T17:33:19Z" datatype="plaintext" original="locallang">
         <body>
             <trans-unit id="snkDown">
-                <target>z.Z. ist der Scoutnet Kalender nicht erreichbar.&amp;lt;br&amp;gt;Bitte versuch es zu einem späteren Zeitpunkt noch einmal.</target>
+                <target><![CDATA[z.Z. ist der Scoutnet Kalender nicht erreichbar.<br>Bitte versuch es zu einem späteren Zeitpunkt noch einmal.]]></target>
                 <source>The ScoutNet calendar server is not Reachable.&lt;br&gt;Please try again later.</source>
             </trans-unit>
             <trans-unit id="stammesAuswahl">

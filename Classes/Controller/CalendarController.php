@@ -1,9 +1,10 @@
 <?php
 namespace ScoutNet\ShScoutnetKalender\Controller;
 
+use ScoutNet\ShScoutnetWebservice\Domain\Repository\EventRepository;
+use ScoutNet\ShScoutnetWebservice\Domain\Repository\StructureRepository;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
-use TYPO3\CMS\Extbase\Annotation\Inject;
 use TYPO3\CMS\Frontend\Resource\FilePathSanitizer;
 
 /***************************************************************
@@ -38,16 +39,21 @@ use TYPO3\CMS\Frontend\Resource\FilePathSanitizer;
 class CalendarController extends ActionController {
 	/**
 	 * @var \ScoutNet\ShScoutnetWebservice\Domain\Repository\EventRepository
-	 * @Inject
 	 */
-	protected $eventRepository = null;
+    private $eventRepository = null;
+
+	public function injectEventRepository(EventRepository $eventRepository) {
+	    $this->eventRepository = $eventRepository;
+    }
 
 	/**
 	 * @var \ScoutNet\ShScoutnetWebservice\Domain\Repository\StructureRepository
-	 * @Inject
 	 */
-	protected $structureRepository = null;
+    private $structureRepository = null;
 
+	public function injectStructureRepository(StructureRepository $structureRepository) {
+	    $this->structureRepository = $structureRepository;
+    }
 
 	/**
 	 * @param array $addids

@@ -1,8 +1,10 @@
 {namespace snk=ScoutNet\ShScoutnetKalender\ViewHelpers}
 <f:layout name="Default" />
+
+
 <f:section name="main">
     <f:if condition="{error}">
-        <f:then><f:translate key="snkDown">ScoutNet server Down: </f:translate> ({error})</f:then>
+        <f:then><f:format.raw><f:translate key="snkDown">ScoutNet server Down: </f:translate> ({error})</f:format.raw></f:then>
         <f:else>
             <div id="snk-{structures.0.uid}" class="snk">
                 <div class="snk-body">

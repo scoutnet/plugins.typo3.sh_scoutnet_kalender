@@ -62,8 +62,8 @@
 	},
 	"extra": {
 		"branch-alias": {
-			"dev-master": "5.0.x-dev",
-			"dev-typo3_v9": "4.0.x-dev"
+			"dev-master": "5.x-dev",
+			"dev-typo3_v9": "4.x-dev"
 		},
 		"typo3/cms": {
 			"app-dir": ".Build",
@@ -72,6 +72,5 @@
 			"extension-key": "sh_scoutnet_kalender",
 			"composer-mode": false
 		}
-	},
-	"minimum-stability": "dev"
+	}
 }

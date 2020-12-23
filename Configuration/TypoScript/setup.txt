@@ -1,5 +1,5 @@
 plugin.tx_shscoutnetkalender {
-	mvc.callDefaultActionIfActionCantBeResolved = 1
+#	mvc.callDefaultActionIfActionCantBeResolved = 1
 
 	view {
 		templateRootPaths {
@@ -32,9 +32,9 @@ plugin.tx_shscoutnetkalender {
 	}
 }
 
-module.tx_shscoutnetkalender {
-	settings < plugin.tx_shscoutnetkalender.settings
-	persistence < plugin.tx_shscoutnetkalender.persistence
-	view < plugin.tx_shscoutnetkalender.view
-}
-
+#module.tx_shscoutnetkalender {
+#	settings < plugin.tx_shscoutnetkalender.settings
+#	persistence < plugin.tx_shscoutnetkalender.persistence
+#	view < plugin.tx_shscoutnetkalender.view
+#}
+#
