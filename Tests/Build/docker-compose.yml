@@ -1,14 +1,14 @@
 # This file is a generic Scoutnet docker-compose.yml file. The original is found in the dummy extension
 # https://github.com/scoutnet/plugins.typo3.scoutnet_dummy/blob/master/Tests/Build/docker-compose.yml
-# DOCKER_COMPOSE Version: 1.0.0
+# DOCKER_COMPOSE Version: 1.0.1
 
 version: '2.3'
 services:
   chrome:
     image: selenium/standalone-chrome:3.12
     extra_hosts:
-    - "repo.scoutnet.de:10.87.23.8"
-    - "www.scoutnet.de:10.87.23.8"
+    - "repo.scoutnet.de:${REPO_IP}"
+    - "www.scoutnet.de:${WWW_IP}"
 
   mariadb10:
     image: mariadb:10
@@ -17,8 +17,8 @@ services:
     tmpfs:
     - /var/lib/mysql/:rw,noexec,nosuid
     extra_hosts:
-    - "repo.scoutnet.de:10.87.23.8"
-    - "www.scoutnet.de:10.87.23.8"
+    - "repo.scoutnet.de:${REPO_IP}"
+    - "www.scoutnet.de:${WWW_IP}"
 
   mssql2017cu9:
     image: microsoft/mssql-server-linux:2017-CU9
@@ -27,8 +27,8 @@ services:
       SA_PASSWORD: "Test1234!"
       MSSQL_PID: Developer
     extra_hosts:
-    - "repo.scoutnet.de:10.87.23.8"
-    - "www.scoutnet.de:10.87.23.8"
+    - "repo.scoutnet.de:${REPO_IP}"
+    - "www.scoutnet.de:${WWW_IP}"
     # No tmpfs setup here since mssql fails on tmpfs o_direct.
     # This makes mssql sloooow for functionals.
 
@@ -40,8 +40,8 @@ services:
     tmpfs:
     - /var/lib/postgresql/data:rw,noexec,nosuid
     extra_hosts:
-    - "repo.scoutnet.de:10.87.23.8"
-    - "www.scoutnet.de:10.87.23.8"
+    - "repo.scoutnet.de:${REPO_IP}"
+    - "www.scoutnet.de:${WWW_IP}"
 
   web:
     image: typo3gmbh/${DOCKER_PHP_IMAGE}:latest
@@ -52,8 +52,8 @@ services:
     - /etc/passwd:/etc/passwd:ro
     - /etc/group:/etc/group:ro
     extra_hosts:
-    - "repo.scoutnet.de:10.87.23.8"
-    - "www.scoutnet.de:10.87.23.8"
+    - "repo.scoutnet.de:${REPO_IP}"
+    - "www.scoutnet.de:${WWW_IP}"
     environment:
       TYPO3_PATH_ROOT: ${ROOT_DIR}/.Build/Web/typo3temp/var/tests/acceptance
       TYPO3_PATH_APP: ${ROOT_DIR}/.Build/Web/typo3temp/var/tests/acceptance
@@ -77,8 +77,8 @@ services:
     - /etc/passwd:/etc/passwd:ro
     - /etc/group:/etc/group:ro
     extra_hosts:
-    - "repo.scoutnet.de:10.87.23.8"
-    - "www.scoutnet.de:10.87.23.8"
+    - "repo.scoutnet.de:${REPO_IP}"
+    - "www.scoutnet.de:${WWW_IP}"
     working_dir: ${ROOT_DIR}/.Build
     command: >
       /bin/sh -c "
@@ -104,8 +104,8 @@ services:
     - /etc/group:/etc/group:ro
     - /tmp/.composer:/.composer
     extra_hosts:
-    - "repo.scoutnet.de:10.87.23.8"
-    - "www.scoutnet.de:10.87.23.8"
+    - "repo.scoutnet.de:${REPO_IP}"
+    - "www.scoutnet.de:${WWW_IP}"
     working_dir: ${ROOT_DIR}
     command: >
       /bin/sh -c "
@@ -123,9 +123,10 @@ services:
     - ${HOST_HOME}:${HOST_HOME}
     - /etc/passwd:/etc/passwd:ro
     - /etc/group:/etc/group:ro
+    - /tmp/.composer:/.composer
     extra_hosts:
-    - "repo.scoutnet.de:10.87.23.8"
-    - "www.scoutnet.de:10.87.23.8"
+    - "repo.scoutnet.de:${REPO_IP}"
+    - "www.scoutnet.de:${WWW_IP}"
     working_dir: ${ROOT_DIR}
     command: >
       /bin/sh -c "
@@ -143,9 +144,10 @@ services:
     - ${HOST_HOME}:${HOST_HOME}
     - /etc/passwd:/etc/passwd:ro
     - /etc/group:/etc/group:ro
+    - /tmp/.composer:/.composer
     extra_hosts:
-    - "repo.scoutnet.de:10.87.23.8"
-    - "www.scoutnet.de:10.87.23.8"
+    - "repo.scoutnet.de:${REPO_IP}"
+    - "www.scoutnet.de:${WWW_IP}"
     working_dir: ${ROOT_DIR}
     command: >
       /bin/sh -c "
@@ -166,8 +168,8 @@ services:
     - /etc/passwd:/etc/passwd:ro
     - /etc/group:/etc/group:ro
     extra_hosts:
-    - "repo.scoutnet.de:10.87.23.8"
-    - "www.scoutnet.de:10.87.23.8"
+    - "repo.scoutnet.de:${REPO_IP}"
+    - "www.scoutnet.de:${WWW_IP}"
     environment:
       typo3DatabaseName: func_test
       typo3DatabaseUsername: root
@@ -206,8 +208,8 @@ services:
     - /etc/passwd:/etc/passwd:ro
     - /etc/group:/etc/group:ro
     extra_hosts:
-    - "repo.scoutnet.de:10.87.23.8"
-    - "www.scoutnet.de:10.87.23.8"
+    - "repo.scoutnet.de:${REPO_IP}"
+    - "www.scoutnet.de:${WWW_IP}"
     environment:
       typo3DatabaseDriver: sqlsrv
       typo3DatabaseName: func
@@ -249,8 +251,8 @@ services:
     - /etc/passwd:/etc/passwd:ro
     - /etc/group:/etc/group:ro
     extra_hosts:
-    - "repo.scoutnet.de:10.87.23.8"
-    - "www.scoutnet.de:10.87.23.8"
+    - "repo.scoutnet.de:${REPO_IP}"
+    - "www.scoutnet.de:${WWW_IP}"
     environment:
       typo3DatabaseDriver: pdo_pgsql
       typo3DatabaseName: bamboo
@@ -288,8 +290,8 @@ services:
     - /etc/passwd:/etc/passwd:ro
     - /etc/group:/etc/group:ro
     extra_hosts:
-    - "repo.scoutnet.de:10.87.23.8"
-    - "www.scoutnet.de:10.87.23.8"
+    - "repo.scoutnet.de:${REPO_IP}"
+    - "www.scoutnet.de:${WWW_IP}"
     # @todo: sqlite DB is currently written to functional-doc-root (typo3temp/var/test-functional-xy/) /test.sqlite
     # This directory is mapped to the local dir, so it is hard disk and not a tmpfs. sqlite functionals would speed
     # up significantly if typo3/testing-framework would accept an environment variable to locate test.sqlite file on
@@ -321,8 +323,8 @@ services:
     - /etc/passwd:/etc/passwd:ro
     - /etc/group:/etc/group:ro
     extra_hosts:
-    - "repo.scoutnet.de:10.87.23.8"
-    - "www.scoutnet.de:10.87.23.8"
+    - "repo.scoutnet.de:${REPO_IP}"
+    - "www.scoutnet.de:${WWW_IP}"
     working_dir: ${ROOT_DIR}
     command: >
       /bin/sh -c "
@@ -345,8 +347,8 @@ services:
       - /etc/passwd:/etc/passwd:ro
       - /etc/group:/etc/group:ro
     extra_hosts:
-    - "repo.scoutnet.de:10.87.23.8"
-    - "www.scoutnet.de:10.87.23.8"
+    - "repo.scoutnet.de:${REPO_IP}"
+    - "www.scoutnet.de:${WWW_IP}"
     working_dir: ${ROOT_DIR}/.Build
     command: >
       /bin/sh -c "
