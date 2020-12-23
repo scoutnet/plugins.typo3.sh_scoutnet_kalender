@@ -3,48 +3,41 @@
 [![Packagist](https://img.shields.io/packagist/dt/scoutnet/sh-scoutnet-kalender.svg?label=packagist%20downloads)](https://packagist.org/packages/scoutnet/sh-scoutnet-kalender)
 [![Packagist](https://img.shields.io/packagist/l/scoutnet/sh-scoutnet-kalender.svg)](https://packagist.org/packages/scoutnet/sh-scoutnet-kalender)
 ---
-ScoutNet Kalender Plugin for TYPO3
-==================================
+# ScoutNet Kalender Plugin for TYPO3
+
 This is the official ScoutNet.de Kalender Plugin for TYPO3. If you are a scouting Group from Germany you can use our Service and manage your events on our Servers.
 
-Install
--------
+## Installation
 To install You can either use the version from the TER, or install this git repo to 
 
 <TYPO3 Dir>/typo3conf/ext/sh_scoutnet_kalender
 
-For the Kalender Plugin to work, you need the sh_scoutnet_webservice extension in a Version > 2.0.
+For the Kalender Plugin to work, you need the sh_scoutnet_webservice extension in a Version > 4.0.
+
+alternatively you can use composer:
+
+`composer require scoutnet/sh-scoutnet-kalender`
 
 
-Setup
------
+### Setup
 For the Backend function to work, you have to set your SSID (the id of your Scouting Group) in the extension.
 
 For the Frontend to work, you need to include the static file into your template. Then you can add a new content Element. 
 There you can choose which ssids to be shown, which additional calenders to show and which kategories you want to display.
 
-Update
-------
-If you update from a Version < 3.0 please note, that the whole extension was rewritten. And is now based on Extbase. 
-You need to resetup the frontend Plugin and all templates do not work anymore.
 
-You can easily change the CSS with the constant editor. If you want to change the Templates, please set how to change templates with extbase.
-The be_user database fields are changed, so you need to update your database. And reconnect all backend accounts. But this should be done by the 
-Backend users themself.
-
-Development
------------
+## Development
 If you want to contribute, feel free to do so. The Repo is located here:
 
 https://github.com/scoutnet/plugins.typo3.sh_scoutnet_kalender
 
 just run `make composerInstall`
 
-Testing
--------
+### Testing
+
 Needed: GnuMake, PHP, Docker and docker-compose
 
-Init: 
+Init:
 
 `make init`
 
@@ -52,13 +45,13 @@ To Run all the Tests call:
 
 `make test`
 
-you can use the -phpx suffix to indicate which php version you want to check e.g. `make test-php72`
+you can use the -phpx suffix to indicate which php version you want to check e.g. `make test-php73`
 
 for only testing a special function or php version there are different suffixes. For Example:
 
-- `make lintTest-php72`
-- `make unitTest-php73`
-- `make unitTest`        Will call Unit tests with php7.2 and php 7.3
+- `make lintTest-php73`
+- `make unitTest-php74`
+- `make unitTest`        Will call Unit tests with php7.3 and php 7.4
 
 Testing with PhpStorm: Setup new remote PHP interpreter.
 Docker-Compose:
@@ -82,25 +75,27 @@ Set up new Run Configuration for `Functional Tests`:
  
 Happy Testing
 
+### Update
+#### 2.x->3.0
+If you update from a Version < 3.0 please note, that the whole extension was rewritten. And is now based on Extbase. 
+You need to resetup the frontend Plugin and all templates do not work anymore.
+
+You can easily change the CSS with the constant editor. If you want to change the Templates, please set how to change templates with extbase.
+The be_user database fields are changed, so you need to update your database. And reconnect all backend accounts. But this should be done by the 
+Backend users themself.
+
+#### 4.x->5.0
 
 
-Author
-------
-If you have any questions reganding this software, you can send me an email to muetze@scoutnet.de
+### Author
+If you have any questions regarding this software, you can send me an email to muetze@scoutnet.de
 
-License
--------
-(c) 2016 Stefan "Mütze" Horst <muetze@scoutnet.de>
+### TODO
+
+
+### License
+(c) 2020 Stefan "Mütze" Horst <muetze@scoutnet.de>
 All rights reserved
-
-This script is part of the TYPO3 project. The TYPO3 project is
-free software; you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation; either version 2 of the License, or
-(at your option) any later version.
-
-The GNU General Public License can be found at
-http://www.gnu.org/copyleft/gpl.html.
 
 This script is distributed in the hope that it will be useful,
 but WITHOUT ANY WARRANTY; without even the implied warranty of

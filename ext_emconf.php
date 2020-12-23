@@ -20,7 +20,7 @@ $EM_CONF[$_EXTKEY] = [
 	'version' => '5.0.0',
 	'constraints' => [
 		'depends' => [
-			'typo3' => '10.0.0-10.4.99',
+			'typo3' => '10.4.0-10.4.99',
 			'sh_scoutnet_webservice' => '4.0.0-4.99.99',
 		],
 		'conflicts' => [],
