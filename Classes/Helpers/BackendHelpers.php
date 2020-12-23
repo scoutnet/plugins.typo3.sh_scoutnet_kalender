@@ -35,18 +35,15 @@ class BackendHelpers {
      * @return void
      */
     public function getCategories(array &$fConfig) {
-        /** @var CategoryRepository $categorieRepository */
-        $categorieRepository = GeneralUtility::makeInstance(CategoryRepository::class);
+        /** @var CategoryRepository $categoryRepository */
+        $categoryRepository = GeneralUtility::makeInstance(CategoryRepository::class);
 
-   //     $configurationManager = $objectManager->get('TYPO3\\CMS\Extbase\\Configuration\\ConfigurationManager');
-   //     $configuration = $configurationManager->getConfiguration(ConfigurationManager::CONFIGURATION_TYPE_SETTINGS, 'ShScoutnetKalender');
-
-        $categories = $categorieRepository->findAll();
+        $categories = $categoryRepository->findAll();
         // change conf
-        foreach ($categories as $categorie) {
+        foreach ($categories as $category) {
             array_push($fConfig['items'], [
-                $categorie->getText(),
-                $categorie->getUid()
+                $category->getText(),
+                $category->getUid()
             ]);
         }
     }
