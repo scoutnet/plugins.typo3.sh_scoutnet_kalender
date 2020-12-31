@@ -13,5 +13,5 @@ ExtensionManagementUtility::addPiFlexFormValue('shscoutnetkalender_calendar', 'F
 ExtensionUtility::registerPlugin(
    'sh_scoutnet_kalender',
    'Calendar',
-    'LLL:EXT:sh_scoutnet_kalender/Resources/Private/Language/locallang_csh_tt_content.xlf:tt_content.pi_flexform.sheet_scoutnet',
+    'LLL:EXT:sh_scoutnet_kalender/Resources/Private/Language/locallang_csh_tt_content.xlf:tt_content.pi_flexform.sheet_scoutnet'
 );
