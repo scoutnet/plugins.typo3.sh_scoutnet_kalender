@@ -1,0 +1,10 @@
+routeEnhancers:
+  calendar_events:
+    type: Extbase
+    extension: sh_scoutnet_kalender
+    plugin: Calendar
+    routes:
+      - { routePath: '/event/{eventId}', _controller: 'Calendar::details'}
+    defaultController: 'Calendar::list'
+    requirements:
+      event: '\d+'

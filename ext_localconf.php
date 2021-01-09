@@ -6,9 +6,9 @@ if (!defined ('TYPO3_MODE')) die ('Access denied.');
 	'sh_scoutnet_kalender',
 	'Calendar',
 	[
-        \ScoutNet\ShScoutnetKalender\Controller\CalendarController::class => 'list',
+        \ScoutNet\ShScoutnetKalender\Controller\CalendarController::class => 'list, details',
     ],
 	[
-		\ScoutNet\ShScoutnetKalender\Controller\CalendarController::class => 'list',
+		\ScoutNet\ShScoutnetKalender\Controller\CalendarController::class => 'list, details',
     ]
 );

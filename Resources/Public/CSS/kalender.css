@@ -39,6 +39,15 @@ tr.snk-headings-row th{
 	padding: 10px 20px 20px 20px;
 }
 
+.snk-termin-details {
+	padding-bottom: 20px;
+	margin-bottom: 0;
+}
+
+.snk-detail-content {
+	padding-left: 10px;
+}
+
 .snk-termin-infos dt{
 	font-weight: bold;
 }

@@ -30,7 +30,15 @@
                 <target>Stufe</target>
                 <source>section</source>
             </trans-unit>
+            <trans-unit id="sections">
+                <target>Stufen</target>
+                <source>sections</source>
+            </trans-unit>
             <trans-unit id="categorie">
+                <target>Kategorien</target>
+                <source>categories</source>
+            </trans-unit>
+            <trans-unit id="categories">
                 <target>Kategorien</target>
                 <source>categories</source>
             </trans-unit>

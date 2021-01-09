@@ -23,7 +23,13 @@
             <trans-unit id="section">
                 <source>section</source>
             </trans-unit>
+            <trans-unit id="sections">
+                <source>sections</source>
+            </trans-unit>
             <trans-unit id="categorie">
+                <source>categories</source>
+            </trans-unit>
+            <trans-unit id="categories">
                 <source>categories</source>
             </trans-unit>
             <trans-unit id="addEvent">

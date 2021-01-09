@@ -25,6 +25,11 @@ For the Backend function to work, you have to set your SSID (the id of your Scou
 For the Frontend to work, you need to include the static file into your template. Then you can add a new content Element. 
 There you can choose which ssids to be shown, which additional calenders to show and which kategories you want to display.
 
+If you want to use nice looking URLs, you should include the Routes Script into your Site Configuration
+```yaml
+imports:
+  - { resource: "EXT:sh_scoutnet_kalender/Configuration/Routes/Default.yaml" }
+```
 
 ## Development
 If you want to contribute, feel free to do so. The Repo is located here:

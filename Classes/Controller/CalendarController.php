@@ -128,4 +128,28 @@ class CalendarController extends ActionController {
 		$this->view->assign('optionalStructures', $optionalStructures);
 		$this->view->assign('eventId', intval($eventId));
 	}
+
+    /**
+     * @param int   $eventId
+     */
+    public function detailsAction(int $eventId) {
+        $filePathSanitizer = GeneralUtility::makeInstance(FilePathSanitizer::class);
+
+        $cssFile = $filePathSanitizer->sanitize($this->settings['cssFile']);
+        $jsFolder = dirname($filePathSanitizer->sanitize('EXT:sh_scoutnet_kalender/Resources/Public/JS/base2-p.js')).'/';
+
+        // add CSS and Javascript
+        $GLOBALS['TSFE']->additionalHeaderData['tx_sh_scoutnet_Kalender'] =
+            '<link rel="stylesheet" type="text/css" href="' . $cssFile . '" media="screen" />' . "\n" .
+            '<script type="text/javascript" src="'.$jsFolder.'base2-p.js"></script>' . "\n" .
+            '<script type="text/javascript" src="'.$jsFolder.'base2-dom-p.js"></script>' . "\n" .
+            '<script type="text/javascript" src="'.$jsFolder.'kalender.js"></script>' . "\n";
+
+        try {
+            $event = $this->eventRepository->findByUid($eventId);
+            $this->view->assign('event', $event);
+        } catch (Exception $e) {
+            $this->view->assign('error', $e->getMessage());
+        }
+    }
 }

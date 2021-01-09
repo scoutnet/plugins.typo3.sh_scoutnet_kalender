@@ -1,0 +1,52 @@
+{namespace snk=ScoutNet\ShScoutnetKalender\ViewHelpers}
+<f:layout name="Default" />
+
+
+<f:section name="main">
+    <f:if condition="{error}">
+        <f:then><f:format.raw><f:translate key="snkDown">ScoutNet server Down: </f:translate> ({error})</f:format.raw></f:then>
+        <f:else>
+            <div id="snk-{event.structure.uid}" class="snk">
+                <div class="snk-body">
+                    <div class="snk-termin">
+                        <h2>{event.Title}</h2>
+                        <dl class="snk-termin-details">
+                            <dt class="snk-detail-header snk-eintrag-date"><f:translate key="date">Date</f:translate></dt>
+                            <dd class="snk-detail-content snk-eintrag-date">
+                                <f:format.crop maxCharacters="2" append="" respectWordBoundaries="FALSE"><f:format.date date="{event.startTimestamp}" format="%A" /></f:format.crop>,&nbsp;<f:format.date date="{event.startTimestamp}" format="%d.%m." />
+                                <f:if condition="!{event.allDayEvent}"><f:format.date date="{event.startTimestamp}" format="%H:%M" /></f:if>
+                                <f:if condition="{event.showEndDate}">&nbsp;-&nbsp;<f:format.crop maxCharacters="2" append="" respectWordBoundaries="FALSE"><f:format.date date="{event.endTimestamp}" format="%A" /></f:format.crop>,&nbsp;<f:format.date date="{event.endTimestamp}" format="%d.%m." /></f:if>
+                                <f:if condition="!{event.allDayEvent}"><f:if condition="{event.showEndTime}"><f:format.date date="{event.endTimestamp}" format="%H:%M" /></f:if></f:if>
+                            </dd>
+                            <f:if condition="{event.sectionImages}">
+                            <dt class="snk-detail-header snk-eintrag-stufe"><f:translate key="sections">Sections</f:translate></dt>
+                            <dd class="snk-detail-content snk-eintrag-stufe"><f:format.raw>{event.sectionImages}</f:format.raw></dd></f:if>
+                            <f:if condition="{event.categories -> f:count()} > 0">
+                                <dt class="snk-detail-header snk-eintrag-kategorien"><f:translate key="categories">Categories</f:translate></dt>
+                                <dd class="snk-detail-content snk-eintrag-kategorien"><snk:implode values="{event.categories}" lastDelimiter=", ">{object.text}</snk:implode></dd>
+                            </f:if>
+                            <f:if condition="{event.Description}"><dt class="snk-detail-header snk-eintrag-beschreibung"><f:translate key="description" /></dt><dd class="snk-detail-content snk-eintrag-beschreibung">{event.Description}</dd></f:if>
+                            <f:if condition="{event.Location}"><dt class="snk-detail-header snk-eintrag-ort"><f:translate key="location" /></dt><dd class="snk-detail-content snk-eintrag-ort">{event.ZIP} {event.Location}</dd></f:if>
+                            <f:if condition="{event.Organizer}"><dt class="snk-detail-header snk-eintrag-veranstalter"><f:translate key="organizer" /></dt><dd class="snk-detail-content snk-eintrag-veranstalter">{event.Organizer}</dd></f:if>
+                            <f:if condition="{event.Target_Group}"><dt class="snk-detail-header snk-eintrag-zielgruppe"><f:translate key="targetGroup" /></dt><dd class="snk-detail-content snk-eintrag-zielgruppe">{event.Target_Group}</dd></f:if>
+                            <f:if condition="{event.URL}"><dt class="snk-detail-header snk-eintrag-url-label"><f:translate key="URL" /></dt><dd class="snk-detail-content snk-eintrag-url"><f:link.external target="_blank" uri="{event.URL}"><f:if condition="{event.URL_Text}"><f:then>{event.URL_Text}</f:then><f:else>{event.URL}</f:else></f:if></f:link.external></dd></f:if>
+                            <dt class="snk-detail-header snk-eintrag-autor"><f:translate key="author" /></dt><dd class="snk-detail-content snk-eintrag-author">{event.author.fullName}</dd>
+                        </dl>
+                    </div>
+
+
+                </div>
+                <div class="snk-footer">
+                    <div class="snk-hinzufuegen">
+                        <a href="https://www.scoutnet.de/community/kalender/termine-bearbeiten/structure/{event.structure.uid}/new" target="_blank"><f:translate key="addEvent" /></a>
+                    </div>
+                    <div class="snk-powered-by">
+                        <f:translate key="poweredBy" />&nbsp;<span><f:link.external uri="www.scoutnet.de/kalender/" defaultScheme="https" target="_blank">ScoutNet.DE</f:link.external></span>
+                    </div>
+                </div>
+            </div>
+
+        </f:else>
+    </f:if>
+</f:section>
+
