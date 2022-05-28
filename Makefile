@@ -1,6 +1,6 @@
 # This file is a generic Scoutnet Makefile file. The original is found in the dummy extension
 # https://github.com/scoutnet/plugins.typo3.scoutnet_dummy/blob/master/Makefile
-# MAKEFILE Version: 2.0.5
+# MAKEFILE Version: 2.0.8
 
 EXT_NAME=$(shell php -r "print(json_decode(file_get_contents('composer.json'), true)['extra']['typo3/cms']['extension-key']);")
 
@@ -37,7 +37,7 @@ PHP_XDEBUG_ON ?= 0
 PHP_XDEBUG_PORT ?= 9000
 SCRIPT_VERBOSE ?= 0
 
-PHP_VERSIONS ?= 7.3 7.4
+PHP_VERSIONS ?= 7.4 8.0
 TESTS ?= lint unit functional acceptance
 
 COMPOSE_PROJECT_NAME_PREFIX=typo3-local-$(JOB_NAME)-$(BUILD_ID)-$(EXT_NAME)-
@@ -110,8 +110,11 @@ tag:
 
 release: checkVersion $(RELEASE_BUILD_FOLDER)/$(EXT_NAME)_$(EXT_VERSION).zip
 	@if [ -z "$(GITHUB_TOKEN)" ]; then echo "Please Set ENV GITHUB_TOKEN"; exit 2; fi
-	@echo "* Upload Release $(EXT_VERSION) to Github"
+	@echo "* Generate Release $(EXT_VERSION) on Github"
 	@github-release release -t $(EXT_VERSION) -d "Release of version $(EXT_VERSION)<br><br>$(COMMIT_MESSAGE)"
+	@echo "* Wait for Release to be created on Github"
+	@sleep 3
+	@echo "* Upload Release $(EXT_VERSION) to Github"
 	@github-release upload -t $(EXT_VERSION) -f $(RELEASE_BUILD_FOLDER)/$(EXT_NAME)_$(EXT_VERSION).zip -n "$(EXT_NAME)_$(EXT_VERSION).zip"
 	@echo "* Upload Done"
 
@@ -123,31 +126,33 @@ clean:
 	-rm -f composer.lock
 	-rm -rf Tests/Acceptance/Support/_generated
 	-rm -rf Tests/Build/.env
+	-rm -rf Resources/Public/JavaScript/node_modules
+	-rm -rf Resources/Public/JavaScript/package-lock.json
 
 .PHONY: cleanDocker
 cleanDocker: $(TEST_ROOT_FOLDER)/docker-php74-composer/.env $(TEST_ROOT_FOLDER)/docker-php74-composer/docker-compose.yaml \
- $(TEST_ROOT_FOLDER)/docker-php73-lint/.env $(TEST_ROOT_FOLDER)/docker-php73-lint/docker-compose.yaml \
- $(TEST_ROOT_FOLDER)/docker-php73-unit/.env $(TEST_ROOT_FOLDER)/docker-php73-unit/docker-compose.yaml\
- $(TEST_ROOT_FOLDER)/docker-php73-functional/.env $(TEST_ROOT_FOLDER)/docker-php73-functional/docker-compose.yaml \
- $(TEST_ROOT_FOLDER)/docker-php73-acceptance/.env $(TEST_ROOT_FOLDER)/docker-php73-acceptance/docker-compose.yaml \
  $(TEST_ROOT_FOLDER)/docker-php74-lint/.env $(TEST_ROOT_FOLDER)/docker-php74-lint/docker-compose.yaml \
  $(TEST_ROOT_FOLDER)/docker-php74-unit/.env $(TEST_ROOT_FOLDER)/docker-php74-unit/docker-compose.yaml\
  $(TEST_ROOT_FOLDER)/docker-php74-functional/.env $(TEST_ROOT_FOLDER)/docker-php74-functional/docker-compose.yaml \
- $(TEST_ROOT_FOLDER)/docker-php74-acceptance/.env $(TEST_ROOT_FOLDER)/docker-php74-acceptance/docker-compose.yaml
+ $(TEST_ROOT_FOLDER)/docker-php74-acceptance/.env $(TEST_ROOT_FOLDER)/docker-php74-acceptance/docker-compose.yaml \
+ $(TEST_ROOT_FOLDER)/docker-php80-lint/.env $(TEST_ROOT_FOLDER)/docker-php80-lint/docker-compose.yaml \
+ $(TEST_ROOT_FOLDER)/docker-php80-unit/.env $(TEST_ROOT_FOLDER)/docker-php80-unit/docker-compose.yaml\
+ $(TEST_ROOT_FOLDER)/docker-php80-functional/.env $(TEST_ROOT_FOLDER)/docker-php80-functional/docker-compose.yaml \
+ $(TEST_ROOT_FOLDER)/docker-php80-acceptance/.env $(TEST_ROOT_FOLDER)/docker-php80-acceptance/docker-compose.yaml
 	# Composer
 	-cd $(TEST_ROOT_FOLDER)/docker-php74-composer && export COMPOSE_PROJECT_NAME=$(COMPOSE_PROJECT_NAME_PREFIX)composer_install; docker-compose down
 	-cd $(TEST_ROOT_FOLDER)/docker-php74-composer && export COMPOSE_PROJECT_NAME=$(COMPOSE_PROJECT_NAME_PREFIX)composer_update; docker-compose down
 	-cd $(TEST_ROOT_FOLDER)/docker-php74-composer && export COMPOSE_PROJECT_NAME=$(COMPOSE_PROJECT_NAME_PREFIX)composer_validate; docker-compose down
-	# PHP 7.3
-	-cd $(TEST_ROOT_FOLDER)/docker-php73-lint && export COMPOSE_PROJECT_NAME=$(COMPOSE_PROJECT_NAME_PREFIX)php73-lint; docker-compose down
-	-cd $(TEST_ROOT_FOLDER)/docker-php73-unit && export COMPOSE_PROJECT_NAME=$(COMPOSE_PROJECT_NAME_PREFIX)php73-unit; docker-compose down
-	-cd $(TEST_ROOT_FOLDER)/docker-php73-functional && export COMPOSE_PROJECT_NAME=$(COMPOSE_PROJECT_NAME_PREFIX)php73-functional_mariadb10; docker-compose down
-	-cd $(TEST_ROOT_FOLDER)/docker-php73-acceptance && export COMPOSE_PROJECT_NAME=$(COMPOSE_PROJECT_NAME_PREFIX)php73-acceptance_backend_mariadb10; docker-compose down
 	# PHP 7.4
 	-cd $(TEST_ROOT_FOLDER)/docker-php74-lint && export COMPOSE_PROJECT_NAME=$(COMPOSE_PROJECT_NAME_PREFIX)php74-lint; docker-compose down
 	-cd $(TEST_ROOT_FOLDER)/docker-php74-unit && export COMPOSE_PROJECT_NAME=$(COMPOSE_PROJECT_NAME_PREFIX)php74-unit; docker-compose down
 	-cd $(TEST_ROOT_FOLDER)/docker-php74-functional && export COMPOSE_PROJECT_NAME=$(COMPOSE_PROJECT_NAME_PREFIX)php74-functional_mariadb10; docker-compose down
 	-cd $(TEST_ROOT_FOLDER)/docker-php74-acceptance && export COMPOSE_PROJECT_NAME=$(COMPOSE_PROJECT_NAME_PREFIX)php74-acceptance_backend_mariadb10; docker-compose down
+	# PHP 8.0
+	-cd $(TEST_ROOT_FOLDER)/docker-php80-lint && export COMPOSE_PROJECT_NAME=$(COMPOSE_PROJECT_NAME_PREFIX)php80-lint; docker-compose down
+	-cd $(TEST_ROOT_FOLDER)/docker-php80-unit && export COMPOSE_PROJECT_NAME=$(COMPOSE_PROJECT_NAME_PREFIX)php80-unit; docker-compose down
+	-cd $(TEST_ROOT_FOLDER)/docker-php80-functional && export COMPOSE_PROJECT_NAME=$(COMPOSE_PROJECT_NAME_PREFIX)php80-functional_mariadb10; docker-compose down
+	-cd $(TEST_ROOT_FOLDER)/docker-php80-acceptance && export COMPOSE_PROJECT_NAME=$(COMPOSE_PROJECT_NAME_PREFIX)php80-acceptance_backend_mariadb10; docker-compose down
 
 checkVersion:
 	@echo GIT_VERSION: $(GIT_VERSION)
@@ -175,6 +180,7 @@ init: clean composerInstall phpStormDockerDotEnv
 .PHONY: composerInstall
 composerInstall: $(TEST_ROOT_FOLDER)/docker-php74-composer/.env $(TEST_ROOT_FOLDER)/docker-php74-composer/docker-compose.yaml
 	@mkdir -p /tmp/.composer
+	@mkdir -p /tmp/.npm
 	@cd $(TEST_ROOT_FOLDER)/docker-php74-composer && export COMPOSE_PROJECT_NAME=$(COMPOSE_PROJECT_NAME_PREFIX)composer_install; docker-compose run composer_install
 	@cd $(TEST_ROOT_FOLDER)/docker-php74-composer && export COMPOSE_PROJECT_NAME=$(COMPOSE_PROJECT_NAME_PREFIX)composer_install; docker-compose down
 	# Create Link for functional tests to work properly they expect to have the vendor directory in the web directory
@@ -183,12 +189,14 @@ composerInstall: $(TEST_ROOT_FOLDER)/docker-php74-composer/.env $(TEST_ROOT_FOLD
 .PHONY: composerUpdate
 composerUpdate: $(TEST_ROOT_FOLDER)/docker-php74-composer/.env $(TEST_ROOT_FOLDER)/docker-php74-composer/docker-compose.yaml
 	@mkdir -p /tmp/.composer
+	@mkdir -p /tmp/.npm
 	@cd $(TEST_ROOT_FOLDER)/docker-php74-composer && export COMPOSE_PROJECT_NAME=$(COMPOSE_PROJECT_NAME_PREFIX)composer_update; docker-compose run composer_update
 	@cd $(TEST_ROOT_FOLDER)/docker-php74-composer && export COMPOSE_PROJECT_NAME=$(COMPOSE_PROJECT_NAME_PREFIX)composer_update; docker-compose down
 
 .PHONY: composerValidate
 composerValidate: $(TEST_ROOT_FOLDER)/docker-php74-composer/.env $(TEST_ROOT_FOLDER)/docker-php74-composer/docker-compose.yaml
 	@mkdir -p /tmp/.composer
+	@mkdir -p /tmp/.npm
 	@cd $(TEST_ROOT_FOLDER)/docker-php74-composer && export COMPOSE_PROJECT_NAME=$(COMPOSE_PROJECT_NAME_PREFIX)composer_validate; docker-compose run composer_validate
 	@cd $(TEST_ROOT_FOLDER)/docker-php74-composer && export COMPOSE_PROJECT_NAME=$(COMPOSE_PROJECT_NAME_PREFIX)composer_validate; docker-compose down
 

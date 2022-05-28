@@ -23,20 +23,24 @@
 		"issues": "https://github.com/scoutnet/plugins.typo3.sh_scoutnet_kalender/issues"
 	},
 	"require": {
-		"typo3/cms-core": "^10.4",
-		"typo3/cms-extensionmanager": "^10.4",
-		"scoutnet/sh-scoutnet-webservice": "^4.0"
+		"typo3/cms-core": "^11.5",
+		"typo3/cms-extensionmanager": "^11.5",
+		"scoutnet/sh-scoutnet-webservice": "^5.0"
 	},
 	"config": {
 		"vendor-dir": ".Build/vendor",
-		"bin-dir": ".Build/bin"
+		"bin-dir": ".Build/bin",
+		"allow-plugins": {
+			"typo3/cms-composer-installers": true,
+			"typo3/class-alias-loader": true
+		}
 	},
 	"require-dev": {
-		"typo3/testing-framework": "^6.2",
-		"typo3/cms-frontend": "^10.4",
-		"typo3/cms-install": "^10.4",
-		"typo3/cms-about": "^10.4",
-		"typo3/cms-fluid-styled-content": "^10.4",
+		"typo3/testing-framework": "^6.16",
+		"typo3/cms-frontend": "^11.5",
+		"typo3/cms-install": "^11.5",
+		"typo3/cms-about": "^11.5",
+		"typo3/cms-fluid-styled-content": "^11.5",
 		"phpspec/prophecy": "~1.0",
 		"codeception/codeception": "^4.1",
 		"codeception/module-webdriver": "^1.0",
@@ -62,7 +66,8 @@
 	},
 	"extra": {
 		"branch-alias": {
-			"dev-master": "5.x-dev",
+			"dev-master": "6.x-dev",
+			"dev-typo3_v10": "5.x-dev",
 			"dev-typo3_v9": "4.x-dev"
 		},
 		"typo3/cms": {

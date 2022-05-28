@@ -1,6 +1,6 @@
 // This file is a generic Scoutnet Jenkins file. The original is found in the dummy extension
 // https://github.com/scoutnet/plugins.typo3.scoutnet_dummy/blob/master/Jenkinsfile
-// Jenkinsfile Version: 2.0.0
+// Jenkinsfile Version: 2.0.1
 pipeline {
     agent any
 
@@ -14,7 +14,7 @@ pipeline {
             steps {
                 withCredentials([usernamePassword(credentialsId: 'REPO_AUTH', passwordVariable: 'REPO_AUTH_PASSWORD', usernameVariable: 'REPO_AUTH_USER')]) {
                     script {
-                        def PHP_VERSIONS = ['7.3', '7.4']
+                        def PHP_VERSIONS = ['7.4', '8.0']
                         def tests = [:]
 
                         sh "echo '{\"http-basic\": {\"repo.scoutnet.de\": {\"username\": \"${REPO_AUTH_USER}\", \"password\": \"${REPO_AUTH_PASSWORD}\"}}}' > auth.json"
@@ -33,9 +33,9 @@ pipeline {
                         }
                         parallel tests
 
-                        // we only test for php version 7.4, since this should execute the same way
-                        sh "make functionalTest-php74"
-                        sh "make acceptanceTest-php74"
+                        // we only test for php version 8.0, since this should execute the same way
+                        sh "make functionalTest-php80"
+                        sh "make acceptanceTest-php80"
                         sh 'rm -f auth.json'
                     }
                 }
