@@ -21,12 +21,13 @@ namespace ScoutNet\ShScoutnetKalender\Tests\Unit;
 
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
-class ScoutnetKalenderTest extends UnitTestCase {
+class ScoutnetKalenderTest extends UnitTestCase
+{
     /**
      * @test
-     * @return void
      */
-    public function myFirstTest() {
-        $this->assertEquals("test", "test");
+    public function myFirstTest()
+    {
+        self::assertEquals('test', 'test');
     }
 }

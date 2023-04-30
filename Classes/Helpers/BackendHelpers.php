@@ -27,14 +27,13 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
-class BackendHelpers {
-
+class BackendHelpers
+{
     /**
      * @param array $fConfig
-     *
-     * @return void
      */
-    public function getCategories(array &$fConfig) {
+    public function getCategories(array &$fConfig)
+    {
         /** @var CategoryRepository $categoryRepository */
         $categoryRepository = GeneralUtility::makeInstance(CategoryRepository::class);
 
@@ -43,9 +42,8 @@ class BackendHelpers {
         foreach ($categories as $category) {
             array_push($fConfig['items'], [
                 $category->getText(),
-                $category->getUid()
+                $category->getUid(),
             ]);
         }
     }
-
 }

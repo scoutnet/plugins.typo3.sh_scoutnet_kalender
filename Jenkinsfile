@@ -1,6 +1,6 @@
 // This file is a generic Scoutnet Jenkins file. The original is found in the dummy extension
 // https://github.com/scoutnet/plugins.typo3.scoutnet_dummy/blob/master/Jenkinsfile
-// Jenkinsfile Version: 2.0.1
+// Jenkinsfile Version: 2.0.2
 pipeline {
     agent any
 
@@ -21,6 +21,11 @@ pipeline {
                         sh "make composerInstall"
                         sh "make composerUpdate"
                         sh "make composerValidate"
+
+                        tests['cgl Test'] = {
+                            echo "Testing CGL"
+                            sh "make cglTest"
+                        }
 
                         for (x in PHP_VERSIONS) {
                             def PHP_VERSION = x.replace('.','')

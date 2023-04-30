@@ -1,4 +1,5 @@
 <?php
+
 namespace ScoutNet\ShScoutnetKalender\Tests\Acceptance\Support\Extension;
 
 use TYPO3\TestingFramework\Core\Acceptance\Extension\BackendEnvironment;
@@ -26,7 +27,7 @@ class BackendDummyEnvironment extends BackendEnvironment
             'extensionmanager',
         ],
         'testExtensionsToLoad' => [
-			'typo3conf/ext/sh_scoutnet_kalender',
+            'typo3conf/ext/sh_scoutnet_kalender',
         ],
         'xmlDatabaseFixtures' => [
             'PACKAGE:typo3/testing-framework/Resources/Core/Acceptance/Fixtures/be_users.xml',

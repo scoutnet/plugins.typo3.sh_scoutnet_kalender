@@ -1,4 +1,5 @@
 <?php
+
 namespace ScoutNet\ShScoutnetKalender\ViewHelpers;
 
 use TYPO3\CMS\Extbase\Persistence\Generic\QueryResult;
@@ -30,8 +31,8 @@ use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
-class ImplodeViewHelper extends AbstractViewHelper {
-
+class ImplodeViewHelper extends AbstractViewHelper
+{
     public function initializeArguments()
     {
         parent::initializeArguments();
@@ -40,59 +41,69 @@ class ImplodeViewHelper extends AbstractViewHelper {
         $this->registerArgument('lastDelimiter', 'string', 'The last delimiter, if different from the others', false);
     }
 
-	/**
-	 * @return string
-	 */
-	public function render(): string {
-	    $values = $this->arguments['values'];
-	    $delimiter = $this->arguments['delimiter'];
-	    $lastDelimiter = $this->arguments['lastDelimiter'];
+    /**
+     * @return string
+     */
+    public function render(): string
+    {
+        $values = $this->arguments['values'];
+        $delimiter = $this->arguments['delimiter'];
+        $lastDelimiter = $this->arguments['lastDelimiter'];
 
-		if ($values instanceof QueryResult) $values = $values->toArray();
+        if ($values instanceof QueryResult) {
+            $values = $values->toArray();
+        }
 
         if ($delimiter === null) {
             $delimiter = ', ';
         }
 
-
         if ($lastDelimiter === null) {
-			$lastDelimiter = ' '. LocalizationUtility::translate( 'community.mergeViewHelper.and', 'sh_scoutnet_community').' ';
-		}
+            $lastDelimiter = ' ' . LocalizationUtility::translate('community.mergeViewHelper.and', 'sh_scoutnet_community') . ' ';
+        }
 
-		if (count($values) == 0) {
-			return '';
-		} elseif (count($values) == 1) {
-			$value = array_pop($values);
+        if (count($values) == 0) {
+            return '';
+        }
+        if (count($values) == 1) {
+            $value = array_pop($values);
 
-			// TODO: check alternatives
-			// remove if it exists
-			if ($this->templateVariableContainer->exists('object')) $this->templateVariableContainer->remove('object');
-			$this->templateVariableContainer->add('object', $value);
+            // TODO: check alternatives
+            // remove if it exists
+            if ($this->templateVariableContainer->exists('object')) {
+                $this->templateVariableContainer->remove('object');
+            }
+            $this->templateVariableContainer->add('object', $value);
 
-			return $this->renderChildren();
-		} else {
-			$last_element = array_pop($values);
-			$first_element = array_shift($values);
+            return $this->renderChildren();
+        }
+        $last_element = array_pop($values);
+        $first_element = array_shift($values);
 
-			// render object
-			if ($this->templateVariableContainer->exists('object')) $this->templateVariableContainer->remove('object');
-			$this->templateVariableContainer->add('object', $first_element);
+        // render object
+        if ($this->templateVariableContainer->exists('object')) {
+            $this->templateVariableContainer->remove('object');
+        }
+        $this->templateVariableContainer->add('object', $first_element);
 
-			$output = $this->renderChildren();
+        $output = $this->renderChildren();
 
-			while (($value = array_shift($values)) !== NULL) {
-				// render object
-				if ($this->templateVariableContainer->exists('object')) $this->templateVariableContainer->remove('object');
-				$this->templateVariableContainer->add('object', $value);
+        while (($value = array_shift($values)) !== null) {
+            // render object
+            if ($this->templateVariableContainer->exists('object')) {
+                $this->templateVariableContainer->remove('object');
+            }
+            $this->templateVariableContainer->add('object', $value);
 
-				$output .= $delimiter.$this->renderChildren();
-			}
+            $output .= $delimiter . $this->renderChildren();
+        }
 
-			if ($this->templateVariableContainer->exists('object')) $this->templateVariableContainer->remove('object');
-			$this->templateVariableContainer->add('object', $last_element);
-			$output .= $lastDelimiter.$this->renderChildren();
+        if ($this->templateVariableContainer->exists('object')) {
+            $this->templateVariableContainer->remove('object');
+        }
+        $this->templateVariableContainer->add('object', $last_element);
+        $output .= $lastDelimiter . $this->renderChildren();
 
-			return $output;
-		}
-	}
+        return $output;
+    }
 }

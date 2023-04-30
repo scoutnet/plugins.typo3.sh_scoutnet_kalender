@@ -36,11 +36,14 @@
 		}
 	},
 	"require-dev": {
-		"typo3/testing-framework": "^6.16",
+		"roave/security-advisories": "dev-latest",
+		"typo3/testing-framework": "^7.0",
 		"typo3/cms-frontend": "^11.5",
 		"typo3/cms-install": "^11.5",
-		"typo3/cms-about": "^11.5",
 		"typo3/cms-fluid-styled-content": "^11.5",
+		"typo3/coding-standards": "^0.6.0",
+		"phpstan/phpstan": "^1.7.0",
+		"phpstan/phpstan-phpunit": "^1.1.1",
 		"phpspec/prophecy": "~1.0",
 		"codeception/codeception": "^4.1",
 		"codeception/module-webdriver": "^1.0",
@@ -58,11 +61,6 @@
 	},
 	"replace": {
 		"typo3-ter/sh-scoutnet-kalender": "self.version"
-	},
-	"scripts": {
-		"post-autoload-dump": [
-			"TYPO3\\TestingFramework\\Composer\\ExtensionTestEnvironment::prepare"
-		]
 	},
 	"extra": {
 		"branch-alias": {

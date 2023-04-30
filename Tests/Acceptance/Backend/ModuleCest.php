@@ -1,8 +1,8 @@
 <?php
+
 namespace ScoutNet\ShScoutnetKalender\Tests\Acceptance\Backend;
 
 use ScoutNet\ShScoutnetKalender\Tests\Acceptance\Support\BackendTester;
-use TYPO3\TestingFramework\Core\Acceptance\Helper\Topbar;
 
 /**
  * Tests the sh_scoutnet_kalender backend module can be loaded
@@ -23,5 +23,4 @@ class ModuleCest
     public function dummyTest(BackendTester $I)
     {
     }
-
 }
