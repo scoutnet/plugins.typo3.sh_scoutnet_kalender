@@ -19,8 +19,8 @@ use TYPO3\CMS\Core\Configuration\Exception\ExtensionConfigurationPathDoesNotExis
 use TYPO3\CMS\Core\Configuration\ExtensionConfiguration;
 use TYPO3\CMS\Core\Type\ContextualFeedbackSeverity;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Extbase\Annotation\Inject;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
+use TYPO3\CMS\Extbase\Mvc\Web\Routing\UriBuilder;
 use TYPO3\CMS\Extbase\Property\TypeConverter\DateTimeConverter;
 
 /***************************************************************
@@ -60,25 +60,21 @@ class AdministrationController extends ActionController
 
     /**
      * @var EventRepository
-     * @Inject
      */
     protected $eventRepository;
 
     /**
      * @var StructureRepository
-     * @Inject
      */
     protected $structureRepository;
 
     /**
      * @var CategoryRepository
-     * @Inject
      */
     protected $categoryRepository;
 
     /**
      * @var AuthHelper
-     * @Inject
      */
     protected $authHelper;
 
@@ -114,7 +110,7 @@ class AdministrationController extends ActionController
     /**
      * action initializeAction
      */
-    public function initializeAction()
+    public function initializeAction(): void
     {
         parent::initializeAction();
 
@@ -183,7 +179,8 @@ class AdministrationController extends ActionController
                         // return no error
                         return true;
                     case StructureRepository::AUTH_NO_RIGHT:
-                        $link = $this->controllerContext->getUriBuilder()->uriFor('requestRights');
+                        $ul = GeneralUtility::makeInstance(UriBuilder::class);
+                        $link = $ul->uriFor('requestRights');
                         $this->view->assign('error', 'You have no rights');
                         $this->view->assign('errorID', self::ERROR_NO_RIGHTS);
                         $this->view->assign('errorArguments', [$link]);
