@@ -50,10 +50,10 @@ use TYPO3\CMS\Extbase\Property\TypeConverter\DateTimeConverter;
  */
 class AdministrationController extends ActionController
 {
-    const ERROR_UNKNOWN_ERROR = 'errorUnknown';
-    const ERROR_NO_RIGHTS = 'noRights';
-    const ERROR_NO_CONNECTION = 'noConnection';
-    const ERROR_RIGHTS_PENDING = 'rightsPending';
+    public const ERROR_UNKNOWN_ERROR = 'errorUnknown';
+    public const ERROR_NO_RIGHTS = 'noRights';
+    public const ERROR_NO_CONNECTION = 'noConnection';
+    public const ERROR_RIGHTS_PENDING = 'rightsPending';
 
     /**
      * @var \ScoutNet\ShScoutnetWebservice\Domain\Repository\EventRepository
@@ -159,7 +159,7 @@ class AdministrationController extends ActionController
 
         $ssid = $extensionConfiguration->get('sh_scoutnet_kalender', 'ScoutnetSSID');
 
-        if (!is_numeric($ssid) or $ssid <=0) {
+        if (!is_numeric($ssid) or $ssid <= 0) {
             return false;
         }
 
@@ -456,9 +456,7 @@ class AdministrationController extends ActionController
     /**
      * does nothing
      */
-    public function registerAction()
-    {
-    }
+    public function registerAction() {}
 
     /**
      * @throws \TYPO3\CMS\Core\Configuration\Exception\ExtensionConfigurationExtensionNotConfiguredException
@@ -501,7 +499,7 @@ class AdministrationController extends ActionController
             'DPSG' => ['name' => 'dpsg', 'color' => '#C1B38F'],
             'PSG' => ['name' => 'psg', 'color' => '#99ccff'],
             'VCP' => ['name' => 'vcp', 'color' => '#ccccff'],
-            '' => ['name'=>'wosm', 'color' => '#622599'],
+            '' => ['name' => 'wosm', 'color' => '#622599'],
         ];
 
         $nationalAssociation = array_rand($nationalAssociations);

@@ -20,7 +20,5 @@ class ModuleCest
     /**
      * @param BackendTester $I
      */
-    public function dummyTest(BackendTester $I)
-    {
-    }
+    public function dummyTest(BackendTester $I) {}
 }
