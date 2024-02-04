@@ -33,7 +33,7 @@ use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
 
 class ImplodeViewHelper extends AbstractViewHelper
 {
-    public function initializeArguments()
+    public function initializeArguments(): void
     {
         parent::initializeArguments();
         $this->registerArgument('values', 'array', 'The Values to be merged together', true);
@@ -62,10 +62,10 @@ class ImplodeViewHelper extends AbstractViewHelper
             $lastDelimiter = ' ' . LocalizationUtility::translate('community.mergeViewHelper.and', 'sh_scoutnet_community') . ' ';
         }
 
-        if (count($values) == 0) {
+        if (count($values) === 0) {
             return '';
         }
-        if (count($values) == 1) {
+        if (count($values) === 1) {
             $value = array_pop($values);
 
             // TODO: check alternatives

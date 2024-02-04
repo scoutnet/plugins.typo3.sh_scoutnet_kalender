@@ -32,7 +32,7 @@ class BackendHelpers
     /**
      * @param array $fConfig
      */
-    public function getCategories(array &$fConfig)
+    public function getCategories(array &$fConfig): void
     {
         /** @var CategoryRepository $categoryRepository */
         $categoryRepository = GeneralUtility::makeInstance(CategoryRepository::class);

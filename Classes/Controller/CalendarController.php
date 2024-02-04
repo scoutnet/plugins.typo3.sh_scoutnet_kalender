@@ -3,8 +3,13 @@
 namespace ScoutNet\ShScoutnetKalender\Controller;
 
 use Exception;
+use Psr\Http\Message\ResponseInterface;
 use ScoutNet\ShScoutnetWebservice\Domain\Repository\EventRepository;
 use ScoutNet\ShScoutnetWebservice\Domain\Repository\StructureRepository;
+use TYPO3\CMS\Core\Resource\Exception\FileDoesNotExistException;
+use TYPO3\CMS\Core\Resource\Exception\InvalidFileException;
+use TYPO3\CMS\Core\Resource\Exception\InvalidFileNameException;
+use TYPO3\CMS\Core\Resource\Exception\InvalidPathException;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use TYPO3\CMS\Frontend\Resource\FilePathSanitizer;
@@ -39,20 +44,20 @@ use TYPO3\CMS\Frontend\Resource\FilePathSanitizer;
 class CalendarController extends ActionController
 {
     /**
-     * @var \ScoutNet\ShScoutnetWebservice\Domain\Repository\EventRepository
+     * @var EventRepository
      */
     private $eventRepository;
 
     /**
-     * @var \ScoutNet\ShScoutnetWebservice\Domain\Repository\StructureRepository
+     * @var StructureRepository
      */
     private $structureRepository;
 
     /**
      * CalendarController constructor.
      *
-     * @param \ScoutNet\ShScoutnetWebservice\Domain\Repository\EventRepository     $eventRepository
-     * @param \ScoutNet\ShScoutnetWebservice\Domain\Repository\StructureRepository $structureRepository
+     * @param EventRepository $eventRepository
+     * @param StructureRepository $structureRepository
      */
     public function __construct(
         EventRepository $eventRepository,
@@ -64,9 +69,14 @@ class CalendarController extends ActionController
 
     /**
      * @param array|null $addids
-     * @param int|null   $eventId
+     * @param int|null $eventId
+     * @return ResponseInterface
+     * @throws FileDoesNotExistException
+     * @throws InvalidFileException
+     * @throws InvalidFileNameException
+     * @throws InvalidPathException
      */
-    public function listAction(?array $addids = [], ?int $eventId = null)
+    public function listAction(?array $addids = [], ?int $eventId = null): ResponseInterface
     {
         $filePathSanitizer = GeneralUtility::makeInstance(FilePathSanitizer::class);
 
@@ -128,12 +138,19 @@ class CalendarController extends ActionController
         $this->view->assign('structures', $structures);
         $this->view->assign('optionalStructures', $optionalStructures);
         $this->view->assign('eventId', (int)$eventId);
+
+        return $this->htmlResponse();
     }
 
     /**
-     * @param int   $eventId
+     * @param int $eventId
+     * @return ResponseInterface
+     * @throws FileDoesNotExistException
+     * @throws InvalidFileException
+     * @throws InvalidFileNameException
+     * @throws InvalidPathException
      */
-    public function detailsAction(int $eventId)
+    public function detailsAction(int $eventId): ResponseInterface
     {
         $filePathSanitizer = GeneralUtility::makeInstance(FilePathSanitizer::class);
 
@@ -153,5 +170,7 @@ class CalendarController extends ActionController
         } catch (Exception $e) {
             $this->view->assign('error', $e->getMessage());
         }
+
+        return $this->htmlResponse();
     }
 }

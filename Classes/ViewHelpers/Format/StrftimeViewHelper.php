@@ -24,11 +24,11 @@ class StrftimeViewHelper extends AbstractViewHelper
      * Render the supplied DateTime object as a formatted date using strftime.
      *
      * @param array                                                      $arguments
-     * @param \Closure                                                   $renderChildrenClosure
-     * @param \TYPO3Fluid\Fluid\Core\Rendering\RenderingContextInterface $renderingContext
+     * @param Closure $renderChildrenClosure
+     * @param RenderingContextInterface $renderingContext
      *
      * @return string Formatted date
-     * @throws \Exception
+     * @throws Exception
      */
     public static function renderStatic(array $arguments, Closure $renderChildrenClosure, RenderingContextInterface $renderingContext): string
     {
