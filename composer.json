@@ -64,7 +64,8 @@
 	},
 	"extra": {
 		"branch-alias": {
-			"dev-main": "6.x-dev",
+			"dev-main": "7.x-dev",
+			"dev-typo3_v11": "6.x-dev",
 			"dev-typo3_v10": "5.x-dev",
 			"dev-typo3_v9": "4.x-dev"
 		},
