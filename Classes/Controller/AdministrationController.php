@@ -4,6 +4,8 @@ namespace ScoutNet\ShScoutnetKalender\Controller;
 
 use DateTime;
 use Exception;
+use Psr\Http\Message\ResponseInterface;
+use ScoutNet\ShScoutnetWebservice\Domain\Model\BackendUser;
 use ScoutNet\ShScoutnetWebservice\Domain\Model\Category;
 use ScoutNet\ShScoutnetWebservice\Domain\Model\Event;
 use ScoutNet\ShScoutnetWebservice\Domain\Model\Structure;
@@ -12,12 +14,13 @@ use ScoutNet\ShScoutnetWebservice\Domain\Repository\CategoryRepository;
 use ScoutNet\ShScoutnetWebservice\Domain\Repository\EventRepository;
 use ScoutNet\ShScoutnetWebservice\Domain\Repository\StructureRepository;
 use ScoutNet\ShScoutnetWebservice\Helpers\AuthHelper;
+use TYPO3\CMS\Core\Configuration\Exception\ExtensionConfigurationExtensionNotConfiguredException;
+use TYPO3\CMS\Core\Configuration\Exception\ExtensionConfigurationPathDoesNotExistException;
 use TYPO3\CMS\Core\Configuration\ExtensionConfiguration;
-use TYPO3\CMS\Core\Messaging\AbstractMessage;
+use TYPO3\CMS\Core\Type\ContextualFeedbackSeverity;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Annotation\Inject;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
-use TYPO3\CMS\Extbase\Mvc\View\ViewInterface;
 use TYPO3\CMS\Extbase\Property\TypeConverter\DateTimeConverter;
 
 /***************************************************************
@@ -56,31 +59,31 @@ class AdministrationController extends ActionController
     public const ERROR_RIGHTS_PENDING = 'rightsPending';
 
     /**
-     * @var \ScoutNet\ShScoutnetWebservice\Domain\Repository\EventRepository
+     * @var EventRepository
      * @Inject
      */
     protected $eventRepository;
 
     /**
-     * @var \ScoutNet\ShScoutnetWebservice\Domain\Repository\StructureRepository
+     * @var StructureRepository
      * @Inject
      */
     protected $structureRepository;
 
     /**
-     * @var \ScoutNet\ShScoutnetWebservice\Domain\Repository\CategoryRepository
+     * @var CategoryRepository
      * @Inject
      */
     protected $categoryRepository;
 
     /**
-     * @var \ScoutNet\ShScoutnetWebservice\Helpers\AuthHelper
+     * @var AuthHelper
      * @Inject
      */
     protected $authHelper;
 
     /**
-     * @var \ScoutNet\ShScoutnetWebservice\Domain\Repository\BackendUserRepository
+     * @var BackendUserRepository
      * @Inject
      */
     protected $backendUserRepository;
@@ -88,11 +91,11 @@ class AdministrationController extends ActionController
     /**
      * AdministrationController constructor.
      *
-     * @param \ScoutNet\ShScoutnetWebservice\Domain\Repository\EventRepository       $eventRepository
-     * @param \ScoutNet\ShScoutnetWebservice\Domain\Repository\StructureRepository   $structureRepository
-     * @param \ScoutNet\ShScoutnetWebservice\Domain\Repository\CategoryRepository    $categoryRepository
-     * @param \ScoutNet\ShScoutnetWebservice\Helpers\AuthHelper                      $authHelper
-     * @param \ScoutNet\ShScoutnetWebservice\Domain\Repository\BackendUserRepository $backendUserRepository
+     * @param EventRepository $eventRepository
+     * @param StructureRepository $structureRepository
+     * @param CategoryRepository $categoryRepository
+     * @param AuthHelper $authHelper
+     * @param BackendUserRepository $backendUserRepository
      */
     public function __construct(
         EventRepository $eventRepository,
@@ -133,24 +136,9 @@ class AdministrationController extends ActionController
     }
 
     /**
-     * @param \TYPO3\CMS\Extbase\Mvc\View\ViewInterface $view
-     *
-     * @throws \TYPO3\CMS\Core\Configuration\Exception\ExtensionConfigurationExtensionNotConfiguredException
-     * @throws \TYPO3\CMS\Core\Configuration\Exception\ExtensionConfigurationPathDoesNotExistException
-     */
-    public function initializeView(ViewInterface $view)
-    {
-        parent::initializeView($view);
-
-        // set the background for every Action
-        $this->setBackground();
-    }
-
-    /**
      * @return bool
-     * @throws \TYPO3\CMS\Core\Configuration\Exception\ExtensionConfigurationExtensionNotConfiguredException
-     * @throws \TYPO3\CMS\Core\Configuration\Exception\ExtensionConfigurationPathDoesNotExistException
-     * @throws \TYPO3\CMS\Extbase\Mvc\Exception\StopActionException
+     * @throws ExtensionConfigurationExtensionNotConfiguredException
+     * @throws ExtensionConfigurationPathDoesNotExistException
      */
     private function checkRights(): bool
     {
@@ -159,17 +147,17 @@ class AdministrationController extends ActionController
 
         $ssid = $extensionConfiguration->get('sh_scoutnet_kalender', 'ScoutnetSSID');
 
-        if (!is_numeric($ssid) or $ssid <= 0) {
+        if (!is_numeric($ssid) || $ssid <= 0) {
             return false;
         }
 
         $structure = $this->structureRepository->findByUid($ssid);
 
-        /** @var \ScoutNet\ShScoutnetWebservice\Domain\Model\BackendUser $be_user */
+        /** @var BackendUser $be_user */
         $be_user = $this->backendUserRepository->findByUid($GLOBALS['BE_USER']->user['uid']);
 
         // check if we get the login
-        if (isset($_GET['logintype']) && $_GET['logintype'] === 'login' && isset($_GET['auth'])) {
+        if (isset($_GET['logintype'], $_GET['auth']) && $_GET['logintype'] === 'login') {
             try {
                 $data = $this->authHelper->getApiKeyFromData($_GET['auth']);
 
@@ -178,12 +166,12 @@ class AdministrationController extends ActionController
 
                 $this->backendUserRepository->update($be_user);
             } catch (Exception $e) {
-                $this->addFlashMessage('Cannot connect to Server' . $e->getMessage(), 'Error', AbstractMessage::ERROR);
+                $this->addFlashMessage('Cannot connect to Server' . $e->getMessage(), 'Error', ContextualFeedbackSeverity::ERROR);
                 $this->view->assign('error', self::ERROR_NO_CONNECTION);
             }
         }
 
-        if (trim($be_user->getScoutnetApikey()) == '' || trim($be_user->getScoutnetUsername()) == '') {
+        if (trim($be_user->getScoutnetApikey()) === '' || trim($be_user->getScoutnetUsername()) === '') {
             // if we do not have a username or api key redirect to register
             $this->redirect('register');
         } else {
@@ -205,12 +193,12 @@ class AdministrationController extends ActionController
                         $this->view->assign('errorID', self::ERROR_RIGHTS_PENDING);
                         break;
                     default:
-                        $this->addFlashMessage('Cannot connect to Server', AbstractMessage::ERROR);
+                        $this->addFlashMessage('Cannot connect to Server', ContextualFeedbackSeverity::ERROR);
                         $this->view->assign('error', self::ERROR_UNKNOWN_ERROR);
                         break;
                 }
             } catch (Exception $e) {
-                $this->addFlashMessage('Cannot connect to Server' . $e->getMessage(), 'Error', AbstractMessage::ERROR);
+                $this->addFlashMessage('Cannot connect to Server' . $e->getMessage(), 'Error', ContextualFeedbackSeverity::ERROR);
                 $this->view->assign('error', self::ERROR_NO_CONNECTION);
             }
         }
@@ -219,12 +207,13 @@ class AdministrationController extends ActionController
     }
 
     /**
-     * @throws \TYPO3\CMS\Core\Configuration\Exception\ExtensionConfigurationExtensionNotConfiguredException
-     * @throws \TYPO3\CMS\Core\Configuration\Exception\ExtensionConfigurationPathDoesNotExistException
-     * @throws \TYPO3\CMS\Extbase\Mvc\Exception\StopActionException
+     * @throws ExtensionConfigurationExtensionNotConfiguredException
+     * @throws ExtensionConfigurationPathDoesNotExistException
      */
-    public function listAction()
+    public function listAction(): ResponseInterface
     {
+        $this->setBackground();
+
         if ($this->checkRights()) {
             /** @var ExtensionConfiguration $extensionConfiguration */
             $extensionConfiguration = GeneralUtility::makeInstance(ExtensionConfiguration::class);
@@ -242,22 +231,26 @@ class AdministrationController extends ActionController
                 $this->view->assign('structure', $structure);
                 $this->view->assign('events', $this->eventRepository->findByStructureAndFilter($structure, $filter));
             } catch (Exception $e) {
-                $this->addFlashMessage('Cannot connect to Server' . $e->getMessage(), 'Error', AbstractMessage::ERROR);
+                $this->addFlashMessage('Cannot connect to Server' . $e->getMessage(), 'Error', ContextualFeedbackSeverity::ERROR);
                 $this->view->assign('error', self::ERROR_NO_CONNECTION);
             }
         }
+
+        return $this->htmlResponse();
     }
 
     /**
-     * @param \ScoutNet\ShScoutnetWebservice\Domain\Model\Structure  $structure
-     * @param \ScoutNet\ShScoutnetWebservice\Domain\Model\Event|null $event
+     * @param Structure $structure
+     * @param Event|null $event
      *
-     * @throws \TYPO3\CMS\Core\Configuration\Exception\ExtensionConfigurationExtensionNotConfiguredException
-     * @throws \TYPO3\CMS\Core\Configuration\Exception\ExtensionConfigurationPathDoesNotExistException
-     * @throws \TYPO3\CMS\Extbase\Mvc\Exception\StopActionException
+     * @return ResponseInterface
+     * @throws ExtensionConfigurationExtensionNotConfiguredException
+     * @throws ExtensionConfigurationPathDoesNotExistException
      */
-    public function newAction(Structure $structure, Event $event = null)
+    public function newAction(Structure $structure, Event $event = null): ResponseInterface
     {
+        $this->setBackground();
+
         if ($this->checkRights()) {
             if ($event === null) {
                 $event = new Event();
@@ -271,14 +264,20 @@ class AdministrationController extends ActionController
             $this->view->assign('event', $event);
             $this->view->assign('verband', $event->getStructure()->getVerband());
         }
+
+        return $this->htmlResponse();
     }
 
     /**
-     * @param \ScoutNet\ShScoutnetWebservice\Domain\Model\Event $event
+     * @param Event $event
+     * @return ResponseInterface
+     * @throws ExtensionConfigurationExtensionNotConfiguredException
+     * @throws ExtensionConfigurationPathDoesNotExistException
      */
-    public function templateAction(Event $event)
+    public function templateAction(Event $event): ResponseInterface
     {
         $this->_loadAllCategories($event->getStructure(), $event);
+        $this->setBackground();
 
         $newEvent = new Event();
         $newEvent->setStructure($event->getStructure());
@@ -289,20 +288,22 @@ class AdministrationController extends ActionController
         // set event
         $this->view->assign('event', $newEvent);
         $this->view->assign('verband', $newEvent->getStructure()->getVerband());
+
+        return $this->htmlResponse();
     }
 
     /**
      * action create
      *
-     * @param \ScoutNet\ShScoutnetWebservice\Domain\Model\Event $event
-     * @param \array                                            $categories
-     * @param \array                                            $customCategories
+     * @param Event $event
+     * @param \array $categories
+     * @param \array $customCategories
      *
-     * @throws \TYPO3\CMS\Core\Configuration\Exception\ExtensionConfigurationExtensionNotConfiguredException
-     * @throws \TYPO3\CMS\Core\Configuration\Exception\ExtensionConfigurationPathDoesNotExistException
-     * @throws \TYPO3\CMS\Extbase\Mvc\Exception\StopActionException
+     * @return ResponseInterface
+     * @throws ExtensionConfigurationExtensionNotConfiguredException
+     * @throws ExtensionConfigurationPathDoesNotExistException
      */
-    public function createAction(Event $event, array $categories, array $customCategories)
+    public function createAction(Event $event, array $categories, array $customCategories): ResponseInterface
     {
         if ($this->checkRights()) {
             $categoryObjects = [];
@@ -330,26 +331,28 @@ class AdministrationController extends ActionController
 
                 $this->addFlashMessage('event created');
             } catch (Exception $e) {
-                $this->addFlashMessage('Cannot connect to Server' . $e->getMessage(), 'Error', AbstractMessage::ERROR);
+                $this->addFlashMessage('Cannot connect to Server' . $e->getMessage(), 'Error', ContextualFeedbackSeverity::ERROR);
                 $this->view->assign('error', self::ERROR_NO_CONNECTION);
             }
         }
 
-        $this->redirect('list');
+        return $this->redirect('list');
     }
 
     /**
      * action edit
      *
-     * @param \ScoutNet\ShScoutnetWebservice\Domain\Model\Event $event
+     * @param Event $event
      *
-     * @throws \TYPO3\CMS\Core\Configuration\Exception\ExtensionConfigurationExtensionNotConfiguredException
-     * @throws \TYPO3\CMS\Core\Configuration\Exception\ExtensionConfigurationPathDoesNotExistException
-     * @throws \TYPO3\CMS\Extbase\Mvc\Exception\StopActionException
+     * @return ResponseInterface
+     * @throws ExtensionConfigurationExtensionNotConfiguredException
+     * @throws ExtensionConfigurationPathDoesNotExistException
      * @TYPO3\CMS\Extbase\Annotation\IgnoreValidation("event")
      */
-    public function editAction(Event $event)
+    public function editAction(Event $event): ResponseInterface
     {
+        $this->setBackground();
+
         if ($this->checkRights()) {
             $this->_loadAllCategories($event->getStructure(), $event);
 
@@ -357,20 +360,22 @@ class AdministrationController extends ActionController
             $this->view->assign('event', $event);
             $this->view->assign('verband', $event->getStructure()->getVerband());
         }
+
+        return $this->htmlResponse();
     }
 
     /**
      * action edit
      *
-     * @param \ScoutNet\ShScoutnetWebservice\Domain\Model\Event $event
-     * @param \array                                            $categories
-     * @param \array                                            $customCategories
+     * @param Event $event
+     * @param \array $categories
+     * @param \array $customCategories
      *
-     * @throws \TYPO3\CMS\Core\Configuration\Exception\ExtensionConfigurationExtensionNotConfiguredException
-     * @throws \TYPO3\CMS\Core\Configuration\Exception\ExtensionConfigurationPathDoesNotExistException
-     * @throws \TYPO3\CMS\Extbase\Mvc\Exception\StopActionException
+     * @return ResponseInterface
+     * @throws ExtensionConfigurationExtensionNotConfiguredException
+     * @throws ExtensionConfigurationPathDoesNotExistException
      */
-    public function updateAction(Event $event, array $categories, array $customCategories)
+    public function updateAction(Event $event, array $categories, array $customCategories): ResponseInterface
     {
         if ($this->checkRights()) {
             $categoryObjects = [];
@@ -398,32 +403,40 @@ class AdministrationController extends ActionController
 
                 $this->addFlashMessage('event saved');
             } catch (Exception $e) {
-                $this->addFlashMessage('Cannot connect to Server' . $e->getMessage(), 'Error', AbstractMessage::ERROR);
+                $this->addFlashMessage('Cannot connect to Server' . $e->getMessage(), 'Error', ContextualFeedbackSeverity::ERROR);
                 $this->view->assign('error', self::ERROR_NO_CONNECTION);
             }
         }
-        $this->redirect('list');
+
+        return $this->redirect('list');
     }
 
     /**
-     * @param \ScoutNet\ShScoutnetWebservice\Domain\Model\Event $event
+     * @param Event $event
+     * @return ResponseInterface
+     * @throws ExtensionConfigurationExtensionNotConfiguredException
+     * @throws ExtensionConfigurationPathDoesNotExistException
      * @TYPO3\CMS\Extbase\Annotation\IgnoreValidation("event")
      */
-    public function deleteAction(Event $event)
+    public function deleteAction(Event $event): ResponseInterface
     {
+        $this->setBackground();
+
         // set event
         $this->view->assign('event', $event);
+
+        return $this->htmlResponse();
     }
 
     /**
-     * @param \ScoutNet\ShScoutnetWebservice\Domain\Model\Event $event
+     * @param Event $event
      *
-     * @throws \TYPO3\CMS\Core\Configuration\Exception\ExtensionConfigurationExtensionNotConfiguredException
-     * @throws \TYPO3\CMS\Core\Configuration\Exception\ExtensionConfigurationPathDoesNotExistException
-     * @throws \TYPO3\CMS\Extbase\Mvc\Exception\StopActionException
+     * @return ResponseInterface
+     * @throws ExtensionConfigurationExtensionNotConfiguredException
+     * @throws ExtensionConfigurationPathDoesNotExistException
      * @TYPO3\CMS\Extbase\Annotation\IgnoreValidation("event")
      */
-    public function removeAction(Event $event)
+    public function removeAction(Event $event): ResponseInterface
     {
         if ($this->checkRights()) {
             try {
@@ -431,18 +444,18 @@ class AdministrationController extends ActionController
 
                 $this->addFlashMessage('event Deleted');
             } catch (Exception $e) {
-                $this->addFlashMessage('Cannot connect to Server' . $e->getMessage(), 'Error', AbstractMessage::ERROR);
+                $this->addFlashMessage('Cannot connect to Server' . $e->getMessage(), 'Error', ContextualFeedbackSeverity::ERROR);
                 $this->view->assign('error', self::ERROR_NO_CONNECTION);
             }
         }
-        $this->redirect('list');
+        return $this->redirect('list');
     }
 
     /**
-     * @param \ScoutNet\ShScoutnetWebservice\Domain\Model\Structure  $structure
-     * @param \ScoutNet\ShScoutnetWebservice\Domain\Model\Event|null $event
+     * @param Structure $structure
+     * @param Event|null $event
      */
-    private function _loadAllCategories(Structure $structure, Event $event = null)
+    private function _loadAllCategories(Structure $structure, Event $event = null): void
     {
         $categories = $this->categoryRepository->getAllCategoriesForStructureAndEvent($structure, $event);
 
@@ -456,14 +469,18 @@ class AdministrationController extends ActionController
     /**
      * does nothing
      */
-    public function registerAction() {}
+    public function registerAction(): ResponseInterface
+    {
+        $this->setBackground();
+
+        return $this->htmlResponse();
+    }
 
     /**
-     * @throws \TYPO3\CMS\Core\Configuration\Exception\ExtensionConfigurationExtensionNotConfiguredException
-     * @throws \TYPO3\CMS\Core\Configuration\Exception\ExtensionConfigurationPathDoesNotExistException
-     * @throws \TYPO3\CMS\Extbase\Mvc\Exception\StopActionException
+     * @throws ExtensionConfigurationExtensionNotConfiguredException
+     * @throws ExtensionConfigurationPathDoesNotExistException
      */
-    public function requestRightsAction()
+    public function requestRightsAction(): ResponseInterface
     {
         /** @var ExtensionConfiguration $extensionConfiguration */
         $extensionConfiguration = GeneralUtility::makeInstance(ExtensionConfiguration::class);
@@ -474,20 +491,20 @@ class AdministrationController extends ActionController
             $structure = $this->structureRepository->findByUid($ssid);
             $this->structureRepository->requestWritePermissionsForStructure($structure);
         } catch (Exception $e) {
-            $this->addFlashMessage('Cannot connect to Server' . $e->getMessage(), 'Error', AbstractMessage::ERROR);
+            $this->addFlashMessage('Cannot connect to Server' . $e->getMessage(), 'Error', ContextualFeedbackSeverity::ERROR);
             $this->view->assign('error', self::ERROR_NO_CONNECTION);
         }
 
-        $this->redirect('list');
+        return $this->redirect('list');
     }
 
     /**
      * Set the Background color for the calendar we use
      *
-     * @throws \TYPO3\CMS\Core\Configuration\Exception\ExtensionConfigurationExtensionNotConfiguredException
-     * @throws \TYPO3\CMS\Core\Configuration\Exception\ExtensionConfigurationPathDoesNotExistException
+     * @throws ExtensionConfigurationExtensionNotConfiguredException
+     * @throws ExtensionConfigurationPathDoesNotExistException
      */
-    private function setBackground()
+    private function setBackground(): void
     {
         /** @var ExtensionConfiguration $extensionConfiguration */
         $extensionConfiguration = GeneralUtility::makeInstance(ExtensionConfiguration::class);

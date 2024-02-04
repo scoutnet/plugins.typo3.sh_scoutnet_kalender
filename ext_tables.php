@@ -2,7 +2,6 @@
 
 defined ('TYPO3') || die ('Access denied.');
 
-if (TYPO3_MODE === 'BE') {
 	// add Wizicon
 //	\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPageTSConfig('<INCLUDE_TYPOSCRIPT: source="FILE:EXT:sh_scoutnet_kalender/Configuration/TypoScript/pageTsConfig.ts">');
 //
@@ -22,5 +21,3 @@ if (TYPO3_MODE === 'BE') {
 //			'labels'    => 'LLL:EXT:sh_scoutnet_kalender/Resources/Private/Language/locallang_modcalendar.xlf',
 //        ]
 //	);
-}
-
