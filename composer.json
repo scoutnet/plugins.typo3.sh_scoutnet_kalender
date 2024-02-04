@@ -18,36 +18,32 @@
 		}
 	],
 	"license": ["GPL-2.0-or-later"],
-	"keywords": ["TYPO3 CMS", "ScoutNet", "Pfadfinder", "ScoutNet Kalender"],
+	"keywords": ["TYPO3 CMS", "extension", "ScoutNet", "Pfadfinder", "ScoutNet Kalender"],
 	"support": {
 		"issues": "https://github.com/scoutnet/plugins.typo3.sh_scoutnet_kalender/issues"
 	},
 	"require": {
-		"typo3/cms-core": "^11.5",
-		"typo3/cms-extensionmanager": "^11.5",
-		"scoutnet/sh-scoutnet-webservice": "^5.0"
+		"typo3/cms-core": "^12.4",
+		"typo3/cms-extensionmanager": "^12.4",
+		"scoutnet/sh-scoutnet-webservice": "^6.0"
 	},
 	"config": {
 		"vendor-dir": ".Build/vendor",
 		"bin-dir": ".Build/bin",
 		"allow-plugins": {
-			"typo3/cms-composer-installers": true,
-			"typo3/class-alias-loader": true
+			"typo3/class-alias-loader": true,
+			"typo3/cms-composer-installers": true
 		}
 	},
 	"require-dev": {
 		"roave/security-advisories": "dev-latest",
-		"typo3/testing-framework": "^7.0",
-		"typo3/cms-frontend": "^11.5",
-		"typo3/cms-install": "^11.5",
-		"typo3/cms-fluid-styled-content": "^11.5",
-		"typo3/coding-standards": "^0.6.0",
-		"phpstan/phpstan": "^1.7.0",
-		"phpstan/phpstan-phpunit": "^1.1.1",
+		"typo3/testing-framework": "^8.0",
+		"typo3/cms-frontend": "^12.4",
+		"typo3/cms-install": "^12.4",
+		"typo3/cms-fluid-styled-content": "^12.4",
+		"typo3/coding-standards": "^0.7.1",
 		"phpspec/prophecy": "~1.0",
-		"codeception/codeception": "^4.1",
-		"codeception/module-webdriver": "^1.0",
-		"codeception/module-asserts": "^1.2"
+		"sbuerk/typo3-cmscomposerinstallers-testingframework-bridge": "^0.1.0"
 	},
 	"autoload": {
 		"psr-4": {
@@ -73,8 +69,7 @@
 			"app-dir": ".Build",
 			"cms-package-dir": "{$vendor-dir}/typo3/cms",
 			"web-dir": ".Build/Web",
-			"extension-key": "sh_scoutnet_kalender",
-			"composer-mode": false
+			"extension-key": "sh_scoutnet_kalender"
 		}
 	}
 }

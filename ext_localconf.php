@@ -1,5 +1,5 @@
 <?php
-if (!defined ('TYPO3_MODE')) die ('Access denied.');
+defined ('TYPO3') || die ('Access denied.');
 
 /** @var string $_EXTKEY */
 \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(

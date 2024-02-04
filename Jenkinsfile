@@ -1,6 +1,6 @@
 // This file is a generic Scoutnet Jenkins file. The original is found in the dummy extension
 // https://github.com/scoutnet/plugins.typo3.scoutnet_dummy/blob/master/Jenkinsfile
-// Jenkinsfile Version: 2.0.2
+// Jenkinsfile Version: 3.0.1
 pipeline {
     agent any
 
@@ -14,13 +14,11 @@ pipeline {
             steps {
                 withCredentials([usernamePassword(credentialsId: 'REPO_AUTH', passwordVariable: 'REPO_AUTH_PASSWORD', usernameVariable: 'REPO_AUTH_USER')]) {
                     script {
-                        def PHP_VERSIONS = ['7.4', '8.0']
+                        def PHP_VERSIONS = ['8.1', '8.3'] // Only support first and last supported Version to Speed Tests up
                         def tests = [:]
 
                         sh "echo '{\"http-basic\": {\"repo.scoutnet.de\": {\"username\": \"${REPO_AUTH_USER}\", \"password\": \"${REPO_AUTH_PASSWORD}\"}}}' > auth.json"
-                        sh "make composerInstall"
-                        sh "make composerUpdate"
-                        sh "make composerValidate"
+                        sh "make init"
 
                         tests['cgl Test'] = {
                             echo "Testing CGL"
@@ -38,9 +36,9 @@ pipeline {
                         }
                         parallel tests
 
-                        // we only test for php version 8.0, since this should execute the same way
-                        sh "make functionalTest-php80"
-                        sh "make acceptanceTest-php80"
+                        // we only test for php version 8.3, since this should execute the same way
+                        sh "make functionalTest-php83"
+                        sh "make acceptanceTest-php83"
                         sh 'rm -f auth.json'
                     }
                 }

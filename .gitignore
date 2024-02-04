@@ -4,3 +4,4 @@ Tests/Build/.env
 composer.lock
 auth.json
 Tests/Acceptance/Support/_generated
+var/

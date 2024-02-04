@@ -1,6 +1,6 @@
 <?php
 
-if (!defined ('TYPO3_MODE')) die ('Access denied.');
+defined ('TYPO3') || die ('Access denied.');
 
 if (TYPO3_MODE === 'BE') {
 	// add Wizicon
