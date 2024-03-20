@@ -1,6 +1,6 @@
 // This file is a generic Scoutnet Jenkins file. The original is found in the dummy extension
 // https://github.com/scoutnet/plugins.typo3.scoutnet_dummy/blob/master/Jenkinsfile
-// Jenkinsfile Version: 3.0.1
+// Jenkinsfile Version: 3.0.2
 pipeline {
     agent any
 
@@ -62,6 +62,9 @@ pipeline {
             steps {
                 withCredentials([usernamePassword(credentialsId: 'REPO_AUTH', passwordVariable: 'REPO_AUTH_PASSWORD', usernameVariable: 'REPO_AUTH_USER')]) {
                     sh 'curl -s -u ${REPO_AUTH_USER}:${REPO_AUTH_PASSWORD} https://repo.scoutnet.de/trigger.php'
+                }
+                withCredentials([string(credentialsId: 'CODECOV_TOKEN', variable: 'CODECOV_TOKEN')]) {
+                    sh 'codecovcli upload-process'
                 }
             }
         }

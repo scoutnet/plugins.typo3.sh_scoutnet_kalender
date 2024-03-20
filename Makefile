@@ -1,6 +1,6 @@
 # This file is a generic Scoutnet Makefile file. The original is found in the dummy extension
 # https://github.com/scoutnet/plugins.typo3.scoutnet_dummy/blob/master/Makefile
-# MAKEFILE Version: 3.0.0
+# MAKEFILE Version: 3.0.1
 
 EXT_NAME=$(shell php -r "print(json_decode(file_get_contents('composer.json'), true)['extra']['typo3/cms']['extension-key']);")
 
@@ -67,7 +67,7 @@ $(TEST_ROOT_FOLDER)/docker-%/.env:
 	@echo "PHP_XDEBUG_PORT=$(PHP_XDEBUG_PORT)" >> $(TEST_ROOT_FOLDER)/docker-$*/.env
 	@echo "DOCKER_PHP_IMAGE=$(word 1,$(subst -, ,$*))" >> $(TEST_ROOT_FOLDER)/docker-$*/.env
 	@echo "PHP_VERSION=$(word 1,$(subst -, ,$*))" >> $(TEST_ROOT_FOLDER)/docker-$*/.env
-	@echo "EXTRA_TEST_OPTIONS=$(EXTRA_TEST_OPTIONS)" >> $(TEST_ROOT_FOLDER)/docker-$*/.env
+	@echo "EXTRA_TEST_OPTIONS=$(EXTRA_TEST_OPTIONS) --coverage-filter $(shell pwd)/Classes --coverage-clover coverage-$*.xml" >> $(TEST_ROOT_FOLDER)/docker-$*/.env
 	@echo "SCRIPT_VERBOSE=$(SCRIPT_VERBOSE)" >> $(TEST_ROOT_FOLDER)/docker-$*/.env
 	@echo "PREFIX=$*" >> $(TEST_ROOT_FOLDER)/docker-$*/.env
 	@echo "TYPO3_CONTEXT=Testing" >> $(TEST_ROOT_FOLDER)/docker-$*/.env
