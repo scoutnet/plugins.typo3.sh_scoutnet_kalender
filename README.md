@@ -1,4 +1,5 @@
 [![Build Status](https://jenkins.scoutnet.eu/buildStatus/icon?job=scoutnet/plugins.typo3.sh_scoutnet_kalender/main)](https://jenkins.scoutnet.eu/job/scoutnet/job/plugins.typo3.sh_scoutnet_kalender/job/main/)
+[![codecov](https://codecov.io/gh/scoutnet/plugins.typo3.sh_scoutnet_kalender/graph/badge.svg?token=7hE5uOFnXp)](https://codecov.io/gh/scoutnet/plugins.typo3.sh_scoutnet_kalender)
 [![Packagist](https://img.shields.io/packagist/v/scoutnet/sh-scoutnet-kalender.svg)](https://packagist.org/packages/scoutnet/sh-scoutnet-kalender)
 [![Packagist](https://img.shields.io/packagist/dt/scoutnet/sh-scoutnet-kalender.svg?label=packagist%20downloads)](https://packagist.org/packages/scoutnet/sh-scoutnet-kalender)
 [![Packagist](https://img.shields.io/packagist/l/scoutnet/sh-scoutnet-kalender.svg)](https://packagist.org/packages/scoutnet/sh-scoutnet-kalender)
@@ -50,13 +51,17 @@ To Run all the Tests call:
 
 `make test`
 
-you can use the -phpx suffix to indicate which php version you want to check e.g. `make test-php73`
+you can use the -phpx suffix to indicate which php version you want to check e.g. `make test-php81`
 
 for only testing a special function or php version there are different suffixes. For Example:
 
-- `make lintTest-php73`
-- `make unitTest-php74`
-- `make unitTest`        Will call Unit tests with php7.3 and php 7.4
+- `make lintTest-php81`
+- `make unitTest-php83`
+- `make unitTest`        Will call Unit tests with php 8.1 through php 8.3
+
+For running only certain tests use:
+
+- `TEST_FILE=$(pwd)/Tests/Functional/Plugins/WebringPluginTest.php EXTRA_TEST_OPTIONS='--filter testRedirect' make functionalTest-php80`
 
 Testing with PhpStorm: Setup new remote PHP interpreter.
 Docker-Compose:
@@ -71,11 +76,13 @@ Set up new Test Framework:
 Set up new Run Configuration for `Unit Tests`:
  - Test Scope: `<abs. Path to this dir>/Tests/Unit`
  - Custom Working Directory: `<abs. Path to this dir>/.Build/`
- 
+ - Test Runner options: `--coverage-filter <abs. Path to this dir>/Classes`
+
 Set up new Run Configuration for `Functional Tests`:
  - Test Scope: `<abs. Path to this dir>/Tests/Functional`
  - Custom Working Directory: `<abs. Path to this dir>/.Build/`
  - Use alternative configuration File: `<aps. Path to this dir>/.Build/vendor/typo3/testing-framework/Resources/Core/Build/FunctionalTests.xml`
+ - Test Runner options: `--coverage-filter <abs. Path to this dir>/Classes`
  - Environment variables: `typo3DatabaseUsername=root;typo3DatabasePassword=funcp;typo3DatabaseHost=mariadb10;typo3DatabaseName=func_test`
  
 Happy Testing
