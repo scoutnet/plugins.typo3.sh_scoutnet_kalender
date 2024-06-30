@@ -1,5 +1,5 @@
 # This file is a generic Scoutnet Makefile file. The original is found in the dummy extension
-# https://github.com/scoutnet/plugins.typo3.scoutnet_dummy/blob/master/Makefile
+# https://github.com/scoutnet/plugins.typo3.scoutnet_dummy/blob/main/Makefile
 # MAKEFILE Version: 3.0.1
 
 EXT_NAME=$(shell php -r "print(json_decode(file_get_contents('composer.json'), true)['extra']['typo3/cms']['extension-key']);")

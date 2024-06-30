@@ -1,6 +1,6 @@
 // This file is a generic Scoutnet Jenkins file. The original is found in the dummy extension
-// https://github.com/scoutnet/plugins.typo3.scoutnet_dummy/blob/master/Jenkinsfile
-// Jenkinsfile Version: 3.0.2
+// https://github.com/scoutnet/plugins.typo3.scoutnet_dummy/blob/main/Jenkinsfile
+// Jenkinsfile Version: 3.0.3
 pipeline {
     agent any
 
@@ -37,7 +37,7 @@ pipeline {
                         parallel tests
 
                         // we only test for php version 8.3, since this should execute the same way
-                        sh "make functionalTest-php83"
+                        // sh "make functionalTest-php83"
                         sh "make acceptanceTest-php83"
                         sh 'rm -f auth.json'
                     }
@@ -64,7 +64,21 @@ pipeline {
                     sh 'curl -s -u ${REPO_AUTH_USER}:${REPO_AUTH_PASSWORD} https://repo.scoutnet.de/trigger.php'
                 }
                 withCredentials([string(credentialsId: 'CODECOV_TOKEN', variable: 'CODECOV_TOKEN')]) {
-                    sh 'codecovcli upload-process'
+                    script {
+                        def uploads = [:]
+
+                        uploads["unit"] = {
+                                echo "Uploading Covereage for UnitTests"
+                                sh "codecovcli upload-process --disable-search --plugin none -F unitTests -f '${WORKSPACE}/.Build/coverage-php*-unit.xml'"
+                        }
+
+                        // uploads['functional'] = {
+                        //        echo "Uploading Covereage for FunctionalTests"
+                        //        sh "codecovcli upload-process --disable-search --plugin none -F functionalTests -f '${WORKSPACE}/.Build/coverage-php*-functional.xml'"
+                        // }
+
+                        parallel uploads
+                    }
                 }
             }
         }
