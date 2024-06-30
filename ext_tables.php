@@ -1,8 +1,8 @@
 <?php
 
-defined ('TYPO3') || die ('Access denied.');
+defined('TYPO3') || die('Access denied.');
 
-	// add Wizicon
+// add Wizicon
 //	\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPageTSConfig('<INCLUDE_TYPOSCRIPT: source="FILE:EXT:sh_scoutnet_kalender/Configuration/TypoScript/pageTsConfig.ts">');
 //
 //
