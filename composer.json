@@ -25,7 +25,8 @@
 	"require": {
 		"typo3/cms-core": "^12.4",
 		"typo3/cms-extensionmanager": "^12.4",
-		"scoutnet/sh-scoutnet-webservice": "^6.0"
+		"scoutnet/sh-scoutnet-webservice": "^6.0",
+		"scoutnet/sn-webservice": "^2.0"
 	},
 	"config": {
 		"vendor-dir": ".Build/vendor",
@@ -42,9 +43,11 @@
 		"typo3/cms-install": "^12.4",
 		"typo3/cms-fluid-styled-content": "^12.4",
 		"typo3/coding-standards": "^0.7.1",
-		"phpspec/prophecy": "~1.0",
 		"sbuerk/typo3-cmscomposerinstallers-testingframework-bridge": "^0.1.0",
-		"scoutnet/testing-tools": "^3.0"
+		"scoutnet/testing-tools": "^3.0",
+		"zbateson/mail-mime-parser": "^2.2",
+		"codappix/typo3-php-datasets": "^1.5",
+		"composer/composer": "^2.7"
 	},
 	"autoload": {
 		"psr-4": {

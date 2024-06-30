@@ -1,4 +1,14 @@
 <?php
+/**
+ * Copyright (c) 2024-2024 Stefan (Mütze) Horst
+ *
+ * I don't have the time to read through all the licences to find out
+ * what they exactly say. But it's simple. It's free for non-commercial
+ * projects, but as soon as you make money with it, I want my share :-)
+ * (License: Free for non-commercial use)
+ *
+ * Authors: Stefan (Mütze) Horst <muetze@scoutnet.de>
+ */
 
 namespace ScoutNet\ShScoutnetKalender\Controller;
 
@@ -6,14 +16,14 @@ use DateTime;
 use Exception;
 use Psr\Http\Message\ResponseInterface;
 use ScoutNet\ShScoutnetWebservice\Domain\Model\BackendUser;
-use ScoutNet\ShScoutnetWebservice\Domain\Model\Category;
-use ScoutNet\ShScoutnetWebservice\Domain\Model\Event;
-use ScoutNet\ShScoutnetWebservice\Domain\Model\Structure;
+use ScoutNet\Api\Model\Category;
+use ScoutNet\Api\Model\Event;
+use ScoutNet\Api\Model\Structure;
 use ScoutNet\ShScoutnetWebservice\Domain\Repository\BackendUserRepository;
 use ScoutNet\ShScoutnetWebservice\Domain\Repository\CategoryRepository;
 use ScoutNet\ShScoutnetWebservice\Domain\Repository\EventRepository;
 use ScoutNet\ShScoutnetWebservice\Domain\Repository\StructureRepository;
-use ScoutNet\ShScoutnetWebservice\Helpers\AuthHelper;
+use ScoutNet\Api\Helpers\AuthHelper;
 use TYPO3\CMS\Core\Configuration\Exception\ExtensionConfigurationExtensionNotConfiguredException;
 use TYPO3\CMS\Core\Configuration\Exception\ExtensionConfigurationPathDoesNotExistException;
 use TYPO3\CMS\Core\Configuration\ExtensionConfiguration;
@@ -74,11 +84,6 @@ class AdministrationController extends ActionController
     protected $categoryRepository;
 
     /**
-     * @var AuthHelper
-     */
-    protected $authHelper;
-
-    /**
      * @var BackendUserRepository
      * @Inject
      */
@@ -90,20 +95,17 @@ class AdministrationController extends ActionController
      * @param EventRepository $eventRepository
      * @param StructureRepository $structureRepository
      * @param CategoryRepository $categoryRepository
-     * @param AuthHelper $authHelper
      * @param BackendUserRepository $backendUserRepository
      */
     public function __construct(
         EventRepository $eventRepository,
         StructureRepository $structureRepository,
         CategoryRepository $categoryRepository,
-        AuthHelper $authHelper,
         BackendUserRepository $backendUserRepository
     ) {
         $this->eventRepository = $eventRepository;
         $this->structureRepository = $structureRepository;
         $this->categoryRepository = $categoryRepository;
-        $this->authHelper = $authHelper;
         $this->backendUserRepository = $backendUserRepository;
     }
 
@@ -155,7 +157,8 @@ class AdministrationController extends ActionController
         // check if we get the login
         if (isset($_GET['logintype'], $_GET['auth']) && $_GET['logintype'] === 'login') {
             try {
-                $data = $this->authHelper->getApiKeyFromData($_GET['auth']);
+                $authHelper = GeneralUtility::makeInstance(AuthHelper::class);
+                $data = $authHelper->getApiKeyFromData($_GET['auth']);
 
                 $be_user->setScoutnetUsername($data['user']);
                 $be_user->setScoutnetApikey($data['api_key']);

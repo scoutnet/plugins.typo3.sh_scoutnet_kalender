@@ -2,7 +2,7 @@
 
 namespace ScoutNet\ShScoutnetKalender\ViewHelpers;
 
-use ScoutNet\ShScoutnetWebservice\Exceptions\ScoutNetExceptionMissingConfVar;
+use ScoutNet\Api\Exceptions\ScoutNetExceptionMissingConfVar;
 use ScoutNet\ShScoutnetWebservice\Helpers\ScoutNetConnectHelper;
 use TYPO3\CMS\Backend\Routing\Exception\RouteNotFoundException;
 use TYPO3\CMS\Backend\Routing\UriBuilder;
